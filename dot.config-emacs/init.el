@@ -1,5 +1,4 @@
 ;; -*-mode: Emacs-Lisp; folded-file:t-*-
-;; Time-stamp: <2010-05-04 17:12:14 (vilanova)>
 
 ;; ;; Show backtrace on error
 ;; (toggle-debug-on-error t)
@@ -32,21 +31,15 @@ directory path."
 (defconst my-config-dir (path my-home-dir ".config" "emacs"))
 (defconst my-data-dir   (path my-home-dir ".local"  "share" "emacs"))
 (defconst my-cache-dir  (path my-home-dir ".cache"  "emacs"))
-(defconst user-emacs-directory my-config-dir)
-(make-directory my-data-dir  t)
 (make-directory my-cache-dir t)
+(defconst user-emacs-directory my-data-dir)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Add local lisp repository
 (defconst my-code-dir (path my-config-dir "site-lisp")) ;; Local packages
 (add-to-list 'load-path my-code-dir)
-
-;; ID for machine-specific configurations
-(defconst my-id-tag (concat (user-login-name) "@" (system-name)))
-
-;; User-specific configurations
-(defconst my-override-before (path my-config-dir "override-before.el"))
-(defconst my-override-after  (path my-config-dir "override-after.el"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; External programs
@@ -59,34 +52,14 @@ directory path."
  browse-url-generic-args '("--new-tab"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ELPA
 (setq package-user-dir (path my-config-dir "elpa" ""))
-(load (path my-config-dir "elpa" "package.el"))
+(load (path my-config-dir "package.el"))
 (package-initialize)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Map file extensions into major modes
-(setq auto-mode-alist
-      (append
-       '(
-         ("\\.h$"             . c++-mode)
-         ("\\.ipp$"           . c++-mode)
-         ("\\.cu$"            . c++-mode)
-         ) auto-mode-alist))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Override before pulling (see all references to `defvar')
-(if (file-exists-p my-override-before) (load-file my-override-before))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
 (load-file (path my-config-dir "general.el"))
 
@@ -96,12 +69,7 @@ directory path."
 
 (load-file (path my-config-dir "organization.el"))
 (load-file (path my-config-dir "mail.el"))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Override after pulling (see all references to `defvar')
-(if (file-exists-p my-override-after) (load-file my-override-after))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom-set-*
