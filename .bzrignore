@@ -1,3 +1,4 @@
+*.elc
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*
 dot.local-share-emacs/bbdb*

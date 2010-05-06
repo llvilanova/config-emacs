@@ -42,7 +42,7 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Add local lisp repository
 (add-to-list 'load-path my-config-dir)
-(defconst my-code-dir (path my-config-dir "site-lisp")) ;; Local packages
+(defconst my-code-dir (path my-config-dir "site-lisp")) ; local packages
 (add-to-list 'load-path my-code-dir)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -65,6 +65,7 @@ directory path."
 (require 'my-elpa)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'cl)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
@@ -77,7 +78,10 @@ directory path."
 
 (load-file (path my-config-dir "organization.el"))
 (load-file (path my-config-dir "mail.el"))
+(require 'my-misc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(my-regenerate-autoloads)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom-set-*
