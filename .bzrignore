@@ -1,3 +1,4 @@
+dot.config-emacs/custom.el
 dot.local-share-emacs/bbdb*
 dot.local-share-emacs/bmk-bmenu-state.el
 dot.local-share-emacs/bookmarks

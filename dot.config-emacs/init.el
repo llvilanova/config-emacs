@@ -59,6 +59,8 @@ directory path."
 (package-initialize)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq custom-file (path my-config-dir "custom.el"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
 (load-file (path my-config-dir "general.el"))
@@ -73,21 +75,5 @@ directory path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom-set-*
-;; TODO: should probably move to respective configuration file
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40")
- '(ecb-source-path (quote (("." ".") ("/" "/"))))
- '(font-latex-user-keyword-classes (quote (("mycommon-to-revise" (("TODO" "{")) font-latex-warning-face command))))
- '(org-agenda-files (quote ("~/Projects/vilanova/pmvirt/pvm.org" "/home/users/vilanova/plans/Brainstorming.org" "/home/users/vilanova/plans/Events.org" "/home/users/vilanova/plans/Main.org" "/home/users/vilanova/plans/Personal.org" "/home/users/vilanova/plans/Projects.org" "/home/users/vilanova/plans/TODO.org" "/home/users/vilanova/plans/notes.org")))
- '(safe-local-variable-values (quote ((org-export-latex-append-header . "\\usepackage{tikz}") (outline-minor-mode . t) (folded-file . t) (c-auto-newline . t) (c-default-style . "stroustrup")))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(cscope-line-face ((default (:foreground "gray")) (nil nil))))
+(load custom-file)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
