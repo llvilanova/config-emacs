@@ -4,7 +4,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color theming
 
-;; (require 'color-theme)
 (set-variable 'color-theme-is-global t)
 (defun my-color-theme ()
   (interactive)
@@ -48,6 +47,7 @@
      (py-XXX-tag-face ((t (:bold t :foreground "red"))))
      )))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Frame parameters
 
@@ -68,6 +68,44 @@
 ;; Set a more informative frame title
 (setq frame-title-format
       '("" invocation-name "@" system-name ":" "%b %&"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Global appearance
+
+(menu-bar-mode  t)                           ; show the menu...
+(tool-bar-mode -1)                           ; ... but not the the toolbar
+
+(set-fringe-mode 'half)                      ; space left of col1
+(setq default-indicate-empty-lines t         ; fringe indicators
+      default-indicate-buffer-boundaries 'left)
+
+(setq visible-bell t)                        ; no annoying sounds
+(mouse-avoidance-mode 'animate)              ; move when cursor is too close
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Modeline appearance
+
+(line-number-mode t)                         ; line numbers
+(column-number-mode t)                       ; column numbers
+(size-indication-mode t)                     ; file size
+(display-time-mode t)                        ; current time
+(scroll-bar-mode -1)                         ; no good'ol scrollbar...
+(sml-modeline-mode 1)                        ; ... but in modeline
+(set-variable 'sml-modeline-len 10)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; utf8 / input-method
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(set-input-method nil)
+(setq read-quoted-char-radix 10)             ; use decimal, not octal
 
 
 (provide 'my-appearance)

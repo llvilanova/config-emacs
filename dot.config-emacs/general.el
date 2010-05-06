@@ -1,5 +1,5 @@
 ;; -*-mode: Emacs-Lisp; folded-file:t-*-
-;; Time-stamp: <2010-05-06 21:02:41 (vilanova)>
+;; Time-stamp: <2010-05-06 23:10:10 (vilanova)>
 
 ;; To be run on every file
 (setq my-generic-hook nil)
@@ -7,39 +7,12 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;{{{ Modeline
-(line-number-mode t)                     ; show line numbers
-(column-number-mode t)                   ; show column numbers
-(when (fboundp size-indication-mode)
-  (size-indication-mode t))              ; show file size (emacs 22+)
-(display-time-mode -1)                   ; don't show the time
-;;}}}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;{{{ General settings
 
-(menu-bar-mode  t)                       ; show the menu...
-(tool-bar-mode -1)                       ; ... but not the the toolbar
-;; (ruler-mode t)
-(set-fringe-mode 'half)                  ; space left of col1
-(setq default-indicate-empty-lines t     ; fringe indicators
-      default-indicate-buffer-boundaries 'left)
-
-(setq visible-bell t)                    ; no annoying sounds
-
-(require 'sml-modeline)                  ; show scrollbar-like
-(sml-modeline-mode 1)                    ; in the modeline...
-(set-variable 'sml-modeline-len 10)
-(size-indication-mode 1)                 ; ... plus file size indication ...
-(scroll-bar-mode -1)                     ; ... instead of good'ol scrollbar ...
-;; (set-scroll-bar-mode 'right)             ; ... on the right
 (setq scroll-margin 1                    ; do smooth scrolling, ...
   scroll-conservatively 100000           ; ... the defaults ...
   scroll-up-aggressively 0.01            ; ... are very ...
   scroll-down-aggressively 0.01)         ; ... annoying
-
-(mouse-avoidance-mode 'animate)          ; mouse ptr when cursor is too close
 
 (transient-mark-mode t)                  ; make the current 'selection' visible
 (delete-selection-mode t)                ; delete the selection with a keypress
@@ -150,19 +123,6 @@ directory, select directory. Lastly the file is opened."
 (global-set-key [(meta x)]       'smex-update-and-run)
 (global-set-key [(meta shift x)] 'smex-major-mode-commands)
 
-;;}}}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;{{{ utf8 / input-method
-(setq locale-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(set-language-environment "UTF-8")       ; prefer utf-8 for language settings
-(set-input-method nil)                   ; no funky input for normal editing;
-(setq read-quoted-char-radix 10)         ; use decimal, not octal
 ;;}}}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
