@@ -1,5 +1,5 @@
 ;; -*-mode: Emacs-Lisp; folded-file:t-*-
-;; Time-stamp: <2010-05-05 19:31:15 (vilanova)>
+;; Time-stamp: <2010-05-06 21:02:41 (vilanova)>
 
 ;; To be run on every file
 (setq my-generic-hook nil)
@@ -433,71 +433,6 @@ directory, select directory. Lastly the file is opened."
 ;; Interactive string replacement
 (autoload 'iedit-mode "iedit" nil t)
 (global-set-key [(control \;)] 'iedit-mode)
-;;}}}
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;{{{ Graphical appearance
-
-(defvar my-font "Terminus-10")
-
-(require 'color-theme)
-(set-variable 'color-theme-is-global t)
-(defun my-color-theme ()
-  (interactive)
-  (color-theme-install
-   '(my-color-theme
-     ;; Frame parameters
-     ((background-color . "black")
-      (background-mode . dark)
-      (foreground-color . "#c0c0c0")
-      (border-color . "#888a85")
-      (cursor-color . "#fce94f")
-      ;; (mouse-color . "#8ae234")
-      (background-mode . dark))
-
-     ;; ;; Variable settings
-     ;; ((help-highlight-face . underline)
-     ;;  (ibuffer-dired-buffer-face . font-lock-function-name-face)
-     ;;  (ibuffer-help-buffer-face . font-lock-comment-face)
-     ;;  (ibuffer-hidden-buffer-face . font-lock-warning-face)
-     ;;  (ibuffer-occur-match-face . font-lock-warning-face) 
-     ;;  (ibuffer-read-only-buffer-face . font-lock-type-face)
-     ;;  (ibuffer-special-buffer-face . font-lock-keyword-face)
-     ;;  (ibuffer-title-face . font-lock-type-face))
-     ()
-
-     ;; Outer widgets
-     (mode-line ((t (:foreground "#c0c0c0" :background "#444444"
-                                 :box (:line-width 1 :color nil :style released-button)))))
-     (mode-line-inactive ((t (:foreground "#a0a0a0" :background "#222222"
-                                          :box (:line-width 1 :color nil :style released-button)))))
-     (mode-line-buffer-id ((t (:bold t :foreground "orange" :background nil))))
-
-     ;; General text editing area
-     (highlight ((t (:background "#283242" :foreground nil))))
-
-     ;; Specifics
-     (sml-modeline-end-face ((t (:background "#000000"))))
-     (sml-modeline-vis-face ((t (:background "#555555"))))
-     (py-XXX-tag-face ((t (:bold t :foreground "red"))))
-     )))
-(defun my-frame-parameters (frame)
-  (set-variable 'color-theme-is-global nil)
-  (select-frame frame)
-  (if (window-system frame)
-      (progn
-        (my-color-theme)
-        (set-frame-parameter frame 'font my-font)
-        )
-    (color-theme-tty-dark)))
-(add-hook 'after-make-frame-functions 'my-frame-parameters)
-(my-frame-parameters (next-frame))
-
-;; Set a more informative frame title
-(setq frame-title-format
-      '("" invocation-name "@" system-name ":" "%b %&"))
-
 ;;}}}
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
