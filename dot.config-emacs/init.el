@@ -15,7 +15,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Definition of pervasive directories
+;; Definition of pervasive paths
 (defun path (&rest list)
   "Build a path by concatenating a list of strings.
 
@@ -26,17 +26,22 @@ directory path."
       (setq res (concat (file-name-as-directory res) elem)))
     res
     ))
+
 ;; Where to store files
 (defconst my-home-dir   (expand-file-name "~"))
 (defconst my-config-dir (path my-home-dir ".config" "emacs"))
 (defconst my-data-dir   (path my-home-dir ".local"  "share" "emacs"))
 (defconst my-cache-dir  (path my-home-dir ".cache"  "emacs"))
 (make-directory my-cache-dir t)
+
+;; Some emacs-defined paths
 (defconst user-emacs-directory my-data-dir)
+(defconst custom-file (path my-config-dir "custom.el"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Add local lisp repository
+(add-to-list 'load-path my-config-dir)
 (defconst my-code-dir (path my-config-dir "site-lisp")) ;; Local packages
 (add-to-list 'load-path my-code-dir)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,14 +60,15 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ELPA
 (setq package-user-dir (path my-config-dir "elpa" ""))
-(load (path my-config-dir "package.el"))
+(require 'package)
 (package-initialize)
+(require 'my-elpa)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq custom-file (path my-config-dir "custom.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
+(require 'my-appearance)
 (load-file (path my-config-dir "general.el"))
 
 (load-file (path my-config-dir "ide.el"))
