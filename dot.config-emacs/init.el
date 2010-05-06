@@ -65,10 +65,12 @@ directory path."
 (require 'my-elpa)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'cl)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
+(require 'cl)
+(require 'my-misc)
+(my-regenerate-autoloads)
+
 (require 'my-appearance)
 (load-file (path my-config-dir "general.el"))
 
@@ -78,10 +80,7 @@ directory path."
 
 (load-file (path my-config-dir "organization.el"))
 (load-file (path my-config-dir "mail.el"))
-(require 'my-misc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(my-regenerate-autoloads)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom-set-*

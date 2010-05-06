@@ -16,7 +16,7 @@
   "Regenerate the autoload definitions file if necessary and load it."
   (interactive "P")
   (let* ((autoload-dir my-code-dir)
-         (autoload-file (path autoload-dir "loaddefs.el")))
+         (autoload-file (path my-config-dir "loaddefs.el")))
     (let ((generated-autoload-file autoload-file))
       (when (or force
                 (not (file-exists-p autoload-file))
@@ -25,6 +25,8 @@
         (message "Updating autoloads...")
         (let (emacs-lisp-mode-hook)
           (update-directory-autoloads autoload-dir))))
+    ;; TODO: missing `bookmark-bmenu-mode-map'
+    (require 'bookmark)
     (load autoload-file)))
 
 
