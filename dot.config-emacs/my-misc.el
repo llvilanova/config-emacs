@@ -1,5 +1,39 @@
-;; -*-mode: Emacs-Lisp; folded-file:t-*-
 ;;; my-misc.el --- Miscellaneous function definitions and settings
+
+(defun my-duplicate-line (&optional commentfirst)
+  "Duplicate line at point.
+If COMMENTFIRST is non-nil, comment the original line."
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (let ((str (buffer-substring (region-beginning) (region-end))))
+    (when commentfirst
+      (comment-region (region-beginning) (region-end)))
+    (insert-string
+     (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (forward-line -1)))
+
+(defun my-program-exists (program-name)
+  "Checks whenever we can locate program and launch it.
+Taken from org-mode's `org-prgram-exists'."
+  (if (eq system-type 'gnu/linux)
+      (= 0 (call-process "which" nil nil nil program-name))))
+
+(defun my-popup (title msg &optional icon sound)
+  "Show a popup through `awesome' if we're on X, or echo it otherwise."
+  (interactive)
+  (if sound
+      (if (my-program-exists "mplayer")
+          (start-process "my-popup-play" nil "mplayer" sound)
+        (condition-case nil
+            (play-sound-file sound)
+          (progn (beep t) (beep t)))))
+  (if (my-program-exists "notify-send")
+      (start-process "my-popup-show" nil "notify-send"
+                     "-i" (if icon icon "''") title msg)
+    (message "%s: %s" title msg)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local code book-keeping

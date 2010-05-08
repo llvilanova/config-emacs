@@ -1,4 +1,4 @@
-;; -*-mode: Emacs-Lisp; folded-file:t-*-
+;;; init.el --- Start configuration process.
 
 ;; ;; Show backtrace on error
 ;; (toggle-debug-on-error t)
@@ -8,7 +8,6 @@
 ;; in the system:
 ;;   - auctex
 ;;   - develock-el
-;;   - yasnippet
 ;;   - org-mode (>= 6.33f)
 ;;   - emacs-goodies-el (debian package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -24,8 +23,7 @@ directory path."
   (let ((res (car list)))
     (dolist (elem (cdr list))
       (setq res (concat (file-name-as-directory res) elem)))
-    res
-    ))
+    res))
 
 ;; Where to store files
 (defconst my-home-dir   (expand-file-name "~"))
@@ -72,14 +70,14 @@ directory path."
 (my-regenerate-autoloads)
 
 (require 'my-appearance)
-(load-file (path my-config-dir "general.el"))
+(require 'my-behaviour)
 
-(load-file (path my-config-dir "ide.el"))
-(load-file (path my-config-dir "writing.el"))
-(load-file (path my-config-dir "programming.el"))
+;; (load-file (path my-config-dir "ide.el"))
+;; (load-file (path my-config-dir "writing.el"))
+;; (load-file (path my-config-dir "programming.el"))
 
-(load-file (path my-config-dir "organization.el"))
-(load-file (path my-config-dir "mail.el"))
+;; (load-file (path my-config-dir "organization.el"))
+;; (load-file (path my-config-dir "mail.el"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,4 +1,3 @@
-;; -*-mode: Emacs-Lisp; folded-file:t-*-
 ;;; my-elpa.el --- Automagic installation of base package set.
 ;;
 ;; Taken from `starter-kit-elpa.el'
@@ -11,6 +10,7 @@
                           'highlight-80+
                           'highlight-parentheses
                           'highlight-symbol
+                          'smex
                           'tempo-snippets)
   "Libraries that should be installed b default.")
 

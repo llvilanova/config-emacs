@@ -1,4 +1,3 @@
-;; -*-mode: Emacs-Lisp; folded-file:t-*-
 ;;; my-appearance.el --- Graphical appearance settings
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,6 +81,15 @@
 
 (setq visible-bell t)                        ; no annoying sounds
 (mouse-avoidance-mode 'animate)              ; move when cursor is too close
+
+(setq inhibit-startup-message t              ; don't show ...
+      inhibit-startup-echo-area-message t)   ; ... startup messages
+
+;; `cursor-chg': context-specific cursor appearence
+(require 'cursor-chg)
+(setq curchg-default-cursor-color "Yellow")
+(curchg-toggle-cursor-type-when-idle 1)
+(change-cursor-mode 1)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
