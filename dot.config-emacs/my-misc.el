@@ -40,7 +40,7 @@ Taken from org-mode's `org-prgram-exists'."
 ;; Taken from `starter-kit-defuns'
 
 (defvar my-recompile-cmds (list)
-  "List of extra functions to call when recompiling code.")
+  "List of extra functions to call or paths to recompile code.")
 
 (defun my-recompile-init ()
   "Byte-compile all local code."
@@ -50,7 +50,10 @@ Taken from org-mode's `org-prgram-exists'."
   (byte-recompile-directory my-code-dir 0)
   (mapcar '(lambda (item)
              (case item
-               ((symbolp item) (item))))
+               ((symbolp item) (item))
+               ((and (stringp item) (file-directory-p item))
+                (byte-recompile-directory item))
+               ((error))))
           my-recompile-cmds))
 
 (defun my-regenerate-autoloads (&optional force)

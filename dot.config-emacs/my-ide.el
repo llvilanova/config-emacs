@@ -1,4 +1,4 @@
-;;; my-ide.el --- 
+;;; my-ide.el --- General development evironment preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Project management (EDE)
