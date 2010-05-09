@@ -39,12 +39,19 @@ Taken from org-mode's `org-prgram-exists'."
 ;; Local code book-keeping
 ;; Taken from `starter-kit-defuns'
 
+(defvar my-recompile-cmds (list)
+  "List of extra functions to call when recompiling code.")
+
 (defun my-recompile-init ()
   "Byte-compile all local code."
   (interactive)
   (message "Recompiling local code...")
   (byte-recompile-directory my-config-dir 0)
-  (byte-recompile-directory my-code-dir 0))
+  (byte-recompile-directory my-code-dir 0)
+  (mapcar '(lambda (item)
+             (case item
+               ((symbolp item) (item))))
+          my-recompile-cmds))
 
 (defun my-regenerate-autoloads (&optional force)
   "Regenerate the autoload definitions file if necessary and load it."

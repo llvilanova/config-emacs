@@ -2,6 +2,7 @@
 dot.config-emacs/loaddefs.el
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*
+dot.config-emacs/site-lisp/ecb/ecb-autoloads.el
 dot.local-share-emacs/bbdb*
 dot.local-share-emacs/bmk-bmenu-state.el
 dot.local-share-emacs/bookmarks
