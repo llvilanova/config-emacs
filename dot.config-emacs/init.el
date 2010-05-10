@@ -73,8 +73,7 @@ directory path."
 (require 'my-behaviour)
 (require 'my-ide)
 (require 'my-writing)
-
-;; (load-file (path my-config-dir "programming.el"))
+(require 'my-programming)
 
 ;; (load-file (path my-config-dir "organization.el"))
 ;; (load-file (path my-config-dir "mail.el"))
