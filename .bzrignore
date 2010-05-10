@@ -1,4 +1,5 @@
 *.elc
+dot.config-emacs/my-personal.el
 dot.config-emacs/loaddefs.el
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*

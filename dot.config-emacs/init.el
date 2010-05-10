@@ -46,13 +46,9 @@ directory path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; External programs
-(setq
- browse-url-browser-function 'browse-url-epiphany
- browse-url-epiphany-new-window-is-tab t ; for tab instead of new window.
-
- browse-url-browser-function 'browse-url-generic
- browse-url-generic-program "epiphany"
- browse-url-generic-args '("--new-tab"))
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "epiphany"
+      browse-url-generic-args '("--new-tab"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,6 +65,7 @@ directory path."
 (require 'my-misc)
 (my-regenerate-autoloads)
 
+(require 'my-personal nil t)
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
