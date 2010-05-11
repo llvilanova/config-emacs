@@ -11,22 +11,29 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
+(setq font-latex-user-keyword-classes   ; user-defined keyword highlighting
+      '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command))
+      TeX-parse-self t                  ; parse file on load
+      TeX-auto-save t                   ; store parsed information...
+      TeX-auto-local (path ".auto" "")  ; ...here
+      TeX-style-local (path ".style" "")
+      TeX-fold-auto t)                  ; auto-fold new macros
+(setq-default TeX-master nil)           ; query for master file
+
 (add-hook
  'my-latex-mode-hook
  '(lambda ()
-    (setq fill-column 100
-          TeX-parse-self t
-          TeX-auto-save t
-          TeX-style-local (path ".style" "")
-          TeX-auto-local (path ".auto" ""))
-    (setq-default TeX-master nil)       ; query for master file
+    (setq fill-column 100)
     (predictive-mode 1)                 ; predictive text
     (LaTeX-math-mode 1)                 ; nice math insertion menu
     (TeX-fold-mode 1)                   ; nicely foldable environments...
     (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
-    (outline-minor-mode 1)              ; foldable regions a-la-vim
-    (orgtbl-mode 1)))                   ; support for org's tables
-
+    (local-set-key [(})] '(lambda () (interactive) (insert "}")
+                            ;; (save-excursion (backward-char) (TeX-fold-macro))))
+                            (TeX-fold-buffer)))
+    ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
+    ;; (orgtbl-mode 1)                     ; support for org's tables
+    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bibliography
