@@ -87,8 +87,7 @@
              ;; ECB
              (my-define-ecb-layouts '("my-programming-left-right"
                                       "my-programming-right"
-                                      "my-files"))
-            ))
+                                      "my-files"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

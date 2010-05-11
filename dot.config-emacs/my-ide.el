@@ -42,7 +42,7 @@
 
 (defun my-define-ecb-layouts (layouts)
   "Sequence of layouts to use with `ecb-toggle-layout' in current major mode."
-  (set (make-local-variable ecb-toggle-layout-sequence) layouts)
+  (set (make-local-variable 'ecb-toggle-layout-sequence) layouts)
   (set (make-local-variable 'ecb-layout-name) (car layouts)))
 
 
