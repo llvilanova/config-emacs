@@ -55,7 +55,7 @@ command to be run in a shell.")
                     (funcall item))
                    ((and (stringp item) (file-directory-p item))
                     (mapcar 'byte-compile-file
-                            (directory-files item t ".*\.el$")))
+                            (directory-files item t "\\.el$")))
                    ((stringp item)
                     (message "Running '%s'..." item)
                     (call-process-shell-command item nil "*Compile-Log*" t))
