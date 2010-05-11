@@ -1,6 +1,4 @@
-;; -*-mode: Emacs-Lisp; outline-minor-mode:t-*-
-;; Time-stamp: <2010-04-30 14:48:47 (vilanova)>
-
+;;; my-org.el --- OrgMode's preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org Mode
@@ -8,11 +6,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Location
-(defvar org-directory (path my-home-dir "plans" ""))
-(setq org-agenda-files (list org-directory))
-(setq org-default-notes-file (path org-directory "notes.org"))
-(setq my-org-agenda-file (path my-cache-dir "org-agenda.txt"))
-(setq org-agenda-skip-unavailable-files t)
+(defconst org-directory (path my-home-dir "plans" ""))
+(setq org-agenda-files (list org-directory)
+      org-default-notes-file (path org-directory "notes.org")
+      my-org-agenda-file (path my-cache-dir "org-agenda.txt")
+      org-agenda-skip-unavailable-files t)
 ;; Contributed extensions
 (add-to-list 'load-path "/usr/share/org-mode/lisp")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -23,7 +21,6 @@
 (global-set-key [(control shift o) (l)] 'org-store-link)
 (global-set-key [(control shift o) (a)] 'org-agenda)
 (global-set-key [(control shift o) (s)] 'org-search-view)
-;; TODO: integrate with `ido'
 (global-set-key [(control shift o) (f)]
                 '(lambda ()
                    (interactive)
@@ -41,18 +38,19 @@
 ;; http://orgmode.org/worg/org-contrib/babel/org-babel.php#reference-and-documentation
 (require 'org-babel-ditaa)     ;; ditaa
 ;; (setq org-ditaa-jar-path "/usr/share/org-mode/scripts/ditaa.jar")
-(setq org-ditaa-jar-path (path my-home-dir "bin" "ditaa.jar"))
+;; (setq org-ditaa-jar-path (path my-home-dir "bin" "ditaa.jar"))
+(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Appointment notification
-(setq appt-message-warning-time 15     ; warn 15min in advance
-      appt-display-mode-line t         ; show in modeline
-      appt-display-format 'window)     ; use our function
+(setq appt-message-warning-time 15      ; warn 15min in advance
+      appt-display-mode-line t          ; show in modeline
+      appt-display-format 'window)      ; use our function
 (appt-activate 1)
 (display-time)
-(add-hook 'org-finalize-agenda-hook    ; update `appt' when agenda is opened
+(add-hook 'org-finalize-agenda-hook     ; update `appt' when agenda is opened
           '(lambda () (org-agenda-to-appt t)))
 (defun my-appt-popup (min-to-app new-time msg)
   (my-popup (format "Appointment in %s minute(s)" min-to-app) msg
@@ -64,47 +62,39 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
-;;
+
 ;; Common tags
 (setq org-tag-alist '(
                       ("PROJECT" . ?P)
                       ))
-;;
+
 ;; Appearance
 (setq org-agenda-ndays 14              ; show 2 weeks...
       org-agenda-start-on-weekday 1    ; ...starting on Monday
       org-hide-leading-stars t         ; hide stars...
       org-odd-levels-only t)           ; ...and increase separation
-;; ;; Still experimental
-;; (setq org-startup-indented t)
-;;
-;; Do not show TODOs with scheduled date in the TODO list
-;; (they'll eventually appear in agenda)
-(setq org-agenda-todo-ignore-deadlines t)
-(setq org-agenda-todo-ignore-with-date t)
-(setq org-agenda-todo-ignore-scheduled t)
-;;
-;; Do not show completed tasks
-(setq org-agenda-skip-scheduled-if-done t)
-(setq org-agenda-skip-deadline-if-done t)
-;;
-;; Do not show tasks blocked due to dependencies
-(setq org-agenda-dim-blocked-tasks t)
-;;
-;; Cannot change state if children are unfinished
-(setq org-enforce-todo-dependencies t)
-;;
-;; Finding stuck projects
-(setq org-stuck-projects
+      ;; org-startup-indented t)          ; still experimental
+
+
+;; Hide information
+(setq org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
+      org-agenda-todo-ignore-with-date t  ; ... in the TODO list...
+      org-agenda-todo-ignore-scheduled t  ; (they'll eventually appear)
+      org-agenda-skip-scheduled-if-done t ; completed tasks
+      org-agenda-skip-deadline-if-done t
+      org-agenda-dim-blocked-tasks t)     ; tasks blocked by dependencies
+
+;; Lifecycle
+(setq org-enforce-todo-dependencies t   ; hold state if unfinished children
+      org-stuck-projects                ; find stuck projects
       '("+PROJECT/-MAYBE-DONE" ("NEXT" "TODO") ("@SHOP")
-        "\\<IGNORE\\>"))
-;;
-;; Add time stamp when moving to state `DONE'
-(setq org-log-done 'time)
-;;
+        "\\<IGNORE\\>")
+      org-log-done 'time                ; add timestamp when moving to `DONE'
+      )
+
 ;; To follow links with RET, rather than a 2 key combo:
 (setq org-return-follows-link t)
-;;
+
 ;; Export the current agenda whenever one of its files is updated
 (add-hook 'org-mode-hook
           '(lambda ()
@@ -192,3 +182,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; [END] Remember Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(provide 'my-org)

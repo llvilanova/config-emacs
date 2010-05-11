@@ -71,7 +71,7 @@ directory path."
 (require 'my-ide)
 (require 'my-writing)
 (require 'my-programming)
-;; (load-file (path my-config-dir "organization.el"))
+(require 'my-org)
 (require 'my-mail)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
