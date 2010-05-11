@@ -8,7 +8,7 @@
 ;; Location
 (defconst org-directory (path my-home-dir "plans" ""))
 (setq org-agenda-files (list org-directory)
-      org-default-notes-file (path org-directory "notes.org")
+      org-default-notes-file (path org-directory "Personal.org")
       my-org-agenda-file (path my-cache-dir "org-agenda.txt")
       org-agenda-skip-unavailable-files t)
 ;; Contributed extensions
@@ -126,19 +126,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
-(org-remember-insinuate)               ; integrate into Org Mode
-(setq org-remember-templates           ; note templates
-                                       ; defaults into `org-default-notes-file'
-      '(
-        ;; ;; org-protocol:remember
-        ;; ("Browser" ?w "* %^{Title}\n\n  Source: %u, %c\n\n  %i" nil "Notes")
-        ;; ("Journal"    ?j "* %U %?\n\n  %i\n  %a"     nil)
-        ("Todo"       ?t "* TODO %?\n  %i\n  %a"     nil "Tasks")
-        ("Schedule"   ?s "* TODO %?\n  SCHEDULE: $^{Schedule}t" nil "Tasks")
-        ("Deadline"   ?d "* TODO %?\n  DEADLINE: $^{Deadline}t" nil "Tasks")
-        ("Clipboard"  ?c "* %T %^{Description}\n %x" nil "Interesting")
-        ("Idea"       ?i "* %^{Title}\n  %i\n  %a"   nil "New Ideas")
-        ("Conference" ?f
+(org-remember-insinuate)                ; integrate into Org Mode
+(setq org-remember-templates            ; note templates
+      '(                                ; defaults into `org-default-notes-file'
+        ;; org-protocol:remember
+        (?w "* %^{Description}\n  %U %c%?"                      nil "Interessant")
+
+        ;; Personal
+        ("Todo"       ?t "* TODO %?\n  %i\n  %a"                nil "Tasques")
+        ("Schedule"   ?s "* %?\n  SCHEDULED: %^{Schedule}t"     nil "Tasques")
+        ("Deadline"   ?d "* TODO %?\n  DEADLINE: %^{Deadline}t" nil "Tasques")
+        ("Clipboard"  ?c "* %U %^{Description}\n  %c\n  %x"     nil "Interessant")
+        ("Préstec"    ?p "* %u %^{Objecte} -> %^{Persona}%!"    nil "Préstecs")
+
+        ;; Work
+        ("Todo"       ?T "* TODO %?\n  %i\n  %a"                "Work.org" "Tasks")
+        ("Schedule"   ?S "* %?\n  SCHEDULED: %^{Schedule}t"     "Work.org" "Tasks")
+        ("Deadline"   ?D "* TODO %?\n  DEADLINE: %^{Deadline}t" "Work.org" "Tasks")
+        ("Idea"       ?I "* %^{Title}\n  %i\n  %a"              "Work.org" "Brainstorming")
+        ("Conference" ?F
          "* %^{Conference}    :%^{Acronym}:%?
 *** TODO Abstract
     DEADLINE: <%(org-read-date nil nil nil \"Abstract deadline\") ++1y -1w>
@@ -149,7 +155,6 @@
 *** TODO Acceptance notification
     SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>"
          "Events.org" "Conferences")
-        ("Préstec" ?P "* %t %^{Objecte} -> %^{Persona}" "Personal.org" "Préstecs")
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
