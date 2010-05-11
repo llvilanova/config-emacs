@@ -76,8 +76,8 @@
 (tool-bar-mode -1)                           ; ... but not the the toolbar
 
 (set-fringe-mode 'half)                      ; space left of col1
-(setq default-indicate-empty-lines t         ; fringe indicators
-      default-indicate-buffer-boundaries 'left)
+(setq indicate-empty-lines t                 ; fringe indicators
+      indicate-buffer-boundaries 'left)
 
 (setq visible-bell t)                        ; no annoying sounds
 (mouse-avoidance-mode 'animate)              ; move when cursor is too close

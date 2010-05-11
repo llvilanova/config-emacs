@@ -1820,7 +1820,7 @@ do not use a template."
 	 (error "Cannot use templates for existing files"))
     (let ((auto-mode-alist nil)
 	  (enable-local-variables nil)
-	  (find-file-not-found-hooks nil)
+	  (find-file-not-found-functions nil)
 	  (enable-local-eval nil))
       (switch-to-buffer (find-file-noselect file))))
   (when template
@@ -2256,7 +2256,7 @@ result is in `template-file'.  See `template-derivation-alist'."
 	    (setq auto-num
 		  (and (or (get-file-buffer full)
 			   (file-readable-p full))
-		       (string-to-int (fourth template-file)))))
+		       (string-to-number (fourth template-file)))))
       (setq auto-num (1- auto-num)
 	    raw (third template-file)
 	    ext (fifth template-file))
@@ -2291,7 +2291,7 @@ result is in `template-file'.  See `template-derivation-alist'."
   "Return numbering in FILE-RNE if the RAW and EXT parts are equal."
   (or (and (string= (car file-rne) raw)
 	   (string= (caddr file-rne) ext)
-	   (string-to-int (cadr file-rne)))
+	   (string-to-number (cadr file-rne)))
       0))
 
 

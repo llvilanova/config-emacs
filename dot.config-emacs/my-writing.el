@@ -54,7 +54,8 @@
 ;; ;; `predictive': Predictive text completion
 ;; ;; http://www.emacswiki.org/emacs/PredictiveMode
 
-;; (add-to-list 'my-recompile-cmds (path my-code-dir "predictive"))
+;; (add-to-list 'my-recompile-objs (format "make -C %s"
+;;                                         (path my-code-dir "predictive")))
 ;; (autoload 'predictive-mode "predictive"
 ;;   "Turn on Predictive Completion Mode." t)
 

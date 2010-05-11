@@ -9,7 +9,7 @@
 ;; Emacs Code Browser (ECB)
 
 (add-to-list 'load-path (path my-code-dir "ecb"))
-(add-to-list 'my-recompile-cmds 'ecb-byte-compile)
+(add-to-list 'my-recompile-objs 'ecb-byte-compile)
 (setq ecb-layouts-path (path my-data-dir "ecb-layouts"))
 
 ;; Byte-compile for first time if no autoload file exists
@@ -42,10 +42,8 @@
 
 (defun my-define-ecb-layouts (layouts)
   "Sequence of layouts to use with `ecb-toggle-layout' in current major mode."
-  (make-variable-buffer-local 'ecb-toggle-layout-sequence)
-  (setq ecb-toggle-layout-sequence layouts)
-  (make-variable-buffer-local 'ecb-layout-name)
-  (setq ecb-layout-name (car layouts)))
+  (set (make-local-variable ecb-toggle-layout-sequence) layouts)
+  (set (make-local-variable 'ecb-layout-name) (car layouts)))
 
 
 (provide 'my-ide)

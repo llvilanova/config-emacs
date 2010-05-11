@@ -38,8 +38,8 @@
 
 
 (require 'semantic)
-(require 'semantic-ctxt)
-(require 'semantic-analyze)
+(require 'semantic/ctxt)
+(require 'semantic/analyze)
 
 (defconst ecb-semantic-2-loaded (string-match "^2" semantic-version))
 (defconst ecb-semantic-2-beta-nr (if (and ecb-semantic-2-loaded

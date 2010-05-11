@@ -180,7 +180,7 @@
 ;; `template': File templates
 ;; TODO: replace with cedet's `srecode'
 (autoload 'template-initialize (path my-code-dir "template" "lisp" "template"))
-(add-to-list 'my-recompile-cmds (path my-code-dir "template" "lisp"))
+(add-to-list 'my-recompile-objs (path my-code-dir "template" "lisp"))
 (add-hook 'my-programming-mode-hook
           '(lambda ()
              (setq template-default-directories

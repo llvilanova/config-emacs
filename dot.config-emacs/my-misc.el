@@ -10,8 +10,7 @@ If COMMENTFIRST is non-nil, comment the original line."
   (let ((str (buffer-substring (region-beginning) (region-end))))
     (when commentfirst
       (comment-region (region-beginning) (region-end)))
-    (insert-string
-     (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (insert (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
     (forward-line -1)))
 
 (defun my-program-exists (program-name)
@@ -39,22 +38,29 @@ Taken from org-mode's `org-prgram-exists'."
 ;; Local code book-keeping
 ;; Taken from `starter-kit-defuns'
 
-(defvar my-recompile-cmds (list)
-  "List of extra functions to call or paths to recompile code.")
+(defvar my-recompile-objs (list my-config-dir
+                                my-code-dir)
+  "List of recompilation objectives.
+If the element is a function, it is called to recompile.  If the
+element is the path to an existing directory, all its elisp files
+are compiled.  If the element is a string, it is assumed as a
+command to be run in a shell.")
 
 (defun my-recompile-init ()
   "Byte-compile all local code."
   (interactive)
   (message "Recompiling local code...")
-  (byte-recompile-directory my-config-dir 0)
-  (byte-recompile-directory my-code-dir 0)
   (mapcar '(lambda (item)
-             (case item
-               ((symbolp item) (item))
-               ((and (stringp item) (file-directory-p item))
-                (byte-recompile-directory item))
-               ((error))))
-          my-recompile-cmds))
+             (cond ((functionp item)
+                    (funcall item))
+                   ((and (stringp item) (file-directory-p item))
+                    (mapcar 'byte-compile-file
+                            (directory-files item t ".*\.el$")))
+                   ((stringp item)
+                    (message "Running '%s'..." item)
+                    (call-process-shell-command item nil "*Compile-Log*" t))
+                   ((error "Unknown recompilation objective: %s" item))))
+          my-recompile-objs))
 
 (defun my-regenerate-autoloads (&optional force)
   "Regenerate the autoload definitions file if necessary and load it."
