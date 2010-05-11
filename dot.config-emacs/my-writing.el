@@ -50,33 +50,38 @@
              (add-to-list 'ecb-compilation-buffer-names '("*WordNet*" . nil))))
 
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; `predictive': Predictive text completion
-;; ;; http://www.emacswiki.org/emacs/PredictiveMode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; `predictive': Predictive text completion
+;; http://www.emacswiki.org/emacs/PredictiveMode
 
-;; (add-to-list 'my-recompile-objs (format "make -C %s"
-;;                                         (path my-code-dir "predictive")))
-;; (autoload 'predictive-mode "predictive"
-;;   "Turn on Predictive Completion Mode." t)
+(add-to-list 'my-recompile-objs (format "make -C %s"
+                                        (path my-code-dir "predictive")))
+(autoload 'predictive-mode "predictive"
+  "Toggle Predictive Completion mode." t)
+(autoload 'predictive-create-dict "predictive"
+  "Create a new predictive mode dictionary called DICTNAME." t)
 
-;; (add-to-list 'load-path (path my-code-dir "predictive"))
-;; (add-to-list 'load-path (path my-code-dir "predictive" "latex"))
-;; (add-to-list 'load-path (path my-code-dir "predictive" "texinfo"))
-;; (add-to-list 'load-path (path my-code-dir "predictive" "html"))
-;; ;; Create new dictionaries with: `predictive-create-dict'
-;; (add-to-list 'load-path (path my-data-dir "predictive"))
+(add-to-list 'load-path (path my-code-dir "predictive"))
+(add-to-list 'load-path (path my-code-dir "predictive" "latex"))
+(add-to-list 'load-path (path my-code-dir "predictive" "texinfo"))
+(add-to-list 'load-path (path my-code-dir "predictive" "html"))
 
-;; (add-hook
-;;  'my-writing-mode-hook
-;;  '(lambda ()
-;;     (set-default 'predictive-auto-add-to-dict t)
-;;     (setq predictive-main-dict 'my-english
-;;           predictive-auto-learn t
-;;           predictive-add-to-dict-ask t ;; nil
-;;           predictive-use-auto-learn-cache nil ;; t
-;;           ;; predictive-which-dict t
-;;           auto-completion-syntax-alist '(accept . word) ; non-word char accepts
-;;           completion-auto-show nil)))                   ; no auto completion-ui
+;; Auto-create personal dictionary
+(let* ((my-dicts-dir    (path my-data-dir "predictive"))
+       (my-dict-english (path my-dicts-dir "my-dict-english")))
+  (add-to-list 'load-path my-dicts-dir)
+  (unless (file-exists-p (concat my-dict-english ".el"))
+    (make-directory my-dicts-dir t)
+    (predictive-create-dict 'my-dict-english my-dict-english nil nil)
+    (predictive-save-dict my-dict-english)))
+
+(setq-default predictive-auto-add-to-dict t) ; add new words to first dict
+(setq predictive-main-dict '(my-dict-english dict-english)
+      predictive-auto-learn t           ; update frequency counts
+      predictive-add-to-dict-ask t      ; ask for new words
+      predictive-which-dict t
+      auto-completion-syntax-alist '(accept . word) ; non-word char accepts
+      completion-auto-show nil)         ; no auto completion-ui
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

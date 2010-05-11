@@ -20,12 +20,12 @@
           TeX-style-local (path ".style" "")
           TeX-auto-local (path ".auto" ""))
     (setq-default TeX-master nil)       ; query for master file
-    ;; (orgtbl-mode 1)                     ; support for org's tables
-    ;; (predictive-mode 1)                 ; predictive text
+    (predictive-mode 1)                 ; predictive text
     (LaTeX-math-mode 1)                 ; nice math insertion menu
     (TeX-fold-mode 1)                   ; nicely foldable environments...
     (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
-    (outline-minor-mode 1)))            ; foldable regions a-la-vim
+    (outline-minor-mode 1)              ; foldable regions a-la-vim
+    (orgtbl-mode 1)))                   ; support for org's tables
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
