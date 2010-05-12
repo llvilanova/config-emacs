@@ -48,6 +48,7 @@ Taken from org-mode's `org-prgram-exists'."
                  local-map
                  (keymap (mode-line keymap
                                     (mouse-1 . my-toggle-dedicated-window)))
+                 mouse-face mode-line-highlight
                  help-echo "Dedicated window\nmouse-1: Toggle dedicated window")
                t)
   (setq-default mode-line-buffer-identification value))
