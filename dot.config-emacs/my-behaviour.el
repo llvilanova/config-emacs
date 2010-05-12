@@ -75,6 +75,7 @@
 
 (transient-mark-mode t)                 ; show current 'selection'
 (delete-selection-mode t)               ; delete the selection with a keypress
+(cua-selection-mode t)                  ; enable CUA behaviour without C-[zxvc]
 
 (setq x-select-enable-clipboard t       ; copy & paste
       interprogram-paste-function 'x-cut-buffer-or-selection-value)
