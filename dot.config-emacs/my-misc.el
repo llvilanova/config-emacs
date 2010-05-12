@@ -34,20 +34,28 @@ Taken from org-mode's `org-prgram-exists'."
     (message "%s: %s" title msg)))
 
 
-(defun my-toggle-dedicated-window ()
-  "Toggle whether the current active window is dedicated or not."
+(defun my-toggle-dedicated-window (&optional window)
+  "Toggle whether WINDOW is dedicated or not.
+If nil, WINDOW is `selected-window'."
   (interactive)
-  (let* ((window (selected-window))
+  (let* ((window (or window (selected-window)))
          (dedicated (window-dedicated-p window)))
     (set-window-dedicated-p window (not dedicated))))
+
+(defun my--mode-line-toggle-dedicated-window (event)
+  "Like `my-toggle-dedicated-window', but for the mode-line."
+  (interactive "e")
+  (my-toggle-dedicated-window (posn-window (event-start event))))
 
 (let ((value (default-value 'mode-line-buffer-identification)))
   (add-to-list 'value
                '(:propertize
-                 (:eval (if (window-dedicated-p (selected-window)) " [D]" " [ ]"))
+                 (:eval (if (window-dedicated-p (selected-window))
+                            " [D]" " [ ]"))
                  local-map
-                 (keymap (mode-line keymap
-                                    (mouse-1 . my-toggle-dedicated-window)))
+                 (keymap
+                  (mode-line keymap
+                             (mouse-1 . my--mode-line-toggle-dedicated-window)))
                  mouse-face mode-line-highlight
                  help-echo "Dedicated window\nmouse-1: Toggle dedicated window")
                t)
