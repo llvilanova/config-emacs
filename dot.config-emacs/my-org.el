@@ -130,7 +130,7 @@
 (setq org-remember-templates            ; note templates
       '(                                ; defaults into `org-default-notes-file'
         ;; org-protocol:remember
-        (?w "* %^{Description}\n  %U %c%?"                      nil "Interessant")
+        ("Web"        ?w "* %^{Description}\n  %U %c%?"         nil "Interessant")
 
         ;; Personal
         ("Todo"       ?t "* TODO %?\n  %i\n  %a"                nil "Tasques")
@@ -156,6 +156,7 @@
     SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>"
          "Events.org" "Conferences")
         ))
+(require 'org-protocol)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
