@@ -134,14 +134,14 @@
 
         ;; Personal
         ("Todo"       ?t "* TODO %?\n  %i\n  %a"                nil "Tasques")
-        ("Schedule"   ?s "* %?\n  SCHEDULED: %^{Schedule}t"     nil "Tasques")
+        ("Schedule"   ?s "* %?\n  SCHEDULED: %^{Schedule}T"     nil "Tasques")
         ("Deadline"   ?d "* TODO %?\n  DEADLINE: %^{Deadline}t" nil "Tasques")
         ("Clipboard"  ?c "* %U %^{Description}\n  %c\n  %x"     nil "Interessant")
         ("Préstec"    ?p "* %u %^{Objecte} -> %^{Persona}%!"    nil "Préstecs")
 
         ;; Work
         ("Todo"       ?T "* TODO %?\n  %i\n  %a"                "Work.org" "Tasks")
-        ("Schedule"   ?S "* %?\n  SCHEDULED: %^{Schedule}t"     "Work.org" "Tasks")
+        ("Schedule"   ?S "* %?\n  SCHEDULED: %^{Schedule}T"     "Work.org" "Tasks")
         ("Deadline"   ?D "* TODO %?\n  DEADLINE: %^{Deadline}t" "Work.org" "Tasks")
         ("Idea"       ?I "* %^{Title}\n  %i\n  %a"              "Work.org" "Brainstorming")
         ("Conference" ?F
@@ -156,6 +156,7 @@
     SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>"
          "Events.org" "Conferences")
         ))
+
 (require 'org-protocol)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -180,9 +181,6 @@
                              default-frame-alist)))
    ad-do-it
    ))
-;;
-;; ;; http://orgmode.org/worg/org-contrib/org-protocol.php
-;; (require 'org-protocol)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
