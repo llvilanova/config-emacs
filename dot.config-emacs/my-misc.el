@@ -33,6 +33,24 @@ Taken from org-mode's `org-prgram-exists'."
                      "-i" (if icon icon "''") title msg)
     (message "%s: %s" title msg)))
 
+(defun my-toggle-dedicated-window ()
+  "Toggle whether the current active window is dedicated or not."
+  (interactive)
+  (let* ((window (selected-window))
+         (dedicated (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated))))
+
+(let ((value (default-value 'mode-line-buffer-identification)))
+  (add-to-list 'value
+               '(:propertize
+                 (:eval (if (window-dedicated-p (selected-window)) " [D]" " [ ]"))
+                 local-map
+                 (keymap (mode-line keymap
+                                    (mouse-1 . my-toggle-dedicated-window)))
+                 help-echo "Dedicated window\nmouse-1: Toggle dedicated window")
+               t)
+  (setq-default mode-line-buffer-identification value))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local code book-keeping

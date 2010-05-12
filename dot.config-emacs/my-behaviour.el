@@ -48,6 +48,8 @@
 (put 'narrow-to-region 'disabled nil)   ; enable region narrowing
 (put 'erase-buffer 'disabled nil)
 
+(global-set-key [pause] 'my-toggle-dedicated-window)
+
 ;; Move between windows
 (windmove-default-keybindings 'meta)
 (global-set-key [(control x) (left)] 'windmove-left)
