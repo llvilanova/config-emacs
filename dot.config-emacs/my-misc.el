@@ -58,20 +58,20 @@ Taken from org-mode's `org-prgram-exists'."
 
 (defun my-add-helper-buffer (buffer)
   "Register BUFFER as a helper buffer.
-Helper buffers are treated specially, depending on your
-environment state.
-
-If ECB is active, helper buffers are added into
-`ecb-compilation-buffer-names'.
-
-Argument BUFFER can have any valid format for `get-buffer'."
+Helper buffers are treated as `ecb-compilation-buffer-names',
+even when ECB is not active."
   (add-to-list 'my-helper-buffers buffer))
 
-(add-hook 'ecb-activate-hook
-          '(lambda ()
-             (mapc '(lambda (item) (add-to-list 'ecb-compilation-buffer-names
-                                                '(item . nil)))
-                   my-helper-buffers)))
+(defun my--setup-helper-buffers ()
+  (mapc '(lambda (item) (add-to-list 'ecb-compilation-buffer-names
+                                     '(item . nil)))
+        my-helper-buffers))
+
+;; (add-hook 'ecb-activate-hook 'my-setup-helper-buffers)
+(add-hook 'after-init-hook '(lambda ()
+                              (require 'ecb-layout)
+                              (ecb-initialize-layout)
+                              (my--setup-helper-buffers)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
