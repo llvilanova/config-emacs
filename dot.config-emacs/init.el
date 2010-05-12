@@ -63,6 +63,7 @@ directory path."
 ;; Pull the rest of configuration
 (require 'cl)
 (require 'my-misc)
+(require 'bookmark)          ; TODO: missing autoload `bookmark-bmenu-mode-map'
 (my-regenerate-autoloads)
 
 (require 'my-personal nil t)
