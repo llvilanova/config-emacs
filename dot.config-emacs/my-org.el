@@ -28,6 +28,7 @@
                    ))
 (global-set-key [(control shift o) (b)] 'org-iswitchb)
 (global-set-key [(control shift o) (r)] 'org-remember)
+(global-set-key [(control c) (control shift o) (r)] 'remember-other-frame)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -169,18 +170,15 @@
 ;;       only the `*Remember*' frame is deleted
 (defadvice remember-other-frame (around remember-frame-parameters activate)
  "Set some frame parameters for the remember frame."
- (let ((default-frame-alist (append
-                             '(
-                               (name . "*Remember*")
-                               (width . 80)
-                               (height . 10)
-                               (vertical-scroll-bars . nil)
-                               (menu-bar-lines . 0)
-                               (tool-bar-lines . 0)
-                               )
-                             default-frame-alist)))
-   ad-do-it
-   ))
+ (let ((default-frame-alist
+         (append '((name . "*Remember*")
+                   (width . 80)
+                   (height . 15)
+                   (vertical-scroll-bars . nil)
+                   (menu-bar-lines . 0)
+                   (tool-bar-lines . 0))
+                 default-frame-alist)))
+   ad-do-it))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
