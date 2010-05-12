@@ -122,6 +122,8 @@ command to be run in a shell.")
                       (directory-files autoload-dir t "\\.el$")))
         (message "Updating autoloads...")
         (let (emacs-lisp-mode-hook)
+          (when (not (file-exists-p autoload-file))
+            (add-hook 'after-init-hook 'my-recompile-init))
           (update-directory-autoloads autoload-dir))))
     ;; TODO: missing `bookmark-bmenu-mode-map'
     (require 'bookmark)
