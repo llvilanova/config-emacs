@@ -242,6 +242,8 @@ directory, select directory. Lastly the file is opened."
 ;; Misc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq tramp-persistency-file-name (path my-cache-dir "tramp"))
+
 ;; `browse-kill-ring': kill ring browser on M-y
 (browse-kill-ring-default-keybindings)
 (setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
