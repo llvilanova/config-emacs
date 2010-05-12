@@ -9,15 +9,19 @@
 ;; Emacs Code Browser (ECB)
 
 (add-to-list 'load-path (path my-code-dir "ecb"))
-(add-to-list 'my-recompile-objs 'ecb-byte-compile)
-(setq ecb-layouts-path (path my-data-dir "ecb-layouts"))
+(setq ecb-layouts-path (path my-data-dir "ecb-layouts")
+      my--ecb-autogen-file (path my-code-dir "ecb" "ecb-autoloads.el"))
 
-;; Byte-compile for first time if no autoload file exists
-(if (not (require 'ecb-autoloads nil t))
-    (progn
-      (require 'ecb)
-      (ecb-byte-compile)
-      (ecb-update-autoloads)))
+;; (Re)compile
+(defun my--ecb-update-autoloads ()
+  (require 'ecb-autogen)
+  (setq ecb-autogen-file my--ecb-autogen-file)
+  (ecb-update-autoloads))
+(add-to-list 'my-recompile-objs 'my--ecb-update-autoloads)
+(add-to-list 'my-recompile-objs 'ecb-byte-compile)
+(when (not (require 'ecb-autoloads nil t))
+  (my--ecb-update-autoloads)
+  (require 'ecb-autoloads))
 
 (add-hook
  'ecb-before-activate-hook
