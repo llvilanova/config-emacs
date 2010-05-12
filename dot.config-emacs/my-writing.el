@@ -45,9 +45,7 @@
 (add-hook 'my-writing-mode-hook
           '(lambda ()
              (local-set-key [(control c) (w)] 'wordnet-search)))
-(add-hook 'ecb-activate-hook
-          '(lambda ()
-             (add-to-list 'ecb-compilation-buffer-names '("*WordNet*" . nil))))
+(my-add-helper-buffer "*WordNet*")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -221,10 +221,7 @@
                      (display-buffer doc-buffer t))))))
 
 ;; Special treatment for documentation buffer
-(add-hook 'ecb-activate-hook
-          '(lambda ()
-             (add-to-list 'ecb-compilation-buffer-names
-                          '("*Company meta-data*" . nil))))
+(my-add-helper-buffer "*Company meta-data*")
 
 (add-hook 'my-programming-mode-hook
           '(lambda ()
@@ -236,9 +233,7 @@
 ;; Code navigation
 
 ;; Special treatment for tags buffer
-(add-hook
- 'ecb-activate-hook
- '(lambda () (add-to-list 'ecb-compilation-buffer-names '("*cscope*" . nil))))
+(my-add-helper-buffer "*cscope*")
 
 (add-hook 'my-programming-mode-hook
           '(lambda ()
@@ -255,10 +250,7 @@
 ;; Code help
 
 ;; Special treatment for documentation buffer
-(add-hook
- 'ecb-activate-hook
- '(lambda ()
-    (add-to-list 'ecb-compilation-buffer-names '("*TAG DCUMENTATION*" . nil))))
+(my-add-helper-buffer "*TAG DOCUMENTATION*")
 
 (add-hook 'my-programming-mode-hook
           '(lambda ()

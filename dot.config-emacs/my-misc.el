@@ -33,6 +33,7 @@ Taken from org-mode's `org-prgram-exists'."
                      "-i" (if icon icon "''") title msg)
     (message "%s: %s" title msg)))
 
+
 (defun my-toggle-dedicated-window ()
   "Toggle whether the current active window is dedicated or not."
   (interactive)
@@ -50,6 +51,26 @@ Taken from org-mode's `org-prgram-exists'."
                  help-echo "Dedicated window\nmouse-1: Toggle dedicated window")
                t)
   (setq-default mode-line-buffer-identification value))
+
+
+(defvar my-helper-buffers nil)
+
+(defun my-add-helper-buffer (buffer)
+  "Register BUFFER as a helper buffer.
+Helper buffers are treated specially, depending on your
+environment state.
+
+If ECB is active, helper buffers are added into
+`ecb-compilation-buffer-names'.
+
+Argument BUFFER can have any valid format for `get-buffer'."
+  (add-to-list 'my-helper-buffers buffer))
+
+(add-hook 'ecb-activate-hook
+          '(lambda ()
+             (mapc '(lambda (item) (add-to-list 'ecb-compilation-buffer-names
+                                                '(item . nil)))
+                   my-helper-buffers)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
