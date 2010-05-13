@@ -150,7 +150,10 @@
         ("Reply-To" ("Reply-To") ("To" "Cc" "From") ("Newsgroups"))
         ("From" ("From") ("To" "Cc") ("Newsgroups"))))
 
-(add-hook 'wl-draft-mode '(lambda () (set-fill-column 75)))
+(add-hook 'wl-draft-mode
+          '(lambda ()
+             (set-fill-column 75)
+             (my-mail-setup-boxquote)))
 
 
 ;; BBDB
