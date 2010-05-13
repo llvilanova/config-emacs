@@ -150,7 +150,7 @@
         ("Reply-To" ("Reply-To") ("To" "Cc" "From") ("Newsgroups"))
         ("From" ("From") ("To" "Cc") ("Newsgroups"))))
 
-(add-hook 'wl-draft-mode '(lambda () (setq fill-column 75)))
+(add-hook 'wl-draft-mode '(lambda () (set-fill-column 75)))
 
 
 ;; BBDB
@@ -159,6 +159,22 @@
 (setq wl-summary-from-function 'bbdb-wl-from-func) ; show name from BBDB in summary
 (add-hook 'wl-mail-setup-hook           ; auto-expand BBDB aliases
           '(lambda () (bbdb-define-all-aliases) (mail-abbrevs-setup)))
+
+;; `signature' integration
+(add-hook 'wl-init-hook
+          '(lambda ()
+             (add-to-list 'wl-draft-config-sub-func-alist
+                          '(signature . wl-draft-config-sub-signature))))
+(defun mime-edit-insert-signature (&optional arg)
+  "Redefine to insert a signature file directly, not as a tag."
+  (interactive "P")
+  (insert-signature arg))
+(defun wl-draft-config-sub-signature (content)
+  "Insert the signature at the end of the MIME message."
+  (let ((signature-insert-at-eof nil)
+        (signature-file-name (or content signature-file-name)))
+    (goto-char (mime-edit-content-end))
+    (insert-signature)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -240,16 +256,11 @@
                    ;; (wl-draft-folder . ,drafts)
                    (wl-fcc . ,sent)    ; `wl-fcc' is just the default...
                    ("Fcc" . ,sent)     ; ...so we have to setup the header
-                   ;; TODO: this should come from `signature'
-                   (bottom . "\n--
- \"And it's much the same thing with knowledge, for whenever you learn
- something new, the whole world becomes that much richer.\"
- -- The Princess of Pure Reason, as told by Norton Juster in The Phantom
- Tollbooth")
+                   (signature . nil)
                    (wl-qmail-inject-args . '("-t" "-f" ,mail))))))
 
 ;; Setup account-specific info before edit, not before send
-(add-hook 'wl-draft-reply-hook 'wl-draft-config-exec)
+;; (add-hook 'wl-draft-reply-hook 'wl-draft-config-exec)
 (add-hook 'wl-mail-setup-hook 'wl-draft-config-exec)
 (add-hook 'wl-mail-reedit-hook 'wl-draft-config-exec)
 (remove-hook 'wl-draft-send-hook 'wl-draft-config-exec)
