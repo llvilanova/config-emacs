@@ -77,7 +77,6 @@
               indicate-buffer-boundaries 'left)
 
 (setq visible-bell t)                        ; no annoying sounds
-(mouse-avoidance-mode 'animate)              ; move when cursor is too close
 
 (setq inhibit-startup-message t              ; don't show ...
       inhibit-startup-echo-area-message t)   ; ... startup messages
