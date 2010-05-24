@@ -133,9 +133,10 @@
           '(lambda () (run-hooks 'my-programming-mode-hook
                                  'my-python-mode-hook)))
 
-(add-hook 'my-python-mode-hook
-          '(lambda ()
-             (highlight-80+-mode t)))   ; TODO: `develock' not in `python-mode'
+;; TODO: a bug in `highlight-80+-mode' requires manual activation of font locks
+;; (add-hook 'my-python-mode-hook
+;;           '(lambda ()
+;;              (highlight-80+-mode t)))   ; TODO: `develock' not in `python-mode'
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
