@@ -89,6 +89,12 @@
                                       "my-programming-right"
                                       "my-files"))))
 
+(defun my-toggle-tabs ()
+  (interactive)
+  (if indent-tabs-mode
+      (setq indent-tabs-mode nil)
+    (setq indent-tabs-mode t)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
