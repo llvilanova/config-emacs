@@ -157,6 +157,7 @@
       ido-max-work-file-list      50    ; remember many
       ido-use-filename-at-point 'guess  ; use filename at point if looks like one
       ido-use-url-at-point t            ; use url at point
+      ido-use-virtual-buffers t         ; show closed files in buffer list
       ido-enable-flex-matching t        ; be flexible
       ido-enable-tramp-completion nil
       ido-confirm-unique-completion nil ; wait for RET even on one completion
