@@ -24,7 +24,8 @@
  'my-latex-mode-hook
  '(lambda ()
     (setq fill-column 100)
-    (predictive-mode 1)                 ; predictive text
+    ;; TODO: seems to be broken
+    ;; (predictive-mode 1)                 ; predictive text
     (LaTeX-math-mode 1)                 ; nice math insertion menu
     (TeX-fold-mode 1)                   ; nicely foldable environments...
     (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
