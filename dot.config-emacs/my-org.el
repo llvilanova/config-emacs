@@ -114,6 +114,12 @@
               (org-agenda-to-appt)))))))
 ;; ;; do it once at startup
 ;; (if (window-system) (my-org-update-agenda-file t))
+
+;; Show locations with `google-maps'
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (require 'org-location-google-maps)))
+(add-to-list 'org-use-property-inheritance "LOCATION") ; inherit property
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

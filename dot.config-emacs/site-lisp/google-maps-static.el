@@ -1,0 +1,1 @@
+jd/google-maps-static.el
