@@ -7,7 +7,7 @@
 ;; This configuration assumes the following packages/libraries are available:
 ;;   - auctex
 ;;   - develock-el
-;;   - org-mode (>= 6.33f)
+;;   - org-mode (>= 7.01g)
 ;;   - ditaa
 ;;   - emacs-goodies-el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -34,12 +34,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Babel
-(require 'org-babel-init)
 ;; For a list of supported languages / backends see:
-;; http://orgmode.org/worg/org-contrib/babel/org-babel.php#reference-and-documentation
-(require 'org-babel-ditaa)     ;; ditaa
-;; (setq org-ditaa-jar-path "/usr/share/org-mode/scripts/ditaa.jar")
-;; (setq org-ditaa-jar-path (path my-home-dir "bin" "ditaa.jar"))
+;; http://orgmode.org/worg/org-contrib/babel/languages.php
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((C . t)
+   (ditaa . t)
+   (dot . t)
+   (gnuplot . t)
+   (latex . t)
+   (octave . t)
+   (perl . t)
+   (python . t)
+   (R . t)
+   (screen . t)))
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
