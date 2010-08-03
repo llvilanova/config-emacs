@@ -27,8 +27,7 @@
                    (ido-find-file-in-dir org-directory)
                    ))
 (global-set-key [(control shift o) (b)] 'org-iswitchb)
-(global-set-key [(control shift o) (r)] 'org-remember)
-(global-set-key [(control c) (control shift o) (r)] 'remember-other-frame)
+(global-set-key [(control shift o) (control c) (c)] 'org-capture)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -136,31 +135,41 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remember Mode
+;; Capture Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General settings
-(org-remember-insinuate)                ; integrate into Org Mode
-(setq org-remember-templates            ; note templates
-      '(                                ; defaults into `org-default-notes-file'
-        ;; org-protocol:remember
-        ("Web"        ?w "* %^{Description}\n  %U %c%?"         nil "Interessant")
+(setq
+ org-capture-templates
+ '(("w" "Web" entry (file+headline "Personal.org" "Interessant")
+    "* %U %^{Description}\n  %c"
+    :immediate-finish t)
+   ("c" "Clipboard" entry (file+headline "Personal.org" "Interessant")
+    "* %U %^{Description}\n  %c\n  %x"
+    :immediate-finish t)
 
-        ;; Personal
-        ("Todo"       ?t "* TODO %?\n  %i\n  %a"                nil "Tasques")
-        ("Schedule"   ?s "* %?\n  SCHEDULED: %^{Schedule}T"     nil "Tasques")
-        ("Deadline"   ?d "* TODO %?\n  DEADLINE: %^{Deadline}t" nil "Tasques")
-        ("Clipboard"  ?c "* %U %^{Description}\n  %c\n  %x"     nil "Interessant")
-        ("Préstec"    ?p "* %u %^{Objecte} -> %^{Persona}%!"    nil "Préstecs")
+   ("t" "Todo" entry (file+headline "Personal.org" "Tasques")
+    "* TODO %?\n  %i\n  %a")
+   ("s" "Schedule" entry (file+headline "Personal.org" "Tasques")
+    "* %?\n  SCHEDULED: %^{Schedule}T")
+   ("d" "Deadline" entry (file+headline "Personal.org" "Tasques")
+    "* TODO %?\n  DEADLINE: %^{Deadline}t")
 
-        ;; Work
-        ("Todo"       ?T "* TODO %?\n  %i\n  %a"                "Work.org" "Tasks")
-        ("Schedule"   ?S "* %?\n  SCHEDULED: %^{Schedule}T"     "Work.org" "Tasks")
-        ("Deadline"   ?D "* TODO %?\n  DEADLINE: %^{Deadline}t" "Work.org" "Tasks")
-        ("Idea"       ?I "* %^{Title}\n  %i\n  %a"              "Work.org" "Brainstorming")
-        ("Conference" ?F
-         "* %^{Conference}    :%^{Acronym}:%?
+   ("p" "Préstec" entry (file+headline "Personal.org" "Préstecs")
+    "* %u %^{Objecte} -> %^{Persona}"
+    :immediate-finish t)
+
+   ("T" "Todo" entry (file+headline "Work.org" "Tasks")
+    "* TODO %?\n  %i\n  %a")
+
+   ("S" "Schedule" entry (file+headline "Work.org" "Tasks")
+    "* %?\n  SCHEDULED: %^{Schedule}T")
+   ("D" "Deadline" entry (file+headline "Work.org" "Tasks")
+    "* TODO %?\n  DEADLINE: %^{Deadline}t")
+
+   ("I" "Idea" entry (file+headline "Work.org" "Brainstorming")
+    "* %^{Title}\n  %i\n  %a")
+   ("F" "Conference" entry (file+headline "Events.org" "Conferences")
+    "* %^{Conference}    :%^{Acronym}:%?
 *** TODO Abstract
     DEADLINE: <%(org-read-date nil nil nil \"Abstract deadline\") ++1y -1w>
 *** TODO Paper
@@ -168,35 +177,10 @@
 *** TODO Rebuttal
     SCHEDULED: <%(org-read-date nil nil nil \"Rebuttal deadline\") ++1y>
 *** TODO Acceptance notification
-    SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>"
-         "Events.org" "Conferences")
-        ))
-
-(require 'org-protocol)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+    SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Quick note-taking
-;;
-;; Run with `emacsclient -e "(remember-other-frame)"
-;; TODO: if no frame is present `emacsclient' needs the `-c' argument, but then
-;;       only the `*Remember*' frame is deleted
-(defadvice remember-other-frame (around remember-frame-parameters activate)
- "Set some frame parameters for the remember frame."
- (let ((default-frame-alist
-         (append '((name . "*Remember*")
-                   (width . 80)
-                   (height . 15)
-                   (vertical-scroll-bars . nil)
-                   (menu-bar-lines . 0)
-                   (tool-bar-lines . 0))
-                 default-frame-alist)))
-   ad-do-it))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; [END] Remember Mode
+;; [END] Capture Mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
