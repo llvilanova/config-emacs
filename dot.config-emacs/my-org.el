@@ -11,7 +11,8 @@
       org-default-notes-file (path org-directory "Personal.org")
       my-org-agenda-file (path my-cache-dir "org-agenda.txt")
       org-agenda-skip-unavailable-files t
-      org-completion-use-ido t)
+      org-completion-use-ido t
+      org-pretty-entities t)
 ;; Contributed extensions
 (add-to-list 'load-path "/usr/share/org-mode/lisp")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
