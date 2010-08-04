@@ -79,8 +79,8 @@
 ;; Appearance
 (setq org-agenda-ndays 14              ; show 2 weeks...
       org-agenda-start-on-weekday 1    ; ...starting on Monday
-      org-hide-leading-stars t         ; hide stars...
-      org-odd-levels-only t)           ; ...and increase separation
+      org-hide-leading-stars t)        ; hide stars...
+      ;; org-odd-levels-only t)           ; ...and increase separation
       ;; org-startup-indented t)          ; still experimental
 
 
