@@ -78,7 +78,7 @@
 (cua-selection-mode t)                  ; enable CUA behaviour without C-[zxvc]
 
 (setq x-select-enable-clipboard t       ; copy & paste
-      interprogram-paste-function 'x-cut-buffer-or-selection-value)
+      interprogram-paste-function 'x-selection-value)
 
 (setq search-highlight t                ; highlight when searching...
   query-replace-highlight t             ; ...and replacing
