@@ -1,0 +1,16 @@
+#!/bin/bash
+
+BASE=`dirname $0`
+
+do_sync () {
+    local what=$1
+    $BASE/sync_nnmaildir $what -d=~/Mail/gmx/
+    $BASE/sync_nnmaildir $what -d=~/Mail/ac/
+    $BASE/sync_nnmaildir $what -d=~/Mail/bsc/
+}
+
+do_sync -g
+fetchmail
+offlineimap -u TTY.TTYUI
+do_sync -m
+

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SOURCE=~/Mail/
+DEST=~/Mail/namazu/
+
+set -e
+mkdir -p $DEST
+cd $DEST
+set +e
+#mknmz -f ~/.config/namazu-mknmz --all --indexing-lang=en_US.UTF-8 --decode-base64 ~/Mail/bsc
+mknmz -f ~/.config/namazu-mknmz --all --indexing-lang=en_US.UTF-8 --decode-base64 $SOURCE
+#mknmz -f ~/.config/namazu --all --indexing-lang=en_US.UTF-8 $SOURCE
+#mknmz -f ~/.config/namazu --all $SOURCE
+
