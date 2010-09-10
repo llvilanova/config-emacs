@@ -2,9 +2,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Settings
-(setq wl-init-file (path my-config-dir "my-wl.el")
-      mail-user-agent   'wl-user-agent  ; C-x m
-      read-mail-command 'wl)
+
+;; Default
+(setq mail-user-agent   'gnus-user-agent  ; C-x m
+      read-mail-command 'gnus)
+;; (setq mail-user-agent   'wl-user-agent  ; C-x m
+;;       read-mail-command 'wl)
+
+;; Gnus
+(setq gnus-init-file (path my-config-dir "my-gnus"))
+
+;; Wanderlust
+(setq wl-init-file (path my-config-dir "my-wl.el"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
