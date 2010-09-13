@@ -127,8 +127,10 @@
 ;; Show locations with `google-maps'
 (add-hook 'org-mode-hook
           '(lambda ()
-             (require 'org-location-google-maps)))
-(add-to-list 'org-use-property-inheritance "LOCATION") ; inherit property
+             (add-to-list 'load-path (path my-code-dir "google-maps"))
+             (require 'org-location-google-maps)
+             (add-to-list 'org-use-property-inheritance "LOCATION")))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
