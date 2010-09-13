@@ -60,6 +60,17 @@
                                 (total-expire .    t)
                                 (expiry-wait  . 1461))) ; 4 years
 
+;; Format
+(setq gnus-summary-line-format "%U%R%z %(%-11&user-date; %[%4L: %-23,23f%] %B%s%)\n"
+      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+      gnus-sum-thread-tree-false-root      "┈┬──▷ "
+      gnus-sum-thread-tree-single-indent   " ●  "
+      gnus-sum-thread-tree-root            "┌─▶ "
+      gnus-sum-thread-tree-vertical        "│"
+      gnus-sum-thread-tree-leaf-with-other "├──► "
+      gnus-sum-thread-tree-single-leaf     "└──► "
+      gnus-sum-thread-tree-indent          " ")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Article
