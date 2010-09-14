@@ -71,6 +71,8 @@
       gnus-sum-thread-tree-single-leaf     "└──► "
       gnus-sum-thread-tree-indent          " ")
 
+;; Scoring
+(add-hook 'message-sent-hook 'gnus-score-followup-thread) ; highlight followups
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Article
