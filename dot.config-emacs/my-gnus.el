@@ -48,17 +48,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Expiration
-(add-to-list 'gnus-parameters '("^nnmaildir\\+GMX:"
+(add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:"
                                 (total-expire .    t)
-                                (expiry-wait  .  180))) ; 6 months
-(add-to-list 'gnus-parameters '("^nnmaildir\\+GMX:Lists\\."
-                                (expiry-wait  .   90))) ; 2 months
-(add-to-list 'gnus-parameters '("^nnmaildir\\+AC:"
+                                (nnmail-expiry-wait  .  180))) ; 6 months
+(add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:Lists\\."
+                                (nnmail-expiry-wait  .   90))) ; 2 months
+(add-to-list 'gnus-parameters '("^[^+:]+\\+AC:"
                                 (total-expire .    t)
-                                (expiry-wait  . 1461))) ; 4 years
-(add-to-list 'gnus-parameters '("^nnmaildir\\+BSC:"
+                                (nnmail-expiry-wait  . 1461))) ; 4 years
+(add-to-list 'gnus-parameters '("^[^+:]+\\+BSC:"
                                 (total-expire .    t)
-                                (expiry-wait  . 1461))) ; 4 years
+                                (nnmail-expiry-wait  . 1461))) ; 4 years
 
 ;; Format
 (setq gnus-summary-line-format "%U%R%z %(%-11&user-date; %[%4L: %-23,23f%] %B%s%)\n"
@@ -99,22 +99,17 @@
 
 (defun my-add-gnus-account (id name mail)
   (add-to-list 'gnus-secondary-select-methods
-               `(nnmaildir ,id
-                           (directory ,(concat "~/Mail/" (downcase id) "/"))
-                           (directory-files nnheader-directory-files-safe)
-                           (get-new-mail nil)
-                           (nnir-search-engine namazu)
-                           (nnir-namazu-index-directory
-                            ,(path my-home-dir "Mail" "namazu" ""))
-                           (nnir-namazu-remove-prefix
-                            ,(path my-home-dir "Mail" (downcase id) ""))
-                           ))
+               `(nnimap ,id
+                        (nnimap-stream shell)
+                        ;; (imap-shell-program ,(format "MAIL=maildir:$HOME/Maildir/%s /usr/lib/dovecot/imap" (downcase id)))
+                        (imap-shell-program ,(format "dovecot -c ~/.dovecotrc-%s --exec-mail imap" (downcase id)))
+                        (nnir-search-engine imap)))
   (add-to-list 'gnus-parameters
-               `(,(concat "^nnmaildir\\+" id ":")
+               `(,(concat "^[^\+:]+\\+" id ":")
                  (eval (setq message-sendmail-extra-arguments
                              '("-t" "-a" ,(downcase id))))))
   (add-to-list 'gnus-posting-styles
-               `(,(concat "^nnmaildir\\+" id ":")
+               `(,(concat "^[^\+:]+\\+" id ":")
                  (name ,name)
                  (address ,mail))))
 
