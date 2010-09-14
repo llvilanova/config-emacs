@@ -91,7 +91,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq message-send-mail-function 'message-send-mail-with-sendmail
-      sendmail-program "/usr/bin/msmtp")
+      sendmail-program "/usr/bin/msmtp"
+      message-sendmail-extra-arguments '("--read-recipients"))
+(add-to-list 'message-send-hook
+             '(lambda ()
+                (setq message-sendmail-envelope-from
+                      (mail-strip-quoted-names (mail-fetch-field "From")))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Accounts
@@ -104,10 +110,6 @@
                         ;; (imap-shell-program ,(format "MAIL=maildir:$HOME/Maildir/%s /usr/lib/dovecot/imap" (downcase id)))
                         (imap-shell-program ,(format "/usr/sbin/dovecot -c ~/.dovecotrc-%s --exec-mail imap" (downcase id)))
                         (nnir-search-engine imap)))
-  (add-to-list 'gnus-parameters
-               `(,(concat "^[^\+:]+\\+" id ":")
-                 (eval (setq message-sendmail-extra-arguments
-                             '("-t" "-a" ,(downcase id))))))
   (add-to-list 'gnus-posting-styles
                `(,(concat "^[^\+:]+\\+" id ":")
                  (name ,name)
