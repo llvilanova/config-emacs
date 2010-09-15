@@ -77,6 +77,8 @@
 ;; Misc
 (setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
       gnus-refer-thread-limit t)        ; ... (without success)
+(require 'gnus-ml)                      ; mailing list support
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Article
