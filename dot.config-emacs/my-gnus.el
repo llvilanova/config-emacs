@@ -77,9 +77,6 @@
 ;; Misc
 (setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
       gnus-refer-thread-limit t)        ; ... (without success)
-(require 'gnus-ml)                      ; mailing list ...
-(add-hook 'gnus-summary-mode-hook       ; ... support
-          'gnus-mailing-list-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -87,6 +84,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'gnus-article-display-hook 'gnus-article-fill-cited-article)
+(add-hook 'gnus-article-display-hook 'gnus-mailing-list-insinuate)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
