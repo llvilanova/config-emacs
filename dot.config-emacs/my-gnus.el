@@ -117,6 +117,17 @@
              '(lambda ()
                 (setq message-sendmail-envelope-from
                       (mail-strip-quoted-names (mail-fetch-field "From")))))
+;; Save sent messages
+;; (add-to-list 'gnus-parameters '("" (gcc-self . t)))
+(setq gnus-message-archive-group
+      '((lambda (group)
+          (cond
+           ;; argument might be null when composing from group buffer
+           ((null group) "nnimap+GMX:INBOX")
+           ;; do not store if sending to a subscribed list
+           ((gnus-group-find-parameter group 'subscribed) nil)
+           ;; store in current group
+           (t group)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
