@@ -49,16 +49,17 @@
 
 ;; Expiration
 (add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:"
-                                (total-expire .    t)
-                                (nnmail-expiry-wait  .  180))) ; 6 months
+                                (total-expire       .    t)
+                                (nnmail-expiry-wait .  180))) ; 6 months
 (add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:Lists\\."
-                                (nnmail-expiry-wait  .   90))) ; 2 months
+                                (subscribed         .    t)
+                                (nnmail-expiry-wait .   90))) ; 2 months
 (add-to-list 'gnus-parameters '("^[^+:]+\\+AC:"
-                                (total-expire .    t)
-                                (nnmail-expiry-wait  . 1461))) ; 4 years
+                                (total-expire       .    t)
+                                (nnmail-expiry-wait . 1461))) ; 4 years
 (add-to-list 'gnus-parameters '("^[^+:]+\\+BSC:"
-                                (total-expire .    t)
-                                (nnmail-expiry-wait  . 1461))) ; 4 years
+                                (total-expire       .    t)
+                                (nnmail-expiry-wait . 1461))) ; 4 years
 
 ;; Format
 (setq gnus-summary-line-format "%U%R%z %(%-11&user-date; %[%4L: %-23,23f%] %B%s%)\n"
@@ -83,8 +84,6 @@
 ;; Article
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'gnus-article-display-hook 'gnus-article-fill-cited-article)
-(add-hook 'gnus-article-display-hook 'gnus-mailing-list-insinuate)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -95,6 +94,8 @@
 (add-to-list 'gnus-posting-styles
              '(".*"
                (signature-file signature-file-name)))
+;; Support `Mail-Followup-To'
+(setq message-subscribed-address-functions '(gnus-find-subscribed-addresses))
 
 ;; `bbdb'
 (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
