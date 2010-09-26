@@ -11,6 +11,7 @@ dot.config-emacs/site-lisp/predictive/predictive-user-manual.info.gz
 dot.local-share-emacs/bbdb*
 dot.local-share-emacs/bmk-bmenu-state.el
 dot.local-share-emacs/bookmarks
+dot.local-share-emacs/gnus.eld
 dot.local-share-emacs/predictive
 dot.local-share-emacs/signature
 dot.local-share-emacs/wl-folders*
