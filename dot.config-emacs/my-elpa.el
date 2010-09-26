@@ -6,6 +6,7 @@
 
 (defvar my-packages (list 'auto-dictionary
                           'company
+                          'cssh
                           'gdb-shell
                           'highlight-80+
                           'highlight-parentheses
