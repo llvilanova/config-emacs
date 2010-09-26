@@ -275,5 +275,8 @@ directory, select directory. Lastly the file is opened."
     (ido-read-buffer prompt)))
 (global-set-key [(control x) (r) (b)] 'my-ido-find-bookmark)
 
+;; `url'
+(setq url-configuration-directory (my-path my-cache-dir "url" ""))
+
 
 (provide 'my-behaviour)
