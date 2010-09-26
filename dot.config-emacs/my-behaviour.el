@@ -276,7 +276,7 @@ directory, select directory. Lastly the file is opened."
 (global-set-key [(control x) (r) (b)] 'my-ido-find-bookmark)
 
 ;; `url'
-(setq url-configuration-directory (my-path my-cache-dir "url" ""))
+(setq url-configuration-directory (path my-cache-dir "url" ""))
 
 
 (provide 'my-behaviour)
