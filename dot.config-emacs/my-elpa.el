@@ -3,24 +3,29 @@
 ;; Taken from `starter-kit-elpa.el'
 
 (require 'cl)
+(require 'package)
 
 (defvar my-packages (list 'auto-dictionary
                           'company
-                          'cssh
+                          ;; 'cssh
                           'gdb-shell
                           'highlight-80+
                           'highlight-parentheses
                           'highlight-symbol
                           'smex
                           'tempo-snippets)
-  "Libraries that should be installed b default.")
+  "Libraries that should be installed by default.")
 
-(defun my-elpa-install ()
+(setq package-user-dir (path my-config-dir "elpa" ""))
+(add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
+
+(defun my-elpa-install (&optional fast)
   "Install all my default packages that aren't installed."
   (interactive)
+  (unless fast
+    (package-refresh-contents))
   (dolist (package my-packages)
-    (unless (or (member package package-activated-list)
-                (functionp package))
+    (unless (assoc package package-alist)
       (message "Installing %s" (symbol-name package))
       (package-install package))))
 
@@ -31,9 +36,11 @@
                                                     (car iface)))))))
         (network-interface-list)))
 
-;; Pull in packages
+
+;; See if packages have to be downloaded
+(package-initialize)
 (when (my-online?)
-  (unless package-archive-contents (package-refresh-contents)
-          (my-elpa-install)))
+  (my-elpa-install package-alist))
+
 
 (provide 'my-elpa)
