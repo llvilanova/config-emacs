@@ -84,6 +84,9 @@
 ;; Article
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; `gravatar' support
+(add-hook 'gnus-part-display-hook 'gnus-treat-from-gravatar)
+(add-hook 'gnus-part-display-hook 'gnus-treat-mail-gravatar)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
