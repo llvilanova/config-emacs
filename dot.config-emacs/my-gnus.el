@@ -139,7 +139,7 @@
                `(nnimap ,id
                         (nnimap-stream shell)
                         ;; (imap-shell-program ,(format "MAIL=maildir:$HOME/Maildir/%s /usr/lib/dovecot/imap" (downcase id)))
-                        (imap-shell-program ,(format "/usr/sbin/dovecot -c ~/.dovecotrc-%s --exec-mail imap" (downcase id)))
+                        (nnimap-shell-program ,(format "/usr/sbin/dovecot -c ~/.dovecotrc-%s --exec-mail imap" (downcase id)))
                         (nnir-search-engine imap)))
   (add-to-list 'gnus-posting-styles
                `(,(concat "^[^\+:]+\\+" id ":")
