@@ -5,6 +5,17 @@
 ;; Semantic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; show summary of symbol under point
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; decore tags based on their attributes
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+;; highlight current tag
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+;; display header for topmost tag
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+;; C-x B => MRU list of edited tags
+(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+
 (semantic-mode 1)                       ; global minor mode
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,17 +31,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Idle scheduler
-(global-semantic-idle-summary-mode 1)   ; show summary of symbol under point
-(global-semantic-idle-tag-highlight-mode 1) ; highlight tag under point
+(global-semantic-idle-local-symbol-highlight-mode 1) ; highlight symbol under point
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
 (require 'semantic/sb)                  ; display semantic tags in SpeedBar
-(global-semantic-mru-bookmark-mode 1)   ; C-x B => MRU list of edited tags
-(global-semantic-stickyfunc-mode 1)     ; display header for topmost tag
-(global-semantic-highlight-func-mode 1) ; highlight current tag
 (which-func-mode 1)                     ; show current tag in modeline
-(global-semantic-decoration-mode 1)     ; decore tags based on their attributes
 (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 (semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
 (semantic-toggle-decoration-style "semantic-decoration-on-protected-members" t)
