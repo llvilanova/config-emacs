@@ -245,6 +245,7 @@
 (add-hook 'my-programming-mode-hook
           '(lambda ()
              (require 'xcscope)
+             (cscope-minor-mode)
              (local-set-key [(control c) (i)] ; open included file at point
                             'semantic-decoration-include-visit)
              (local-set-key [(control c) (g)] ; jump to declaration
