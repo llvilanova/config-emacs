@@ -52,18 +52,6 @@
 ;; `predictive': Predictive text completion
 ;; http://www.emacswiki.org/emacs/PredictiveMode
 
-(add-to-list 'my-recompile-objs (format "make -C %s"
-                                        (path my-code-dir "predictive")))
-(autoload 'predictive-mode "predictive"
-  "Toggle Predictive Completion mode." t)
-(autoload 'predictive-create-dict "predictive"
-  "Create a new predictive mode dictionary called DICTNAME." t)
-
-(add-to-list 'load-path (path my-code-dir "predictive"))
-(add-to-list 'load-path (path my-code-dir "predictive" "latex"))
-(add-to-list 'load-path (path my-code-dir "predictive" "texinfo"))
-(add-to-list 'load-path (path my-code-dir "predictive" "html"))
-
 ;; Auto-create personal dictionary
 (let* ((my-dicts-dir    (path my-data-dir "predictive"))
        (my-dict-english (path my-dicts-dir "my-dict-english")))

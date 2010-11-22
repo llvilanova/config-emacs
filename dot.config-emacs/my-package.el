@@ -131,7 +131,11 @@ command to be run in a shell.")
          :url "http://www.dr-qubit.org/git/predictive.git"
          :build ("make")
          ;; Does not generate the `dir' file, so no info will appear on the menu
-         :info ".")
+         :info "."
+         :load-path ("." "latex" "texinfo" "html")
+         :after (lambda ()
+                  (autoload 'predictive-mode "predictive" nil t)
+                  (autoload 'predictive-create-dict "predictive" nil t)))
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
