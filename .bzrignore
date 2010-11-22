@@ -4,11 +4,6 @@ dot.config-emacs/loaddefs.el
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*
 dot.config-emacs/el-get/*
-dot.config-emacs/site-lisp/ecb/ecb-autoloads.el
-dot.config-emacs/site-lisp/predictive/html/*.el
-dot.config-emacs/site-lisp/predictive/latex/*.el
-dot.config-emacs/site-lisp/predictive/texinfo/*.el
-dot.config-emacs/site-lisp/predictive/predictive-user-manual.info.gz
 dot.local-share-emacs/bbdb*
 dot.local-share-emacs/bmk-bmenu-state.el
 dot.local-share-emacs/bookmarks

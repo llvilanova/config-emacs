@@ -126,6 +126,11 @@ command to be run in a shell.")
                :load "loaddefs.el")
         (:name lisppaste             :type elpa)
         ;; multi-term
+        (:name predictive            :type git
+         :url "http://www.dr-qubit.org/git/predictive.git"
+         :build ("make")
+         ;; Does not generate the `dir' file, so no info will appear on the menu
+         :info ".")
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
