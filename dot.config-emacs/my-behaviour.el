@@ -278,5 +278,6 @@ directory, select directory. Lastly the file is opened."
 ;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))
 
+(put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 
 (provide 'my-behaviour)
