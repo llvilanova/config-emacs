@@ -83,6 +83,7 @@ command to be run in a shell.")
       '(
         ;; el-get
         (:name asciidoc              :type elpa)
+        (:name auctex                :type apt-get)
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         (:name bookmark+-mac         :type emacswiki)
@@ -98,6 +99,7 @@ command to be run in a shell.")
         (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
+        (:name develock-el           :type apt-get)
         (:name doc-mode              :type http
          :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el"
          :after (lambda () (autoload 'doc-mode "doc-mode" nil t)))
@@ -107,6 +109,7 @@ command to be run in a shell.")
          :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
          :features (ecb-autoloads)
          :info "info-help")
+        (:name emacs-goodies-el      :type apt-get)
         (:name gdb-shell             :type elpa)
         google-maps
         google-weather
@@ -118,6 +121,7 @@ command to be run in a shell.")
                   (autoload 'iedit-mode "iedit" nil t)))
         (:name lisppaste             :type elpa)
         ;; multi-term
+        (:name org-mode              :type apt-get)
         (:name predictive            :type git
          :url "http://www.dr-qubit.org/git/predictive.git"
          :build ("make")
