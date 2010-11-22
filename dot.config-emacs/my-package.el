@@ -32,12 +32,13 @@
 (add-hook 'el-get-post-install-hooks
           '(lambda (package)
              (let* ((method   (plist-get (el-get-package-def package) :type))
-                    (generate (or (eq method 'http)
-                                  (eq method 'emacswiki)))
+                    (generate (not (or (eq method 'apt-get)
+                                       (eq method 'fink)
+                                       (eq method 'elpa)
+                                       (eq method 'pacman))))
                     (generated-autoload-file (path (el-get-package-directory package) "loaddefs.el")))
-               (message "-> %s %s" package generate)
                (when generate
-                 (update-directory-autoloads (path el-get-dir package))))))
+                 (update-directory-autoloads (el-get-package-directory package))))))
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
