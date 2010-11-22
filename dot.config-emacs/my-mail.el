@@ -10,7 +10,7 @@
 ;;       read-mail-command 'wl)
 
 ;; Gnus
-(setq gnus-init-file (path my-config-dir "my-gnus"))
+(setq gnus-init-file (path my-config-dir "my-gnus.el"))
 
 ;; Wanderlust
 (setq wl-init-file (path my-config-dir "my-wl.el"))
@@ -99,6 +99,10 @@
   (interactive)
   (let ((prefix (or prefix [(control c) (b)])))
     (local-set-key prefix my--mail-boxquote-map)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Misc
+(setq message-from-style 'angles)
 
 
 (provide 'my-mail)
