@@ -12,6 +12,7 @@
 ;; `el-get'
 (setq el-get-dir (path my-config-dir "el-get" ""))
 (add-to-list 'load-path (path el-get-dir "el-get"))
+;; Handle auto-installation
 (unless (require 'el-get nil t)
   (let* ((dummy             (unless (file-directory-p el-get-dir)
                               (make-directory el-get-dir t)))
@@ -27,6 +28,16 @@
     (el-get-init "el-get"))
   (package-refresh-contents)            ; get initial list of available packages
   (load-file (path my-config-dir "el-get" "el-get" "el-get.el")))
+;; Generate package autoloads
+(add-hook 'el-get-post-install-hooks
+          '(lambda (package)
+             (let* ((method   (plist-get (el-get-package-def package) :type))
+                    (generate (or (eq method 'http)
+                                  (eq method 'emacswiki)))
+                    (generated-autoload-file (path (el-get-package-directory package) "loaddefs.el")))
+               (message "-> %s %s" package generate)
+               (when generate
+                 (update-directory-autoloads (path el-get-dir package))))))
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
@@ -62,7 +73,8 @@
         (:name highlight-80+         :type elpa)
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
-        (:name iedit                 :type emacswiki)
+        (:name iedit                 :type emacswiki
+               :load "loaddefs.el")
         (:name lisppaste             :type elpa)
         ;; multi-term
         (:name smex                  :type elpa)
