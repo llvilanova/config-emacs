@@ -3,6 +3,7 @@ dot.config-emacs/my-personal.el
 dot.config-emacs/loaddefs.el
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*
+dot.config-emacs/el-get/*
 dot.config-emacs/site-lisp/ecb/ecb-autoloads.el
 dot.config-emacs/site-lisp/predictive/html/*.el
 dot.config-emacs/site-lisp/predictive/latex/*.el
