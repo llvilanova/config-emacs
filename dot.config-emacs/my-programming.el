@@ -222,16 +222,16 @@
           '(lambda (candidate)
              (semantic-idle-summary-mode 1)))
 
-;; Show documentation buffer when selecting a completion
-;; taken from `company-show-doc-buffer'
-(add-hook 'company-completion-finished-hook
-          '(lambda (candidate)
-             (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
-               (if doc-buffer
-                   (progn
-                     (with-current-buffer doc-buffer
-                       (goto-char (point-min)))
-                     (display-buffer doc-buffer t))))))
+;; ;; Show documentation buffer when selecting a completion
+;; ;; taken from `company-show-doc-buffer'
+;; (add-hook 'company-completion-finished-hook
+;;           '(lambda (candidate)
+;;              (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
+;;                (if doc-buffer
+;;                    (progn
+;;                      (with-current-buffer doc-buffer
+;;                        (goto-char (point-min)))
+;;                      (display-buffer doc-buffer t))))))
 
 ;; Special treatment for documentation buffer
 (my-add-helper-buffer "*Company meta-data*")
