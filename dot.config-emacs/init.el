@@ -49,10 +49,9 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Add local lisp repository
+;; Add local lisp repositories
 (add-to-list 'load-path my-config-dir)
-(defconst my-code-dir (path my-config-dir "site-lisp")) ; local packages
-(add-to-list 'load-path my-code-dir)
+(require 'my-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -63,18 +62,14 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ELPA
-(require 'my-elpa)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
 (require 'cl)
 (require 'my-misc)
-(require 'bookmark)          ; TODO: missing autoload `bookmark-bmenu-mode-map'
+(require 'bookmark)           ; TODO: missing autoload `bookmark-bmenu-mode-map'
 (my-regenerate-autoloads)
 
-(require 'my-personal nil t)
+(require 'my-personal nil t)            ; personal information, never upload
+
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
