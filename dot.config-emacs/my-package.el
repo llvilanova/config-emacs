@@ -99,7 +99,8 @@ command to be run in a shell.")
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
-         :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
+         :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el"
+         :after (lambda () (autoload 'doc-mode "doc-mode" nil t)))
         (:name ecb                   :type cvs
          :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
          :module "ecb"
