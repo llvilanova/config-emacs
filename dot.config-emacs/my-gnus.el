@@ -14,16 +14,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Searching
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'nnir)
-;; TODO: hack to disallow broken official version
-(load-file (path my-code-dir "nnir.el"))
-(setq nnir-search-engine 'namazu
-      nnir-namazu-remove-prefix (concat nnir-namazu-remove-prefix "bsc/"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Group
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -152,5 +142,6 @@
 (my-add-gnus-account "GMX" "Lluís" "xscript@gmx.net")
 (my-add-gnus-account "AC"  nil     "vilanova@ac.upc.edu")
 (my-add-gnus-account "BSC" nil     "lluis.vilanova@bsc.es")
+
 
 ;; (provide 'my-gnus)
