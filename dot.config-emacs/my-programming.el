@@ -322,4 +322,11 @@
       vc-diff-switches "-u")            ; use unified diff by default
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Miscellaneous
+
+(setq diff-mode-hook '(diff-delete-empty-files ; do not show empty files
+                       diff-make-unified))     ; "diff -u" style
+
+
 (provide 'my-programming)
