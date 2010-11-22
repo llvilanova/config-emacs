@@ -276,8 +276,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compilation
 
-(setq compilation-scroll-output t   ; follow compilation output
-      compilation-window-height 10)
+(setq compilation-scroll-output t)      ; follow compilation output
+;; compilation-window-height 10         ; fix maximum number of lines
 
 ;; Save compilation commands in desktop
 (add-to-list 'desktop-globals-to-save 'compile-command)
