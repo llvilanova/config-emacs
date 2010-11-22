@@ -28,17 +28,6 @@
     (el-get-init "el-get"))
   (package-refresh-contents)            ; get initial list of available packages
   (load-file (path my-config-dir "el-get" "el-get" "el-get.el")))
-;; Generate package autoloads
-(add-hook 'el-get-post-install-hooks
-          '(lambda (package)
-             (let* ((method   (plist-get (el-get-package-def package) :type))
-                    (generate (not (or (eq method 'apt-get)
-                                       (eq method 'fink)
-                                       (eq method 'elpa)
-                                       (eq method 'pacman))))
-                    (generated-autoload-file (path (el-get-package-directory package) "loaddefs.el")))
-               (when generate
-                 (update-directory-autoloads (el-get-package-directory package))))))
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
@@ -124,7 +113,8 @@ command to be run in a shell.")
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
         (:name iedit                 :type emacswiki
-               :load "loaddefs.el")
+         :after (lambda ()
+                  (autoload 'iedit-mode "iedit" nil t)))
         (:name lisppaste             :type elpa)
         ;; multi-term
         (:name predictive            :type git
