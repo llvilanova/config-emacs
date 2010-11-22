@@ -54,7 +54,6 @@ directory path."
 (require 'cl)
 (require 'my-misc)
 (require 'bookmark)           ; TODO: missing autoload `bookmark-bmenu-mode-map'
-(my-regenerate-autoloads)
 
 (require 'my-personal nil t)            ; personal information, never upload
 
