@@ -67,6 +67,11 @@
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
          :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
+        (:name ecb                   :type cvs
+         :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
+         :module "ecb"
+         :build ("make CEDET=" "make autoloads EMACS=\"emacs -L .\"")
+         :features (ecb-autoloads))
         (:name gdb-shell             :type elpa)
         google-maps
         google-weather
