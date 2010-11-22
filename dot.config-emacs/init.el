@@ -13,18 +13,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Extra command-line switches
-(add-to-list
- 'command-switch-alist
- '("gnus" . (lambda (&rest ignore)
-              ;; Start Gnus when Emacs starts
-              (add-hook 'emacs-startup-hook 'gnus t)
-              ;; Exit Emacs after quitting Gnus
-              (add-hook 'gnus-after-exiting-gnus-hook
-                        'save-buffers-kill-emacs))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Definition of pervasive paths
 (defun path (&rest list)
   "Build a path by concatenating a list of strings.
@@ -70,6 +58,7 @@ directory path."
 
 (require 'my-personal nil t)            ; personal information, never upload
 
+(require 'my-cmdline)
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
