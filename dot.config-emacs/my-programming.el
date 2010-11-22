@@ -177,13 +177,12 @@
 (add-hook 'my-cc-mode-hook
           '(lambda ()
              ;; Auto-end comment block when inserting `/' (override: C-q /)
-             (add-to-list 'c-cleanup-list 'comment-close-slash)))
+             (add-to-list 'c-cleanup-list 'comment-close-slash)
+             (doc-mode t)))             ; manage doxygen documentation
 
 
 ;; Documentation editors
 (setq c-doc-comment-style nil)
-;; TODO: a bug in `doc-mode' requires manual activation to show font locks
-;; (add-hook 'c-mode-common-hook doc-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
