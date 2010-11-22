@@ -113,8 +113,9 @@ command to be run in a shell.")
         (:name ecb                   :type cvs
          :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
          :module "ecb"
-         :build ("make CEDET=" "make autoloads EMACS=\"emacs -L .\"")
-         :features (ecb-autoloads))
+         :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
+         :features (ecb-autoloads)
+         :info "info-help")
         (:name gdb-shell             :type elpa)
         google-maps
         google-weather
