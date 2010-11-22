@@ -35,7 +35,7 @@
 
 ;; Taken from `starter-kit-defuns'
 
-(defvar my-recompile-objs (list my-config-dir
+(defvar my-recompile-objs (list ;; my-config-dir
                                 my-code-dir)
   "List of recompilation objectives.
 If the element is a function, it is called to recompile.  If the
