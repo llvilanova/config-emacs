@@ -98,6 +98,14 @@
 (global-set-key [(control c) (control y)] '(lambda ()
                                              (interactive)
                                              (my-duplicate-line t)))
+;; DWIM kill word or region
+(global-set-key [(control w)]
+                '(lambda ()
+                   (interactive)
+                   (call-interactively
+                    (if (region-active-p)
+                        'kill-region
+                      'backward-kill-word))))
 
 ;; `iedit': interactive string replacement
 (global-set-key [(control \;)] 'iedit-mode)
