@@ -28,6 +28,18 @@
                                     "[<gdb args...> -args] "
                                     "<program> <program args...>")))
 
+               (setq parts (split-string eargs "\\(^\\|\s\\)-?-gdb\\($\\|\s\\)"))
+               (case (length parts)
+                 (1 (setq gargs
+                          gud-gdb-command-name
+                          eargs (nth 0 parts)))
+                 (2 (setq gargs
+                          (concat (nth 0 parts)
+                                  " "
+                                  gud-gdb-command-name)
+                          eargs (nth 1 parts)))
+                 (t (error errmsg)))
+
                (setq parts (split-string eargs "\\(^\\|\s\\)-?-args\\($\\|\s\\)"))
                (case (length parts)
                  (1 (setq eargs ""
@@ -36,21 +48,7 @@
                           pargs (nth 1 parts)))
                  (t (error errmsg)))
 
-               (setq parts (split-string eargs "\\(^\\|\s\\)-?-gdb\\($\\|\s\\)"))
-               (case (length parts)
-                 (1 (setq gargs
-                          (concat gud-gdb-command-name
-                                  " "
-                                  (nth 0 parts))))
-                 (2 (setq gargs
-                          (concat (nth 0 parts)
-                                  " "
-                                  gud-gdb-command-name
-                                  " "
-                                  (nth 1 parts))))
-                 (t (error errmsg)))
-
                (setq command-line-args-left nil)
-               (gdb (concat gargs " -args " pargs))))))
+               (gdb (concat gargs " " eargs " -args " pargs))))))
 
 (provide 'my-cmdline)
