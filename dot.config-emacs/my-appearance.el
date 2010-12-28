@@ -6,6 +6,7 @@
 (set-variable 'color-theme-is-global t)
 (defun my-color-theme ()
   (interactive)
+  (require 'color-theme)
   (color-theme-install
    '(my-color-theme
      ;; Frame parameters
@@ -44,6 +45,15 @@
      (sml-modeline-end-face ((t (:background "#000000"))))
      (sml-modeline-vis-face ((t (:background "#555555"))))
      (py-XXX-tag-face ((t (:bold t :foreground "red"))))
+     (diff-added         ((t (:foreground "#559944"))))
+     ;; (diff-context       ((t nil)))
+     (diff-file-header   ((((class color) (min-colors 88) (background dark)) (:foreground "RoyalBlue1"))))
+     (diff-function      ((t (:foreground "#00bbdd"))))
+     (diff-header        ((((class color) (min-colors 88) (background dark)) (:foreground "RoyalBlue1"))))
+     (diff-hunk-header   ((t (:foreground "#fbde2d"))))
+     (diff-nonexistent   ((t (:inherit diff-file-header :strike-through nil))))
+     (diff-refine-change ((t (:bold t :background "#202030"))))
+     (diff-removed       ((t (:foreground "#de1923"))))
      )))
 
 
