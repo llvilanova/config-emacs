@@ -25,7 +25,6 @@
 
 (global-semanticdb-minor-mode 1)
 
-(require 'semantic/db-global)           ; enable support for `GNU global'
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 
