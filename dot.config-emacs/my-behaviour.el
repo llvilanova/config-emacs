@@ -264,9 +264,13 @@ directory, select directory. Lastly the file is opened."
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; `desktop': maintain per-directory session information
-;;            supersedes `savehist', `recentf'
+;;            supersedes `recentf'
 (desktop-save-mode 1)
 (setq desktop-save 'if-exists)          ; only save if desktop file exists
+
+;; `savehist': save minibuffer history
+(setq savehist-file (path my-cache-dir "history"))
+(savehist-mode t)
 
 ;; `bookmark+': bookmark everything
 (setq bookmark-default-file (path my-data-dir "bookmarks")
