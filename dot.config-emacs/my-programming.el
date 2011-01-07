@@ -177,14 +177,13 @@
           '(lambda ()
              (auto-fill-mode 1)         ; auto-wrap lines in comments
              (require 'filladapt)
-             (add-to-list (make-local-variable 'filladapt-token-table)
-                          '("^[ \t]*\\*[^ \t]*" c++-comment))
              (turn-on-filladapt-mode)))
 (add-hook 'my-cc-mode-hook
           '(lambda ()
              ;; Auto-end comment block when inserting `/' (override: C-q /)
              (add-to-list 'c-cleanup-list 'comment-close-slash)
-             (doc-mode t)))             ; manage doxygen documentation
+             (doc-mode t)               ; manage doxygen documentation
+             (c-setup-filladapt)))
 
 
 ;; Documentation editors
