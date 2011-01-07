@@ -145,6 +145,11 @@
           '(lambda () (run-hooks 'my-programming-mode-hook
                                  'my-python-mode-hook)))
 
+;; `ipython': Use `py-shell' to bring an ipython shell up, while `python-shell'
+;;            still uses the regular shell
+(add-hook 'my-python-mode-hook
+          '(lambda ()
+             (require 'ipython)))
 ;; TODO: a bug in `highlight-80+-mode' requires manual activation of font locks
 ;; (add-hook 'my-python-mode-hook
 ;;           '(lambda ()
