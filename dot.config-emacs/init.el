@@ -54,6 +54,7 @@ directory path."
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
+(require 'my-projects nil t)            ; personal project list, never upload
 (require 'my-writing)
 (require 'my-programming)
 (require 'my-org)
