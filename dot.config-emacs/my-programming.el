@@ -111,7 +111,8 @@
 (setq-default
  c-default-style "stroustrup"           ; indentation style
  ;; c-basic-offset tab-width               ; indentation width
- )
+ cpp-face-type 'dark                    ; use colors suitable for a dark bg
+ cpp-known-face 'highlight)
 (add-hook 'my-cc-mode-hook
           '(lambda ()
              (c-toggle-auto-newline 1)  ; auto-newline on semi-colon, etc.
