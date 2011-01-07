@@ -118,7 +118,8 @@
              (c-toggle-hungry-state 1)  ; hungry backspace
              ;; Fixup for auto-added spaces on braces
              (add-to-list 'c-cleanup-list 'defun-close-semi)
-             (add-to-list 'c-cleanup-list 'list-close-comma)))
+             (add-to-list 'c-cleanup-list 'list-close-comma)
+             (cpp-highlight-buffer t)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
