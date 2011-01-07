@@ -11,6 +11,7 @@
 
 ;; `el-get'
 (setq el-get-dir (path my-config-dir "el-get" ""))
+(add-to-list 'load-path el-get-dir)
 (add-to-list 'load-path (path el-get-dir "el-get"))
 ;; Handle auto-installation
 (unless (require 'el-get nil t)
@@ -87,28 +88,25 @@ command to be run in a shell.")
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         (:name bookmark+-mac         :type emacswiki)
-        (:name bookmark+-bmu         :type emacswiki)
+        (:name bookmark+-bmu         :type emacswiki
+               :features (bookmark+-bmu)) ; TODO: missing autoload for
+                                          ;       `bookmark-bmenu-mode-map'
         (:name bookmark+-1           :type emacswiki)
         (:name bookmark+-lit         :type emacswiki)
         (:name bookmark+-doc         :type emacswiki)
         (:name bookmark+-chg         :type emacswiki)
         (:name bookmark+             :type emacswiki)
-        ;; (:name pymacs                :type apt-get)
-        ;; (:name pysmell               :type git
-        ;;  :url "http://github.com/orestis/pysmell.git")
         (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
         (:name develock-el           :type apt-get)
         (:name doc-mode              :type http
-         :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el"
-         :after (lambda () (autoload 'doc-mode "doc-mode" nil t)))
+               :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name ecb                   :type cvs
-         :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
-         :module "ecb"
-         :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
-         :features (ecb-autoloads)
-         :info "info-help")
+               :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
+               :module "ecb"
+               :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
+               :info "info-help")
         (:name emacs-goodies-el      :type apt-get)
         (:name gdb-shell             :type elpa)
         google-maps
@@ -116,26 +114,34 @@ command to be run in a shell.")
         (:name highlight-80+         :type elpa)
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
-        (:name iedit                 :type emacswiki
-         :after (lambda ()
-                  (autoload 'iedit-mode "iedit" nil t)))
+        (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         ;; multi-term
         (:name org-mode              :type apt-get)
         (:name predictive            :type git
-         :url "http://www.dr-qubit.org/git/predictive.git"
-         :build ("make")
-         ;; Does not generate the `dir' file, so no info will appear on the menu
-         :info "."
-         :load-path ("." "latex" "texinfo" "html")
-         :after (lambda ()
-                  (autoload 'predictive-mode "predictive" nil t)
-                  (autoload 'predictive-create-dict "predictive" nil t)))
+               :url "http://www.dr-qubit.org/git/predictive.git"
+               :build ("make")
+               ;; Does not generate the `dir' file, so no info will appear on the menu
+               :info "."
+               :load-path ("." "latex" "texinfo" "html")
+               :after (lambda ()
+                        (autoload 'predictive-mode "predictive" nil t)
+                        (autoload 'predictive-create-dict "predictive" nil t)))
+        (:name pymacs                :type apt-get
+               :features (pymacs)
+               :after (lambda ()
+                        (add-to-list
+                         'pymacs-load-path (path my-config-dir
+                                                 "el-get" "pysmell"))))
+        (:name python-mode           :type apt-get)
+        (:name pysmell               :type git
+               :url "http://github.com/orestis/pysmell.git"
+               :build ("python setup.py"))
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
         (:name wordnet               :type http
-         :url "http://xwl.appspot.com/ref/wordnet.el")
+               :url "http://xwl.appspot.com/ref/wordnet.el")
         undo-tree
         ;; (:name xml-rpc               :type elpa)
         ))

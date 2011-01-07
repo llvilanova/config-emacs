@@ -49,10 +49,7 @@ directory path."
 ;; Pull the rest of configuration
 (require 'cl)
 (require 'my-misc)
-(require 'bookmark)           ; TODO: missing autoload `bookmark-bmenu-mode-map'
-
 (require 'my-personal nil t)            ; personal information, never upload
-
 (require 'my-cmdline)
 (require 'my-appearance)
 (require 'my-behaviour)

@@ -6,7 +6,6 @@
 (set-variable 'color-theme-is-global t)
 (defun my-color-theme ()
   (interactive)
-  (require 'color-theme)
   (color-theme-install
    '(my-color-theme
      ;; Frame parameters
