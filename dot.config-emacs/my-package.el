@@ -112,6 +112,7 @@ command to be run in a shell.")
                :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
                :info "info-help")
         (:name emacs-goodies-el      :type apt-get)
+        (:name fic-mode              :type emacswiki)
         (:name fuzzy                 :type svn
                :url "http://dea.googlecode.com/svn/trunk/lisps/auto-complete"
                :features (fuzzy)
