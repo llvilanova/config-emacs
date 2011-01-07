@@ -83,6 +83,10 @@ command to be run in a shell.")
 (setq el-get-sources
       '(
         ;; el-get
+        (:name ack                   :type http
+               :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
+               :after (lambda ()
+                        (setq ack-executable "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
         (:name auto-dictionary       :type elpa)
