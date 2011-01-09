@@ -290,6 +290,17 @@ directory, select directory. Lastly the file is opened."
 ;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))
 
+;; `em-smart'
+;; Be clever on `eshell' output
+(add-hook 'eshell-mode-hook
+          '(lambda ()
+             (require 'em-smart)
+             (setq eshell-where-to-jump 'begin
+                   esell-review-quick-commands nil
+                   eshell-smart-space-goes-to-end t)
+             (eshell-smart-initialize)))
+
+
 (put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 
 (provide 'my-behaviour)
