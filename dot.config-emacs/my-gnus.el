@@ -64,6 +64,13 @@
 
 ;; Scoring
 (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; highlight followups
+(define-key gnus-summary-mode-map [(control meta shift k)]
+  '(lambda (&optional arg)
+     "Temporarily lower score for a whole thread."
+     (interactive "p")
+     (kmacro-exec-ring-item (quote ([76 105 101 116 return] 0 "%d")) arg)
+     (kmacro-exec-ring-item (quote ([76 116 102 116 return] 0 "%d")) arg)
+     (gnus-summary-next-thread 1)))
 
 ;; Misc
 (setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
