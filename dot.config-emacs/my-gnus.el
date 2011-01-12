@@ -39,17 +39,17 @@
 
 ;; Expiration
 (add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:"
-                                (total-expire       .    t)
-                                (nnmail-expiry-wait .  180))) ; 6 months
+                                (total-expire             .    t)
+                                (expiry-wait              .  180))) ; 6 months
 (add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:Lists\\."
-                                (subscribed         .    t)
-                                (nnmail-expiry-wait .   90))) ; 2 months
+                                (subscribed               .    t)
+                                (expiry-wait              .   90))) ; 2 months
 (add-to-list 'gnus-parameters '("^[^+:]+\\+AC:"
-                                (total-expire       .    t)
-                                (nnmail-expiry-wait . 1461))) ; 4 years
+                                (total-expire             .    t)
+                                (expiry-wait              . 1461))) ; 4 years
 (add-to-list 'gnus-parameters '("^[^+:]+\\+BSC:"
-                                (total-expire       .    t)
-                                (nnmail-expiry-wait . 1461))) ; 4 years
+                                (total-expire             .    t)
+                                (expiry-wait              . 1461))) ; 4 years
 
 ;; Format
 (setq gnus-summary-line-format "%U%R%z %(%-11&user-date; %[%4L: %-23,23f%] %B%s%)\n"
