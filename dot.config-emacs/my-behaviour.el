@@ -98,14 +98,15 @@
 (global-set-key [(control c) (control y)] '(lambda ()
                                              (interactive)
                                              (my-duplicate-line t)))
-;; DWIM kill word or region
-(global-set-key [(control w)]
-                '(lambda ()
-                   (interactive)
-                   (call-interactively
-                    (if (region-active-p)
-                        'kill-region
-                      'backward-kill-word))))
+;; ;; DWIM kill word or region
+;; ;; TODO: cua-rectangle already overloads kill-region
+;; (global-set-key [(control w)]
+;;                 '(lambda ()
+;;                    (interactive)
+;;                    (call-interactively
+;;                     (if (or (region-active-p) cua--rectangle)
+;;                         'kill-region
+;;                       'backward-kill-word))))
 
 ;; `iedit': interactive string replacement
 (global-set-key [(control \;)] 'iedit-mode)
