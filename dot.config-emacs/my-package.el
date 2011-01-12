@@ -127,15 +127,15 @@ command to be run in a shell.")
         (:name lisppaste             :type elpa)
         ;; multi-term
         (:name org-mode              :type apt-get)
-        (:name predictive            :type git
-               :url "http://www.dr-qubit.org/git/predictive.git"
-               :build ("make")
-               ;; Does not generate the `dir' file, so no info will appear on the menu
-               :info "."
-               :load-path ("." "latex" "texinfo" "html")
-               :after (lambda ()
-                        (autoload 'predictive-mode "predictive" nil t)
-                        (autoload 'predictive-create-dict "predictive" nil t)))
+        ;; (:name predictive            :type git
+        ;;        :url "http://www.dr-qubit.org/git/predictive.git"
+        ;;        :build ("make")
+        ;;        ;; Does not generate the `dir' file, so no info will appear on the menu
+        ;;        :info "."
+        ;;        :load-path ("." "latex" "texinfo" "html")
+        ;;        :after (lambda ()
+        ;;                 (autoload 'predictive-mode "predictive" nil t)
+        ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
         (:name pymacs                :type apt-get
                :features (pymacs)
                :after (lambda ()
