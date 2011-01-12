@@ -145,7 +145,7 @@ command to be run in a shell.")
         (:name python-mode           :type apt-get)
         (:name pysmell               :type git
                :url "http://github.com/orestis/pysmell.git"
-               :build ("python setup.py"))
+               :build ("python setup.py build"))
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
