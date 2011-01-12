@@ -15,19 +15,14 @@
 (add-to-list 'load-path (path el-get-dir "el-get"))
 ;; Handle auto-installation
 (unless (require 'el-get nil t)
-  (let* ((dummy             (unless (file-directory-p el-get-dir)
-                              (make-directory el-get-dir t)))
-         (package           "el-get")
-         (pdir              (concat (file-name-as-directory el-get-dir) package))
-         (git               (or (executable-find "git") (error "Unable to find `git'")))
-         (url               "git://github.com/dimitri/el-get.git")
-         (el-get-sources    `((:name ,package :type "git" :url ,url :features el-get :compile "el-get.el"))))
-    (setq default-directory el-get-dir)
-    (call-process git nil t t "--no-pager" "clone" "-v" url pdir)
-    (insert "Performing initial package installation...\n")
-    (load (concat (file-name-as-directory pdir) package ".el"))
-    (el-get-init "el-get"))
-  (package-refresh-contents)            ; get initial list of available packages
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   '(lambda (s)
+      (let ((user-emacs-directory my-config-dir))
+        (end-of-buffer)
+        (eval-print-last-sexp))))
+  ;; Get initial list of available packages for `package'
+  (package-refresh-contents)
   (load-file (path my-config-dir "el-get" "el-get" "el-get.el")))
 
 ;; local site-lisp
