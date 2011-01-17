@@ -171,6 +171,16 @@
 ;;           '(lambda ()
 ;;              (highlight-80+-mode t)))   ; TODO: `develock' not in `python-mode'
 
+;; `flymake'
+(add-hook 'my-python-mode-hook
+          '(lambda ()
+             ;; Configure to wait a bit longer after edits before starting
+             (setq-default flymake-no-changes-timeout '3)
+             ;; Keymaps to navigate to the errors
+             (local-set-key [(meta n)] 'flymake-goto-next-error)
+             (local-set-key [(meta p)] 'flymake-goto-prev-error)
+             (flymake-mode t)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs Lisp
