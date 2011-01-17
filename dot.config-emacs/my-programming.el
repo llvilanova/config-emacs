@@ -18,6 +18,18 @@
 
 (semantic-mode 1)                       ; global minor mode
 
+;; Let the user temporarily disable some minibuffer output
+(setq my--disable-semantic-idle-summary-idle-function nil)
+(make-variable-buffer-local 'my--disable-semantic-idle-summary-idle-function)
+(defadvice semantic-idle-summary-idle-function (around
+                                                my--semantic-idle-summary-idle-function
+                                                activate compile)
+  (unless my--disable-semantic-idle-summary-idle-function
+    ad-do-it))
+(defun my-set-minibuffer-helpers (state)
+  "Temporarily enable/disable helpers that show state in the minibuffer."
+  (setq my--disable-semantic-idle-summary-idle-function state))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code tagging (semanticdb)
 (setq semanticdb-default-save-directory ; where to store tag cache files
