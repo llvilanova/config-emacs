@@ -131,6 +131,18 @@ command to be run in a shell.")
         ;;        :after (lambda ()
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
+        (:name pylint                :type apt-get
+               :after (lambda ()
+                        (when (load "flymake" t)
+                          (defun my--flymake-pylint-init ()
+                            (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                                               'flymake-create-temp-inplace))
+                                   (local-file (file-relative-name
+                                                temp-file
+                                                (file-name-directory buffer-file-name))))
+                              (list "epylint" (list local-file))))
+                          (add-to-list 'flymake-allowed-file-name-masks
+                                       '("\\.py\\'" my--flymake-pylint-init)))))
         (:name pymacs                :type apt-get
                :features (pymacs)
                :after (lambda ()
