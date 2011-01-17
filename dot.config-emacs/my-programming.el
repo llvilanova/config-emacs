@@ -304,6 +304,19 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; `flymake': Continuous compilation
+
+;; Show error message in minibuffer
+(defun my-flymake-show-message ()
+  (if (get-char-property (point) 'flymake-overlay)
+      (let ((help (get-char-property (point) 'help-echo)))
+        (if help (message "%s" help)))))
+(add-hook 'post-command-hook
+          '(lambda ()
+             (my-set-minibuffer-helpers (my-flymake-show-message))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Remote compilation
 
 ;; You can use `remote-compile' instead of compile to run compilation in
