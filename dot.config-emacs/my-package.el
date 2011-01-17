@@ -152,6 +152,10 @@ command to be run in a shell.")
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
                :features (enclose)
                :after enclose-global-mode)
+        (:name wrap-region           :type http
+               :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
+               :features (wrap-region)
+               :after wrap-region-global-mode)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
