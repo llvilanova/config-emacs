@@ -156,6 +156,10 @@ command to be run in a shell.")
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
                :features (wrap-region)
                :after wrap-region-global-mode)
+        (:name pretty-mode           :type git
+               :features (pretty-mode)
+               :url "https://github.com/mattharrison/pretty-mode.git"
+               :after global-pretty-mode)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
