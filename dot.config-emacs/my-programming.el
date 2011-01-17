@@ -313,7 +313,7 @@
         (if help (message "%s" help)))))
 (add-hook 'post-command-hook
           '(lambda ()
-             (my-set-minibuffer-helpers (my-flymake-show-message))))
+             (my-set-minibuffer-helpers (not (my-flymake-show-message)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
