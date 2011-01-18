@@ -137,6 +137,9 @@
              (add-to-list 'load-path (path my-code-dir "google-weather-el"))
              (require 'org-google-weather)))
 
+;; Display known image types
+(add-hook 'org-mode-hook 'org-display-inline-images)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
