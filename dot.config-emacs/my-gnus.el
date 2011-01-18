@@ -62,6 +62,12 @@
       gnus-sum-thread-tree-single-leaf     "└──► "
       gnus-sum-thread-tree-indent          " ")
 
+;; Sorting
+(setq gnus-thread-sort-functions
+      (list 'gnus-thread-sort-by-number
+            'gnus-thread-sort-by-score
+            'gnus-thread-sort-by-total-score))
+
 ;; Scoring
 (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; highlight followups
 (define-key gnus-summary-mode-map [(control meta shift k)]
