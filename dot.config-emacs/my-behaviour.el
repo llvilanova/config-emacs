@@ -301,7 +301,14 @@ directory, select directory. Lastly the file is opened."
                    eshell-smart-space-goes-to-end t)
              (eshell-smart-initialize)))
 
-
 (put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
+
+;; `flymake'
+(add-hook 'flymake-mode-hook
+          '(lambda ()
+             ;; Keymaps to navigate between the errors
+             (local-set-key [(meta n)] 'flymake-goto-next-error)
+             (local-set-key [(meta p)] 'flymake-goto-prev-error)))
+
 
 (provide 'my-behaviour)
