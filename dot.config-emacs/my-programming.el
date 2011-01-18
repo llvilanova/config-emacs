@@ -241,12 +241,11 @@
 
 ;; temporally disable `semantic-idle-summary-mode' when completing
 (add-hook 'company-completion-started-hook
-          '(lambda (manually) (semantic-idle-summary-mode -1)))
+          '(lambda (manually) (my-set-minibuffer-helpers nil)))
 (add-hook 'company-completion-cancelled-hook
-          '(lambda (manually) (semantic-idle-summary-mode 1)))
+          '(lambda (manually) (my-set-minibuffer-helpers t)))
 (add-hook 'company-completion-finished-hook
-          '(lambda (candidate)
-             (semantic-idle-summary-mode 1)))
+          '(lambda (candidate) (my-set-minibuffer-helpers t)))
 
 ;; ;; Show documentation buffer when selecting a completion
 ;; ;; taken from `company-show-doc-buffer'
