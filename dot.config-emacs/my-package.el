@@ -120,6 +120,7 @@ command to be run in a shell.")
         (:name highlight-symbol      :type elpa)
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
+        (:name lua-mode              :type apt-get)
         ;; multi-term
         (:name org-mode              :type apt-get)
         ;; (:name predictive            :type git
