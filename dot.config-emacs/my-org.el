@@ -128,14 +128,11 @@
 ;; Show locations with `google-maps'
 (add-hook 'org-mode-hook
           '(lambda ()
-             (add-to-list 'load-path (path my-code-dir "google-maps"))
-             (require 'org-location-google-maps)
-             (add-to-list 'org-use-property-inheritance "LOCATION")))
+             (require 'org-location-google-maps)))
 
 ;; Show weather forecast with `google-weather'
 (add-hook 'org-mode-hook
           '(lambda ()
-             (add-to-list 'load-path (path my-code-dir "google-weather-el"))
              (require 'org-google-weather)))
 
 ;; Display known image types
