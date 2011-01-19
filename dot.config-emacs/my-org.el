@@ -54,6 +54,41 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Agenda
+
+;; Appearance
+(setq org-agenda-ndays 14              ; show 2 weeks...
+      org-agenda-start-on-weekday 1)   ; ...starting on Monday
+
+;; Hide information
+(setq org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
+      org-agenda-todo-ignore-with-date t  ; ... in the TODO list...
+      org-agenda-todo-ignore-scheduled t  ; (they'll eventually appear)
+      org-agenda-skip-scheduled-if-done t ; completed tasks
+      org-agenda-skip-deadline-if-done t
+      org-agenda-dim-blocked-tasks t)     ; tasks blocked by dependencies
+
+;; Export the current agenda whenever one of its files is updated
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (add-hook 'after-save-hook 'my-org-update-agenda-file t t)))
+;; export function
+(defun my-org-update-agenda-file ()
+  (interactive)
+  (let ((save-frame (and (boundp 'framepop-frame)
+                         (eq (selected-frame) framepop-frame))))
+    (if (not save-frame)
+        (save-excursion
+          (save-window-excursion
+            (let ((file my-org-agenda-file))
+              (org-agenda-list)
+              (org-write-agenda file)
+              (org-agenda-to-appt)))))))
+;; ;; do it once at startup
+;; (if (window-system) (my-org-update-agenda-file t))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Appointment notification
 (setq appt-message-warning-time 15      ; warn 15min in advance
       appt-display-mode-line t          ; show in modeline
@@ -79,20 +114,9 @@
                       ))
 
 ;; Appearance
-(setq org-agenda-ndays 14              ; show 2 weeks...
-      org-agenda-start-on-weekday 1    ; ...starting on Monday
-      org-hide-leading-stars t)        ; hide stars...
+(setq org-hide-leading-stars t)         ; hide stars...
       ;; org-odd-levels-only t)           ; ...and increase separation
       ;; org-startup-indented t)          ; still experimental
-
-
-;; Hide information
-(setq org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
-      org-agenda-todo-ignore-with-date t  ; ... in the TODO list...
-      org-agenda-todo-ignore-scheduled t  ; (they'll eventually appear)
-      org-agenda-skip-scheduled-if-done t ; completed tasks
-      org-agenda-skip-deadline-if-done t
-      org-agenda-dim-blocked-tasks t)     ; tasks blocked by dependencies
 
 ;; Lifecycle
 (setq org-enforce-todo-dependencies t   ; hold state if unfinished children
@@ -104,25 +128,6 @@
 
 ;; To follow links with RET, rather than a 2 key combo:
 (setq org-return-follows-link t)
-
-;; Export the current agenda whenever one of its files is updated
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (add-hook 'after-save-hook 'my-org-update-agenda-file t t)
-             ))
-;; export function
-(defun my-org-update-agenda-file ()
-  (let ((save-frame (and (boundp 'framepop-frame)
-                         (eq (selected-frame) framepop-frame))))
-    (if (not save-frame)
-        (save-excursion
-          (save-window-excursion
-            (let ((file my-org-agenda-file))
-              (org-agenda-list)
-              (org-write-agenda file)
-              (org-agenda-to-appt)))))))
-;; ;; do it once at startup
-;; (if (window-system) (my-org-update-agenda-file t))
 
 ;; Show locations with `google-maps'
 (add-hook 'org-mode-hook
