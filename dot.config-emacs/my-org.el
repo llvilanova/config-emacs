@@ -119,21 +119,16 @@
       org-stuck-projects                ; find stuck projects
       '("+PROJECT/-MAYBE-DONE" ("NEXT" "TODO") ("@SHOP")
         "\\<IGNORE\\>")
-      org-log-done 'time                ; add timestamp when moving to `DONE'
-      )
+      org-log-done 'time)               ; add timestamp when moving to `DONE'
 
 ;; To follow links with RET, rather than a 2 key combo:
 (setq org-return-follows-link t)
 
 ;; Show locations with `google-maps'
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (require 'org-location-google-maps)))
+(add-hook 'org-mode-hook '(lambda () (require 'org-location-google-maps)))
 
 ;; Show weather forecast with `google-weather'
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (require 'org-google-weather)))
+(add-hook 'org-mode-hook '(lambda () (require 'org-google-weather)))
 
 ;; Display known image types
 (add-hook 'org-mode-hook 'org-display-inline-images)
