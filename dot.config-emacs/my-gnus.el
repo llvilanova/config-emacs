@@ -60,7 +60,9 @@
       gnus-sum-thread-tree-vertical        "│"
       gnus-sum-thread-tree-leaf-with-other "├──► "
       gnus-sum-thread-tree-single-leaf     "└──► "
-      gnus-sum-thread-tree-indent          " ")
+      gnus-sum-thread-tree-indent          " "
+
+      gnus-summary-mode-line-format "Gnus: %p %Z")
 
 ;; Sorting
 (setq gnus-thread-sort-functions
@@ -86,6 +88,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Article
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Format
+(setq gnus-article-mode-line-format "Gnus: %p ► %S%m")
 
 ;; `gravatar' support
 (add-hook 'gnus-part-display-hook 'gnus-treat-from-gravatar)
