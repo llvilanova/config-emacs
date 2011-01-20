@@ -145,6 +145,9 @@
       uniquify-ignore-buffers-re "^\\*")
 
 ;; nuke whitespaces when writing to a file
+(add-hook 'find-file-hook
+          '(lambda ()
+             (setq whitespace-indent-tabs-mode indent-tabs-mode)))
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 
