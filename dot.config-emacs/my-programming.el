@@ -309,6 +309,11 @@
 (add-to-list 'desktop-globals-to-save 'compile-command)
 (add-to-list 'desktop-globals-to-save 'compile-history)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Debug
+
+(setq gdb-many-windows t)               ; it's usually nicer to have them all
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; `flymake': Continuous compilation
