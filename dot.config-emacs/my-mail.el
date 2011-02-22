@@ -74,11 +74,6 @@
       signature-use-bbdb t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; `footnote'
-(add-hook 'mail-mode-hook 'footnote-mode)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; `boxquote'
 (defvar my--mail-boxquote-map (make-sparse-keymap))
 (define-key my--mail-boxquote-map [(u)] 'boxquote-unboxa)
