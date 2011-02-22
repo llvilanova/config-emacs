@@ -52,7 +52,7 @@
                                 (expiry-wait              . 1461))) ; 4 years
 
 ;; Format
-(setq gnus-summary-line-format "%U%R%z %(%-11&user-date; %[%4L: %-23,23f%] %B%s%)\n"
+(setq gnus-summary-line-format "%U%R%z %(%-15&user-date; %[%4L: %-23,23f%] %B%s%)\n"
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-sum-thread-tree-false-root      "┈┬──▷ "
       gnus-sum-thread-tree-single-indent   " ●  "
