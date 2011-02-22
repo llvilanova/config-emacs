@@ -53,8 +53,8 @@
 ;; Agenda
 
 ;; Appearance
-(setq org-agenda-ndays 14              ; show 2 weeks...
-      org-agenda-start-on-weekday 1)   ; ...starting on Monday
+(setq org-agenda-span 14                ; show 2 weeks...
+      org-agenda-start-on-weekday 1)    ; ...starting on Monday
 
 ;; Hide information
 (setq org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
