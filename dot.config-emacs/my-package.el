@@ -177,6 +177,9 @@ command to be run in a shell.")
                :features (pretty-mode)
                :url "https://github.com/mattharrison/pretty-mode.git"
                :after global-pretty-mode)
+        (:name unipoint              :type git
+               :features (unipoint)
+               :url "https://github.com/apgwoz/unipoint.git")
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
