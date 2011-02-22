@@ -74,28 +74,6 @@
       signature-use-bbdb t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; `boxquote'
-(defvar my--mail-boxquote-map (make-sparse-keymap))
-(define-key my--mail-boxquote-map [(u)] 'boxquote-unboxa)
-(define-key my--mail-boxquote-map [(t)] 'boxquote-title)
-(define-key my--mail-boxquote-map [(r)] 'boxquote-region)
-(define-key my--mail-boxquote-map [(f)] 'boxquote-insert-file)
-(define-key my--mail-boxquote-map [(b)] 'boxquote-insert-buffer)
-(define-key my--mail-boxquote-map [(y)] 'boxquote-yank)
-(define-key my--mail-boxquote-map [(d)] 'boxquote-defun)
-(define-key my--mail-boxquote-map [(p)] 'boxquote-paragraph)
-(define-key my--mail-boxquote-map [(s)] 'boxquote-shell-command)
-(define-key my--mail-boxquote-map [(T)] 'boxquote-text)
-(define-key my--mail-boxquote-map [(k)] 'boxquote-kill-ring-save)
-(define-key my--mail-boxquote-map [(shift f)] 'boxquote-fill-paragraph)
-
-(defun my-mail-setup-boxquote (&optional prefix)
-  "Install `my--mail-boxquote-map' into current buffer's local keymap."
-  (interactive)
-  (let ((prefix (or prefix [(control c) (b)])))
-    (local-set-key prefix my--mail-boxquote-map)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc
 (setq message-from-style 'angles)
 
