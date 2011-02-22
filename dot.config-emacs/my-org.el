@@ -143,6 +143,9 @@
 ;; Code block editing
 (setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block
       org-src-fontify-natively t)   ; and fontify accordingly
+
+;; ;; Linking
+;; (require 'org-wikinodes)                ; enable camelcase auto-linking
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
