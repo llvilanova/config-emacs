@@ -162,7 +162,9 @@ command to be run in a shell.")
         ;; (:name tempo-snippets        :type elpa)
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
-        undo-tree
+        (:name undo-tree             :type el-get
+               :features (undo-tree)
+               :after global-undo-tree-mode)
         ;; (:name xml-rpc               :type elpa)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
