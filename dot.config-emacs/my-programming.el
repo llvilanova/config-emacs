@@ -75,9 +75,6 @@
 
 (add-hook 'my-programming-mode-hook
           '(lambda ()
-             ;; Show trailing whitespaces
-             (setq show-trailing-whitespace t)
-
              ;; Highlight parentheses around point
              (highlight-parentheses-mode 1)
 

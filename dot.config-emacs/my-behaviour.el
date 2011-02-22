@@ -144,6 +144,12 @@
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
+;; show all kinds of niceties when breaking format rules
+(setq whitespace-style
+      '(face trailing lines-tail space-before-tab indentation empty
+      space-after-tab))
+(global-whitespace-mode t)
+
 ;; nuke whitespaces when writing to a file
 (add-hook 'find-file-hook
           '(lambda ()

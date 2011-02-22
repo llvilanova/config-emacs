@@ -98,7 +98,6 @@ command to be run in a shell.")
         (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
-        (:name develock-el           :type apt-get)
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name ecb                   :type cvs
