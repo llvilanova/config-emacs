@@ -133,6 +133,9 @@
 ;; Display known image types
 (add-hook 'org-mode-hook 'org-display-inline-images)
 
+;; Code block editing
+(setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block
+      org-src-fontify-natively t)   ; and fontify accordingly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
