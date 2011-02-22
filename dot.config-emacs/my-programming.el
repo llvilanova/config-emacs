@@ -174,9 +174,10 @@
 ;; `flymake'
 (add-hook 'my-python-mode-hook
           '(lambda ()
-             ;; Configure to wait a bit longer after edits before starting
-             (setq-default flymake-no-changes-timeout '3)
-             (flymake-mode t)))
+             (when (buffer-file-name)
+               ;; Configure to wait a bit longer after edits before starting
+               (setq-default flymake-no-changes-timeout '3)
+               (flymake-mode t))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
