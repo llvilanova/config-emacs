@@ -163,10 +163,6 @@
 (add-hook 'my-python-mode-hook
           '(lambda ()
              (require 'ipython)))
-;; TODO: a bug in `highlight-80+-mode' requires manual activation of font locks
-;; (add-hook 'my-python-mode-hook
-;;           '(lambda ()
-;;              (highlight-80+-mode t)))   ; TODO: `develock' not in `python-mode'
 
 ;; `flymake'
 (add-hook 'my-python-mode-hook

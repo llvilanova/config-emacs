@@ -119,7 +119,6 @@ command to be run in a shell.")
         (:name gdb-shell             :type elpa)
         google-maps
         google-weather
-        (:name highlight-80+         :type elpa)
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
         (:name iedit                 :type emacswiki)
