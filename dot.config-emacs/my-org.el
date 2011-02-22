@@ -119,9 +119,7 @@
                       ))
 
 ;; Appearance
-(setq org-hide-leading-stars t)         ; hide stars...
-      ;; org-odd-levels-only t)           ; ...and increase separation
-      ;; org-startup-indented t)          ; still experimental
+(setq org-startup-indented t)           ; automatically indent headers and text
 
 ;; Lifecycle
 (setq org-enforce-todo-dependencies t   ; hold state if unfinished children
