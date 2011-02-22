@@ -19,7 +19,7 @@
 (semantic-mode 1)                       ; global minor mode
 
 ;; Let the user temporarily disable some minibuffer output
-(setq my--enable-semantic-idle-summary-idle-function nil)
+(setq my--enable-semantic-idle-summary-idle-function t)
 (make-variable-buffer-local 'my--enable-semantic-idle-summary-idle-function)
 (defadvice semantic-idle-summary-idle-function (around
                                                 my--semantic-idle-summary-idle-function
