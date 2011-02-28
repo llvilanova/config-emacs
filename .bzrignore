@@ -4,7 +4,7 @@ dot.config-emacs/my-projects.el
 dot.config-emacs/loaddefs.el
 dot.config-emacs/custom.el
 dot.config-emacs/elpa/*
-dot.config-emacs/el-get/*
+dot.config-emacs/el-get
 dot.local-share-emacs/bbdb*
 dot.local-share-emacs/bmk-bmenu-state.el
 dot.local-share-emacs/bookmarks
