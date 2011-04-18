@@ -146,8 +146,9 @@
 
 ;; show all kinds of niceties when breaking format rules
 (setq whitespace-style
-      '(face trailing lines-tail space-before-tab indentation empty
-      space-after-tab))
+      '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
+      whitespace-line-column nil)
+
 (global-whitespace-mode t)
 
 ;; nuke whitespaces when writing to a file
