@@ -172,15 +172,15 @@
     "* %^{Title}\n%i\n  %a")
    ("c" "Conference"                      entry (file+headline "Events.org"
                                                                "Conferences")
-    "* %^{Conference}    :%^{Acronym}:%?
-*** TODO Abstract
-    DEADLINE: <%(org-read-date nil nil nil \"Abstract deadline\") ++1y -1w>
-*** TODO Paper
-    DEADLINE: <%(org-read-date nil nil nil \"Paper deadline\") ++1y -6m>
-*** TODO Rebuttal
-    SCHEDULED: <%(org-read-date nil nil nil \"Rebuttal deadline\") ++1y>
-*** TODO Acceptance notification
-    SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>")))
+    ;; (function 'org-capture-cfp-reuse "Events.org" "Conferences" 'org-capture-cfp-mail-conference)
+    "* [[%(org-capture-cfp-url)][%(org-capture-cfp-mail-conference)]]    :%^{Acronym}:%?
+** Abstract
+DEADLINE: <%(org-capture-cfp-date \"Abstract submission: \" \"abstract\" \"submission\") ++1y -1w>
+** Paper
+DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6m>
+** Acceptance
+SCHEDULED: <%(org-capture-cfp-date \"Acceptance notification: \" \"notification\") ++1y>"
+    )
 
    ;; personal templates
    ("W" "Web"                             entry (file+headline "Personal.org"
