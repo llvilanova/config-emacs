@@ -207,6 +207,29 @@ SCHEDULED: <%(org-capture-cfp-date \"Acceptance notification: \" \"notification\
     "* %u %^{Objecte} -> %^{Persona}"
     :immediate-finish t)
    ))
+
+(defun my-org-capture-other-frame ()
+  "Create a new frame and run org-capture."
+  (interactive)
+  (make-frame '((name . "Org-Capture")
+                (width  . 120)
+                (height .  20)
+                (menu-bar-lines . 0)
+                (tool-bar-lines . 0)
+                (auto-lower . nil)
+                (auto-raise . t)))
+  (select-frame-by-name "Org-Capture")
+  (if (condition-case nil
+          (progn (org-capture) t)
+        (error nil))
+      (delete-other-windows)
+    (my-org-capture-other-frame-cleanup)))
+
+(defun my-org-capture-other-frame-cleanup ()
+  "Close the Org-Capture frame."
+  (if (equal "Org-Capture" (frame-parameter nil 'name))
+      (delete-frame)))
+(add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame-cleanup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
