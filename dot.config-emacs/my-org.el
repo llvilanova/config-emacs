@@ -152,35 +152,26 @@
 ;; Capture
 (setq
  org-capture-templates
- '(("w" "Web" entry (file+headline "Personal.org" "Interessant")
-    "* %U %^{Description}\n  %c"
-    :immediate-finish t)
-   ("c" "Clipboard" entry (file+headline "Personal.org" "Interessant")
-    "* %U %^{Description}\n  %c\n  %x"
-    :immediate-finish t)
+ '(
+   ;; work templates
+   ("a" "Appointment"                     entry (file+headline "Work.org"
+                                                               "Tasks")
+    "* %^{Appointment}T %?")
+   ("s" "Schedule"                        entry (file+headline "Work.org"
+                                                               "Tasks")
+    "* %?\nSCHEDULED: %^{Schedule}T")
+   ("d" "Deadline"                        entry (file+headline "Work.org"
+                                                               "Tasks")
+    "* TODO %?\nDEADLINE: %^{Deadline}t")
+   ("t" "Todo"                            entry (file+headline "Work.org"
+                                                               "Tasks")
+    "* TODO %?\n%i\n  %a")
 
-   ("t" "Todo" entry (file+headline "Personal.org" "Tasques")
-    "* TODO %?\n  %i\n  %a")
-   ("s" "Schedule" entry (file+headline "Personal.org" "Tasques")
-    "* %?\n  SCHEDULED: %^{Schedule}T")
-   ("d" "Deadline" entry (file+headline "Personal.org" "Tasques")
-    "* TODO %?\n  DEADLINE: %^{Deadline}t")
-
-   ("p" "Préstec" entry (file+headline "Personal.org" "Préstecs")
-    "* %u %^{Objecte} -> %^{Persona}"
-    :immediate-finish t)
-
-   ("T" "Todo" entry (file+headline "Work.org" "Tasks")
-    "* TODO %?\n  %i\n  %a")
-
-   ("S" "Schedule" entry (file+headline "Work.org" "Tasks")
-    "* %?\n  SCHEDULED: %^{Schedule}T")
-   ("D" "Deadline" entry (file+headline "Work.org" "Tasks")
-    "* TODO %?\n  DEADLINE: %^{Deadline}t")
-
-   ("I" "Idea" entry (file+headline "Work.org" "Brainstorming")
-    "* %^{Title}\n  %i\n  %a")
-   ("F" "Conference" entry (file+headline "Events.org" "Conferences")
+   ("i" "Idea"                            entry (file+headline "Work.org"
+                                                               "Brainstorming")
+    "* %^{Title}\n%i\n  %a")
+   ("c" "Conference"                      entry (file+headline "Events.org"
+                                                               "Conferences")
     "* %^{Conference}    :%^{Acronym}:%?
 *** TODO Abstract
     DEADLINE: <%(org-read-date nil nil nil \"Abstract deadline\") ++1y -1w>
@@ -190,6 +181,32 @@
     SCHEDULED: <%(org-read-date nil nil nil \"Rebuttal deadline\") ++1y>
 *** TODO Acceptance notification
     SCHEDULED: <%(org-read-date nil nil nil \"Acceptance notification\") ++1y>")))
+
+   ;; personal templates
+   ("W" "Web"                             entry (file+headline "Personal.org"
+                                                               "Interessant")
+    "* %U %^{Description}\n%c"
+    :immediate-finish t)
+   ("C" "Clipboard"                       entry (file+headline "Personal.org"
+                                                               "Interessant")
+    "* %U %^{Description}\n%c\n%x"
+    :immediate-finish t)
+
+   ("S" "Schedule"                        entry (file+headline "Personal.org"
+                                                               "Tasques")
+    "* %?\nSCHEDULED: %^{Schedule}T")
+   ("D" "Deadline"                        entry (file+headline "Personal.org"
+                                                               "Tasques")
+    "* TODO %?\nDEADLINE: %^{Deadline}t")
+   ("T" "Todo"                            entry (file+headline "Personal.org"
+                                                               "Tasques")
+    "* TODO %?\n%i\n%a")
+
+   ("P" "Préstec"                         entry (file+headline "Personal.org"
+                                                               "Préstecs")
+    "* %u %^{Objecte} -> %^{Persona}"
+    :immediate-finish t)
+   ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
