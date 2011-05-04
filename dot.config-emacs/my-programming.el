@@ -357,8 +357,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
 
+;; `diff-mode'
 (setq diff-mode-hook '(diff-delete-empty-files ; do not show empty files
                        diff-make-unified))     ; "diff -u" style
-
+;; `diff'
+(unless (listp diff-switches)
+  (setq diff-switches (list diff-switches)))
+(add-to-list 'diff-switches "-u")
+(setq diff-switches (remove "-c" diff-switches))
 
 (provide 'my-programming)
