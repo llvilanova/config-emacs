@@ -332,5 +332,10 @@ directory, select directory. Lastly the file is opened."
              (local-set-key [(meta n)] 'flymake-goto-next-error)
              (local-set-key [(meta p)] 'flymake-goto-prev-error)))
 
+;; `re-builder'
+(add-hook 'reb-mode-hook
+          '(lambda ()
+             (setq reb-re-syntax 'string)))
+
 
 (provide 'my-behaviour)
