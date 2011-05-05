@@ -26,12 +26,13 @@
 (add-hook 'gnus-summary-exit-hook       ; automatically re-sort by rank (slow)
           'gnus-group-sort-groups-by-rank)
 
-
 ;; New groups
 (setq gnus-check-new-newsgroups 'always ; check if new newsgroups are available
       gnus-subscribe-options-newsgroups-method 'gnus-subscribe-hierarchically
       gnus-subscribe-newsgroup-method 'gnus-subscribe-hierarchically)
 
+;; Searching
+(require 'nnir)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Summary
