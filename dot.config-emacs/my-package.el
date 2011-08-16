@@ -106,7 +106,8 @@ command to be run in a shell.")
                :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
                :info "info-help")
         (:name emacs-goodies-el      :type apt-get)
-        (:name fic-mode              :type emacswiki)
+        (:name fic-mode              :type emacswiki
+               :features (fic-mode))
         (:name flymake-lua           :type http
                :url "https://github.com/sroccaserra/emacs/raw/master/flymake-lua.el"
                :after (lambda ()
