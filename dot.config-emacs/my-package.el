@@ -148,7 +148,6 @@ command to be run in a shell.")
                               (list "epylint" (list local-file))))
                           (add-to-list 'flymake-allowed-file-name-masks
                                        '("\\.py\\'" my--flymake-pylint-init)))))
-        (:name python-mode           :type apt-get)
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
