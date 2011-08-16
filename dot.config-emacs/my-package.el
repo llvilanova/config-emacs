@@ -148,12 +148,6 @@ command to be run in a shell.")
                               (list "epylint" (list local-file))))
                           (add-to-list 'flymake-allowed-file-name-masks
                                        '("\\.py\\'" my--flymake-pylint-init)))))
-        (:name pymacs                :type apt-get
-               :features (pymacs)
-               :after (lambda ()
-                        (add-to-list
-                         'pymacs-load-path (path my-config-dir
-                                                 "el-get" "pysmell"))))
         (:name python-mode           :type apt-get)
         (:name smex                  :type elpa)
         switch-window
