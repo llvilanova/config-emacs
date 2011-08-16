@@ -73,7 +73,7 @@
 
 ;; Scoring
 (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; highlight followups
-(defun my-gnus-lower-thread                               ; lower thread score
+(defun my-gnus-lower-thread ()                            ; lower thread score
      "Permanently lower score for a whole (sub)thread."
      (interactive)
      (kmacro-exec-ring-item (quote ([?L ?i ?e ?t return] 0 "%d")) nil) ; message-id
