@@ -100,6 +100,8 @@ command to be run in a shell.")
                :features (enclose))
         (:name fic-mode              :type emacswiki
                :features (fic-mode))
+        fringe-helper
+        flymake-fringe-icons
         (:name flymake-lua           :type http
                :url "https://github.com/sroccaserra/emacs/raw/master/flymake-lua.el"
                :after (lambda ()
