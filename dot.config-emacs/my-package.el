@@ -148,11 +148,11 @@ command to be run in a shell.")
         (:name smex                  :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
-        (:name wordnet               :type http
-               :url "http://xwl.appspot.com/ref/wordnet.el")
-        (:name undo-tree             :type el-get
+        (:name undo-tree
                :features (undo-tree)
                :after global-undo-tree-mode)
+        (:name wordnet               :type http
+               :url "http://xwl.appspot.com/ref/wordnet.el")
         ;; (:name xml-rpc               :type elpa)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
