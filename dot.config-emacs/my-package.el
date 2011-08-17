@@ -3,27 +3,24 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package sources
 
-;; `package'
-(require 'package)
-(setq package-user-dir (path my-config-dir "elpa" ""))
-(add-to-list 'package-archives '("elpa". "http://tromey.com/elpa/"))
-(package-initialize)
-
 ;; `el-get'
 (setq el-get-dir (path my-config-dir "el-get" ""))
 (add-to-list 'load-path el-get-dir)
 (add-to-list 'load-path (path el-get-dir "el-get"))
 ;; Handle auto-installation
 (unless (require 'el-get nil t)
-  (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-   '(lambda (s)
-      (let ((user-emacs-directory my-config-dir))
-        (end-of-buffer)
-        (eval-print-last-sexp))))
-  ;; Get initial list of available packages for `package'
-  (package-refresh-contents)
-  (load-file (path my-config-dir "el-get" "el-get" "el-get.el")))
+  ;; download, build & load
+  (let ((buffer
+         (or (url-retrieve-synchronously
+             "https://github.com/dimitri/el-get/raw/master/el-get-install.el")
+            (error "Could not download el-get installer")))
+        (user-emacs-directory my-config-dir))
+    (with-current-buffer buffer
+      (end-of-buffer)
+      (eval-print-last-sexp)))
+  ;; install and update list of available packages for `package'
+  (el-get 'sync '("package"))           ; TODO: remove once emacs24 is released
+  (package-refresh-contents))
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
@@ -174,7 +171,7 @@ command to be run in a shell.")
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(el-get 'wait)
+(el-get 'wait (mapcar 'el-get-source-name el-get-sources))
 (my-regenerate-autoloads)
 
 (provide 'my-package)
