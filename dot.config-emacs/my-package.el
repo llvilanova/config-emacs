@@ -74,7 +74,6 @@ command to be run in a shell.")
 ;; Package list
 (setq el-get-sources
       '(
-        ;; el-get
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (lambda ()
@@ -162,7 +161,6 @@ command to be run in a shell.")
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
                :features (wrap-region)
                :after wrap-region-global-mode)
-        ;; (:name xml-rpc               :type elpa)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
