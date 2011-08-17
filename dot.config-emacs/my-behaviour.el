@@ -296,19 +296,17 @@ directory, select directory. Lastly the file is opened."
 (savehist-mode t)
 
 ;; `bookmark+': bookmark everything
-(setq bookmark-default-file (path my-data-dir "bookmarks")
-      bookmarkp-bmenu-commands-file (path my-data-dir "bmk-bmenu-commands.el")
-      bookmarkp-bmenu-state-file (path my-data-dir "bmk-bmenu-state.el"))
-(require 'bookmark+)
+(setq bookmark-default-file (path my-data-dir "bookmarks"))
 (defun my-jump-to-bookmark (bookmark)
-  (interactive (my--bookmark-ido-read "Jump to bookmark: "))
+  (interactive (list (my--bookmark-ido-read "Jump to bookmark: ")))
   (bookmark-jump bookmark))
 (defun my--bookmark-ido-read (prompt)
   (let ((ido-make-buffer-list-hook
          (lambda ()
+           (require 'bookmark)
            (setq ido-temp-list (bookmark-all-names)))))
     (ido-read-buffer prompt)))
-(global-set-key [(control x) (r) (b)] 'my-ido-find-bookmark)
+(global-set-key [(control x) (r) (b)] 'my-jump-to-bookmark)
 
 ;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))

@@ -83,15 +83,6 @@ command to be run in a shell.")
         (:name auctex                :type apt-get)
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
-        (:name bookmark+-mac         :type emacswiki)
-        (:name bookmark+-bmu         :type emacswiki
-               :features (bookmark+-bmu)) ; TODO: missing autoload for
-                                          ;       `bookmark-bmenu-mode-map'
-        (:name bookmark+-1           :type emacswiki)
-        (:name bookmark+-lit         :type emacswiki)
-        (:name bookmark+-doc         :type emacswiki)
-        (:name bookmark+-chg         :type emacswiki)
-        (:name bookmark+             :type emacswiki)
         (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
