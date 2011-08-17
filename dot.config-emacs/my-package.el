@@ -84,6 +84,8 @@ command to be run in a shell.")
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         (:name company               :type elpa)
+        (:name cscope-el             :type apt-get
+               :features (xcscope))
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
