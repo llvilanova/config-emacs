@@ -103,6 +103,9 @@ command to be run in a shell.")
                :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
                :info "info-help")
         (:name emacs-goodies-el      :type apt-get)
+        (:name enclose               :type http
+               :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
+               :features (enclose))
         (:name fic-mode              :type emacswiki
                :features (fic-mode))
         (:name flymake-lua           :type http
@@ -133,6 +136,10 @@ command to be run in a shell.")
         ;;        :after (lambda ()
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
+        (:name pretty-mode           :type git
+               :features (pretty-mode)
+               :url "https://github.com/mattharrison/pretty-mode.git"
+               :after global-pretty-mode)
         (:name pylint                :type apt-get
                :after (lambda ()
                         (when (load "flymake" t)
@@ -151,23 +158,16 @@ command to be run in a shell.")
         (:name undo-tree
                :features (undo-tree)
                :after global-undo-tree-mode)
+        (:name unipoint              :type git
+               :features (unipoint)
+               :url "https://github.com/apgwoz/unipoint.git")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
-        ;; (:name xml-rpc               :type elpa)
-        (:name enclose               :type http
-               :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
-               :features (enclose))
         (:name wrap-region           :type http
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
                :features (wrap-region)
                :after wrap-region-global-mode)
-        (:name pretty-mode           :type git
-               :features (pretty-mode)
-               :url "https://github.com/mattharrison/pretty-mode.git"
-               :after global-pretty-mode)
-        (:name unipoint              :type git
-               :features (unipoint)
-               :url "https://github.com/apgwoz/unipoint.git")
+        ;; (:name xml-rpc               :type elpa)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
