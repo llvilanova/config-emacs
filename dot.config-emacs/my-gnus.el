@@ -27,7 +27,8 @@
           'gnus-group-sort-groups-by-rank)
 
 ;; New groups
-(setq gnus-check-new-newsgroups 'always ; check if new newsgroups are available
+(setq gnus-check-new-newsgroups 'ask-server ; check if new newsgroups are available
+      gnus-save-killed-list     nil
       gnus-subscribe-options-newsgroups-method 'gnus-subscribe-hierarchically
       gnus-subscribe-newsgroup-method 'gnus-subscribe-hierarchically)
 
