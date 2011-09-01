@@ -163,5 +163,35 @@
 (my-add-gnus-account "AC"  nil     "vilanova@ac.upc.edu")
 (my-add-gnus-account "BSC" nil     "lluis.vilanova@bsc.es")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Temporal fixes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'nnimap)
+(deffoo nnimap-request-newgroups (date &optional server)
+  (when (nnimap-possibly-change-server server)
+    (with-current-buffer nntp-server-buffer
+      (gnus-message 5 "nnimap: Listing subscribed mailboxes%s%s..."
+                    (if (> (length server) 0) " on " "") server)
+      (erase-buffer)
+      (nnimap-before-find-minmax-bugworkaround)
+      (dolist (pattern (nnimap-pattern-to-list-arguments
+                        nnimap-list-pattern))
+        (dolist (mbx (funcall nnimap-request-list-method (cdr pattern) (car pattern) nil
+                              nnimap-server-buffer))
+          (or (catch 'found
+                (dolist (mailbox (imap-mailbox-get 'list-flags mbx
+                                                   nnimap-server-buffer))
+                  (if (string= (downcase mailbox) "\\noselect")
+                      (throw 'found t)))
+                nil)
+              (let ((info (nnimap-find-minmax-uid mbx 'examine)))
+                (when info
+                  (insert (format "\"%s\" %d %d y\n"
+                                  mbx (or (nth 2 info) 0)
+                                  (max 1 (or (nth 1 info) 1)))))))))
+      (gnus-message 5 "nnimap: Listing subscribed mailboxes%s%s...done"
+                    (if (> (length server) 0) " on " "") server))
+    t))
 
 ;; (provide 'my-gnus)
