@@ -18,10 +18,19 @@
       (end-of-buffer)
       (eval-print-last-sexp)))
   ;; TODO: hack around some undefined symbols just after installation
-  (load-file (path el-get-dir "el-get" "el-get.el"))
-  ;; install and update list of available packages for `package'
-  (el-get 'sync '("package"))           ; TODO: remove once emacs24 is released
+  (load-file (path el-get-dir "el-get" "el-get.el")))
+
+
+;; `package' auto-installation
+(unless (require 'package nil t)
+  ;; TODO: delete once emacs24 is released
+  (setq el-get-sources '(package))
+  (el-get 'sync)
+  ;; update list of available packages for `package'
   (package-refresh-contents))
+;; TODO: delete once emacs24 is released
+(unless (boundp 'package-archives)
+  (setq package-archives nil))
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
