@@ -162,7 +162,7 @@ command to be run in a shell.")
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(el-get 'wait (mapcar 'el-get-source-name el-get-sources))
+(el-get 'wait)
 (my-regenerate-autoloads)
 
 (provide 'my-package)
