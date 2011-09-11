@@ -93,8 +93,6 @@ command to be run in a shell.")
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         (:name company               :type elpa)
-        (:name cscope-el             :type apt-get
-               :features (xcscope))
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
@@ -174,6 +172,7 @@ command to be run in a shell.")
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
                :features (wrap-region)
                :after wrap-region-global-mode)
+        xcscope
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
