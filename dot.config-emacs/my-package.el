@@ -5,7 +5,6 @@
 
 ;; `el-get'
 (setq el-get-dir (path my-config-dir "el-get" ""))
-(add-to-list 'load-path el-get-dir)
 (add-to-list 'load-path (path el-get-dir "el-get"))
 ;; Handle auto-installation
 (unless (require 'el-get nil t)
