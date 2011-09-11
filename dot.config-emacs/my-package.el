@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package sources
 
-;; `el-get'
+;; `el-get' auto-installation
 (setq el-get-dir (path my-config-dir "el-get" ""))
 (add-to-list 'load-path (path el-get-dir "el-get"))
 ;; Handle auto-installation
@@ -17,6 +17,8 @@
     (with-current-buffer buffer
       (end-of-buffer)
       (eval-print-last-sexp)))
+  ;; TODO: hack around some undefined symbols just after installation
+  (load-file (path el-get-dir "el-get" "el-get.el"))
   ;; install and update list of available packages for `package'
   (el-get 'sync '("package"))           ; TODO: remove once emacs24 is released
   (package-refresh-contents))
