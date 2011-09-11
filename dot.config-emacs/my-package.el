@@ -112,7 +112,12 @@ command to be run in a shell.")
                :features (fic-mode))
         fringe-helper
         flymake-fringe-icons
-        flymake-lua
+        (:name flymake-lua           :type http
+               :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
+	       :description "Flymake support for Lua."
+	       :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
+	       :post-init (lambda ()
+			    (add-hook 'lua-mode-hook 'flymake-lua-load)))
         (:name fuzzy                 :type svn
                :url "http://dea.googlecode.com/svn/trunk/lisps/auto-complete"
                :features (fuzzy)
