@@ -109,13 +109,16 @@ command to be run in a shell.")
         (:name fic-mode              :type emacswiki
                :features (fic-mode))
         fringe-helper
-        flymake-fringe-icons
+        ;; TODO: recipe is broken
+        (:name flymake-fringe-icons  :type http
+               :url "https://gist.github.com/raw/759130/a85ebbc6bfc5fbab54677f4236e902b2da7bf41f/flymake-fringe-icons.el"
+               :features flymake-fringe-icons)
         (:name flymake-lua           :type http
                :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
-	       :description "Flymake support for Lua."
-	       :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
-	       :post-init (lambda ()
-			    (add-hook 'lua-mode-hook 'flymake-lua-load)))
+               :description "Flymake support for Lua."
+               :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
+               :post-init (lambda ()
+                            (add-hook 'lua-mode-hook 'flymake-lua-load)))
         (:name fuzzy                 :type svn
                :url "http://dea.googlecode.com/svn/trunk/lisps/auto-complete"
                :features (fuzzy)
