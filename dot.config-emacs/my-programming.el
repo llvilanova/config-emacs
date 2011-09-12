@@ -93,10 +93,7 @@
              (which-func-mode 1)
 
              ;; Update the year in copyright message
-             (add-hook 'before-save-hook
-                       '(lambda ()
-                          (copyright-update)
-                          ))
+             (add-hook 'before-save-hook 'copyright-update)
 
              ;; Auto-indent new line
              (local-set-key [return] 'newline-and-indent)
