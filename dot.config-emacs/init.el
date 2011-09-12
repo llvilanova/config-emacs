@@ -47,6 +47,29 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Mode hooks
+(defvar my-add-hook-alist nil
+  "Alist mapping \"abstract\" mode hooks to real mode hooks.
+Use `my-define-hook' to add values to it.")
+
+(defun my-define-hook (hook hooks)
+  "Add a new entry into `my-add-hook-alist'.
+HOOK is the symbol for the \"abstract\" hook variable.  HOOKS is
+a list with the symbols of the real hook variables it refers to."
+  (when (assq hook my-add-hook-alist)
+    (error "Hook already defined"))
+  (add-to-list 'my-add-hook-alist (cons hook hooks)))
+
+(defun my-add-hook (hook function &optional append local)
+  "Add to the value of HOOK the function FUNCTION.
+If HOOK is a car in `my-add-hook-alist', add to all hooks in its
+cdr instead."
+  (let ((hooks (or (assq hook my-add-hook-alist) (list hook))))
+    (dolist (hook hooks)
+      (add-hook hook function append local))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Pull the rest of configuration
 (require 'cl)
 (require 'my-misc)
