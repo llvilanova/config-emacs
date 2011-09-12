@@ -63,17 +63,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Setup activation hooks (`my-programming-mode-hook')
-(setq my-programming-mode-hook nil)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General preferences
+
+(my-define-hook 'my-programming-mode-hook
+                '(c-mode-hook
+                  c++-mode-hook
+                  python-mode-hook
+                  emacs-lisp-mode-hook
+                  makefile-mode-hook))
 
 ;; ;; Make scripts executable on Save (saves having to do the chmod every time)
 ;; (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-(add-hook 'my-programming-mode-hook
+(my-add-hook 'my-programming-mode-hook
           '(lambda ()
              ;; Highlight parentheses around point
              (highlight-parentheses-mode 1)
@@ -110,16 +112,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
 
-(setq my-cc-mode-hook nil)
-(add-hook 'c-mode-common-hook
-          '(lambda () (run-hooks 'my-programming-mode-hook 'my-cc-mode-hook)))
-
 (setq-default
  c-default-style "stroustrup"           ; indentation style
  ;; c-basic-offset tab-width               ; indentation width
  cpp-face-type 'dark                    ; use colors suitable for a dark bg
  cpp-known-face 'highlight)
-(add-hook 'my-cc-mode-hook
+(add-hook 'c-mode-common-hook
           '(lambda ()
              (c-toggle-auto-newline 1)  ; auto-newline on semi-colon, etc.
              (c-toggle-hungry-state 1)  ; hungry backspace
@@ -132,12 +130,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Makefile
 
-(setq my-makefile-mode-hook nil)
 (add-hook 'makefile-mode-hook
-          '(lambda () (run-hooks 'my-programming-mode-hook
-                                 'my-makefile-mode-hook)))
-
-(add-hook 'my-makefile-mode
           '(lambda ()
             ;; Highlight white spaces
             (delq (set-local whitespace-style) 'newline-mark)
@@ -147,26 +140,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
 
-(setq my-python-mode-hook nil)
-(add-hook 'python-mode-hook
-          '(lambda () (run-hooks 'my-programming-mode-hook
-                                 'my-python-mode-hook)))
-
 ;; `flymake'
-(add-hook 'my-python-mode-hook
+(add-hook 'python-mode-hook
           '(lambda ()
              (when (buffer-file-name)
                ;; Configure to wait a bit longer after edits before starting
                (setq-default flymake-no-changes-timeout '3)
                (flymake-mode t))))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Emacs Lisp
-(setq my-emacs-lisp-mode-hook nil)
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda () (run-hooks 'my-programming-mode-hook
-                                 'my-emacs-lisp-mode-hook)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; [END] Code editing
@@ -177,12 +158,12 @@
 ;; Documentation
 
 ;; Comment editing
-(add-hook 'my-programming-mode-hook
-          '(lambda ()
-             (auto-fill-mode 1)         ; auto-wrap lines in comments
-             (require 'filladapt)
-             (turn-on-filladapt-mode)))
-(add-hook 'my-cc-mode-hook
+(my-add-hook 'my-programming-mode-hook
+             '(lambda ()
+                (auto-fill-mode 1)         ; auto-wrap lines in comments
+                (require 'filladapt)
+                (turn-on-filladapt-mode)))
+(add-hook 'c-mode-common-hook
           '(lambda ()
              ;; Auto-end comment block when inserting `/' (override: C-q /)
              (add-to-list 'c-cleanup-list 'comment-close-slash)
@@ -201,15 +182,15 @@
 ;; TODO: replace with cedet's `srecode'
 (autoload 'template-initialize (path my-code-dir "template" "lisp" "template"))
 (add-to-list 'my-recompile-objs (path my-code-dir "template" "lisp"))
-(add-hook 'my-programming-mode-hook
-          '(lambda ()
-             (setq template-default-directories
-                   (cons
-                    (if (file-directory-p (path my-data-dir "templates" ""))
-                        (path my-data-dir "templates" "")
-                      nil)
-                    nil))
-             (template-initialize)))
+(my-add-hook 'my-programming-mode-hook
+             '(lambda ()
+                (setq template-default-directories
+                      (cons
+                       (if (file-directory-p (path my-data-dir "templates" ""))
+                           (path my-data-dir "templates" "")
+                         nil)
+                       nil))
+                (template-initialize)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -243,10 +224,10 @@
 ;; Special treatment for documentation buffer
 (my-add-helper-buffer "*Company meta-data*")
 
-(add-hook 'my-programming-mode-hook
-          '(lambda ()
-             (company-mode 1)
-             (local-set-key [(meta tab)] 'company-complete)))
+(my-add-hook 'my-programming-mode-hook
+             '(lambda ()
+                (company-mode 1)
+                (local-set-key [(meta tab)] 'company-complete)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -255,16 +236,16 @@
 ;; Special treatment for tags buffer
 (my-add-helper-buffer "*cscope*")
 
-(add-hook 'my-programming-mode-hook
-          '(lambda ()
-             (require 'xcscope)
-             (cscope-minor-mode)
-             (local-set-key [(control c) (i)] ; open included file at point
-                            'semantic-decoration-include-visit)
-             (local-set-key [(control c) (g)] ; jump to declaration
-                            'semantic-ia-fast-jump)
-             (local-set-key [(control c) (t)] ; toggle declaration / definition
-                            'semantic-analyze-proto-impl-toggle)))
+(my-add-hook 'my-programming-mode-hook
+             '(lambda ()
+                (require 'xcscope)
+                (cscope-minor-mode)
+                (local-set-key [(control c) (i)] ; open included file at point
+                               'semantic-decoration-include-visit)
+                (local-set-key [(control c) (g)] ; jump to declaration
+                               'semantic-ia-fast-jump)
+                (local-set-key [(control c) (t)] ; toggle declaration / definition
+                               'semantic-analyze-proto-impl-toggle)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -273,11 +254,11 @@
 ;; Special treatment for documentation buffer
 (my-add-helper-buffer "*TAG DOCUMENTATION*")
 
-(add-hook 'my-programming-mode-hook
-          '(lambda ()
-             (local-set-key [f1] 'semantic-ia-show-summary)
-             (local-set-key [(meta f1)] 'semantic-ia-show-doc)
-             (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
+(my-add-hook 'my-programming-mode-hook
+             '(lambda ()
+                (local-set-key [f1] 'semantic-ia-show-summary)
+                (local-set-key [(meta f1)] 'semantic-ia-show-doc)
+                (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
