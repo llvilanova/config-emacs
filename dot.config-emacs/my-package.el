@@ -106,8 +106,7 @@ command to be run in a shell.")
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
                :features (enclose))
-        (:name fic-mode              :type emacswiki
-               :features (fic-mode))
+        ;; TODO: remove once el-get has recipe dependencies
         fringe-helper
         ;; TODO: recipe is broken
         (:name flymake-fringe-icons  :type http

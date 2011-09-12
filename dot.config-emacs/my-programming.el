@@ -83,9 +83,6 @@
              (local-set-key [(meta f6)] 'highlight-symbol-at-point)
              (local-set-key [f5] 'highlight-symbol-prev)
              (local-set-key [f6] 'highlight-symbol-next)
-             ;; Highlight TODO's and the like
-             (fic-mode t)               ; TODO: must be re-enabled before it
-             (font-lock-fontify-buffer) ;       works (like `doc-mode')
 
              ;; Show current function in the modeline
              (which-func-mode 1)
