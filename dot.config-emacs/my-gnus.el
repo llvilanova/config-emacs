@@ -43,15 +43,15 @@
 (add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:"
                                 (total-expire             .    t)
                                 (expiry-wait              .  180))) ; 6 months
-(add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:Lists\\."
-                                (subscribed               .    t)
-                                (expiry-wait              .   90))) ; 2 months
 (add-to-list 'gnus-parameters '("^[^+:]+\\+AC:"
                                 (total-expire             .    t)
                                 (expiry-wait              . 1461))) ; 4 years
 (add-to-list 'gnus-parameters '("^[^+:]+\\+BSC:"
                                 (total-expire             .    t)
                                 (expiry-wait              . 1461))) ; 4 years
+(add-to-list 'gnus-parameters '("^[^+:]+\\+[^:]*:Lists\\."
+                                (total-expire             .    t)
+                                (expiry-wait              .   90))) ; 2 months
 
 ;; Format
 (setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4L: %-23,23f%] %B%s%)\n"
@@ -108,8 +108,11 @@
 (add-to-list 'gnus-posting-styles
              '(".*"
                (signature-file signature-file-name)))
-;; Support `Mail-Followup-To'
-(setq message-subscribed-address-functions '(gnus-find-subscribed-addresses))
+;; Mailing-list support
+(setq gnus-add-to-list . t)             ; TODO: only apply to certain groups
+(add-to-list 'gnus-parameters '("^[^+:]+\\+[^:]*:Lists\\." (subscribed . t)))
+(setq message-subscribed-address-functions
+      '(gnus-find-subscribed-addresses)) ; support `Mail-Followup-To'
 
 ;; `bbdb'
 (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
