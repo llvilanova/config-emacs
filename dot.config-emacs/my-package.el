@@ -106,6 +106,9 @@ command to be run in a shell.")
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
                :features (enclose))
+        (:name fic-ext-mode
+               :after (lambda ()
+                        (add-to-list 'fic-highlighted-words "XXX")))
         ;; TODO: remove once el-get has recipe dependencies
         fringe-helper
         ;; TODO: recipe is broken

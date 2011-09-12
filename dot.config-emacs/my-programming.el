@@ -84,6 +84,9 @@
              (local-set-key [f5] 'highlight-symbol-prev)
              (local-set-key [f6] 'highlight-symbol-next)
 
+             ;; Highlight TODO's and the like
+             (fic-ext-mode 1)
+
              ;; Show current function in the modeline
              (which-func-mode 1)
 
