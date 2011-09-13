@@ -32,6 +32,7 @@
 (unless (boundp 'package-archives)
   (setq package-archives nil))
 
+
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
 (add-to-list 'load-path my-code-dir)
@@ -149,7 +150,7 @@ command to be run in a shell.")
         (:name pretty-mode           :type git
                :features (pretty-mode)
                :url "https://github.com/mattharrison/pretty-mode.git"
-               :after global-pretty-mode)
+               :after (lambda () (global-pretty-mode t)))
         (:name pylint                :type apt-get
                :after (lambda ()
                         (when (load "flymake" t)
@@ -180,6 +181,7 @@ command to be run in a shell.")
         xcscope
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (el-get 'wait)
 (my-regenerate-autoloads)
