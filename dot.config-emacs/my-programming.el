@@ -228,6 +228,75 @@
                   '(lambda ()
                      (local-set-key [(meta tab)] 'company-complete)))))
 
+
+;; `auto-complete'
+
+(defun my-ac-semantic-candidates (prefix)
+  (mapcar '(lambda (elem)
+             (cons (semantic-tag-name elem)
+                   (semantic-tag-clone elem)))
+          (semantic-analyze-possible-completions
+           (semantic-analyze-current-context))))
+
+
+(defun my-ac-semantic-doc (symbol)
+  (let* ((proto (semantic-format-tag-summarize-with-file symbol nil t))
+         (doc (semantic-documentation-for-tag symbol))
+         (res proto))
+    (when doc
+      (setq res (concat res "\n\n" doc)))
+    res))
+
+(defun my-ac-semantic-action ()
+  (require 'srecode)
+  (let* ((tag (car (oref (semantic-analyze-current-context) prefix)))
+         (class (semantic-tag-class tag))
+         (args)
+         (inserted))
+    (when (eq class 'function)
+      (save-excursion
+        (setq args (semantic-tag-function-arguments tag))
+        (insert "(")
+        (dolist (arg args)
+          (when inserted
+            (insert ", "))
+          (setq inserted t)
+          (insert (semantic-tag-name (semantic-tag-type arg)))
+          (insert " ")
+          (insert (semantic-tag-name arg)))
+        (insert ");"))
+      (forward-char 1))))
+
+(eval-after-load 'auto-complete
+  '(progn
+     (add-hook 'auto-complete-mode-hook
+               '(lambda ()
+                  (ac-define-source my-semantic
+                                    '((available . (or (require 'semantic-ia nil t)
+                                                      (require 'semantic/ia nil t)))
+                                      (candidates . (my-ac-semantic-candidates ac-prefix))
+                                      (document . my-ac-semantic-doc)
+                                      (action . my-ac-semantic-action)
+                                      (prefix . c-dot-ref)
+                                      (requires . 0)
+                                      (symbol . "m")))
+
+                  (ac-define-source my-semantic-raw
+                                    '((available . (or (require 'semantic-ia nil t)
+                                                      (require 'semantic/ia nil t)))
+                                      (candidates . (my-ac-semantic-candidates ac-prefix))
+                                      (document . my-ac-semantic-doc)
+                                      (action . my-ac-semantic-action)
+                                      (symbol . "s")))))
+
+     (my-add-hook 'my-programming-mode-hook
+                  '(lambda ()
+                     (local-set-key [(meta tab)] 'auto-complete)))
+     (my-add-hook 'c-mode-common-hook
+                  '(lambda ()
+                     (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
+                     (add-to-list 'ac-sources 'ac-source-my-semantic)))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
 
