@@ -197,35 +197,36 @@
 ;; http://nschum.de/src/emacs/company-mode
 ;; http://www.emacswiki.org/emacs/CompanyMode
 
-(setq company-idle-delay nil)           ; no idle completion
+(require 'company)
+(global-company-mode t)
 
-;; temporally disable `semantic-idle-summary-mode' when completing
-(add-hook 'company-completion-started-hook
-          '(lambda (manually) (my-set-minibuffer-helpers nil)))
-(add-hook 'company-completion-cancelled-hook
-          '(lambda (manually) (my-set-minibuffer-helpers t)))
-(add-hook 'company-completion-finished-hook
-          '(lambda (candidate) (my-set-minibuffer-helpers t)))
+(eval-after-load 'company
+  '(progn
+     ;; Temporarily disable `semantic-idle-summary-mode' when completing
+     (add-hook 'company-completion-started-hook
+               '(lambda (manually) (my-set-minibuffer-helpers -1)))
+     (add-hook 'company-completion-cancelled-hook
+               '(lambda (manually) (my-set-minibuffer-helpers 1)))
+     (add-hook 'company-completion-finished-hook
+               '(lambda (candidate) (my-set-minibuffer-helpers 1)))
 
-;; ;; Show documentation buffer when selecting a completion
-;; ;; taken from `company-show-doc-buffer'
-;; (add-hook 'company-completion-finished-hook
-;;           '(lambda (candidate)
-;;              (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
-;;                (if doc-buffer
-;;                    (progn
-;;                      (with-current-buffer doc-buffer
-;;                        (goto-char (point-min)))
-;;                      (display-buffer doc-buffer t))))))
+     ;; Special treatment for documentation buffer
+     (my-add-helper-buffer "*Company meta-data*")
 
-;; Special treatment for documentation buffer
-(my-add-helper-buffer "*Company meta-data*")
+     ;; ;; Show documentation buffer when selecting a completion
+     ;; ;; taken from `company-show-doc-buffer'
+     ;; (add-hook 'company-completion-finished-hook
+     ;;           '(lambda (candidate)
+     ;;              (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
+     ;;                (if doc-buffer
+     ;;                    (progn
+     ;;                      (with-current-buffer doc-buffer
+     ;;                        (goto-char (point-min)))
+     ;;                      (display-buffer doc-buffer t))))))
 
-(my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                (company-mode 1)
-                (local-set-key [(meta tab)] 'company-complete)))
-
+     (my-add-hook 'my-programming-mode-hook
+                  '(lambda ()
+                     (local-set-key [(meta tab)] 'company-complete)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
