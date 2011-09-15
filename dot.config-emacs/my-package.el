@@ -22,7 +22,10 @@
 
 
 ;; `package' auto-installation
-(unless (require 'package nil t)
+;; TODO: delete once emacs24 is released
+(add-to-list 'load-path (path el-get-dir "package"))
+(if (require 'package nil t)
+    (el-get-init "package")
   ;; TODO: delete once emacs24 is released
   (setq el-get-sources '(package))
   (el-get 'sync)
