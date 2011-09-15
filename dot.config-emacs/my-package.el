@@ -137,6 +137,9 @@ command to be run in a shell.")
         google-weather
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
+        (:name ido-settings          :type http
+               :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"
+               :features (ido-settings))
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
