@@ -11,10 +11,8 @@
 (my-add-hook
  'my-writing-mode-hook
  '(lambda ()
-    ;; (longlines-mode 1)                  ; show virtual line breaks
-    (auto-fill-mode 1)                  ; auto-wrap lines
-    ;; (refill-mode 1)                     ; keep paragraph filled
-    (local-set-key [(control c) (q)] 'refill-mode)
+    (setq fill-column 1000000000)       ; (hopefully) virtually infinite
+    (visual-line-mode 1)                ; do not break lines in file (better VC)
 
     (setq paragraph-start (concat "\\(" paragraph-start "\\|^[ \\t]*\\*\\)"))
 
