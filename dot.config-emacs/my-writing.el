@@ -2,14 +2,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup activation hooks (`my-writing-mode-hook')
-(setq my-writing-mode-hook nil)
-(add-hook 'text-mode-hook '(lambda () (run-hooks 'my-writing-mode-hook)))
+(my-define-hook 'my-writing-mode-hook '(text-mode-hook))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
 
-(add-hook
+(my-add-hook
  'my-writing-mode-hook
  '(lambda ()
     ;; (longlines-mode 1)                  ; show virtual line breaks
@@ -42,7 +41,7 @@
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
-(add-hook 'my-writing-mode-hook
+(my-add-hook 'my-writing-mode-hook
           '(lambda ()
              (local-set-key [(control c) (w)] 'wordnet-search)))
 (my-add-helper-buffer "*WordNet*")
