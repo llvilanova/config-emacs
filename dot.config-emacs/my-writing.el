@@ -27,15 +27,11 @@
       ispell-extra-args '("--sug-mode=ultra"))
 
 ;; `flyspell'
-;; (add-hook 'my-writing-mode-hook
-;;           '(lambda ()
-;;              (flyspell-mode 1)
-;;              ;; (flyspell-buffer)
-;;              ))
 (add-hook 'flyspell-mode-hook
           '(lambda ()
              (auto-dictionary-mode 1)
              (adict-guess-dictionary)))
+(my-add-hook 'my-writing-mode-hook 'flyspell-mode)
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
