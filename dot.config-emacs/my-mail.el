@@ -76,6 +76,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc
 (setq message-from-style 'angles)
+(add-hook 'message-mode-hook '(lambda () (setq fill-column 80)))
 
 
 (provide 'my-mail)
