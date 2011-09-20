@@ -20,7 +20,6 @@
 (my-add-hook
  'my-latex-mode-hook
  '(lambda ()
-    (setq fill-column 100)
     ;; TODO: seems to be broken
     ;; (predictive-mode 1)                 ; predictive text
     (LaTeX-math-mode 1)                 ; nice math insertion menu
