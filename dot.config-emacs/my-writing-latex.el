@@ -3,10 +3,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Setup activation hooks (`my-latex-mode-hook')
-(setq my-latex-mode-hook nil)
-(add-hook 'LaTeX-mode-hook
-          '(lambda ()
-             (run-hooks 'my-writing-mode-hook 'my-latex-mode-hook)))
+(my-define-hook 'my-latex-mode-hook '(LaTeX-mode-hook))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,7 +17,7 @@
       TeX-fold-auto t)                  ; auto-fold new macros
 (setq-default TeX-master nil)           ; query for master file
 
-(add-hook
+(my-add-hook
  'my-latex-mode-hook
  '(lambda ()
     (setq fill-column 100)
@@ -38,7 +35,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bibliography
-(add-hook
+(my-add-hook
  'my-latex-mode-hook
  '(lambda ()
     (turn-on-reftex)                    ; activate RefTeX...
@@ -53,7 +50,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Preview
-(add-hook
+(my-add-hook
  'my-latex-mode-hook
  '(lambda ()
     (setq preview-LaTeX-command         ; command for starting a preview
@@ -71,7 +68,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compilation
-(add-hook
+(my-add-hook
  'my-latex-mode-hook
  '(lambda ()
     (add-to-list 'TeX-command-list '("Makefile PDF" "make %s.pdf"
@@ -88,7 +85,7 @@
 (push
  '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
    1 2 3 5) flymake-err-line-patterns)
-(add-hook 'my-latex-mode-hook 'flymake-mode)
+(my-add-hook 'my-latex-mode-hook 'flymake-mode)
 
 
 (provide 'my-writing-latex)
