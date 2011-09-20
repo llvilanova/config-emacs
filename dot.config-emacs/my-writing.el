@@ -54,11 +54,11 @@
     (predictive-create-dict 'my-dict-english my-dict-english nil nil)
     (predictive-save-dict my-dict-english)))
 
-(setq-default predictive-auto-add-to-dict t) ; add new words to first dict
 (setq predictive-main-dict '(my-dict-english dict-english)
       predictive-auto-learn t           ; update frequency counts
-      predictive-add-to-dict-ask t      ; ask for new words
-      predictive-which-dict t
+      predictive-auto-add-to-dict nil   ; should add new words to 1st dict ...
+      predictive-add-to-dict-ask t      ; ... but ask before adding
+      predictive-which-dict-mode t      ; show current dict in mode line
       auto-completion-syntax-alist '(accept . word) ; non-word char accepts
       completion-auto-show nil)         ; no auto completion-ui
 
