@@ -111,12 +111,7 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (lambda () (add-to-list 'fic-highlighted-words "XXX")))
-        ;; TODO: remove once el-get has recipe dependencies
-        fringe-helper
-        ;; TODO: recipe is broken
-        (:name flymake-fringe-icons  :type http
-               :url "https://gist.github.com/raw/759130/a85ebbc6bfc5fbab54677f4236e902b2da7bf41f/flymake-fringe-icons.el"
-               :features flymake-fringe-icons)
+        flymake-fringe-icons
         (:name flymake-lua           :type http
                :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
                :description "Flymake support for Lua."
