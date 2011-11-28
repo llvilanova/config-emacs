@@ -142,11 +142,8 @@ command to be run in a shell.")
                :after (require 'magit-stgit))
         ;; multi-term
         (:name org-mode              :type apt-get)
-        (:name predictive            :type git
-               :url "http://www.dr-qubit.org/git/predictive.git"
+        (:name predictive
                :build ("make")
-               ;; Does not generate the `dir' file, so no info will appear on the menu
-               :info "."
                :load-path ("." "latex" "texinfo" "html")
                :after (lambda ()
                         (autoload 'predictive-mode "predictive" nil t)
