@@ -22,18 +22,12 @@
 
 
 ;; `package' auto-installation
-;; TODO: delete once emacs24 is released
-(add-to-list 'load-path (path el-get-dir "package"))
-(if (require 'package nil t)
-    (el-get-init "package")
-  ;; TODO: delete once emacs24 is released
-  (setq el-get-sources '(package))
-  (el-get 'sync)
-  ;; update list of available packages for `package'
+(el-get 'wait '(package24))
+;; TODO: handle URL bug in recipe (for marmalade)
+(setq package-archives (delq nil (mapcar (lambda (x) (if (string= (car x) "marmalade") nil x)) package-archives)))
+(setq package-archives (append package-archives '(("marmalade" . "http://marmalade-repo.org/packages/"))))
+(unless (file-exists-p (path package-user-dir "archives"))
   (package-refresh-contents))
-;; TODO: delete once emacs24 is released
-(unless (boundp 'package-archives)
-  (setq package-archives nil))
 
 
 ;; local site-lisp
