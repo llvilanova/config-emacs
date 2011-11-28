@@ -16,9 +16,7 @@
         (user-emacs-directory my-config-dir))
     (with-current-buffer buffer
       (end-of-buffer)
-      (eval-print-last-sexp)))
-  ;; TODO: hack around some undefined symbols just after installation
-  (load-file (path el-get-dir "el-get" "el-get.el")))
+      (eval-print-last-sexp))))
 
 
 ;; `package' auto-installation
@@ -189,7 +187,11 @@ command to be run in a shell.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(el-get 'wait)
+(setq my-packages
+      (append
+       '(el-get)
+       (mapcar 'el-get-source-name el-get-sources)))
+(el-get 'wait my-packages)
 (my-regenerate-autoloads)
 
 (provide 'my-package)
