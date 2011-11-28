@@ -99,6 +99,9 @@
 (add-hook 'gnus-part-display-hook 'gnus-treat-from-gravatar)
 (add-hook 'gnus-part-display-hook 'gnus-treat-mail-gravatar)
 
+;; Hide article parts
+(setq gnus-treat-hide-signature t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compose
