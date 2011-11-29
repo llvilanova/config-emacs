@@ -62,7 +62,7 @@
       auto-completion-syntax-alist '(accept . word) ; non-word char accepts
       completion-auto-show nil)         ; no auto completion-ui
 
-(my-add-hook 'my-writing-mode-hook 'predictive-mode)
+;; (my-add-hook 'my-writing-mode-hook 'predictive-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
