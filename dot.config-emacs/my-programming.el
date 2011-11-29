@@ -129,11 +129,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Makefile
 
-(add-hook 'makefile-mode-hook
-          '(lambda ()
-            ;; Highlight white spaces
-            (delq (set-local whitespace-style) 'newline-mark)
-            (whitespace-mode 1)))
+;; Highlight white spaces
+(add-hook 'makefile-mode-hook 'whitespace-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
