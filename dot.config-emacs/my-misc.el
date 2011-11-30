@@ -76,10 +76,12 @@ even when ECB is not active."
         my-helper-buffers))
 
 ;; (add-hook 'ecb-activate-hook 'my-setup-helper-buffers)
-(add-hook 'after-init-hook '(lambda ()
-                              (require 'ecb-layout)
-                              (ecb-initialize-layout)
-                              (my--setup-helper-buffers)))
+
+;; TODO: unused and not working
+;; (add-hook 'after-init-hook '(lambda ()
+;;                               (require 'ecb-layout)
+;;                               (ecb-initialize-layout)
+;;                               (my--setup-helper-buffers)))
 
 
 (provide 'my-misc)
