@@ -77,8 +77,6 @@
 (delete-selection-mode t)               ; delete the selection with a keypress
 (cua-selection-mode t)                  ; enable CUA behaviour without C-[zxvc]
 
-(setq x-select-enable-clipboard t)      ; copy & paste
-
 (setq search-highlight t                ; highlight when searching...
   query-replace-highlight t             ; ...and replacing
   isearch-allow-scroll t)
