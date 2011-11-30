@@ -5,8 +5,8 @@
 ;; Semantic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; show summary of symbol under point
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; ;; show summary of symbol under point
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;; display header with FQN of symbol under point
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
 ;; decore tags based on their attributes
