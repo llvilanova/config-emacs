@@ -79,6 +79,9 @@
 ;; ;; Make scripts executable on Save (saves having to do the chmod every time)
 ;; (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+;; Use year ranges instead of a (possibly) long list of years
+(setq copyright-year-ranges t)
+
 (my-add-hook 'my-programming-mode-hook
           '(lambda ()
              (flyspell-prog-mode)       ; flyspell for comments and strings
