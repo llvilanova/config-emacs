@@ -201,6 +201,33 @@
 
 (eval-after-load 'company
   '(progn
+
+     (defun company-semantic (command &optional arg &rest ignored)
+       "A `company-mode' completion back-end using CEDET Semantic."
+       (interactive (list 'interactive))
+       (case command
+         ('interactive (company-begin-backend 'company-semantic))
+         ('prefix (and (memq major-mode company-semantic-modes)
+                     (semantic-active-p)
+                     (not (company-in-string-or-comment))
+                     (or (company-semantic--grab) 'stop)))
+         ;; ('candidates (if (and (equal arg "")
+         ;;                     (looking-back " "))
+         ;;                  (company-semantic-completions-raw arg)
+         ;;                (company-semantic-completions arg)))
+         ('candidates (or (company-semantic-completions arg)
+                         (company-semantic-completions-raw arg)))
+         ('meta (funcall company-semantic-metadata-function
+                         (assoc arg company-semantic--current-tags)))
+         ('doc-buffer (company-semantic-doc-buffer
+                       (assoc arg company-semantic--current-tags)))
+         ;; because "" is an empty context and doesn't return local variables
+         ('no-cache (equal arg ""))
+         ('location (let ((tag (assoc arg company-semantic--current-tags)))
+                      (when (buffer-live-p (semantic-tag-buffer tag))
+                        (cons (semantic-tag-buffer tag)
+                              (semantic-tag-start tag)))))))
+
      ;; Temporarily disable `semantic-idle-summary-mode' when completing
      (add-hook 'company-completion-started-hook
                '(lambda (manually) (my-set-minibuffer-helpers -1)))
