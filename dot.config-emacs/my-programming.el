@@ -7,12 +7,14 @@
 
 ;; show summary of symbol under point
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;; display header with FQN of symbol under point
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
 ;; decore tags based on their attributes
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 ;; highlight current tag
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;; display header for topmost tag
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+;; ;; display header for topmost tag
+;; (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ;; C-x B => MRU list of edited tags
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 
