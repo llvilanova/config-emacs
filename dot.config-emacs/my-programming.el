@@ -7,8 +7,6 @@
 
 ;; ;; show summary of symbol under point
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-;; display header with FQN of symbol under point
-(global-semantic-idle-breadcrumbs-mode 1)
 ;; decore tags based on their attributes
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 ;; highlight current tag
@@ -19,6 +17,10 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 
 (semantic-mode 1)                       ; global minor mode
+
+;; TODO: not available through `semantic-default-submodes'
+;; display header with FQN of symbol under point
+(global-semantic-idle-breadcrumbs-mode 1)
 
 ;; Let the user temporarily disable some minibuffer output
 (setq my--enable-semantic-idle-summary-idle-function t)
