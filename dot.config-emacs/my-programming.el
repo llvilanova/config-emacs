@@ -8,7 +8,7 @@
 ;; ;; show summary of symbol under point
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;; display header with FQN of symbol under point
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
+(global-semantic-idle-breadcrumbs-mode 1)
 ;; decore tags based on their attributes
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 ;; highlight current tag
