@@ -198,6 +198,9 @@ SCHEDULED: <%(org-capture-cfp-date \"Acceptance notification: \" \"notification\
     "* %U %^{Description}\n%c\n%x"
     :immediate-finish t)
 
+   ("A" "Appointment"                     entry (file+headline "Personal.org"
+                                                               "Tasques")
+    "* %^{Appointment}T %?")
    ("S" "Schedule"                        entry (file+headline "Personal.org"
                                                                "Tasques")
     "* %?\nSCHEDULED: %^{Schedule}T")
