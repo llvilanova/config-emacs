@@ -40,10 +40,19 @@
 ;; Windows
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Scrolling
 (setq scroll-margin 1                   ; do smooth scrolling, ...
       scroll-conservatively 100000      ; ... the defaults ...
       scroll-up-aggressively 0.01       ; ... are very ...
       scroll-down-aggressively 0.01)    ; ... annoying
+
+;; Window sizes
+(setq window-combination-resize t       ; try to be fair creating windows ...
+      window-combination-limit t)       ; ... as well as deleting them
+
+(global-set-key [(meta f10)] 'maximize-window)
+(global-set-key [(control f10)] 'minimize-window)
+      
 
 (put 'narrow-to-region 'disabled nil)   ; enable region narrowing
 (put 'erase-buffer 'disabled nil)
