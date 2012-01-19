@@ -163,6 +163,7 @@ command to be run in a shell.")
                           (add-to-list 'flymake-allowed-file-name-masks
                                        '("\\.py\\'" my--flymake-pylint-init)))))
         (:name smex                  :type elpa)
+        (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
         (:name undo-tree
