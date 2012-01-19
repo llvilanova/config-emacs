@@ -133,7 +133,7 @@ command to be run in a shell.")
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
-        (:name magit
+        (:name magit                 :type apt-get
                :after (require 'magit-stgit))
         ;; multi-term
         (:name org-mode              :type apt-get)
