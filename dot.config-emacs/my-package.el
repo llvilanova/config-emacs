@@ -134,7 +134,10 @@ command to be run in a shell.")
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
         (:name magit                 :type apt-get
-               :after (require 'magit-stgit))
+               :after (lambda ()
+                        ;; For some reason, the autoload is not working
+                        (require 'magit-stgit)
+                        (add-hook 'magit-mode-hook 'turn-on-magit-stgit)))
         ;; multi-term
         (:name org-mode              :type apt-get)
         (:name predictive
