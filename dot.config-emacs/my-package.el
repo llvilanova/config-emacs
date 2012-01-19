@@ -133,12 +133,12 @@ command to be run in a shell.")
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
+        magithub
         (:name magit                 :type apt-get
                :after (lambda ()
                         ;; For some reason, the autoload is not working
                         (require 'magit-stgit)
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)))
-        (:name magithub)
         ;; multi-term
         (:name org-mode              :type apt-get)
         (:name predictive
