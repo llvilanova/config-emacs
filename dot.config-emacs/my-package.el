@@ -138,6 +138,7 @@ command to be run in a shell.")
                         ;; For some reason, the autoload is not working
                         (require 'magit-stgit)
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)))
+        (:name magithub)
         ;; multi-term
         (:name org-mode              :type apt-get)
         (:name predictive
