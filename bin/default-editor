@@ -1,0 +1,19 @@
+#!/bin/sh
+# Set up a default editor for the shell
+# Use Emacs if already open, and vi in other cases (including fallback)
+
+# Note that this will set the default emacsclient, which may not be what you
+# want if multiple versions of emacs are available. In that case, you can put
+# the absolute path of the emacsclient that needs to be used.
+EMACS_EDITOR=`which emacsclient`
+
+if [ -x "$EMACS_EDITOR" ]; then
+    if [ -n "$DISPLAY" ]; then
+        EMACS_ARGS=-c
+    else
+        EMACS_ARGS=-t
+    fi
+    $EMACS_EDITOR $EMACS_ARGS -a vi "$@"
+else
+    vi "$@"                     # Never fails!
+fi

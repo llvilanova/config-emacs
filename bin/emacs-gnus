@@ -1,0 +1,2 @@
+#!/bin/sh
+emacs -T Gnus -gnus
