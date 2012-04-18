@@ -69,6 +69,32 @@
 ;; Undo / redo window configurations
 (winner-mode 1)
 
+;; Quickly change buffer organization
+(setq my--swapping-buffer nil)
+(setq my--swapping-window nil)
+(defun my-swap-buffers-in-windows ()
+  "Swap buffers between two windows"
+  (interactive)
+  (if (and my--swapping-window
+         my--swapping-buffer)
+      (let ((this-buffer (current-buffer))
+            (this-window (selected-window)))
+        (if (and (window-live-p my--swapping-window)
+               (buffer-live-p my--swapping-buffer))
+            (progn (switch-to-buffer my--swapping-buffer)
+                   (select-window my--swapping-window)
+                   (switch-to-buffer this-buffer)
+                   (select-window this-window)
+                   (message "Swapped buffers."))
+          (message "Old buffer/window killed.  Aborting."))
+        (setq my--swapping-buffer nil)
+        (setq my--swapping-window nil))
+    (progn
+      (setq my--swapping-buffer (current-buffer))
+      (setq my--swapping-window (selected-window))
+      (message "Buffer and window marked for swapping."))))
+(define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Buffers
