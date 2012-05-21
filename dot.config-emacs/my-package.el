@@ -97,7 +97,7 @@ command to be run in a shell.")
                :depends (pos-tip fuzzy))
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
-        (:name company               :type elpa)
+        ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http

@@ -203,8 +203,8 @@
 ;; http://nschum.de/src/emacs/company-mode
 ;; http://www.emacswiki.org/emacs/CompanyMode
 
-(require 'company)
-(global-company-mode t)
+;; (require 'company)
+;; (global-company-mode t)
 
 (eval-after-load 'company
   '(progn
