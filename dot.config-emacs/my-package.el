@@ -22,8 +22,15 @@
 ;; `package' auto-installation
 (el-get 'wait '(package24))
 ;; TODO: handle URL bug in recipe (for marmalade)
-(setq package-archives (delq nil (mapcar (lambda (x) (if (string= (car x) "marmalade") nil x)) package-archives)))
-(setq package-archives (append package-archives '(("marmalade" . "http://marmalade-repo.org/packages/"))))
+(setq package-archives
+      (delq nil (mapcar (lambda (x) (if (string= (car x) "marmalade") nil x))
+                      package-archives)))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; additional repositiories
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; first-time initialization
 (unless (file-exists-p (path package-user-dir "archives"))
   (package-refresh-contents))
 
