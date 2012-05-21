@@ -26,7 +26,7 @@
                                           activate)
     "Switch input focus if necessary."
     (if (and my-framepop-with-focus
-             (eq t (frame-visible-p framepop-frame)))
+           (eq t (frame-visible-p framepop-frame)))
         (select-frame-set-input-focus framepop-frame)))
   (defadvice framepop-display-buffer (after my-framepop-display-buffer
                                             activate)
@@ -52,7 +52,7 @@
 
 (global-set-key [(meta f10)] 'maximize-window)
 (global-set-key [(control f10)] 'minimize-window)
-      
+
 
 (put 'narrow-to-region 'disabled nil)   ; enable region narrowing
 (put 'erase-buffer 'disabled nil)
@@ -113,8 +113,8 @@
 (cua-selection-mode t)                  ; enable CUA behaviour without C-[zxvc]
 
 (setq search-highlight t                ; highlight when searching...
-  query-replace-highlight t             ; ...and replacing
-  isearch-allow-scroll t)
+      query-replace-highlight t         ; ...and replacing
+      isearch-allow-scroll t)
 
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
@@ -314,8 +314,8 @@ directory, select directory. Lastly the file is opened."
 
 ;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
 (setq time-stamp-active t               ; do enable time-stamps
- time-stamp-line-limit 10               ; check first 10 buffer lines
- time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
+      time-stamp-line-limit 10               ; check first 10 buffer lines
+      time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; `desktop': maintain per-directory session information
