@@ -23,6 +23,7 @@
 (bbdb-initialize)
 (setq
  bbdb-offer-save 1                      ; 1 means save-without-asking
+ bbdb-notice-auto-save-file t           ; revert if externally modified
 
  bbdb-expand-mail-aliases t             ; use the `mail-alias' field
 
