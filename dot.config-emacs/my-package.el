@@ -171,6 +171,7 @@ command to be run in a shell.")
                               (list "epylint" (list local-file))))
                           (add-to-list 'flymake-allowed-file-name-masks
                                        '("\\.py\\'" my--flymake-pylint-init)))))
+        python-mode
         (:name smex                  :type elpa)
         (:name sml-modeline          :type elpa)
         switch-window
