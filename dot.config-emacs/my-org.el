@@ -183,9 +183,7 @@
 ** Abstract
 DEADLINE: <%(org-capture-cfp-date \"Abstract submission: \" \"abstract\" \"submission\") ++1y -1w>
 ** Paper
-DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6m>
-** Acceptance
-SCHEDULED: <%(org-capture-cfp-date \"Acceptance notification: \" \"notification\") ++1y>"
+DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6m>"
     )
 
    ;; personal templates
