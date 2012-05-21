@@ -84,7 +84,7 @@
 
 (my-add-hook 'my-programming-mode-hook
           '(lambda ()
-             (flyspell-prog-mode)       ; flyspell for comments and strings
+             ;; (flyspell-prog-mode)       ; flyspell for comments and strings
 
              ;; Highlight parentheses around point
              (highlight-parentheses-mode 1)
