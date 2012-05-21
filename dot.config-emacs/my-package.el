@@ -125,8 +125,8 @@ command to be run in a shell.")
                :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
                :post-init (lambda ()
                             (add-hook 'lua-mode-hook 'flymake-lua-load)))
-        (:name fuzzy                 :type svn
-               :url "http://dea.googlecode.com/svn/trunk/lisps/auto-complete"
+        (:name fuzzy                 :type git
+               :url "https://github.com/m2ym/fuzzy-el"
                :features (fuzzy)
                :after (lambda () (turn-on-fuzzy-isearch)))
         (:name gdb-shell             :type elpa)
