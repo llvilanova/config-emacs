@@ -11,7 +11,7 @@
 (my-add-hook
  'my-writing-mode-hook
  '(lambda ()
-    (setq fill-column 1000000000)       ; (hopefully) virtually infinite
+    (setq fill-column 100000)           ; (hopefully) virtually infinite
     (visual-line-mode 1)                ; do not break lines in file (better VC)
 
     (setq paragraph-start (concat "\\(" paragraph-start "\\|^[ \\t]*\\*\\)"))
