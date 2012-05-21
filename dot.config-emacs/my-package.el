@@ -181,6 +181,7 @@ command to be run in a shell.")
         (:name unipoint              :type git
                :features (unipoint)
                :url "https://github.com/apgwoz/unipoint.git")
+        (:name yasnippet             :type elpa)
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name wrap-region           :type http
