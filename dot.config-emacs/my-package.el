@@ -148,6 +148,7 @@ command to be run in a shell.")
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)))
         ;; multi-term
         (:name org-mode              :type apt-get)
+        (:name pos-tip               :type elpa)
         (:name predictive
                :build ("make")
                :load-path ("." "latex" "texinfo" "html")
