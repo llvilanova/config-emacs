@@ -102,6 +102,31 @@
 ;; Hide article parts
 (setq gnus-treat-hide-signature t)
 
+(defvar my-gnus-article-apply-command-history nil)
+(defun my-gnus-article-apply-command (command)
+  (interactive
+   (list (read-string "Run command (%f: message file): "
+                      (gnus-group-get-parameter gnus-newsgroup-name
+                                                'my-gnus-article-apply-command)
+                      'my-gnus-article-apply-command-history)))
+  (unless (string= command
+                   (gnus-group-get-parameter gnus-newsgroup-name
+                                             'my-gnus-article-apply-command))
+    (add-to-list 'my-gnus-article-apply-command-history command))
+  (let ((file (make-temp-file "gnus-article-"))
+        (buf (get-buffer-create " *my-gnus-article-apply-command*")))
+    (save-window-excursion
+      (unless (eq major-mode 'gnus-article-mode)
+        (gnus-summary-select-article-buffer))
+      (write-region (point-min) (point-max) file)
+      (with-temp-buffer
+        (insert command)
+        (format-replace-strings (list (cons "%f" file))
+                                nil (point-min) (point-max))
+        (setq command (buffer-substring (point-min) (point-max)))))
+    (display-buffer buf)
+    (shell-command command buf buf)
+    (delete-file file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compose
