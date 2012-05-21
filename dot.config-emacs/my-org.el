@@ -99,7 +99,7 @@
 (defun my-appt-popup (min-to-app new-time msg)
   (my-popup (format "Appointment in %s minute(s)" min-to-app) msg
             "/usr/share/icons/hicolor/32x32/apps/gnome-panel-clock.png"
-            "/usr/share/sounds/ekiga/ring.wav"))
+            "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"))
 (setq appt-disp-window-function (function my-appt-popup))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
