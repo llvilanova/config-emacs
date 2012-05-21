@@ -93,12 +93,8 @@ command to be run in a shell.")
                         (setq ack-executable "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
-        ;; (:name auto-complete
-        ;;        :after
-        ;;        '(lambda ()
-        ;;           (require 'pos-tip)
-        ;;           (setq ac-dwim t
-        ;;                 ac-use-quick-help t)))
+        (:name auto-complete         :type elpa
+               :depends (pos-tip fuzzy))
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         (:name company               :type elpa)
