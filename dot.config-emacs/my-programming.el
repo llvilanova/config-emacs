@@ -100,6 +100,7 @@
              ;; (which-function-mode 1)    ; show current tag in modeline
 
              ;; Update the year in copyright message
+             (add-hook 'before-save-hook 'copyright-fix-years)
              (add-hook 'before-save-hook 'copyright-update)
 
              ;; Auto-indent new line
