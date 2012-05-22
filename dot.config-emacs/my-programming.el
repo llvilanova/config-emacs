@@ -335,13 +335,15 @@
                                       (candidates . (my-ac-semantic-candidates ac-prefix))
                                       (document . my-ac-semantic-doc)
                                       (action . my-ac-semantic-action)
-                                      (symbol . "s")))))
+                                      (symbol . "s")))
+
+                  (ac-set-trigger-key "TAB")
+                  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+                  (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
+                  (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))
+
      (my-add-hook 'my-programming-mode-hook
                   '(lambda ()
-                     (ac-set-trigger-key "TAB")
-                     (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-                     (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-                     (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
                      (when (semantic-active-p)
                        (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
                        (add-to-list 'ac-sources 'ac-source-my-semantic))))
