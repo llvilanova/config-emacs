@@ -51,7 +51,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
 (require 'semantic/sb)                  ; display semantic tags in SpeedBar
-;; (which-function-mode 1)                 ; show current tag in modeline
 (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 (semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
 (semantic-toggle-decoration-style "semantic-decoration-on-protected-members" t)
@@ -98,8 +97,7 @@
              ;; Highlight TODO's and the like
              (fic-ext-mode 1)
 
-             ;; Show current function in the modeline
-             (which-func-mode 1)
+             ;; (which-function-mode 1)    ; show current tag in modeline
 
              ;; Update the year in copyright message
              (add-hook 'before-save-hook 'copyright-update)
