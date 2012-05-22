@@ -346,6 +346,7 @@
                      (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))
      (my-add-hook 'c-mode-common-hook
                   '(lambda ()
+                     (add-to-list 'ac-sources 'ac-source-filename)
                      (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
                      (add-to-list 'ac-sources 'ac-source-my-semantic)))))
 
