@@ -128,6 +128,24 @@
     (shell-command command buf buf)
     (delete-file file)))
 
+(defun my-gnus-patch-process (tag)
+  (interactive)
+  (unless (eq major-mode 'message-mode)
+    (error (format "Unsupported mode %s" major-mode)))
+  (save-excursion
+    (goto-char (point-min))
+    (search-forward "Signed-off-by")
+    (when (eq (point) 0)
+      (error "Could not find where to insert the tag"))
+    (search-forward "---")
+    (beginning-of-line)
+    (insert (format "\n%s: %s <%s>\n\n\n"
+                    tag user-full-name user-mail-address))))
+
+(defun my-gnus-patch-review ()
+  (interactive)
+  (my-gnus-patch-process "Reviewed-by"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compose
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
