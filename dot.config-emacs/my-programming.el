@@ -51,7 +51,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
 (require 'semantic/sb)                  ; display semantic tags in SpeedBar
-(which-func-mode 1)                     ; show current tag in modeline
+;; (which-function-mode 1)                 ; show current tag in modeline
 (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 (semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
 (semantic-toggle-decoration-style "semantic-decoration-on-protected-members" t)
