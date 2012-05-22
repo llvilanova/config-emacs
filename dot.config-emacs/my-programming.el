@@ -305,6 +305,10 @@
                 ", ")
                ")$0")))))
 
+(defun my-ac-source-semantic-enable ()
+  (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
+  (add-to-list 'ac-sources 'ac-source-my-semantic))
+
 (eval-after-load 'auto-complete
   '(progn
      (ac-flyspell-workaround)
@@ -342,14 +346,10 @@
                   (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
                   (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))
 
-     (my-add-hook 'my-programming-mode-hook
-                  '(lambda ()
-                     (when (semantic-active-p)
-                       (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
-                       (add-to-list 'ac-sources 'ac-source-my-semantic))))
      (my-add-hook 'c-mode-common-hook
                   '(lambda ()
-                     (add-to-list 'ac-sources 'ac-source-filename)))))
+                     (add-to-list 'ac-sources 'ac-source-filename)
+                     (my-ac-source-semantic-enable)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
