@@ -311,6 +311,7 @@
 
 (eval-after-load 'auto-complete
   '(progn
+     (require 'auto-complete-config)
      (ac-flyspell-workaround)
      (setq ac-dwim t                    ; be clever on TAB/RET
            ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
@@ -349,7 +350,9 @@
      (my-add-hook 'c-mode-common-hook
                   '(lambda ()
                      (add-to-list 'ac-sources 'ac-source-filename)
-                     (my-ac-source-semantic-enable)))))
+                     (my-ac-source-semantic-enable)))
+
+     (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
