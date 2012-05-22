@@ -343,12 +343,13 @@
                      (ac-set-trigger-key "TAB")
                      (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
                      (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-                     (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))
+                     (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)
+                     (when (semantic-active-p)
+                       (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
+                       (add-to-list 'ac-sources 'ac-source-my-semantic))))
      (my-add-hook 'c-mode-common-hook
                   '(lambda ()
-                     (add-to-list 'ac-sources 'ac-source-filename)
-                     (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
-                     (add-to-list 'ac-sources 'ac-source-my-semantic)))))
+                     (add-to-list 'ac-sources 'ac-source-filename)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
