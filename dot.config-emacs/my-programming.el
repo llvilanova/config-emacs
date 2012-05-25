@@ -284,7 +284,7 @@
     res))
 
 (defun my-ac-semantic-action ()
-  (let* ((tag (car (oref (semantic-analyze-current-context) prefix)))
+  (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
          (class (semantic-tag-class tag))
          (args)
          (arg-type)
