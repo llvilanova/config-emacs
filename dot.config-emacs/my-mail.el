@@ -11,6 +11,29 @@
 
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
+(setq my-gnus-start-or-hide-windows nil)
+(defun my-gnus-start-or-hide ()
+  (interactive)
+  (let ((found nil))
+    (mapc '(lambda (window)
+             (let* ((buf (window-buffer window))
+                    (mode (buffer-local-value 'major-mode buf))
+                    (name (symbol-name mode)))
+               (message "%s :: %s" buf name)
+               (if (string-match "^gnus-" name)
+                   (setq found t))))
+          (window-list))
+    (message "-> %s" found)
+    (if found
+        (progn
+          (gnus-group-suspend)
+          (if my-gnus-start-or-hide-windows
+              (set-window-configuration my-gnus-start-or-hide-windows))
+          (setq my-gnus-start-or-hide-windows nil))
+      (setq my-gnus-start-or-hide-windows (current-window-configuration))
+      (delete-other-windows)
+      (gnus))))
+(global-set-key [f12] 'my-gnus-start-or-hide)
 
 ;; Wanderlust
 (setq wl-init-file (path my-config-dir "my-wl.el"))
