@@ -124,6 +124,7 @@
  cpp-known-face 'highlight)
 (add-hook 'c-mode-common-hook
           '(lambda ()
+             (setq c-electric-pound-behavior '(alignleft))
              (c-toggle-auto-newline 1)  ; auto-newline on semi-colon, etc.
              (c-toggle-hungry-state 1)  ; hungry backspace
              ;; Fixup for auto-added spaces on braces
