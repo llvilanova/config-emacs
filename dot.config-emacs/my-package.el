@@ -114,7 +114,6 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (lambda () (add-to-list 'fic-highlighted-words "XXX")))
-        ;; flymake-fringe-icons
         (:name flymake-lua           :type http
                :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
                :description "Flymake support for Lua."
