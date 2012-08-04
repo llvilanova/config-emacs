@@ -3,58 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Color theming
 
-(set-variable 'color-theme-is-global t)
-(defun my-color-theme ()
-  (interactive)
-  (color-theme-install
-   '(my-color-theme
-     ;; Frame parameters
-     ((background-color . "black")
-      (background-mode . dark)
-
-      (foreground-color . "#c0c0c0")
-
-      (border-color . "#888a85")
-      (cursor-color . "#fce94f")
-      ;; (mouse-color . "#8ae234")
-      )
-
-     ;; ;; Variable settings
-     ;; ((help-highlight-face . underline)
-     ;;  (ibuffer-dired-buffer-face . font-lock-function-name-face)
-     ;;  (ibuffer-help-buffer-face . font-lock-comment-face)
-     ;;  (ibuffer-hidden-buffer-face . font-lock-warning-face)
-     ;;  (ibuffer-occur-match-face . font-lock-warning-face) 
-     ;;  (ibuffer-read-only-buffer-face . font-lock-type-face)
-     ;;  (ibuffer-special-buffer-face . font-lock-keyword-face)
-     ;;  (ibuffer-title-face . font-lock-type-face))
-     ()
-
-     ;; Outer widgets
-     (mode-line ((t (:foreground "#c0c0c0" :background "#444444"
-                                 :box (:line-width 1 :color nil :style released-button)))))
-     (mode-line-inactive ((t (:foreground "#a0a0a0" :background "#222222"
-                                          :box (:line-width 1 :color nil :style released-button)))))
-     (mode-line-buffer-id ((t (:bold t :foreground "orange" :background nil))))
-
-     ;; General text editing area
-     (highlight ((t (:background "#283242" :foreground nil))))
-
-     ;; Specifics
-     (sml-modeline-end-face ((t (:background "#000000"))))
-     (sml-modeline-vis-face ((t (:background "#555555"))))
-     (py-XXX-tag-face ((t (:bold t :foreground "red"))))
-     (diff-added         ((t (:foreground "#559944"))))
-     ;; (diff-context       ((t nil)))
-     (diff-file-header   ((((class color) (min-colors 88) (background dark)) (:foreground "RoyalBlue1"))))
-     (diff-function      ((t (:foreground "#00bbdd"))))
-     (diff-header        ((((class color) (min-colors 88) (background dark)) (:foreground "RoyalBlue1"))))
-     (diff-hunk-header   ((t (:foreground "#fbde2d"))))
-     (diff-nonexistent   ((t (:inherit diff-file-header :strike-through nil))))
-     (diff-refine-change ((t (:bold t :background "#202030"))))
-     (diff-removed       ((t (:foreground "#de1923"))))
-     )))
-
+(load-theme 'my t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Frame parameters
@@ -64,7 +13,6 @@
   (set-variable 'color-theme-is-global nil)
   (select-frame frame)
   (when (window-system frame)
-        (my-color-theme)
         (set-frame-parameter frame 'font "Terminus-10")))
 
 (add-hook 'after-make-frame-functions 'my-frame-parameters)
