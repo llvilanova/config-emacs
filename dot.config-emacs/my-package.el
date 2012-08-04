@@ -152,7 +152,7 @@ command to be run in a shell.")
         (:name pretty-mode           :type git
                :features (pretty-mode)
                :url "https://github.com/mattharrison/pretty-mode.git"
-               :after (lambda () (global-pretty-mode t)))
+               :after (add-hook 'after-init-hook '(lambda () (global-pretty-mode t))))
         (:name pylint                :type apt-get
                :after (lambda ()
                         (when (load "flymake" t)
