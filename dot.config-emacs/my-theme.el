@@ -29,6 +29,8 @@
  '(diff-function         ((t (:foreground "#00bbdd"))))
  '(diff-header           ((t (:foreground "LightBlue1"))))
  '(diff-hunk-header      ((t (:foreground "#fbde2d"))))
+ '(flymake-errline       ((t (:inherit (nil) :underline "red"))))
+ '(flymake-warnline      ((t (:inherit (nil) :underline "yellow"))))
  '(py-XXX-tag-face       ((t (:bold t :foreground "red"))))
  '(sml-modeline-end-face ((t (:background "#000000"))))
  '(sml-modeline-vis-face ((t (:background "#666666")))))
