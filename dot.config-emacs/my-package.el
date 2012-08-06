@@ -139,8 +139,8 @@ command to be run in a shell.")
         (:name magit                 :type apt-get
                :after (lambda ()
                         ;; For some reason, the autoload is not working
-                        (require 'magit-stgit)
-                        (add-hook 'magit-mode-hook 'turn-on-magit-stgit)))
+                        (add-hook 'magit-mode-hook
+                                  '(lambda () (require 'magit-stgit) (turn-on-magit-stgit)))))
         ;; multi-term
         (:name pos-tip               :type elpa)
         (:name predictive
