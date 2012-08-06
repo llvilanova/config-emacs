@@ -14,6 +14,16 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Mail scanning
+
+(require 'gnus-desktop-notify)
+(setq gnus-desktop-notify-groups 'gnus-desktop-notify-explicit)
+(gnus-desktop-notify-mode)
+
+(gnus-demon-add-handler 'gnus-demon-scan-news 5 nil)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Group
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

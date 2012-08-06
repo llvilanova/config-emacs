@@ -125,6 +125,8 @@ command to be run in a shell.")
                :features (fuzzy)
                :after (lambda () (turn-on-fuzzy-isearch)))
         (:name gdb-shell             :type elpa)
+        (:name gnus-desktop-notify   :type http
+               :url "http://www.thregr.org/~wavexx/hacks/gnus-desktop-notify/gnus-desktop-notify.el")
         google-maps
         google-weather
         (:name highlight-parentheses :type elpa)
