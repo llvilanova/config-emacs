@@ -128,7 +128,8 @@
                       ))
 
 ;; Appearance
-(setq org-startup-indented t)           ; automatically indent headers and text
+(setq org-startup-indented t            ; automatically indent headers and text
+      org-startup-with-inline-images t) ; display known image types
 
 ;; Lifecycle
 (setq org-enforce-todo-dependencies t   ; hold state if unfinished children
@@ -143,9 +144,6 @@
 ;; Show locations with `google-maps'
 (eval-after-load 'org
   '(require 'org-location-google-maps))
-
-;; Display known image types
-(add-hook 'org-mode-hook 'org-display-inline-images)
 
 ;; Code block editing
 (setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block
