@@ -114,7 +114,18 @@
            '("rubber --pdf --into %o %f"))
      ;; (setq org-export-latex-minted t)        ; export source code using `minted'
      ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
-     ))
+
+     ;; Create bibliography file
+     (add-hook 'org-export-latex-after-save-hook
+               '(lambda ()
+                  (with-current-buffer cbuf
+                    (org-bibtex (concat (file-name-sans-extension
+                                         (buffer-file-name)) ".bib")))))
+     ;; Remove temporary bibliography files when done
+     (setq org-export-pdf-logfiles
+           (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
+     ;; Remove LaTeX file when done
+     (add-to-list 'org-export-pdf-logfiles "tex")))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
