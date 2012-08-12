@@ -86,8 +86,7 @@
           (save-window-excursion
             (let ((file my-org-agenda-file))
               (org-agenda-list)
-              (org-agenda-write file)
-              (org-agenda-to-appt)))))))
+              (org-agenda-write file)))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
