@@ -144,6 +144,11 @@ command to be run in a shell.")
                         (add-hook 'magit-mode-hook
                                   '(lambda () (require 'magit-stgit) (turn-on-magit-stgit)))))
         ;; multi-term
+        (:name org-exp-bibtex        :type http
+               :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
+               :after (lambda ()
+                        (eval-after-load 'org-bibtex
+                            (require 'org-exp-bibtex))))
         (:name pos-tip               :type elpa)
         (:name predictive
                :build ("make")
