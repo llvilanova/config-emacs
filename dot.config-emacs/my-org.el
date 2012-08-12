@@ -70,8 +70,14 @@
 ;; Export the current agenda whenever one of its files is updated
 (add-hook 'org-mode-hook
           '(lambda ()
-             (add-hook 'after-save-hook 'my-org-update-agenda-file t t)))
-;; export function
+             (add-hook 'after-save-hook 'my-org-update-agenda-file-maybe t t)))
+;; export functions
+(defun my-org-update-agenda-file-maybe ()
+  (when (and (buffer-file-name)
+             (string-equal (substring (buffer-file-name)
+                                      0 (length org-directory))
+                           org-directory))
+    (my-org-update-agenda-file)))
 (defun my-org-update-agenda-file ()
   (interactive)
   (let ((save-frame (and (boundp 'framepop-frame)
@@ -83,8 +89,6 @@
               (org-agenda-list)
               (org-agenda-write file)
               (org-agenda-to-appt)))))))
-;; ;; do it once at startup
-;; (if (window-system) (my-org-update-agenda-file t))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
