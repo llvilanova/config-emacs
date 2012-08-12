@@ -33,22 +33,21 @@
 ;; Babel
 ;; For a list of supported languages / backends see:
 ;; http://orgmode.org/worg/org-contrib/babel/languages.php
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (org-babel-do-load-languages
-              'org-babel-load-languages
-              '((C . t)
-                (ditaa . t)
-                (dot . t)
-                (gnuplot . t)
-                (latex . t)
-                (octave . t)
-                (perl . t)
-                (python . t)
-                (R . t)
-                (screen . t)))
-             ))
-(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+(eval-after-load 'org
+  '(progn
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((C . t)
+        (ditaa . t)
+        (dot . t)
+        (gnuplot . t)
+        (latex . t)
+        (octave . t)
+        (perl . t)
+        (python . t)
+        (R . t)
+        (screen . t)))
+     (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -110,13 +109,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Exporting
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (setq org-latex-to-pdf-process          ; use `rubber' to export LaTeX into PDF
-                   '("rubber --pdf --into %o %f"))
-             ;; (setq org-export-latex-minted t)        ; export source code using `minted'
-             ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
-             ))
+(eval-after-load 'org-latex
+  '(progn
+     (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
+           '("rubber --pdf --into %o %f"))
+     ;; (setq org-export-latex-minted t)        ; export source code using `minted'
+     ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
+     ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -142,10 +141,8 @@
 (setq org-return-follows-link t)
 
 ;; Show locations with `google-maps'
-(add-hook 'org-mode-hook '(lambda () (require 'org-location-google-maps)))
-
-;; Show weather forecast with `google-weather'
-(add-hook 'org-mode-hook '(lambda () (require 'org-google-weather)))
+(eval-after-load 'org
+  '(require 'org-location-google-maps))
 
 ;; Display known image types
 (add-hook 'org-mode-hook 'org-display-inline-images)
