@@ -126,6 +126,11 @@
            (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
      ;; Remove LaTeX file when done
      (add-to-list 'org-export-pdf-logfiles "tex")))
+(eval-after-load 'org-exp
+  '(defadvice org-export (around my-disable-flyspell activate)
+     "Disable flyspell while generating intermediate files for exporting."
+     (let ((my-flyspell-mode-maybe-enabled nil))
+       ad-do-it)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
