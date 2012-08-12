@@ -84,4 +84,17 @@ even when ECB is not active."
 ;;                               (my--setup-helper-buffers)))
 
 
+(defun my-run-async (program args callback)
+  "Asynchronously run the given PROGRAM with arguments ARGS and invoke CALLBACK
+  once finished."
+  (let ((buffer (get-buffer-create (format "*%s*" program))))
+    (unless (get-buffer-process buffer)
+      (with-current-buffer buffer
+        (erase-buffer))
+      (let ((process (start-process-shell-command
+                      program buffer (format "%s %s" program args))))
+        (set-process-sentinel process callback)
+        nil))))
+
+
 (provide 'my-misc)

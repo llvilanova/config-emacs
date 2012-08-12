@@ -20,7 +20,18 @@
 (setq gnus-desktop-notify-groups 'gnus-desktop-notify-explicit)
 (gnus-desktop-notify-mode)
 
-(gnus-demon-add-handler 'gnus-demon-scan-news 5 nil)
+(defun my-check-mail ()
+  (interactive)
+  (my-run-async
+   "fetchmail" ""
+   '(lambda (&rest args)
+      (my-run-async
+       "offlineimap" ""
+       '(lambda (&rest args) (gnus-demon-scan-news))))))
+
+(gnus-demon-add-handler 'my-check-mail 5 nil)
+;; Immediately start checking for new mail
+(my-check-mail)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
