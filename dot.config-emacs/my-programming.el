@@ -80,6 +80,8 @@
 
 ;; Use year ranges instead of a (possibly) long list of years
 (setq copyright-year-ranges t)
+(defcustom my-copyright-fixes t
+  "Whether to try to fix copyright information before writing.")
 
 (my-add-hook 'my-programming-mode-hook
           '(lambda ()
@@ -100,7 +102,10 @@
              ;; (which-function-mode 1)    ; show current tag in modeline
 
              ;; Update the year in copyright message
-             (add-hook 'before-save-hook '(lambda () (save-excursion (copyright-fix-years))))
+             (add-hook 'before-save-hook
+                       '(lambda ()
+                          (when my-copyright-fixes
+                            (save-excursion (copyright-fix-years)))))
              (add-hook 'before-save-hook 'copyright-update)
 
              ;; Auto-indent new line
