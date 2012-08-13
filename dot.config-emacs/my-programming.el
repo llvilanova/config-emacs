@@ -283,48 +283,9 @@
 (require 'auto-complete)
 (global-auto-complete-mode t)
 
-(defun my-ac-semantic-candidates (prefix)
-  (mapcar '(lambda (elem)
-             (cons (semantic-tag-name elem)
-                   (semantic-tag-clone elem)))
-          (semantic-analyze-possible-completions
-           (semantic-analyze-current-context))))
-
-
-(defun my-ac-semantic-doc (symbol)
-  (let* ((proto (semantic-format-tag-summarize-with-file symbol nil t))
-         (doc (semantic-documentation-for-tag symbol))
-         (res proto))
-    (when doc
-      (setq res (concat res "\n\n" doc)))
-    res))
-
-(defun my-ac-semantic-action ()
-  (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
-         (class (semantic-tag-class tag))
-         (args)
-         (arg-type)
-         (arg-name))
-    (when (eq class 'function)
-      (setq args (semantic-tag-function-arguments tag))
-      (yas/expand-snippet
-       (concat "("
-               (mapconcat
-                (lambda (arg)
-                  (setq arg-type (semantic-format-tag-type arg nil)
-                        arg-name (semantic-format-tag-name arg nil))
-                  (concat "${"
-                          (if (string= arg-name "")
-                              arg-type
-                            (concat arg-type " " arg-name))
-                          "}"))
-                args
-                ", ")
-               ")$0")))))
-
 (defun my-ac-source-semantic-enable ()
-  (add-to-list 'ac-sources 'ac-source-my-semantic-raw)
-  (add-to-list 'ac-sources 'ac-source-my-semantic))
+  (add-to-list 'ac-sources 'ac-source-semantic-raw)
+  (add-to-list 'ac-sources 'ac-source-semantic))
 
 (eval-after-load 'auto-complete
   '(progn
@@ -338,27 +299,7 @@
            ac-use-menu-map t)           ; allow C-n/C-p in completion menu
      (add-hook 'auto-complete-mode-hook
                '(lambda ()
-                  (setq yas/trigger-key nil)
-                  (yas/minor-mode t)
-
-                  (ac-define-source my-semantic
-                                    '((available . (or (require 'semantic-ia nil t)
-                                                      (require 'semantic/ia nil t)))
-                                      (candidates . (my-ac-semantic-candidates ac-prefix))
-                                      (document . my-ac-semantic-doc)
-                                      (action . my-ac-semantic-action)
-                                      (prefix . c-dot-ref)
-                                      (requires . 0)
-                                      (symbol . "f")))
-
-                  (ac-define-source my-semantic-raw
-                                    '((available . (or (require 'semantic-ia nil t)
-                                                      (require 'semantic/ia nil t)))
-                                      (candidates . (my-ac-semantic-candidates ac-prefix))
-                                      (document . my-ac-semantic-doc)
-                                      (action . my-ac-semantic-action)
-                                      (symbol . "s")))
-
+                  ;; (setq yas/trigger-key nil)
                   (ac-set-trigger-key "TAB")
                   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
                   (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)

@@ -93,7 +93,9 @@ command to be run in a shell.")
                         (setq ack-executable "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
-        (:name auto-complete         :type elpa
+        (:name auto-complete         :type git
+               :url "https://github.com/llvilanova/auto-complete.git"
+               :branch  "semantic-completion-placeholders"
                :depends (pos-tip fuzzy))
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
