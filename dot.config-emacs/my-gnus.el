@@ -107,6 +107,7 @@
 ;; Misc
 (setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
       gnus-refer-thread-limit t)        ; ... (without success)
+(define-key gnus-summary-mode-map [(shift g) (shift g)] 'gnus-group-make-nnir-group)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
