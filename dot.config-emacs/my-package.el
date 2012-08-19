@@ -101,6 +101,9 @@ command to be run in a shell.")
         (:name bibtex-utils          :type emacswiki)
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
+        (:name cedet                    :type git
+               :url "git://git.randomsample.de/cedet.git"
+               :features cedet-devel-load)
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
