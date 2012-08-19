@@ -124,6 +124,9 @@
      ;; Remove temporary bibliography files when done
      (setq org-export-pdf-logfiles
            (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
+     ;; Remove other temporary files when done
+     (setq org-export-pdf-logfiles
+           (append org-export-pdf-logfiles '("loe" "lof")))
      ;; Remove LaTeX file when done
      (add-to-list 'org-export-pdf-logfiles "tex")))
 (eval-after-load 'org-exp
