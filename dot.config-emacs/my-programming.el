@@ -284,6 +284,7 @@
 (global-auto-complete-mode t)
 
 (defun my-ac-source-semantic-enable ()
+  (yas/minor-mode 1)                    ; enable yasnippet for arg placeholders
   (add-to-list 'ac-sources 'ac-source-semantic-raw)
   (add-to-list 'ac-sources 'ac-source-semantic))
 
