@@ -6,13 +6,13 @@
 ;; `el-get' auto-installation
 (setq el-get-dir (path my-config-dir "el-get" ""))
 (add-to-list 'load-path (path el-get-dir "el-get"))
-;; Handle auto-installation
 (unless (require 'el-get nil t)
   ;; download, build & load
   (let ((buffer
          (or (url-retrieve-synchronously
              "https://github.com/dimitri/el-get/raw/master/el-get-install.el")
             (error "Could not download el-get installer")))
+        (el-get-install-branch "master")
         (user-emacs-directory my-config-dir))
     (with-current-buffer buffer
       (end-of-buffer)
@@ -20,18 +20,11 @@
 
 
 ;; `package' auto-installation
-(el-get 'wait '(package24))
-;; TODO: handle URL bug in recipe (for marmalade)
-(setq package-archives
-      (delq nil (mapcar (lambda (x) (if (string= (car x) "marmalade") nil x))
-                      package-archives)))
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; additional repositiories
-(add-to-list 'package-archives
+(el-get 'sync '(package))
+(add-to-list 'package-archives          ; additional repositiories
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; first-time initialization
 (unless (file-exists-p (path package-user-dir "archives"))
+  ;; first-time initialization
   (package-refresh-contents))
 
 
@@ -89,46 +82,38 @@ command to be run in a shell.")
       '(
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
-               :after (lambda ()
-                        (setq ack-executable "ack-grep")))
+               :after (setq ack-executable "ack-grep"))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
         (:name auto-complete         :type git
                :url "https://github.com/llvilanova/auto-complete.git"
                :branch  "semantic-completion-placeholders"
-               :depends (pos-tip fuzzy))
+               :depends (popup pos-tip fuzzy))
         (:name auto-dictionary       :type elpa)
         (:name bibtex-utils          :type emacswiki)
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
-        (:name cedet                    :type git
-               :url "git://git.randomsample.de/cedet.git"
-               :features cedet-devel-load)
+        cedet
         (:name cursor-chg            :type emacswiki)
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
-        (:name ecb                   :type cvs
-               :url ":pserver:anonymous@ecb.cvs.sourceforge.net:/cvsroot/ecb"
-               :module "ecb"
-               :build ("make CEDET= all" "make autoloads EMACS=\"emacs -L .\"")
-               :info "info-help")
+        ecb
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
                :features (enclose))
         (:name fic-ext-mode
                :lazy t
-               :after (lambda () (add-to-list 'fic-highlighted-words "XXX")))
+               :after (add-to-list 'fic-highlighted-words "XXX"))
         (:name flymake-lua           :type http
                :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
                :description "Flymake support for Lua."
                :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
-               :post-init (lambda ()
-                            (add-hook 'lua-mode-hook 'flymake-lua-load)))
+               :post-init (add-hook 'lua-mode-hook 'flymake-lua-load))
         (:name fuzzy                 :type git
                :url "https://github.com/m2ym/fuzzy-el"
-               :features (fuzzy)
-               :after (lambda () (turn-on-fuzzy-isearch)))
+               :features fuzzy
+               :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
         (:name gnus-desktop-notify   :type http
                :url "http://www.thregr.org/~wavexx/hacks/gnus-desktop-notify/gnus-desktop-notify.el")
@@ -137,6 +122,7 @@ command to be run in a shell.")
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
         (:name ido-settings          :type http
+               :depends ido-yes-or-no
                :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"
                :features (ido-settings))
         (:name iedit                 :type emacswiki)
@@ -144,21 +130,17 @@ command to be run in a shell.")
         (:name lua-mode              :type apt-get)
         magithub
         (:name magit                 :type apt-get
-               :after (lambda ()
-                        ;; For some reason, the autoload is not working
-                        (add-hook 'magit-mode-hook
-                                  '(lambda () (require 'magit-stgit) (turn-on-magit-stgit)))))
+               :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
         ;; multi-term
         (:name org-exp-bibtex        :type http
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
-               :after (lambda ()
-                        (eval-after-load 'org-bibtex
-                            (require 'org-exp-bibtex))))
+               :after (eval-after-load 'org-bibtex
+                        (require 'org-exp-bibtex)))
         (:name pos-tip               :type elpa)
         (:name predictive
                :build ("make")
                :load-path ("." "latex" "texinfo" "html")
-               :after (lambda ()
+               :after (progn
                         (autoload 'predictive-mode "predictive" nil t)
                         (autoload 'predictive-create-dict "predictive" nil t)))
         (:name pretty-mode           :type git
@@ -166,24 +148,23 @@ command to be run in a shell.")
                :url "https://github.com/mattharrison/pretty-mode.git"
                :after (add-hook 'after-init-hook '(lambda () (global-pretty-mode t))))
         (:name pylint                :type apt-get
-               :after (lambda ()
-                        (when (load "flymake" t)
-                          (defun my--flymake-pylint-init ()
-                            (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                                               'flymake-create-temp-inplace))
-                                   (local-file (file-relative-name
-                                                temp-file
-                                                (file-name-directory buffer-file-name))))
-                              (list "epylint" (list local-file))))
-                          (add-to-list 'flymake-allowed-file-name-masks
-                                       '("\\.py\\'" my--flymake-pylint-init)))))
+               :after (when (load "flymake" t)
+                        (defun my--flymake-pylint-init ()
+                          (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                                             'flymake-create-temp-inplace))
+                                 (local-file (file-relative-name
+                                              temp-file
+                                              (file-name-directory buffer-file-name))))
+                            (list "epylint" (list local-file))))
+                        (add-to-list 'flymake-allowed-file-name-masks
+                                     '("\\.py\\'" my--flymake-pylint-init))))
         (:name smex                  :type elpa)
         (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
         (:name undo-tree
                :features (undo-tree)
-               :after global-undo-tree-mode)
+               :after (global-undo-tree-mode))
         (:name unipoint              :type git
                :features (unipoint)
                :url "https://github.com/apgwoz/unipoint.git")
@@ -193,17 +174,14 @@ command to be run in a shell.")
         (:name wrap-region           :type http
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
                :features (wrap-region)
-               :after wrap-region-global-mode)
+               :after (wrap-region-global-mode))
         xcscope
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(setq my-packages
-      (append
-       '(el-get)
-       (mapcar 'el-get-source-name el-get-sources)))
-(el-get 'wait my-packages)
+(el-get 'sync (append '(el-get)
+                      (mapcar 'el-get-source-name el-get-sources)))
 (my-regenerate-autoloads)
 
 (provide 'my-package)
