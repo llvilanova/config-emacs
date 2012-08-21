@@ -26,14 +26,14 @@
                                           activate)
     "Switch input focus if necessary."
     (if (and my-framepop-with-focus
+           framepop-frame
            (eq t (frame-visible-p framepop-frame)))
         (select-frame-set-input-focus framepop-frame)))
   (defadvice framepop-display-buffer (after my-framepop-display-buffer
                                             activate)
     "Do not redirect input focus if thus is wanted."
-    (if my-framepop-with-focus
-        (redirect-frame-focus framepop-frame)))
-  )
+    (when my-framepop-with-focus
+      (redirect-frame-focus framepop-frame))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
