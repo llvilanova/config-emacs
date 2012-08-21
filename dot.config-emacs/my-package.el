@@ -119,6 +119,8 @@ command to be run in a shell.")
                :url "http://www.thregr.org/~wavexx/hacks/gnus-desktop-notify/gnus-desktop-notify.el")
         google-maps
         google-weather
+        (:name guess-style           :type http
+               :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
         (:name ido-settings          :type http

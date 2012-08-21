@@ -108,6 +108,8 @@
                             (save-excursion (copyright-fix-years)))))
              (add-hook 'before-save-hook 'copyright-update)
 
+             (guess-style-guess-all)    ; guess indentation style
+
              ;; Auto-indent new line
              (local-set-key [return] 'newline-and-indent)
              ;; ;; Auto-indent new line (plus previous)
