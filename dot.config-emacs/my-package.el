@@ -82,7 +82,7 @@ command to be run in a shell.")
       '(
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
-               :after (setq ack-executable "ack-grep"))
+               :after (setq ack-executable (executable-find "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
         (:name auto-complete         :type git
