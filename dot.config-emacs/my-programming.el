@@ -373,12 +373,6 @@ If ARG is not nil, force a call to `compile'."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Debug
-
-(setq gdb-many-windows t)               ; it's usually nicer to have them all
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; `flymake': Continuous compilation
 
 ;; Show error message in minibuffer
@@ -410,6 +404,7 @@ If ARG is not nil, force a call to `compile'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Debugging
 
+(setq gdb-many-windows t)               ; it's usually nicer to have them all
 (global-set-key [(meta shift down)]  'gud-next)   ;; next line
 (global-set-key [(meta shift right)] 'gud-step)   ;; step into line
 (global-set-key [(meta shift up)]    'gud-finish) ;; finish function
