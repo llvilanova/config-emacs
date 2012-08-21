@@ -43,6 +43,7 @@
 ;; BBDB
 
 (setq bbdb-file (path my-data-dir "bbdb"))
+(require 'bbdb)                         ; TODO: autoload should take care of it
 (bbdb-initialize)
 (setq
  bbdb-offer-save 1                      ; 1 means save-without-asking
