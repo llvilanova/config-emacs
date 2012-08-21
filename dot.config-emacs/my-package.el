@@ -100,8 +100,7 @@ command to be run in a shell.")
         ecb
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
-               :url "https://github.com/rejeep/enclose/raw/master/enclose.el"
-               :features (enclose))
+               :url "https://github.com/rejeep/enclose/raw/master/enclose.el")
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
@@ -117,8 +116,10 @@ command to be run in a shell.")
         (:name gdb-shell             :type elpa)
         (:name gnus-desktop-notify   :type http
                :url "http://www.thregr.org/~wavexx/hacks/gnus-desktop-notify/gnus-desktop-notify.el")
-        google-maps
-        google-weather
+        (:name google-maps
+               :features nil)
+        (:name google-weather
+               :features nil)
         (:name guess-style           :type http
                :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
         (:name highlight-parentheses :type elpa)
@@ -142,6 +143,7 @@ command to be run in a shell.")
         (:name predictive
                :build ("make")
                :load-path ("." "latex" "texinfo" "html")
+               :features nil
                :after (progn
                         (autoload 'predictive-mode "predictive" nil t)
                         (autoload 'predictive-create-dict "predictive" nil t)))
@@ -165,19 +167,18 @@ command to be run in a shell.")
         switch-window
         ;; (:name tempo-snippets        :type elpa)
         (:name undo-tree
-               :features (undo-tree)
                :after (global-undo-tree-mode))
         (:name unipoint              :type git
-               :features (unipoint)
-               :url "https://github.com/apgwoz/unipoint.git")
+               :url "https://github.com/apgwoz/unipoint.git"
+               :after (autoload 'unipoint-mode "unipoint"))
         (:name yasnippet             :type elpa)
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name wrap-region           :type http
                :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
-               :features (wrap-region)
                :after (wrap-region-global-mode))
-        xcscope
+        (:name xcscope
+               :features nil)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
