@@ -295,7 +295,7 @@
      (setq ac-dwim t                    ; be clever on TAB/RET
            ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
            ac-quick-help-delay 0.2      ; ... almost immediately
-           ;; ac-auto-start nil              ; do not start automatically
+           ac-auto-start nil              ; do not start automatically
            ac-auto-show-menu nil          ; do not show menu when auto-starting
            ac-use-menu-map t)           ; allow C-n/C-p in completion menu
      (add-hook 'auto-complete-mode-hook
