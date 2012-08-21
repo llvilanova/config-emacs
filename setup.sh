@@ -65,3 +65,5 @@ setup_file .config/emacs ~/.emacs.d
 setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 setup_files $BASE/bin ~/bin
+
+emacs --batch --eval '(load-file "~/.config/emacs/init.el")'
