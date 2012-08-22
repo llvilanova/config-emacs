@@ -80,6 +80,9 @@ command to be run in a shell.")
 ;; Package list
 (setq el-get-sources
       '(
+        (:name ace-jump-mode
+               :features nil
+               :after (global-set-key (kbd "C-c j") 'ace-jump-mode))
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (setq ack-executable (executable-find "ack-grep")))
