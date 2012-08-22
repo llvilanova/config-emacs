@@ -136,6 +136,10 @@ command to be run in a shell.")
         magithub
         (:name magit                 :type apt-get
                :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
+        (:name mark-multiple
+               :after (progn
+                        (global-set-key (kbd "C-M-m") 'mark-more-like-this)
+                        (global-set-key (kbd "C-*") 'mark-all-like-this)))
         ;; multi-term
         (:name org-exp-bibtex        :type http
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
