@@ -101,6 +101,8 @@ command to be run in a shell.")
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el")
+        (:name expand-region
+               :after (global-set-key (kbd "C-M-S-m") 'er/expand-region))
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
