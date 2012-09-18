@@ -66,6 +66,30 @@
       org-agenda-skip-deadline-if-done t
       org-agenda-dim-blocked-tasks t)     ; tasks blocked by dependencies
 
+;; Handle CFPs in a separate agenda view
+(defun my-org-agenda-skip-tag (tag &optional others)
+  "Skip all entries that correspond to TAG.
+
+If OTHERS is true, skip all entries that do not correspond to TAG."
+  (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
+        (current-headline (or (and (org-at-heading-p)
+                                (point))
+                             (save-excursion (org-back-to-heading)))))
+    (if others
+        (if (not (member tag (org-get-tags-at current-headline)))
+            next-headline
+          nil)
+      (if (member tag (org-get-tags-at current-headline))
+          next-headline
+        nil))))
+(add-to-list 'org-agenda-custom-commands
+             '("p" "CFPs (Calls For Papers)"
+               agenda ""
+               ((org-agenda-skip-function-global nil)
+                (org-agenda-skip-function
+                 '(my-org-agenda-skip-tag "conference" t)))))
+(setq org-agenda-skip-function-global (apply-partially 'my-org-agenda-skip-tag "conference"))
+
 ;; Export the current agenda whenever one of its files is updated
 (add-hook 'org-mode-hook
           '(lambda ()
