@@ -19,6 +19,8 @@
 (require 'gnus-desktop-notify)
 (setq gnus-desktop-notify-groups 'gnus-desktop-notify-explicit)
 (gnus-desktop-notify-mode)
+(setq gnus-notifications-minimum-level 2)
+(add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)
 
 (defun my-check-mail ()
   (interactive)
