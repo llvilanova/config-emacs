@@ -1,0 +1,16 @@
+#!/bin/sh
+# Open an emacsclient if possible, otherwise start a new emacs
+
+BASE=`dirname $0`
+EMACS_EDITOR=`which emacsclient`
+
+if [ -x "$EMACS_EDITOR" ]; then
+    if [ -n "$DISPLAY" ]; then
+        EMACS_ARGS=-c
+    else
+        EMACS_ARGS=-t
+    fi
+    $EMACS_EDITOR $EMACS_ARGS -a "$BASE/emacs-start" "$@"
+else
+    exit 1
+fi
