@@ -173,10 +173,21 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 (setq org-startup-indented t            ; automatically indent headers and text
       org-startup-with-inline-images t) ; display known image types
 
+;; Tags
+(setq org-tags-exclude-from-inheritance '("PROJECT"))
+
 ;; Lifecycle
-(setq org-enforce-todo-dependencies t   ; hold state if unfinished children
+(require 'org-faces)
+(setq org-todo-keywords                 ; TODO states
+      '((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")
+        (sequence "TASK(f)" "|" "DONE(d)")
+        (sequence "MAYBE(m)" "|" "CANCELLED(c)"))
+      org-todo-keyword-faces
+      '(("MAYBE" . (:foreground "Pink"))
+        ("CANCELLED" . (:foreground "Pale Green")))
+      org-enforce-todo-dependencies t   ; hold state if unfinished children
       org-stuck-projects                ; find stuck projects
-      '("+PROJECT/-MAYBE-DONE" ("NEXT" "TODO") ("@SHOP")
+      '("+PROJECT/-MAYBE-DONE" ("NEXT" "TODO" "TASK") ("@SHOP")
         "\\<IGNORE\\>")
       org-log-done 'time)               ; add timestamp when moving to `DONE'
 
@@ -194,6 +205,36 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 ;; ;; Linking
 ;; (require 'org-wikinodes)                ; enable camelcase auto-linking
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Secretary
+(when (require 'org-secretary nil t)
+  (setq org-sec-me "Lluis"
+        org-agenda-custom-commands
+        (append
+         org-agenda-custom-commands
+         '(("h" "Work todos" tags-todo
+            "-personal -doat={.+}-dowith={.+}/!-TASK"
+            ((org-agenda-todo-ignore-scheduled t)))
+           ("H" "All work todos" tags-todo "-personal/!-TASK-MAYBE"
+            ((org-agenda-todo-ignore-scheduled nil)))
+           ("A" "Work todos with doat or dowith" tags-todo
+            "-personal+doat={.+}|dowith={.+}/!-TASK"
+            ((org-agenda-todo-ignore-scheduled nil)))
+           ("j" "TODO dowith and TASK with"
+            ((org-sec-with-view "TODO dowith")
+             (org-sec-where-view "TODO doat")
+             (org-sec-assigned-with-view "TASK with")
+             (org-sec-stuck-with-view "STUCK with")))
+           ("J" "Interactive TODO dowith and TASK with"
+            ((org-sec-who-view "TODO dowith"))))))
+  (global-set-key [(control shift o) (w)] 'org-sec-set-with)
+  (global-set-key [(control shift o) (shift w)] 'org-sec-set-where)
+  (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
+  (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Capture
