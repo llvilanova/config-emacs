@@ -151,7 +151,9 @@ command to be run in a shell.")
                :after (eval-after-load 'org-bibtex
                         (require 'org-exp-bibtex)))
         (:name pos-tip               :type elpa)
-        (:name predictive
+        (:name predictive            :type http-tar
+               :url "http://www.dr-qubit.org/download.php?file=predictive/predictive-0.23.13.tar.gz"
+               :options ("zxf")
                :build ("make")
                :load-path ("." "latex" "texinfo" "html")
                :features nil
