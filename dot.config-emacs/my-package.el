@@ -115,7 +115,7 @@ command to be run in a shell.")
                :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
                :post-init (add-hook 'lua-mode-hook 'flymake-lua-load))
         (:name fuzzy                 :type git
-               :url "https://github.com/m2ym/fuzzy-el"
+               :url "https://github.com/auto-complete/fuzzy-el"
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
