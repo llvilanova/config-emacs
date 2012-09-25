@@ -6,7 +6,7 @@ EMACS_EDITOR=`which /usr/bin/emacs`
 
 if [ -x "$EMACS_EDITOR" ]; then
     $EMACS_EDITOR --daemon
-    $BASE/emacs "$@"
+    $BASE/emacs-open "$@"
 else
     exit 1
 fi
