@@ -100,8 +100,8 @@
 (defun my-gnus-lower-thread ()                            ; lower thread score
      "Permanently lower score for a whole (sub)thread."
      (interactive)
-     (kmacro-exec-ring-item (quote ([?L ?i ?e ?t return] 0 "%d")) nil) ; message-id
-     (kmacro-exec-ring-item (quote ([?L ?t ?f ?t return] 0 "%d")) nil) ;thread
+     (kmacro-exec-ring-item (quote ([?\C-2 ?\C-0 ?\C-0 ?\C-0 ?L ?i ?e ?t ?\C-m] 0 "%d")) nil) ; message-id
+     (kmacro-exec-ring-item (quote ([?\C-2 ?\C-0 ?\C-0 ?\C-0 ?L ?t ?f ?t ?\C-m] 0 "%d")) nil) ; thread
      (gnus-summary-hide-thread)
      (gnus-summary-next-thread 1))
 (define-key gnus-summary-mode-map [(control meta shift k)] 'my-gnus-lower-thread)
