@@ -194,13 +194,6 @@
 ;; Sending
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq message-send-mail-function 'message-send-mail-with-sendmail
-      sendmail-program "/usr/bin/msmtp"
-      message-sendmail-extra-arguments '("--read-recipients"))
-(add-to-list 'message-send-hook
-             '(lambda ()
-                (setq message-sendmail-envelope-from
-                      (mail-strip-quoted-names (mail-fetch-field "From")))))
 ;; Save sent messages
 ;; (add-to-list 'gnus-parameters '("" (gcc-self . t)))
 (setq gnus-message-archive-group

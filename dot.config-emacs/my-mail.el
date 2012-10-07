@@ -9,6 +9,16 @@
 ;; (setq mail-user-agent   'wl-user-agent  ; C-x m
 ;;       read-mail-command 'wl)
 
+;; Sending
+(setq message-send-mail-function 'message-send-mail-with-sendmail
+      sendmail-program "/usr/bin/msmtp"
+      message-sendmail-extra-arguments '("--read-recipients")
+      send-mail-function 'message-send-mail-with-sendmail)
+(add-to-list 'message-send-hook
+             '(lambda ()
+                (setq message-sendmail-envelope-from
+                      (mail-strip-quoted-names (mail-fetch-field "From")))))
+
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
 (setq my-gnus-start-or-hide-windows nil)
