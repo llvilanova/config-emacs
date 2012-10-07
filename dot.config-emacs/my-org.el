@@ -114,19 +114,23 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Appointment notification
-(setq appt-message-warning-time 15      ; warn 15min in advance
-      appt-display-mode-line t          ; show in modeline
-      appt-display-format 'window)      ; use our function
-(appt-activate 1)
+;; Notifications
+(require 'org-notify)
+(require 'org-notify-sound)
+(org-notify-start)
+(org-notify-add 'default
+                '(:time "1h" :actions (-notify/window -sound)
+                        :period "2m" :duration 60))
+(org-notify-add 'conference
+                '(:time "1m" :actions (-email))
+                '(:time "1w" :actions (-email))
+                '(:time "1d" :actions (-email)))
+(org-notify-add 'go-home
+                '(:time "-1s" :period "20s" :duration 10
+                  :actions (-message -ding -notify/window -sound))
+                '(:time "15m" :period "5m"  :duration 60
+                        :actions (-message -notify/window -sound)))
 (display-time)
-(add-hook 'org-finalize-agenda-hook     ; update `appt' when agenda is opened
-          '(lambda () (org-agenda-to-appt t)))
-(defun my-appt-popup (min-to-app new-time msg)
-  (my-popup (format "Appointment in %s minute(s)" min-to-app) msg
-            "/usr/share/icons/hicolor/32x32/apps/gnome-panel-clock.png"
-            "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"))
-(setq appt-disp-window-function (function my-appt-popup))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
