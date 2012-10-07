@@ -89,28 +89,6 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 (org-agenda-skip-function
                  '(my-org-agenda-skip-tag "conference" t)))))
 (setq org-agenda-skip-function-global (apply-partially 'my-org-agenda-skip-tag "conference"))
-
-;; Export the current agenda whenever one of its files is updated
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (add-hook 'after-save-hook 'my-org-update-agenda-file-maybe t t)))
-;; export functions
-(defun my-org-update-agenda-file-maybe ()
-  (when (and (buffer-file-name)
-             (string-equal (substring (buffer-file-name)
-                                      0 (length org-directory))
-                           org-directory))
-    (my-org-update-agenda-file)))
-(defun my-org-update-agenda-file ()
-  (interactive)
-  (let ((save-frame (and (boundp 'framepop-frame)
-                         (eq (selected-frame) framepop-frame))))
-    (if (not save-frame)
-        (save-excursion
-          (save-window-excursion
-            (let ((file my-org-agenda-file))
-              (org-agenda-list)
-              (org-agenda-write file)))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
