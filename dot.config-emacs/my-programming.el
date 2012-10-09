@@ -90,12 +90,6 @@
              ;; Highlight parentheses around point
              (highlight-parentheses-mode 1)
 
-             ;; Highlight a symbol
-             (local-set-key [(meta f5)] 'highlight-symbol-at-point)
-             (local-set-key [(meta f6)] 'highlight-symbol-at-point)
-             (local-set-key [f5] 'highlight-symbol-prev)
-             (local-set-key [f6] 'highlight-symbol-next)
-
              ;; Highlight TODO's and the like
              (fic-ext-mode 1)
 
@@ -109,11 +103,6 @@
              (add-hook 'before-save-hook 'copyright-update)
 
              (guess-style-guess-all)    ; guess indentation style
-
-             ;; Auto-indent new line
-             (local-set-key [return] 'newline-and-indent)
-             ;; ;; Auto-indent new line (plus previous)
-             ;; (local-set-key [return] 'reindent-then-newline-and-indent)
 
              ;; ECB
              (my-define-ecb-layouts '("my-programming-left-right"
@@ -273,10 +262,7 @@
      ;;                      (with-current-buffer doc-buffer
      ;;                        (goto-char (point-min)))
      ;;                      (display-buffer doc-buffer t))))))
-
-     (my-add-hook 'my-programming-mode-hook
-                  '(lambda ()
-                     (local-set-key [(meta tab)] 'company-complete)))))
+     ))
 
 
 ;; `auto-complete'
@@ -303,10 +289,7 @@
      (add-hook 'auto-complete-mode-hook
                '(lambda ()
                   ;; (setq yas/trigger-key nil)
-                  (ac-set-trigger-key "TAB")
-                  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-                  (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-                  (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))
+                  (ac-set-trigger-key "TAB")))
 
      (my-add-hook 'c-mode-common-hook
                   '(lambda ()
@@ -324,13 +307,7 @@
 (my-add-hook 'my-programming-mode-hook
              '(lambda ()
                 (require 'xcscope)
-                (cscope-minor-mode)
-                (local-set-key [(control c) (i)] ; open included file at point
-                               'semantic-decoration-include-visit)
-                (local-set-key [(control c) (g)] ; jump to declaration
-                               'semantic-ia-fast-jump)
-                (local-set-key [(control c) (t)] ; toggle declaration / definition
-                               'semantic-analyze-proto-impl-toggle)))
+                (cscope-minor-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -338,12 +315,6 @@
 
 ;; Special treatment for documentation buffer
 (my-add-helper-buffer "*TAG DOCUMENTATION*")
-
-(my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                (local-set-key [f1] 'semantic-ia-show-summary)
-                (local-set-key [(meta f1)] 'semantic-ia-show-doc)
-                (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -370,8 +341,6 @@ If ARG is not nil, force a call to `compile'."
         (call-interactively 'kill-compilation)
       (error (call-interactively 'recompile))))
   nil)
-;; global keybinding
-(global-set-key [f8] 'my-dwim-compile)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -407,10 +376,6 @@ If ARG is not nil, force a call to `compile'."
 ;; Debugging
 
 (setq gdb-many-windows t)               ; it's usually nicer to have them all
-(global-set-key [(meta shift down)]  'gud-next)   ;; next line
-(global-set-key [(meta shift right)] 'gud-step)   ;; step into line
-(global-set-key [(meta shift up)]    'gud-finish) ;; finish function
-(global-set-key [(meta shift left)]  'gud-until)  ;; until line
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -15,21 +15,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Pervasive Bindings
-(global-set-key [(control shift o) (l)] 'org-store-link)
-(global-set-key [(control shift o) (a)] 'org-agenda)
-(global-set-key [(control shift o) (s)] 'org-search-view)
-(global-set-key [(control shift o) (f)]
-                '(lambda ()
-                   (interactive)
-                   (ido-find-file-in-dir org-directory)
-                   ))
-(global-set-key [(control shift o) (b)] 'org-iswitchb)
-(global-set-key [(control shift o) (control c) (c)] 'org-capture)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Babel
 ;; For a list of supported languages / backends see:
 ;; http://orgmode.org/worg/org-contrib/babel/languages.php
@@ -210,11 +195,7 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
              (org-sec-assigned-with-view "TASK with")
              (org-sec-stuck-with-view "STUCK with")))
            ("J" "Interactive TODO dowith and TASK with"
-            ((org-sec-who-view "TODO dowith"))))))
-  (global-set-key [(control shift o) (w)] 'org-sec-set-with)
-  (global-set-key [(control shift o) (shift w)] 'org-sec-set-where)
-  (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
-  (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
+            ((org-sec-who-view "TODO dowith")))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

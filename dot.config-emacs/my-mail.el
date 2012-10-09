@@ -45,7 +45,6 @@
       (setq my-gnus-start-or-hide-windows (current-window-configuration))
       (delete-other-windows)
       (gnus))))
-(global-set-key [f12] 'my-gnus-start-or-hide)
 
 ;; Wanderlust
 (setq wl-init-file (path my-config-dir "my-wl.el"))

@@ -81,8 +81,7 @@ command to be run in a shell.")
 (setq el-get-sources
       '(
         (:name ace-jump-mode
-               :features nil
-               :after (global-set-key (kbd "C-c j") 'ace-jump-mode))
+               :features nil)
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (setq ack-executable (executable-find "ack-grep")))
@@ -104,8 +103,7 @@ command to be run in a shell.")
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el")
-        (:name expand-region
-               :after (global-set-key (kbd "C-M-S-m") 'er/expand-region))
+        expand-region
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
@@ -141,10 +139,7 @@ command to be run in a shell.")
         magithub
         (:name magit                 :type apt-get
                :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
-        (:name mark-multiple
-               :after (progn
-                        (global-set-key (kbd "C-M-m") 'mark-more-like-this)
-                        (global-set-key (kbd "C-*") 'mark-all-like-this)))
+        mark-multiple
         ;; multi-term
         (:name org-exp-bibtex        :type http
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"

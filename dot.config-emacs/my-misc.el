@@ -1,18 +1,5 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 
-(defun my-duplicate-line (&optional commentfirst)
-  "Duplicate line at point.
-If COMMENTFIRST is non-nil, comment the original line."
-  (interactive)
-  (beginning-of-line)
-  (push-mark)
-  (end-of-line)
-  (let ((str (buffer-substring (region-beginning) (region-end))))
-    (when commentfirst
-      (comment-region (region-beginning) (region-end)))
-    (insert (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
-    (forward-line -1)))
-
 (defun my-program-exists (program-name)
   "Checks whenever we can locate program and launch it.
 Taken from org-mode's `org-prgram-exists'."

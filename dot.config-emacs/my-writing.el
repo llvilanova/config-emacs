@@ -39,9 +39,6 @@
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
-(my-add-hook 'my-writing-mode-hook
-          '(lambda ()
-             (local-set-key [(control c) (w)] 'wordnet-search)))
 (my-add-helper-buffer "*WordNet*")
 
 

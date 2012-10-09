@@ -104,12 +104,10 @@
      (kmacro-exec-ring-item (quote ([?\C-2 ?\C-0 ?\C-0 ?\C-0 ?L ?t ?f ?t ?\C-m] 0 "%d")) nil) ; thread
      (gnus-summary-hide-thread)
      (gnus-summary-next-thread 1))
-(define-key gnus-summary-mode-map [(control meta shift k)] 'my-gnus-lower-thread)
 
 ;; Misc
 (setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
       gnus-refer-thread-limit t)        ; ... (without success)
-(define-key gnus-summary-mode-map [(shift g) (shift g)] 'gnus-group-make-nnir-group)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

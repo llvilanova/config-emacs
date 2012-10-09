@@ -9,12 +9,9 @@
   (setq framepop-enable-keybinding "<f7>")
   (require 'framepop)
 
-  (define-key framepop-map [f7] 'framepop-toggle-frame)
-
-  ;; let the user decide if framepop should retain input focus
-  (define-key framepop-map "f" 'my-framepop-toggle-with-focus)
   (defvar my-framepop-with-focus t)
   (defun my-framepop-toggle-with-focus ()
+    "Toggle whether framepop should retain input focus."
     (interactive)
     (setq my-framepop-with-focus (not my-framepop-with-focus))
     (if my-framepop-with-focus
@@ -50,21 +47,8 @@
 (setq window-combination-resize t       ; try to be fair creating windows ...
       window-combination-limit t)       ; ... as well as deleting them
 
-(global-set-key [(meta f10)] 'maximize-window)
-(global-set-key [(control f10)] 'minimize-window)
-
-
-(put 'narrow-to-region 'disabled nil)   ; enable region narrowing
+(put 'narrow-to-region 'disabled nil)     ; enable region narrowing
 (put 'erase-buffer 'disabled nil)
-
-(global-set-key [pause] 'my-toggle-dedicated-window)
-
-;; Move between windows
-(windmove-default-keybindings 'meta)
-(global-set-key [(control x) (left)] 'windmove-left)
-(global-set-key [(control x) (right)] 'windmove-right)
-(global-set-key [(control x) (up)] 'windmove-up)
-(global-set-key [(control x) (down)] 'windmove-down)
 
 ;; Undo / redo window configurations
 (winner-mode 1)
@@ -93,7 +77,6 @@
       (setq my--swapping-buffer (current-buffer))
       (setq my--swapping-window (selected-window))
       (message "Buffer and window marked for swapping."))))
-(define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -122,26 +105,30 @@
 (show-paren-mode t)                     ; highlight matching parenthesis...
 (setq show-paren-style 'mixed)          ; ...but whole region if out of window
 
-;; Delete line and remaining blanks (like `dd' in VIM)
-(global-set-key [(control delete)] 'kill-whole-line)
-;; Duplicate current line
-(global-set-key [(control c) (y)] 'my-duplicate-line)
-;; Duplicate and comment current line
-(global-set-key [(control c) (control y)] '(lambda ()
-                                             (interactive)
-                                             (my-duplicate-line t)))
-;; DWIM kill word or region
-(global-set-key [(control w)]
-                '(lambda ()
-                   (interactive)
-                   (call-interactively
-                    (cond
-                     ((region-active-p) 'kill-region)
-                     (cua--rectangle    'cua-cut-rectangle)
-                     (t                 'backward-kill-word)))))
+(defun my-duplicate-line (&optional commentfirst)
+  "Duplicate line at point.
+If COMMENTFIRST is non-nil, comment the original line."
+  (interactive)
+  (beginning-of-line)
+  (push-mark)
+  (end-of-line)
+  (let ((str (buffer-substring (region-beginning) (region-end))))
+    (when commentfirst
+      (comment-region (region-beginning) (region-end)))
+    (insert (concat (if (= 0 (forward-line 1)) "" "\n") str "\n"))
+    (forward-line -1)))
 
-;; `iedit': interactive string replacement
-(global-set-key [(control \;)] 'iedit-mode)
+(defun my-duplicate-and-comment-line ()
+  (interactive)
+  (my-duplicate-line t))
+
+(defun my-kill-word-or-region-dwim ()
+  (interactive)
+  (call-interactively
+   (cond
+    ((region-active-p) 'kill-region)
+    (cua--rectangle    'cua-cut-rectangle)
+    (t                 'backward-kill-word))))
 
 ;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
@@ -268,21 +255,16 @@ directory, select directory. Lastly the file is opened."
          (lambda ()
            (setq ido-temp-list choices))))
     (ido-read-buffer prompt)))
-(global-set-key [(control c) (control x) (control f)]
-                'my-file-cache-ido-find-file)
 
 ;; `smex': command-completion interface on top of `ido'
 ;;         replaces emacs's default `execute-extended-command'
 ;;         supersedes `icomplete+'
 (setq smex-save-file (path my-cache-dir "smex.save"))
 (smex-initialize)
-(global-set-key [(meta x)]       'smex)
-(global-set-key [(meta shift x)] 'smex-major-mode-commands)
 
 ;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
-(global-set-key [(control x) (control b)] 'ibuffer)
 (defvar my-ibuffer-saved-filter-groups
   '(("default"
      ("Org" (or
@@ -338,7 +320,6 @@ directory, select directory. Lastly the file is opened."
            (require 'bookmark)
            (setq ido-temp-list (bookmark-all-names)))))
     (ido-read-buffer prompt)))
-(global-set-key [(control x) (r) (b)] 'my-jump-to-bookmark)
 
 ;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))
@@ -354,13 +335,6 @@ directory, select directory. Lastly the file is opened."
              (eshell-smart-initialize)))
 
 (put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
-
-;; `flymake'
-(add-hook 'flymake-mode-hook
-          '(lambda ()
-             ;; Keymaps to navigate between the errors
-             (local-set-key [(meta n)] 'flymake-goto-next-error)
-             (local-set-key [(meta p)] 'flymake-goto-prev-error)))
 
 ;; `re-builder'
 (add-hook 'reb-mode-hook
