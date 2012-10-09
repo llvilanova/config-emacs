@@ -14,10 +14,12 @@
       sendmail-program "/usr/bin/msmtp"
       message-sendmail-extra-arguments '("--read-recipients")
       send-mail-function 'message-send-mail-with-sendmail)
-(add-to-list 'message-send-hook
-             '(lambda ()
-                (setq message-sendmail-envelope-from
-                      (mail-strip-quoted-names (mail-fetch-field "From")))))
+(eval-after-load 'message
+  '(progn
+     (add-to-list 'message-send-hook
+                  '(lambda ()
+                     (setq message-sendmail-envelope-from
+                           (mail-strip-quoted-names (mail-fetch-field "From")))))))
 
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
