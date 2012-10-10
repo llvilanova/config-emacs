@@ -148,6 +148,19 @@ If COMMENTFIRST is non-nil, comment the original line."
              ;; functions.
              (iedit-mode)))))))
 
+;; `multiple-cursors'
+(defun my-mc/mark-all (region)
+  "Use `mc/mark-all-like-this' in current function or `mc/mark-all-in-region'."
+  (interactive "P")
+  (if region
+      (call-interactively 'mc/mark-all-in-region)
+    (save-excursion
+      (save-restriction
+        (if nil nil nil)
+        (widen)
+        (narrow-to-defun)
+        (mc/mark-all-like-this)))))
+
 ;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
 (setq-default save-place t)             ; activate it for all buffers

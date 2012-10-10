@@ -62,11 +62,14 @@
   '(progn
      (global-set-key (kbd "C-M-S-m") 'er/expand-region)))
 
-;; `mark-multiple'
+;; `multiple-cursors'
 (eval-after-load 'mark-multiple
   '(progn
-     (global-set-key (kbd "C-M-m") 'mark-more-like-this)
-     (global-set-key (kbd "C-*") 'mark-all-like-this)))
+     (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+     (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+     (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+     (global-set-key (kbd "C-c C-<") 'my-mc/mark-all)
+     (global-set-key (kbd "C-c C->") 'mc/mark-more-like-this-extended)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
