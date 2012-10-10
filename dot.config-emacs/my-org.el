@@ -73,7 +73,10 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                ((org-agenda-skip-function-global nil)
                 (org-agenda-skip-function
                  '(my-org-agenda-skip-tag "conference" t)))))
-(setq org-agenda-skip-function-global (apply-partially 'my-org-agenda-skip-tag "conference"))
+(setq org-agenda-skip-function-global
+      '(lambda (&rest args)
+         (or (apply 'my-org-agenda-skip-tag "conference" args)
+            (apply 'my-org-agenda-skip-tag "gohome" args))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
