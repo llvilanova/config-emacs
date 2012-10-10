@@ -130,6 +130,24 @@ If COMMENTFIRST is non-nil, comment the original line."
     (cua--rectangle    'cua-cut-rectangle)
     (t                 'backward-kill-word))))
 
+;; `iedit'
+(eval-after-load 'iedit
+  '(defun my-iedit-dwim (arg)
+     "Starts iedit but uses \\[narrow-to-defun] to limit its scope."
+     (interactive "P")
+     (if arg
+         (iedit-mode)
+       (save-excursion
+         (save-restriction
+           (widen)
+           ;; this function determines the scope of `iedit-start'.
+           (narrow-to-defun)
+           (if iedit-mode
+               (iedit-done)
+             ;; `current-word' can of course be replaced by other
+             ;; functions.
+             (iedit-mode)))))))
+
 ;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
 (setq-default save-place t)             ; activate it for all buffers

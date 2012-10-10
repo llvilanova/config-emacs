@@ -48,7 +48,7 @@
 (global-set-key [(control w)] 'my-kill-word-or-region-dwim)
 
 ;; `iedit': interactive string replacement
-(global-set-key [(control \;)] 'iedit-mode)
+(global-set-key [(control \;)] 'my-iedit-dwim)
 
 ;; `ace-jump-mode'
 (eval-after-load 'ace-jump-mode
