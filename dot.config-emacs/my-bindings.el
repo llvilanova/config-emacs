@@ -44,6 +44,8 @@
 (global-set-key [(control c) (y)] 'my-duplicate-line)
 ;; Duplicate and comment current line
 (global-set-key [(control c) (control y)] 'my-duplicate-and-comment-line)
+;; Copy line and increment numbers
+(global-set-key [(control c) (meta y)] 'my-copy-increment)
 ;; DWIM kill word or region
 (global-set-key [(control w)] 'my-kill-word-or-region-dwim)
 
