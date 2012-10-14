@@ -140,6 +140,7 @@ command to be run in a shell.")
         (:name magit                 :type apt-get
                :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
         (:name multiple-cursors      :type elpa)
+               :features multiple-cursors)
         ;; multi-term
         (:name org-exp-bibtex        :type http
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
