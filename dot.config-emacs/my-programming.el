@@ -187,19 +187,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Templates
 
-;; `template': File templates
-;; TODO: replace with cedet's `srecode'
-(autoload 'template-initialize (path my-code-dir "template" "lisp" "template"))
-(add-to-list 'my-recompile-objs (path my-code-dir "template" "lisp"))
-(my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                (setq template-default-directories
-                      (cons
-                       (if (file-directory-p (path my-data-dir "templates" ""))
-                           (path my-data-dir "templates" "")
-                         nil)
-                       nil))
-                (template-initialize)))
+(global-srecode-minor-mode t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
