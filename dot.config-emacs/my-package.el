@@ -139,7 +139,7 @@ command to be run in a shell.")
         magithub
         (:name magit                 :type apt-get
                :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
-        (:name multiple-cursors      :type elpa)
+        (:name multiple-cursors      :type elpa
                :features multiple-cursors)
         ;; multi-term
         (:name org-exp-bibtex        :type http
