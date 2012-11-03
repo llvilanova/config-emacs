@@ -159,7 +159,8 @@ command to be run in a shell.")
         (:name pretty-mode           :type git
                :features (pretty-mode)
                :url "https://github.com/mattharrison/pretty-mode.git"
-               :after (add-hook 'after-init-hook '(lambda () (global-pretty-mode t))))
+               ;; Seems `global-pretty-mode' is broken
+               :after (add-hook 'find-file-hook 'turn-on-pretty-if-desired))
         (:name pylint                :type apt-get
                :after (when (load "flymake" t)
                         (defun my--flymake-pylint-init ()
