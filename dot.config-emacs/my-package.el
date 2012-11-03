@@ -181,7 +181,6 @@ command to be run in a shell.")
         (:name unipoint              :type git
                :url "https://github.com/apgwoz/unipoint.git"
                :after (autoload 'unipoint-mode "unipoint"))
-        (:name yasnippet             :type elpa)
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name wrap-region           :type http
@@ -189,6 +188,7 @@ command to be run in a shell.")
                :after (wrap-region-global-mode))
         (:name xcscope
                :features nil)
+        (:name yasnippet             :type elpa)
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
