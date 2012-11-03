@@ -324,7 +324,7 @@ Otherwise, use `recompile'.
 If ARG is not nil, force a call to `compile'."
   (interactive "P")
   (if arg
-      (call-interactively 'compile)
+      (call-interactively 'compile nil (vector (list 4)))
     (condition-case nil
         (call-interactively 'kill-compilation)
       (error (call-interactively 'recompile))))
