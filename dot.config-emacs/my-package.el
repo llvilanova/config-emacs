@@ -181,6 +181,8 @@ command to be run in a shell.")
         (:name unipoint              :type git
                :url "https://github.com/apgwoz/unipoint.git"
                :after (autoload 'unipoint-mode "unipoint"))
+        (:name wgrep                 :type git
+               :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name wrap-region           :type http
