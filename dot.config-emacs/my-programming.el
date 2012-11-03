@@ -260,7 +260,7 @@
 (global-auto-complete-mode t)
 
 (defun my-ac-source-semantic-enable ()
-  (yas/minor-mode 1)                    ; enable yasnippet for arg placeholders
+  (yas-minor-mode 1)                    ; enable yasnippet for arg placeholders
   (add-to-list 'ac-sources 'ac-source-semantic-raw)
   (add-to-list 'ac-sources 'ac-source-semantic))
 
@@ -276,7 +276,7 @@
            ac-use-menu-map t)           ; allow C-n/C-p in completion menu
      (add-hook 'auto-complete-mode-hook
                '(lambda ()
-                  ;; (setq yas/trigger-key nil)
+                  ;; (setq yas-trigger-key nil)
                   (ac-set-trigger-key "TAB")))
 
      (my-add-hook 'c-mode-common-hook
