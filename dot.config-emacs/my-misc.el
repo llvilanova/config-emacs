@@ -83,5 +83,9 @@ even when ECB is not active."
         (set-process-sentinel process callback)
         nil))))
 
+;; TODO: remove once Gnus is updated
+(defun gnus-funcall-no-warning (function &rest args)
+  (when (fboundp function)
+    (apply function args)))
 
 (provide 'my-misc)
