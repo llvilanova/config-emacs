@@ -148,6 +148,7 @@ all lines and unhighlights all elements."
 (defvar lv--re-history nil
   "List of arguments to `lv-add-re' so far.")
 
+;;;###autoload
 (defun lv-add-re (&optional re)
   "Add a regexp to select and highlight lines."
   (interactive)
@@ -160,6 +161,7 @@ all lines and unhighlights all elements."
   (add-to-list 'lv--re re)
   (lv-add re))
 
+;;;###autoload
 (defun lv-del-re (&optional re)
   "Remove one of the current regexps to select and highlight lines."
   (interactive)
@@ -230,12 +232,12 @@ all lines and unhighlights all elements."
 
 (defvar lv-mode-map (make-sparse-keymap)
   "Keymap for `lv-mode'.")
-(define-key lv-mode-map "t" 'lv-toggle)
-(define-key lv-mode-map "r" 'lv-add-re)
-(define-key lv-mode-map "R" 'lv-del-re)
-(define-key lv-mode-map "l" 'lv-add-limit)
-(define-key lv-mode-map "L" 'lv-del-limit)
-(define-key lv-mode-map "Q" 'lv-reset)
+(define-key lv-mode-map (kbd "C-c t") 'lv-toggle)
+(define-key lv-mode-map (kbd "C-c r") 'lv-add-re)
+(define-key lv-mode-map (kbd "C-c R") 'lv-del-re)
+(define-key lv-mode-map (kbd "C-c l") 'lv-add-limit)
+(define-key lv-mode-map (kbd "C-c L") 'lv-del-limit)
+(define-key lv-mode-map (kbd "C-c Q") 'lv-reset)
 
 ;;;###autoload
 (define-minor-mode lv-mode
