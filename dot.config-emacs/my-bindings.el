@@ -54,11 +54,9 @@
 (global-set-key [(control \;)] 'my-iedit-dwim)
 
 ;; `ace-jump-mode'
-(eval-after-load 'ace-jump-mode
-  '(progn
-     (global-set-key [(control c) (j) (c)] 'ace-jump-char-mode)
-     (global-set-key [(control c) (j) (w)] 'ace-jump-word-mode)
-     (global-set-key [(control c) (j) (l)] 'ace-jump-line-mode)))
+(global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
+(global-set-key [(control c) (control j) (w)] 'ace-jump-word-mode)
+(global-set-key [(control c) (control j) (l)] 'ace-jump-line-mode)
 
 ;; `expand-region'
 (eval-after-load 'expand-region
