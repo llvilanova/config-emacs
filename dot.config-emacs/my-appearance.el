@@ -29,7 +29,6 @@
 (menu-bar-mode  t)                           ; show the menu...
 (tool-bar-mode -1)                           ; ... but not the the toolbar
 
-(set-fringe-mode 'half)                      ; space left of col1
 (setq-default indicate-empty-lines t         ; fringe indicators
               indicate-buffer-boundaries 'left)
 
