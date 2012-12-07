@@ -58,9 +58,7 @@
   (add-to-list 'lv--sn-history sn t)
   (setq lv--sn-history-str (mapcar 'int-to-string lv--sn-history))
   (add-to-list 'lv--sn sn)
-  (lv--add (lv--sn-to-re sn))
-  (lv--prepare)
-  (lv--apply))
+  (lv-add (lv--sn-to-re sn)))
 
 ;;;###autoload
 (defun lv-del-sn (&optional sn)
@@ -73,13 +71,11 @@
               (completing-read "Sequence number: "
                                (mapcar 'int-to-string lv--sn)))))
   (setq lv--sn (remove sn lv--sn))
-  (lv--prepare)
-  (lv--del (lv--sn-to-re sn))
-  (lv--apply))
+  (lv-del (lv--sn-to-re sn)))
 
 
-(define-key lv-mode-map "s" 'lv-add-sn)
-(define-key lv-mode-map "S" 'lv-del-sn)
+(define-key lv-mode-map (kbd "C-c s") 'lv-add-sn)
+(define-key lv-mode-map (kbd "C-c S") 'lv-del-sn)
 
 
 (provide 'lv-gem5-trace)
