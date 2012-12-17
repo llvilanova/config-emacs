@@ -26,6 +26,7 @@
 (unless (file-exists-p (path package-user-dir "archives"))
   ;; first-time initialization
   (package-refresh-contents))
+(package-initialize t)
 
 
 ;; local site-lisp
