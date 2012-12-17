@@ -88,4 +88,12 @@ even when ECB is not active."
   (when (fboundp function)
     (apply function args)))
 
+
+;; Temporary work around for packages using disappeared `make-local-hook'
+(defalias 'make-local-hook
+  (if (featurep 'xemacs)
+      'make-local-hook
+    'ignore))
+
+
 (provide 'my-misc)
