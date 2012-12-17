@@ -1,9 +1,11 @@
 ;;; init.el --- Start configuration process.
 
-(defvar my-emacs-load-start (current-time))
+;; Show backtrace on error
+(toggle-debug-on-error t)
+;; Show backtrace on quit
+(toggle-debug-on-quit t)
 
-;; ;; Show backtrace on error
-;; (toggle-debug-on-error t)
+(defvar my-emacs-load-start (current-time))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; This configuration assumes the following packages/libraries are available:
@@ -97,3 +99,7 @@ cdr instead."
          (destructuring-bind (hi lo us ps) (current-time)
            (- (+ hi lo) (+ (first my-emacs-load-start)
                            (second my-emacs-load-start)))))
+
+;; Restore backtrace states
+(toggle-debug-on-error -1)
+(toggle-debug-on-quit -1)
