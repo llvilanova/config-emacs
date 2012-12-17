@@ -59,9 +59,7 @@
 (global-set-key [(control c) (control j) (l)] 'ace-jump-line-mode)
 
 ;; `expand-region'
-(eval-after-load 'expand-region
-  '(progn
-     (global-set-key (kbd "C-M-S-m") 'er/expand-region)))
+(global-set-key [(control shift return)] 'er/expand-region)
 
 ;; `multiple-cursors'
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
