@@ -383,6 +383,10 @@ If ARG is not nil, force a call to `compile'."
 (setq vc-delete-logbuf-window nil       ; bury log after commit (do not delete)
       vc-diff-switches "-u")            ; use unified diff by default
 
+;; `vc' + `popwin'
+(push '(diff-mode :position right :width 90 :stick t) popwin:special-display-config)
+(push '(log-edit-mode :position bottom :stick t) popwin:special-display-config)
+(push '(vc-git-log-edit-mode :position bottom :stick t) popwin:special-display-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
