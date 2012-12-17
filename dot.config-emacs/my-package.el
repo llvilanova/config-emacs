@@ -149,6 +149,9 @@ command to be run in a shell.")
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
                :after (eval-after-load 'org-bibtex
                         (require 'org-exp-bibtex)))
+        (:name org-gnome-calendar    :type git
+               :url "https://github.com/llvilanova/org-gnome-calendar"
+               :after (global-org-gnome-calendar-mode))
         (:name popwin
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
