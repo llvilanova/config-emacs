@@ -138,8 +138,10 @@ command to be run in a shell.")
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
         magithub
-        (:name magit                 :type apt-get
-               :after (add-hook 'magit-mode-hook 'turn-on-magit-stgit))
+        (:name magit
+               :after (progn
+                        (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
+                        (setq magit-diff-refine-hunk t)))
         (:name multiple-cursors      :type elpa
                :features multiple-cursors)
         ;; multi-term
