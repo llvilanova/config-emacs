@@ -156,12 +156,7 @@ command to be run in a shell.")
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
         (:name pos-tip               :type elpa)
-        (:name predictive            :type http-tar
-               :url "http://www.dr-qubit.org/download.php?file=predictive/predictive-0.23.13.tar.gz"
-               :options ("zxf")
-               :build ("make")
-               :load-path ("." "latex" "texinfo" "html")
-               :features nil
+        (:name predictive
                :after (progn
                         (autoload 'predictive-mode "predictive" nil t)
                         (autoload 'predictive-create-dict "predictive" nil t)))
