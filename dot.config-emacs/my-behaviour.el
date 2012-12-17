@@ -313,6 +313,10 @@ directory, select directory. Lastly the file is opened."
 (setq smex-save-file (path my-cache-dir "smex.save"))
 (smex-initialize)
 
+;; `icomplete-mode'
+;; Complements `smex' where it is not used
+(icomplete-mode)
+
 ;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
