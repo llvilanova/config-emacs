@@ -49,6 +49,8 @@
 (global-set-key [(control c) (meta y)] 'my-copy-increment)
 ;; DWIM kill word or region
 (global-set-key [(control w)] 'my-kill-word-or-region-dwim)
+;; Show line numbers when using `goto-line'
+(global-set-key (vector 'remap 'goto-line) 'my-goto-line-with-feedback)
 
 ;; `iedit': interactive string replacement
 (global-set-key [(control \;)] 'my-iedit-dwim)
