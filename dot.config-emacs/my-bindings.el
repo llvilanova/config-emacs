@@ -178,5 +178,9 @@
   (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
   (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
 
+;; Start version control interface
+(global-set-key [f9] 'my-dwim-vc)
+(global-set-key [(meta f9)] 'vc-dir)          ; force `vc'
+(global-set-key [(control f9)] 'magit-status) ; force `magit'
 
 (provide 'my-bindings)

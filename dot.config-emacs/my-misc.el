@@ -92,6 +92,17 @@ even when ECB is not active."
         (goto-line (read-number "Goto line: ")))
     (linum-mode -1)))
 
+(defun my-dwim-vc (&optional buf)
+  "Start version control interface according to the backend for given buffer."
+  (interactive)
+  (let ((dir (or (and (buffer-file-name buf)
+                   (file-name-directory (buffer-file-name buf)))
+                (and (called-interactively-p 'interactive)
+                   (read-directory-name "Select directory: ")))))
+    (case (vc-responsible-backend dir)
+      ('Git (magit-status dir))
+      (t    (vc-dir dir)))))
+
 ;; TODO: remove once Gnus is updated
 (defun gnus-funcall-no-warning (function &rest args)
   (when (fboundp function)
