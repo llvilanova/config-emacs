@@ -106,8 +106,8 @@
      (gnus-summary-next-thread 1))
 
 ;; Misc
-(setq gnus-fetch-old-headers t          ; try to make 'A T' work ...
-      gnus-refer-thread-limit t)        ; ... (without success)
+(setq gnus-fetch-old-headers nil          ; only fetch unread/marked messages
+      gnus-refer-thread-limit t)        ; try to make 'A T' work
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
