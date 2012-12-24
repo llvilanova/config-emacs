@@ -169,9 +169,10 @@ If COMMENTFIRST is non-nil, comment the original line."
 ;; backups: all in one single place
 (setq my-backup-dir (path my-cache-dir "backups" ""))
 (make-directory my-backup-dir t)
-(setq make-backup-files t               ; do make backups
-      backup-by-copying t               ; and copy them here
-      backup-directory-alist (list (cons "." my-backup-dir))
+(setq make-backup-files t               ; do make backups ...
+      vc-make-backup-files t            ; ... even for VC ...
+      backup-by-copying t               ; ... and copy them ...
+      backup-directory-alist (list (cons "." my-backup-dir)) ; ... here
       version-control t
       kept-new-versions 2
       kept-old-versions 5
