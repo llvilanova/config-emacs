@@ -102,6 +102,11 @@ command to be run in a shell.")
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         ecb
+        (:name elisp-slime-nav       :type elpa
+               :after (progn
+                        (add-hook 'emacs-lisp-mode-hook
+                                  (lambda () (diminish 'elisp-slime-nav-mode)))
+                        (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
                :url "https://github.com/rejeep/enclose/raw/master/enclose.el")
