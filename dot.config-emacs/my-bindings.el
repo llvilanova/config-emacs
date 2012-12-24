@@ -178,6 +178,18 @@
   (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
   (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
 
+;; `magit' in full screen
+(defadvice magit-status (around magit-fullscreen activate)
+  (window-configuration-to-register :magit-fullscreen)
+  ad-do-it
+  (delete-other-windows))
+(defun magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
+(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+
 ;; Start version control interface
 (global-set-key [f9] 'my-dwim-vc)
 (global-set-key [(meta f9)] 'vc-dir)          ; force `vc'
