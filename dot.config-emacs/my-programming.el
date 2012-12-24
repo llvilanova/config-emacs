@@ -96,6 +96,7 @@
 
              ;; Highlight TODO's and the like
              (fic-ext-mode 1)
+             (diminish 'fic-ext-mode)
 
              ;; (which-function-mode 1)    ; show current tag in modeline
 

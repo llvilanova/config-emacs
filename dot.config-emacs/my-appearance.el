@@ -55,6 +55,9 @@
 (sml-modeline-mode 1)                        ; ... but in modeline
 (set-variable 'sml-modeline-len 10)
 
+;; `diminish'
+(diminish 'undo-tree-mode)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; utf8 / input-method

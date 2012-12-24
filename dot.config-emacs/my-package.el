@@ -98,6 +98,7 @@ command to be run in a shell.")
         ;; (:name cssh                  :type elpa)
         cedet
         (:name cursor-chg            :type emacswiki)
+        diminish
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         ecb
@@ -199,6 +200,7 @@ command to be run in a shell.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(el-get 'sync '(el-get diminish))
 (el-get 'sync (append '(el-get)
                       (mapcar 'el-get-source-name el-get-sources)))
 (my-regenerate-autoloads)
