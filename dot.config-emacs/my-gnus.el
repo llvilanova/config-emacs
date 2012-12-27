@@ -206,6 +206,7 @@ See (info \"(gnus)Group Line Specification\")."
 ;; Hide article parts
 (setq gnus-treat-hide-signature t)
 
+;; Execute external commands on messages
 (defvar my-gnus-article-apply-command-history nil)
 (defun my-gnus-article-apply-command (command)
   (interactive
@@ -232,6 +233,7 @@ See (info \"(gnus)Group Line Specification\")."
     (shell-command command buf buf)
     (delete-file file)))
 
+;; Add line indicating patch reviewal
 (defun my-gnus-patch-process (tag)
   (interactive)
   (unless (eq major-mode 'message-mode)
