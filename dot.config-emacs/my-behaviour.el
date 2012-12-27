@@ -237,6 +237,11 @@ then only one line is copied."
     (insert line "\n")
     (move-to-column col)))
 
+;; `global-auto-revert-mode'
+(global-auto-revert-mode 1)                  ; auto refresh buffers ...
+(setq global-auto-revert-non-file-buffers t) ; ... including dired ...
+(setq auto-revert-verbose nil)                 ; ... but be quiet about it
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Minibuffer
