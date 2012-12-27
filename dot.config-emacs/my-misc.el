@@ -95,6 +95,7 @@ even when ECB is not active."
 (defun my-dwim-vc (&optional buf)
   "Start version control interface according to the backend for given buffer."
   (interactive)
+  (require 'vc)
   (let ((dir (or (and (buffer-file-name buf)
                    (file-name-directory (buffer-file-name buf)))
                 (and (called-interactively-p 'interactive)
