@@ -24,6 +24,7 @@
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
 (setq my-gnus-start-or-hide-windows nil)
+(make-variable-frame-local 'my-gnus-start-or-hide-windows)
 (defun my-gnus-start-or-hide ()
   (interactive)
   (let ((found nil))
