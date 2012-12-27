@@ -96,9 +96,28 @@
    gnus-sum-thread-tree-indent          " ")
   (gnus-message 5 "Using tree layout with wide unicode arrows."))
 
+;; Size formatter
+(defun my-gnus-summary-line-message-size (head)
+  "Return pretty-printed version of message size.
+
+Like `gnus-summary-line-message-size' but more verbose.  This function is
+intended to be used in `gnus-summary-line-format-alist', with
+\(defalias 'gnus-user-format-function-X 'my-gnus-summary-line-message-size).
+
+See (info \"(gnus)Group Line Specification\")."
+  (let ((c (or (mail-header-chars head) -1)))
+    (gnus-message 9 "c=%s chars in article %s" c (mail-header-number head))
+    (cond ((< c 0) "n/a") ;; chars not available
+          ((< c (* 1000))       (format "%db"  c))
+          ((< c (* 1000 10))    (format "%1.1fk" (/ c 1024.0)))
+          ((< c (* 1000 1000))  (format "%dk" (/ c 1024.0)))
+          ((< c (* 1000 10000)) (format "%1.1fM" (/ c (* 1024.0 1024))))
+          (t (format "%dM" (/ c (* 1024.0 1024)))))))
+(defalias 'gnus-user-format-function-size 'my-gnus-summary-line-message-size)
+
 ;; Actual format
 (my-gnus-summary-tree-arrows-wide)
-(setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4L: %-23,23f%] %B%s%)\n"
+(setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4u&size;: %-23,23f%] %B%s%)\n"
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-summary-mode-line-format "Gnus: %p %Z")
 
