@@ -179,16 +179,20 @@
   (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
 
 ;; `magit' in full screen
+(setq my-magit-status-windows nil)
+(make-variable-frame-local 'my-magit-status-windows)
 (defadvice magit-status (around magit-fullscreen activate)
-  (window-configuration-to-register :magit-fullscreen)
+  (setq my-magit-status-windows (current-window-configuration))
   ad-do-it
   (delete-other-windows))
-(defun magit-quit-session ()
+(defun my-magit-quit-session ()
   "Restores the previous window configuration and kills the magit buffer"
   (interactive)
   (kill-buffer)
-  (jump-to-register :magit-fullscreen))
-(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+  (set-window-configuration my-magit-status-windows))
+(add-hook 'magit-mode-hook
+          (lambda ()
+            (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)))
 
 ;; Start version control interface
 (global-set-key [f9] 'my-dwim-vc)
