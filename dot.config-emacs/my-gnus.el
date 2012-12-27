@@ -266,4 +266,4 @@ See (info \"(gnus)Group Line Specification\")."
 ;; Personal settings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'my-gnus-personal nil t)
+(load "my-gnus-personal" t)
