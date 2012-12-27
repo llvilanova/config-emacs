@@ -115,9 +115,27 @@ See (info \"(gnus)Group Line Specification\")."
           (t (format "%dM" (/ c (* 1024.0 1024)))))))
 (defalias 'gnus-user-format-function-size 'my-gnus-summary-line-message-size)
 
+;; Score formatter
+(defun my-gnus-summary-line-score (head)
+  "Return pretty-printed version of article score.
+
+See (info \"(gnus)Group Line Specification\")."
+  (let ((c (gnus-summary-article-score (mail-header-number head))))
+    ;; (gnus-message 9 "c=%s chars in article %s" c (mail-header-number head))
+    (cond ((< c -1000)     "vv")
+          ((< c  -100)     " v")
+          ((< c   -10)     "--")
+          ((< c     0)     " -")
+          ((= c     0)     "  ")
+          ((< c    10)     " +")
+          ((< c   100)     "++")
+          ((< c  1000)     " ^")
+          (t               "^^"))))
+(defalias 'gnus-user-format-function-score 'my-gnus-summary-line-score)
+
 ;; Actual format
 (my-gnus-summary-tree-arrows-wide)
-(setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4u&size;: %-23,23f%] %B%s%)\n"
+(setq gnus-summary-line-format "%U%R%u&score; %(%-16&user-date; %[%4u&size;: %-23,23f%] %B%s%)\n"
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-summary-mode-line-format "Gnus: %p %Z")
 
