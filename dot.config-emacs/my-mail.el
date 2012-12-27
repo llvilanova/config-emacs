@@ -31,11 +31,9 @@
              (let* ((buf (window-buffer window))
                     (mode (buffer-local-value 'major-mode buf))
                     (name (symbol-name mode)))
-               (message "%s :: %s" buf name)
                (if (string-match "^gnus-" name)
                    (setq found t))))
           (window-list))
-    (message "-> %s" found)
     (if found
         (progn
           (gnus-group-suspend)
