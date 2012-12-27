@@ -87,12 +87,12 @@
   "Use tree layout with wide unicode arrows."
   (interactive)
   (setq
-   gnus-sum-thread-tree-false-root      "┈┬──▷ "
-   gnus-sum-thread-tree-single-indent   " ●  "
+   gnus-sum-thread-tree-false-root      "┈┬▶ "
+   gnus-sum-thread-tree-single-indent   " o  "
    gnus-sum-thread-tree-root            "┌─▶ "
    gnus-sum-thread-tree-vertical        "│"
-   gnus-sum-thread-tree-leaf-with-other "├──► "
-   gnus-sum-thread-tree-single-leaf     "└──► "
+   gnus-sum-thread-tree-leaf-with-other "├──▶ "
+   gnus-sum-thread-tree-single-leaf     "└──▶ "
    gnus-sum-thread-tree-indent          " ")
   (gnus-message 5 "Using tree layout with wide unicode arrows."))
 
@@ -133,9 +133,37 @@ See (info \"(gnus)Group Line Specification\")."
           (t               "^^"))))
 (defalias 'gnus-user-format-function-score 'my-gnus-summary-line-score)
 
+;; Faces
+(copy-face 'default 'my-gnus-face-sep)
+(set-face-foreground 'my-gnus-face-sep "grey60")
+(setq gnus-face-10 'my-gnus-face-sep)
+
+(copy-face 'default 'my-gnus-face-info)
+(set-face-foreground 'my-gnus-face-info "grey60")
+(set-face-italic 'my-gnus-face-info t)
+(setq gnus-face-11 'my-gnus-face-info)
+
 ;; Actual format
 (my-gnus-summary-tree-arrows-wide)
-(setq gnus-summary-line-format "%U%R%u&score; %(%-16&user-date; %[%4u&size;: %-23,23f%] %B%s%)\n"
+(setq gnus-summary-line-format
+      (concat
+       "%0{%U%R%z%}"
+       "%10{│%}"
+       ;; "%d"
+       "%11{%-16&user-date;%}"
+       "%10{│%}"
+       ;; "%11{%4k%}"
+       "%11{%4u&size;%}"
+       "%10{│%}"
+       "%("
+       ;; "%[%-23,23f%]"
+       "%-23,23f"
+       "%10{│%}"
+       "%u&score;"
+       "%10{│%}"
+       "%*"
+       "%B%s"
+       "%)\n")
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
       gnus-summary-mode-line-format "Gnus: %p %Z")
 
