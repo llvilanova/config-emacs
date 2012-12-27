@@ -58,22 +58,53 @@
 ;; Searching
 (require 'nnir)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Summary
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Format
+
+;; Default
+(defun my-gnus-summary-tree-arrows-ascii-default ()
+  "Use default tree layout with ascii arrows."
+  ;; See `gnus-sum.el'.  Useful for restoring defaults.
+  (interactive)
+  (setq
+   ;; Defaults from `gnus-sum.el'
+   gnus-sum-thread-tree-false-root      "> "
+   gnus-sum-thread-tree-single-indent   ""
+   gnus-sum-thread-tree-root            "> "
+   gnus-sum-thread-tree-vertical        "| "
+   gnus-sum-thread-tree-leaf-with-other "+-> "
+   gnus-sum-thread-tree-single-leaf "  \\-> "
+   gnus-sum-thread-tree-indent          "  ")
+  (gnus-message 5 "Using default ascii tree layout."))
+
+;; Wide
+(defun my-gnus-summary-tree-arrows-wide ()
+  "Use tree layout with wide unicode arrows."
+  (interactive)
+  (setq
+   gnus-sum-thread-tree-false-root      "┈┬──▷ "
+   gnus-sum-thread-tree-single-indent   " ●  "
+   gnus-sum-thread-tree-root            "┌─▶ "
+   gnus-sum-thread-tree-vertical        "│"
+   gnus-sum-thread-tree-leaf-with-other "├──► "
+   gnus-sum-thread-tree-single-leaf     "└──► "
+   gnus-sum-thread-tree-indent          " ")
+  (gnus-message 5 "Using tree layout with wide unicode arrows."))
+
+;; Actual format
+(my-gnus-summary-tree-arrows-wide)
 (setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4L: %-23,23f%] %B%s%)\n"
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-      gnus-sum-thread-tree-false-root      "┈┬──▷ "
-      gnus-sum-thread-tree-single-indent   " ●  "
-      gnus-sum-thread-tree-root            "┌─▶ "
-      gnus-sum-thread-tree-vertical        "│"
-      gnus-sum-thread-tree-leaf-with-other "├──► "
-      gnus-sum-thread-tree-single-leaf     "└──► "
-      gnus-sum-thread-tree-indent          " "
-
       gnus-summary-mode-line-format "Gnus: %p %Z")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Miscellaneous
 
 ;; Sorting
 (setq gnus-thread-sort-functions
