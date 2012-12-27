@@ -178,21 +178,33 @@
   (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
   (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
 
-;; `magit' in full screen
+;; `magit' in fullscreen
 (setq my-magit-status-windows nil)
 (make-variable-frame-local 'my-magit-status-windows)
 (defadvice magit-status (around magit-fullscreen activate)
   (setq my-magit-status-windows (current-window-configuration))
   ad-do-it
-  (delete-other-windows))
+  (delete-other-windows)
+  (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
 (defun my-magit-quit-session ()
   "Restores the previous window configuration and kills the magit buffer"
   (interactive)
   (kill-buffer)
   (set-window-configuration my-magit-status-windows))
-(add-hook 'magit-mode-hook
-          (lambda ()
-            (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session)))
+
+;; `vc' in fullscreen
+(setq my-vc-dir-windows nil)
+(make-variable-frame-local 'my-vc-dir-windows)
+(defadvice vc-dir (around vc-dir-fullscreen activate)
+  (setq my-vc-dir-windows (current-window-configuration))
+  ad-do-it
+  (delete-other-windows)
+  (define-key vc-dir-mode-map (kbd "q") 'my-vc-dir-quit-session))
+(defun my-vc-dir-quit-session ()
+  "Restores the previous window configuration and exits the vc buffer"
+  (interactive)
+  (quit-window)
+  (set-window-configuration my-vc-dir-windows))
 
 ;; Start version control interface
 (global-set-key [f9] 'my-dwim-vc)
