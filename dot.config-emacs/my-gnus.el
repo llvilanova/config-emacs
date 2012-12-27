@@ -62,20 +62,6 @@
 ;; Summary
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Expiration
-(add-to-list 'gnus-parameters '("^[^+:]+\\+GMX:"
-                                (total-expire             .    t)
-                                (expiry-wait              .  180))) ; 6 months
-(add-to-list 'gnus-parameters '("^[^+:]+\\+AC:"
-                                (total-expire             .    t)
-                                (expiry-wait              . 1461))) ; 4 years
-(add-to-list 'gnus-parameters '("^[^+:]+\\+BSC:"
-                                (total-expire             .    t)
-                                (expiry-wait              . 1461))) ; 4 years
-(add-to-list 'gnus-parameters '("^[^+:]+\\+[^:]*:Lists\\."
-                                (total-expire             .    t)
-                                (expiry-wait              .   90))) ; 2 months
-
 ;; Format
 (setq gnus-summary-line-format "%U%R%z %(%-16&user-date; %[%4L: %-23,23f%] %B%s%)\n"
       gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
@@ -225,6 +211,9 @@
 (setq gnus-select-method            '(nnnil "nil")
       gnus-secondary-select-methods nil)
 
-(my-add-gnus-account "GMX" "Lluís" "xscript@gmx.net")
-(my-add-gnus-account "AC"  nil     "vilanova@ac.upc.edu")
-(my-add-gnus-account "BSC" nil     "lluis.vilanova@bsc.es")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Personal settings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'my-gnus-personal nil t)
