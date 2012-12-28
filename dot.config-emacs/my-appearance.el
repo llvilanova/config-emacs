@@ -26,8 +26,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global appearance
 
-(menu-bar-mode  t)                           ; show the menu...
-(tool-bar-mode -1)                           ; ... but not the the toolbar
+(tool-bar-mode -1)                           ; do not show the toolbar ...
+(menu-bar-mode -1)                           ; ... nor the menu ...
+(defun my-menu-bar-open-after ()             ; ... except when asked to
+  (remove-hook 'pre-command-hook 'my-menu-bar-open-after)
+  (when (eq menu-bar-mode 42)
+    (menu-bar-mode -1)))
+(defun my-menu-bar-open (&rest args)
+  (interactive)
+  (let ((open menu-bar-mode))
+    (unless open
+      (menu-bar-mode 1))
+    (funcall 'menu-bar-open args)
+    (unless open
+      (setq menu-bar-mode 42)
+      (add-hook 'pre-command-hook 'my-menu-bar-open-after))))
+(global-set-key [f10] 'my-menu-bar-open)
 
 (setq-default indicate-empty-lines t         ; fringe indicators
               indicate-buffer-boundaries 'left)
