@@ -99,6 +99,10 @@ command to be run in a shell.")
         cedet
         (:name cursor-chg            :type emacswiki)
         diminish
+        (:name dired-details
+               :after (progn
+                        (setq-default dired-details-hidden-string "--- ")
+                        (dired-details-install)))
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         ecb
