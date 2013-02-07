@@ -87,32 +87,33 @@
 (defcustom my-copyright-fixes t
   "Whether to try to fix copyright information before writing.")
 
-(my-add-hook 'my-programming-mode-hook
-          '(lambda ()
-             ;; (flyspell-prog-mode)       ; flyspell for comments and strings
+(my-add-hook
+ 'my-programming-mode-hook
+ (lambda ()
+   ;; (flyspell-prog-mode)       ; flyspell for comments and strings
 
-             ;; Highlight parentheses around point
-             (highlight-parentheses-mode 1)
+   ;; Highlight parentheses around point
+   (highlight-parentheses-mode 1)
 
-             ;; Highlight TODO's and the like
-             (fic-ext-mode 1)
-             (diminish 'fic-ext-mode)
+   ;; Highlight TODO's and the like
+   (fic-ext-mode 1)
+   (diminish 'fic-ext-mode)
 
-             ;; (which-function-mode 1)    ; show current tag in modeline
+   ;; (which-function-mode 1)    ; show current tag in modeline
 
-             ;; Update the year in copyright message
-             (add-hook 'before-save-hook
-                       '(lambda ()
-                          (when my-copyright-fixes
-                            (save-excursion (copyright-fix-years)))))
-             (add-hook 'before-save-hook 'copyright-update)
+   ;; Update the year in copyright message
+   (add-hook 'before-save-hook
+             '(lambda ()
+                (when my-copyright-fixes
+                  (save-excursion (copyright-fix-years)))))
+   (add-hook 'before-save-hook 'copyright-update)
 
-             (guess-style-guess-all)    ; guess indentation style
+   (guess-style-guess-all)    ; guess indentation style
 
-             ;; ECB
-             (my-define-ecb-layouts '("my-programming-left-right"
-                                      "my-programming-right"
-                                      "my-files"))))
+   ;; ECB
+   (my-define-ecb-layouts '("my-programming-left-right"
+                            "my-programming-right"
+                            "my-files"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

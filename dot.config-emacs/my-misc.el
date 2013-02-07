@@ -58,17 +58,17 @@ even when ECB is not active."
   (add-to-list 'my-helper-buffers buffer))
 
 (defun my--setup-helper-buffers ()
-  (mapc '(lambda (item) (add-to-list 'ecb-compilation-buffer-names
-                                     '(item . nil)))
+  (mapc (lambda (item) (add-to-list 'ecb-compilation-buffer-names
+                                    '(item . nil)))
         my-helper-buffers))
 
 ;; (add-hook 'ecb-activate-hook 'my-setup-helper-buffers)
 
 ;; TODO: unused and not working
-;; (add-hook 'after-init-hook '(lambda ()
-;;                               (require 'ecb-layout)
-;;                               (ecb-initialize-layout)
-;;                               (my--setup-helper-buffers)))
+;; (add-hook 'after-init-hook (lambda ()
+;;                              (require 'ecb-layout)
+;;                              (ecb-initialize-layout)
+;;                              (my--setup-helper-buffers)))
 
 
 (defun my-run-async (program args callback)
