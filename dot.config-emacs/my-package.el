@@ -152,7 +152,7 @@ command to be run in a shell.")
                :after (progn
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
                         (setq magit-diff-refine-hunk t)))
-        (:name multiple-cursors      :type elpa
+        (:name multiple-cursors
                :features multiple-cursors)
         ;; multi-term
         (:name org-exp-bibtex        :type http
