@@ -86,6 +86,8 @@
 (setq copyright-year-ranges t)
 (defcustom my-copyright-fixes t
   "Whether to try to fix copyright information before writing.")
+(defcustom my-guess-style t
+  "Whether opening a new file should try to guess the indentation stule.")
 
 (my-add-hook
  'my-programming-mode-hook
@@ -108,7 +110,8 @@
                   (save-excursion (copyright-fix-years)))))
    (add-hook 'before-save-hook 'copyright-update)
 
-   (guess-style-guess-all)    ; guess indentation style
+   (when my-guess-style
+     (guess-style-guess-all)) ; guess indentation style
 
    ;; ECB
    (my-define-ecb-layouts '("my-programming-left-right"
