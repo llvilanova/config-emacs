@@ -116,6 +116,23 @@ even when ECB is not active."
       'make-local-hook
     'ignore))
 
+(defun my-hook-once-generate (hook func)
+  "Generate function to remove FUNC from hook HOOK."
+  (let ((sym (intern (concat "my-hook-once--" (symbol-name func)))))
+    (eval (macroexpand `(defun ,sym ()
+                          (remove-hook ',hook ',sym)
+                          (,func))))
+    sym))
+
+(defun my-hook-once (hook func)
+  "Add FUNC in HOOK to execute only once."
+  (let ((cb (my-hook-once-generate hook func)))
+    (add-hook hook cb)))
+
+(defun my-delay-function (func)
+  "Delay execution of FUNC until next user's command."
+  (my-hook-once 'pre-command-hook func))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Buffers
 

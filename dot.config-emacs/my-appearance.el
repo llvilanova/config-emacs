@@ -28,8 +28,7 @@
 
 (tool-bar-mode -1)                           ; do not show the toolbar ...
 (menu-bar-mode -1)                           ; ... nor the menu ...
-(defun my-menu-bar-open-after ()             ; ... except when asked to
-  (remove-hook 'pre-command-hook 'my-menu-bar-open-after)
+(defun my-menu-bar-close ()                  ; ... except when asked to
   (when (eq menu-bar-mode 42)
     (menu-bar-mode -1)))
 (defun my-menu-bar-open (&rest args)
@@ -40,7 +39,7 @@
     (funcall 'menu-bar-open args)
     (unless open
       (setq menu-bar-mode 42)
-      (add-hook 'pre-command-hook 'my-menu-bar-open-after))))
+      (my-delay-function 'my-menu-bar-close))))
 (global-set-key [f10] 'my-menu-bar-open)
 
 (setq-default indicate-empty-lines t         ; fringe indicators
