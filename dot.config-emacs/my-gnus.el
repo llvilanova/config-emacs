@@ -140,7 +140,7 @@ See (info \"(gnus)Group Line Specification\")."
 
 (copy-face 'default 'my-gnus-face-info)
 (set-face-foreground 'my-gnus-face-info "grey60")
-(set-face-italic 'my-gnus-face-info t)
+(set-face-italic-p 'my-gnus-face-info t)
 (setq gnus-face-11 'my-gnus-face-info)
 
 ;; Actual format
