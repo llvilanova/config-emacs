@@ -106,7 +106,6 @@ command to be run in a shell.")
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name dpkg-dev-el           :type apt-get)
-        ecb
         (:name elisp-slime-nav       :type elpa
                :after (progn
                         (add-hook 'emacs-lisp-mode-hook

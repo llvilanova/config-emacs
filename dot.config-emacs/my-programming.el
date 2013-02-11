@@ -111,12 +111,7 @@
    (add-hook 'before-save-hook 'copyright-update)
 
    (when my-guess-style
-     (guess-style-guess-all)) ; guess indentation style
-
-   ;; ECB
-   (my-define-ecb-layouts '("my-programming-left-right"
-                            "my-programming-right"
-                            "my-files"))))
+     (guess-style-guess-all))))         ; guess indentation style
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
