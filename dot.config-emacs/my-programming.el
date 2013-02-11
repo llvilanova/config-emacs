@@ -247,7 +247,7 @@
                '(lambda (candidate) (my-set-minibuffer-helpers 1)))
 
      ;; Special treatment for documentation buffer
-     (my-add-helper-buffer "*Company meta-data*")
+     (my-register-helper-buffer "*Company meta-data*" 'help)
 
      ;; ;; Show documentation buffer when selecting a completion
      ;; ;; taken from `company-show-doc-buffer'
@@ -299,7 +299,7 @@
 ;; Code navigation
 
 ;; Special treatment for tags buffer
-(my-add-helper-buffer "*cscope*")
+(my-register-helper-buffer "*cscope*" 'long-help)
 
 (my-add-hook 'my-programming-mode-hook
              '(lambda ()
@@ -311,7 +311,7 @@
 ;; Code help
 
 ;; Special treatment for documentation buffer
-(my-add-helper-buffer "*TAG DOCUMENTATION*")
+(my-register-helper-buffer "*TAG DOCUMENTATION*" 'help)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

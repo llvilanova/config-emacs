@@ -39,7 +39,7 @@
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
-(my-add-helper-buffer "*WordNet*")
+(my-register-helper-buffer "*WordNet*" 'help)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

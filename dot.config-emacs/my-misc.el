@@ -35,28 +35,6 @@ If nil, WINDOW is `selected-window'."
   (setq-default mode-line-buffer-identification value))
 
 
-(defvar my-helper-buffers nil)
-
-(defun my-add-helper-buffer (buffer)
-  "Register BUFFER as a helper buffer.
-Helper buffers are treated as `ecb-compilation-buffer-names',
-even when ECB is not active."
-  (add-to-list 'my-helper-buffers buffer))
-
-(defun my--setup-helper-buffers ()
-  (mapc (lambda (item) (add-to-list 'ecb-compilation-buffer-names
-                                    '(item . nil)))
-        my-helper-buffers))
-
-;; (add-hook 'ecb-activate-hook 'my-setup-helper-buffers)
-
-;; TODO: unused and not working
-;; (add-hook 'after-init-hook (lambda ()
-;;                              (require 'ecb-layout)
-;;                              (ecb-initialize-layout)
-;;                              (my--setup-helper-buffers)))
-
-
 (defun my-run-async (program args callback)
   "Asynchronously run the given PROGRAM with arguments ARGS and invoke CALLBACK
   once finished."
