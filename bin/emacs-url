@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "$@" >> /tmp/emacs-url.log
+env >> /tmp/emacs-url.log
+emacs-open -n --eval "(browse-url \"$@\")"
