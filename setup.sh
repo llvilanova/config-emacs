@@ -66,4 +66,28 @@ setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 setup_files $BASE/bin ~/bin
 
-/usr/bin/emacs --batch --eval '(load-file "~/.config/emacs/init.el")'
+ctrl_c() {
+    exit 1
+}
+trap ctrl_c INT
+
+# Run until successfully finishes or same error message repeats
+set -o pipefail
+prevline=""
+TMPFILE=`mktemp`
+while true; do
+    set +e
+    /usr/bin/emacs --batch --eval '(load-file "~/.config/emacs/init.el")' |& tee $TMPFILE
+    RES=$?
+    set -e
+
+    line=`tail -1 $TMPFILE`
+    if [ "$RES" == 0 -o "$prevline" == "$line" ]; then
+        break
+    fi
+    prevline="$line"
+done
+
+rm -f $TMPFILE
+
+exit $res
