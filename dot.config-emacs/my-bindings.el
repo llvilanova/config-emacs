@@ -85,47 +85,47 @@
 
 ;; `my-programming-mode'
 (my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                ;; Auto-indent new line
-                (local-set-key [return] 'newline-and-indent)
-                ;; ;; Auto-indent new line (plus previous)
-                ;; (local-set-key [return] 'reindent-then-newline-and-indent)
+             (lambda ()
+               ;; Auto-indent new line
+               (local-set-key [return] 'newline-and-indent)
+               ;; ;; Auto-indent new line (plus previous)
+               ;; (local-set-key [return] 'reindent-then-newline-and-indent)
 
-                ;; `highlight-symbol'
-                (local-set-key [(meta f5)] 'highlight-symbol-at-point)
-                (local-set-key [(meta f6)] 'highlight-symbol-at-point)
-                (local-set-key [f5] 'highlight-symbol-prev)
-                (local-set-key [f6] 'highlight-symbol-next)
+               ;; `highlight-symbol'
+               (local-set-key [(meta f5)] 'highlight-symbol-at-point)
+               (local-set-key [(meta f6)] 'highlight-symbol-at-point)
+               (local-set-key [f5] 'highlight-symbol-prev)
+               (local-set-key [f6] 'highlight-symbol-next)
 
-                ;; `semantic'
-                (local-set-key [(control c) (i)] ; open included file at point
-                               'semantic-decoration-include-visit)
-                (local-set-key [(control c) (g)] ; jump to declaration
-                               'semantic-ia-fast-jump)
-                (local-set-key [(control c) (t)] ; toggle declaration / definition
-                               'semantic-analyze-proto-impl-toggle)
-                (local-set-key [f1] 'semantic-ia-show-summary)
-                (local-set-key [(meta f1)] 'semantic-ia-show-doc)
-                (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
+               ;; `semantic'
+               (local-set-key [(control c) (i)] ; open included file at point
+                              'semantic-decoration-include-visit)
+               (local-set-key [(control c) (g)] ; jump to declaration
+                              'semantic-ia-fast-jump)
+               (local-set-key [(control c) (t)] ; toggle declaration / definition
+                              'semantic-analyze-proto-impl-toggle)
+               (local-set-key [f1] 'semantic-ia-show-summary)
+               (local-set-key [(meta f1)] 'semantic-ia-show-doc)
+               (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
 (eval-after-load 'company
   '(progn
      (my-add-hook 'my-programming-mode-hook
-                  '(lambda ()
-                     ;; `company'
-                     (local-set-key [(meta tab)] 'company-complete)))))
+                  (lambda ()
+                    ;; `company'
+                    (local-set-key [(meta tab)] 'company-complete)))))
 (eval-after-load 'auto-complete
   '(progn
      (add-hook 'auto-complete-mode-hook
-               '(lambda ()
-                  ;; `auto-complete'
-                  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-                  (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-                  (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))))
+               (lambda ()
+                 ;; `auto-complete'
+                 (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+                 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
+                 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))))
 
 ;; `my-writing-mode'
 (my-add-hook 'my-writing-mode-hook
-             '(lambda ()
-                (local-set-key [(control c) (w)] 'wordnet-search)))
+             (lambda ()
+               (local-set-key [(control c) (w)] 'wordnet-search)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -137,10 +137,10 @@
 
 ;; `flymake'
 (add-hook 'flymake-mode-hook
-          '(lambda ()
-             ;; Keymaps to navigate between the errors
-             (local-set-key [(meta n)] 'flymake-goto-next-error)
-             (local-set-key [(meta p)] 'flymake-goto-prev-error)))
+          (lambda ()
+            ;; Keymaps to navigate between the errors
+            (local-set-key [(meta n)] 'flymake-goto-next-error)
+            (local-set-key [(meta p)] 'flymake-goto-prev-error)))
 
 ;; `framepop'
 (eval-after-load 'framepop
@@ -157,19 +157,18 @@
 ;; `gnus'
 (global-set-key [f12] 'my-gnus-start-or-hide)
 (add-hook 'gnus-startup-hook
-          '(lambda ()
-             (define-key gnus-summary-mode-map [(control meta shift k)] 'my-gnus-lower-thread)
-             (define-key gnus-summary-mode-map [(shift g) (shift g)] 'gnus-group-make-nnir-group)))
+          (lambda ()
+            (define-key gnus-summary-mode-map [(control meta shift k)] 'my-gnus-lower-thread)
+            (define-key gnus-summary-mode-map [(shift g) (shift g)] 'gnus-group-make-nnir-group)))
 
 ;; `org-mode'
 (global-set-key [(control shift o) (l)] 'org-store-link)
 (global-set-key [(control shift o) (a)] 'org-agenda)
 (global-set-key [(control shift o) (s)] 'org-search-view)
 (global-set-key [(control shift o) (f)]
-                '(lambda ()
-                   (interactive)
-                   (ido-find-file-in-dir org-directory)
-                   ))
+                (lambda ()
+                  (interactive)
+                  (ido-find-file-in-dir org-directory)))
 (global-set-key [(control shift o) (b)] 'org-iswitchb)
 (global-set-key [(control shift o) (control c) (c)] 'org-capture)
 (when (require 'org-secretary nil t)

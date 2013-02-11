@@ -10,9 +10,9 @@
         (border-color     . "#888a85")
         (cursor-color     . "#fce94f")))
 
-(mapc '(lambda (elem)
-         (add-to-list 'default-frame-alist elem)
-         (set-frame-parameter nil (car elem) (cdr elem)))
+(mapc (lambda (elem)
+        (add-to-list 'default-frame-alist elem)
+        (set-frame-parameter nil (car elem) (cdr elem)))
       my-theme-frame-parameters)
 
 (custom-theme-set-faces

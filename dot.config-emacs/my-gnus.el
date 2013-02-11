@@ -35,10 +35,10 @@
   (interactive)
   (my-run-async
    "fetchmail" ""
-   '(lambda (&rest args)
-      (my-run-async
-       "offlineimap" ""
-       '(lambda (&rest args) (gnus-demon-scan-news))))))
+   (lambda (&rest args)
+     (my-run-async
+      "offlineimap" ""
+      (lambda (&rest args) (gnus-demon-scan-news))))))
 
 (gnus-demon-add-handler 'my-check-mail 5 nil)
 ;; Immediately start checking for new mail

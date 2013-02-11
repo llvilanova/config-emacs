@@ -202,8 +202,8 @@ If COMMENTFIRST is non-nil, comment the original line."
 (global-whitespace-mode t)
 ;; nuke whitespaces when writing to a file
 (add-hook 'find-file-hook
-          '(lambda ()
-             (setq whitespace-indent-tabs-mode indent-tabs-mode)))
+          (lambda ()
+            (setq whitespace-indent-tabs-mode indent-tabs-mode)))
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 
 (defun my-toggle-tabs ()
@@ -341,8 +341,7 @@ directory, select directory. Lastly the file is opened."
                      )))))
 (setq ibuffer-saved-filter-groups my-ibuffer-saved-filter-groups)
 (add-hook 'ibuffer-mode-hook
-          '(lambda ()
-             (ibuffer-switch-to-saved-filter-groups "default")))
+          (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -388,19 +387,19 @@ directory, select directory. Lastly the file is opened."
 ;; `em-smart'
 ;; Be clever on `eshell' output
 (add-hook 'eshell-mode-hook
-          '(lambda ()
-             (require 'em-smart)
-             (setq eshell-where-to-jump 'begin
-                   esell-review-quick-commands nil
-                   eshell-smart-space-goes-to-end t)
-             (eshell-smart-initialize)))
+          (lambda ()
+            (require 'em-smart)
+            (setq eshell-where-to-jump 'begin
+                  esell-review-quick-commands nil
+                  eshell-smart-space-goes-to-end t)
+            (eshell-smart-initialize)))
 
 (put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 
 ;; `re-builder'
 (add-hook 'reb-mode-hook
-          '(lambda ()
-             (setq reb-re-syntax 'string)))
+          (lambda ()
+            (setq reb-re-syntax 'string)))
 
 ;; `popwin'
 (defun my-register-helper-buffer (pattern &optional type &rest other)

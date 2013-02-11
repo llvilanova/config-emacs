@@ -105,9 +105,9 @@
 
    ;; Update the year in copyright message
    (add-hook 'before-save-hook
-             '(lambda ()
-                (when my-copyright-fixes
-                  (save-excursion (copyright-fix-years)))))
+             (lambda ()
+               (when my-copyright-fixes
+                 (save-excursion (copyright-fix-years)))))
    (add-hook 'before-save-hook 'copyright-update)
 
    (when my-guess-style
@@ -123,14 +123,14 @@
  cpp-face-type 'dark                    ; use colors suitable for a dark bg
  cpp-known-face 'highlight)
 (add-hook 'c-mode-common-hook
-          '(lambda ()
-             (setq c-electric-pound-behavior '(alignleft))
-             (c-toggle-auto-newline 1)  ; auto-newline on semi-colon, etc.
-             (c-toggle-hungry-state 1)  ; hungry backspace
-             ;; Fixup for auto-added spaces on braces
-             (add-to-list 'c-cleanup-list 'defun-close-semi)
-             (add-to-list 'c-cleanup-list 'list-close-comma)
-             (cpp-highlight-buffer t)))
+          (lambda ()
+            (setq c-electric-pound-behavior '(alignleft))
+            (c-toggle-auto-newline 1)  ; auto-newline on semi-colon, etc.
+            (c-toggle-hungry-state 1)  ; hungry backspace
+            ;; Fixup for auto-added spaces on braces
+            (add-to-list 'c-cleanup-list 'defun-close-semi)
+            (add-to-list 'c-cleanup-list 'list-close-comma)
+            (cpp-highlight-buffer t)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -145,22 +145,22 @@
 
 ;; `flymake'
 (add-hook 'python-mode-hook
-          '(lambda ()
-             (when (buffer-file-name)
-               ;; Configure to wait a bit longer after edits before starting
-               (setq-default flymake-no-changes-timeout '3)
-               (flymake-mode t))))
+          (lambda ()
+            (when (buffer-file-name)
+              ;; Configure to wait a bit longer after edits before starting
+              (setq-default flymake-no-changes-timeout '3)
+              (flymake-mode t))))
 
 ;; `ipython'
 (add-hook 'python-mode-hook
-          '(lambda ()
-             (setq python-shell-interpreter "ipython"
-                   python-shell-interpreter-args "--colors=nocolor"
-                   python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-                   python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-                   python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
-                   python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
-                   python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")))
+          (lambda ()
+            (setq python-shell-interpreter "ipython"
+                  python-shell-interpreter-args "--colors=nocolor"
+                  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+                  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+                  python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
+                  python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
+                  python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; [END] Code editing
@@ -172,16 +172,16 @@
 
 ;; Comment editing
 (my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                (auto-fill-mode 1)         ; auto-wrap lines in comments
-                (require 'filladapt)
-                (turn-on-filladapt-mode)))
+             (lambda ()
+               (auto-fill-mode 1)         ; auto-wrap lines in comments
+               (require 'filladapt)
+               (turn-on-filladapt-mode)))
 (add-hook 'c-mode-common-hook
-          '(lambda ()
-             ;; Auto-end comment block when inserting `/' (override: C-q /)
-             (add-to-list 'c-cleanup-list 'comment-close-slash)
-             (doc-mode t)               ; manage doxygen documentation
-             (c-setup-filladapt)))
+          (lambda ()
+            ;; Auto-end comment block when inserting `/' (override: C-q /)
+            (add-to-list 'c-cleanup-list 'comment-close-slash)
+            (doc-mode t)               ; manage doxygen documentation
+            (c-setup-filladapt)))
 
 
 ;; Documentation editors
@@ -235,11 +235,11 @@
 
      ;; Temporarily disable `semantic-idle-summary-mode' when completing
      (add-hook 'company-completion-started-hook
-               '(lambda (manually) (my-set-minibuffer-helpers -1)))
+               (lambda (manually) (my-set-minibuffer-helpers -1)))
      (add-hook 'company-completion-cancelled-hook
-               '(lambda (manually) (my-set-minibuffer-helpers 1)))
+               (lambda (manually) (my-set-minibuffer-helpers 1)))
      (add-hook 'company-completion-finished-hook
-               '(lambda (candidate) (my-set-minibuffer-helpers 1)))
+               (lambda (candidate) (my-set-minibuffer-helpers 1)))
 
      ;; Special treatment for documentation buffer
      (my-register-helper-buffer "*Company meta-data*" 'help)
@@ -247,13 +247,13 @@
      ;; ;; Show documentation buffer when selecting a completion
      ;; ;; taken from `company-show-doc-buffer'
      ;; (add-hook 'company-completion-finished-hook
-     ;;           '(lambda (candidate)
-     ;;              (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
-     ;;                (if doc-buffer
-     ;;                    (progn
-     ;;                      (with-current-buffer doc-buffer
-     ;;                        (goto-char (point-min)))
-     ;;                      (display-buffer doc-buffer t))))))
+     ;;           (lambda (candidate)
+     ;;             (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
+     ;;               (if doc-buffer
+     ;;                   (progn
+     ;;                     (with-current-buffer doc-buffer
+     ;;                       (goto-char (point-min)))
+     ;;                     (display-buffer doc-buffer t))))))
      ))
 
 
@@ -279,14 +279,14 @@
            ac-auto-show-menu nil          ; do not show menu when auto-starting
            ac-use-menu-map t)           ; allow C-n/C-p in completion menu
      (add-hook 'auto-complete-mode-hook
-               '(lambda ()
-                  ;; (setq yas-trigger-key nil)
-                  (ac-set-trigger-key "TAB")))
+               (lambda ()
+                 ;; (setq yas-trigger-key nil)
+                 (ac-set-trigger-key "TAB")))
 
      (my-add-hook 'c-mode-common-hook
-                  '(lambda ()
-                     (add-to-list 'ac-sources 'ac-source-filename)
-                     (my-ac-source-semantic-enable)))
+                  (lambda ()
+                    (add-to-list 'ac-sources 'ac-source-filename)
+                    (my-ac-source-semantic-enable)))
 
      (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)))
 
@@ -297,9 +297,9 @@
 (my-register-helper-buffer "*cscope*" 'long-help)
 
 (my-add-hook 'my-programming-mode-hook
-             '(lambda ()
-                (require 'xcscope)
-                (cscope-minor-mode)))
+             (lambda ()
+               (require 'xcscope)
+               (cscope-minor-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -344,8 +344,8 @@ If ARG is not nil, force a call to `compile'."
       (let ((help (get-char-property (point) 'help-echo)))
         (if help (message "%s" help)))))
 (add-hook 'post-command-hook
-          '(lambda ()
-             (my-set-minibuffer-helpers (not (my-flymake-show-message)))))
+          (lambda ()
+            (my-set-minibuffer-helpers (not (my-flymake-show-message)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -375,9 +375,9 @@ If ARG is not nil, force a call to `compile'."
 
 ;; psvn
 (add-hook 'svn-status-mode-hook
-          '(lambda ()
-             (add-to-list 'svn-status-default-log-arguments
-                          '("--use-merge-history"))))
+          (lambda ()
+            (add-to-list 'svn-status-default-log-arguments
+                         '("--use-merge-history"))))
 
 ;; vc
 (setq vc-delete-logbuf-window nil       ; bury log after commit (do not delete)

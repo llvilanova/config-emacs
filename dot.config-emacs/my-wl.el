@@ -25,9 +25,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mail retrieval
 (add-hook 'wl-plugged-hook
-          '(lambda () (run-at-time nil 300 'my-mail-fetch)))
+          (lambda () (run-at-time nil 300 'my-mail-fetch)))
 (add-hook 'wl-unplugged-hook
-          '(lambda () (cancel-function-timers 'my-mail-fetch)))
+          (lambda () (cancel-function-timers 'my-mail-fetch)))
 (defun my-mail-fetch ()
   "Fetch through all defined mail sources."
   (interactive)
@@ -66,9 +66,9 @@
     res))
 (add-hook
  'wl-folder-init-hook
- '(lambda ()
-    (setq wl-biff-check-folder-list (my-get-folder-list) ; periodical checks...
-          wl-biff-check-interval 360)))                ; ...every these seconds
+ (lambda ()
+   (setq wl-biff-check-folder-list (my-get-folder-list) ; periodical checks...
+         wl-biff-check-interval 360)))                ; ...every these seconds
 
 (add-hook 'wl-biff-notify-hook
           (lambda ()
@@ -155,9 +155,9 @@
         ("From" ("From") ("To" "Cc") ("Newsgroups"))))
 
 (add-hook 'wl-draft-mode
-          '(lambda ()
-             (set-fill-column 75)
-             (my-mail-setup-boxquote)))
+          (lambda ()
+            (set-fill-column 75)
+            (my-mail-setup-boxquote)))
 
 
 ;; BBDB
@@ -165,13 +165,13 @@
 (bbdb-wl-setup)
 (setq wl-summary-from-function 'bbdb-wl-from-func) ; show name from BBDB in summary
 (add-hook 'wl-mail-setup-hook           ; auto-expand BBDB aliases
-          '(lambda () (bbdb-define-all-aliases) (mail-abbrevs-setup)))
+          (lambda () (bbdb-define-all-aliases) (mail-abbrevs-setup)))
 
 ;; `signature' integration
 (add-hook 'wl-init-hook
-          '(lambda ()
-             (add-to-list 'wl-draft-config-sub-func-alist
-                          '(signature . wl-draft-config-sub-signature))))
+          (lambda ()
+            (add-to-list 'wl-draft-config-sub-func-alist
+                         '(signature . wl-draft-config-sub-signature))))
 (defun mime-edit-insert-signature (&optional arg)
   "Redefine to insert a signature file directly, not as a tag."
   (interactive "P")

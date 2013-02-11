@@ -17,9 +17,9 @@
 (eval-after-load 'message
   '(progn
      (add-to-list 'message-send-hook
-                  '(lambda ()
-                     (setq message-sendmail-envelope-from
-                           (mail-strip-quoted-names (mail-fetch-field "From")))))))
+                  (lambda ()
+                    (setq message-sendmail-envelope-from
+                          (mail-strip-quoted-names (mail-fetch-field "From")))))))
 
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
@@ -28,12 +28,12 @@
 (defun my-gnus-start-or-hide ()
   (interactive)
   (let ((found nil))
-    (mapc '(lambda (window)
-             (let* ((buf (window-buffer window))
-                    (mode (buffer-local-value 'major-mode buf))
-                    (name (symbol-name mode)))
-               (if (string-match "^gnus-" name)
-                   (setq found t))))
+    (mapc (lambda (window)
+            (let* ((buf (window-buffer window))
+                   (mode (buffer-local-value 'major-mode buf))
+                   (name (symbol-name mode)))
+              (if (string-match "^gnus-" name)
+                  (setq found t))))
           (window-list))
     (if found
         (progn
@@ -111,7 +111,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc
 (setq message-from-style 'angles)
-(add-hook 'message-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'message-mode-hook (lambda () (setq fill-column 80)))
 
 
 (provide 'my-mail)

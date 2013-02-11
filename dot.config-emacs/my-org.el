@@ -74,9 +74,9 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 (org-agenda-skip-function
                  '(my-org-agenda-skip-tag "conference" t)))))
 (setq org-agenda-skip-function-global
-      '(lambda (&rest args)
-         (or (apply 'my-org-agenda-skip-tag "conference" args)
-            (apply 'my-org-agenda-skip-tag "gohome" args))))
+      (lambda (&rest args)
+        (or (apply 'my-org-agenda-skip-tag "conference" args)
+           (apply 'my-org-agenda-skip-tag "gohome" args))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -111,10 +111,10 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
      ;; Create bibliography file
      (add-hook 'org-export-latex-after-save-hook
-               '(lambda ()
-                  (with-current-buffer cbuf
-                    (org-bibtex (concat (file-name-sans-extension
-                                         (buffer-file-name)) ".bib")))))
+               (lambda ()
+                 (with-current-buffer cbuf
+                   (org-bibtex (concat (file-name-sans-extension
+                                        (buffer-file-name)) ".bib")))))
      ;; Remove temporary bibliography files when done
      (setq org-export-pdf-logfiles
            (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
