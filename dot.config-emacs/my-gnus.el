@@ -12,6 +12,15 @@
       gnus-read-newsrc-file nil         ; ... ever
       )
 
+;; Keep read articles and marks automatically synchronized
+(setq gnus-sync-backend "/mucha:.local/share/emacs/gnus-sync"
+      gnus-sync-global-vars `(gnus-newsrc-last-checked-date)
+      gnus-sync-newsrc-groups `("nntp" "nnrss")
+      gnus-sync-newsrc-offsets `(2 3))
+(add-hook 'gnus-get-new-news-hook 'gnus-sync-read)
+(add-hook 'gnus-read-newsrc-el-hook 'gnus-sync-read)
+(require 'gnus-sync)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mail scanning
