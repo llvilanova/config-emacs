@@ -31,10 +31,7 @@
 (defun my-flyspell-mode-maybe (&optional arg)
   (when my-flyspell-mode-maybe-enabled
     (flyspell-mode arg)))
-(add-hook 'flyspell-mode-hook
-          '(lambda ()
-             (auto-dictionary-mode 1)
-             (adict-guess-dictionary)))
+(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 (my-add-hook 'my-writing-mode-hook 'my-flyspell-mode-maybe)
 
 ;; `wordnet'
