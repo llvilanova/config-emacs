@@ -145,6 +145,10 @@ command to be run in a shell.")
                :depends ido-yes-or-no
                :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"
                :features (ido-settings))
+        (:name ido-ubiquitous
+               :after (progn
+                        (ido-mode 1)
+                        (ido-ubiquitous-mode 1)))
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
