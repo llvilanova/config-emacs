@@ -71,10 +71,14 @@
           wl-biff-check-interval 360)))                ; ...every these seconds
 
 (add-hook 'wl-biff-notify-hook
-          '(lambda ()
-             (my-popup "Wanderlust" "You have new mail!"
-                       "/usr/share/icons/Tango/32x32/apps/email.png"
-                       "/usr/share/sounds/gnome/default/alerts/sonar.ogg")))
+          (lambda ()
+            (require 'notifications)
+            (notifications-notify
+             :title "Wanderlust"
+             :app-name "wanderlust"
+             :app-icon "/usr/share/icons/Tango/32x32/apps/email.png"
+             :sound-file "/usr/share/sounds/gnome/default/alerts/sonar.ogg"
+             :body "You have new mail!")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

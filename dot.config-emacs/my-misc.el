@@ -6,20 +6,6 @@ Taken from org-mode's `org-prgram-exists'."
   (if (eq system-type 'gnu/linux)
       (= 0 (call-process "which" nil nil nil program-name))))
 
-(defun my-popup (title msg &optional icon sound)
-  "Show a popup through `awesome' if we're on X, or echo it otherwise."
-  (interactive)
-  (if sound
-      (if (my-program-exists "mplayer")
-          (start-process "my-popup-play" nil "mplayer" sound)
-        (condition-case nil
-            (play-sound-file sound)
-          (progn (beep t) (beep t)))))
-  (if (my-program-exists "notify-send")
-      (start-process "my-popup-show" nil "notify-send"
-                     "-i" (if icon icon "''") title msg)
-    (message "%s: %s" title msg)))
-
 
 (defun my-toggle-dedicated-window (&optional window)
   "Toggle whether WINDOW is dedicated or not.
