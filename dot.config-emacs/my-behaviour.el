@@ -402,5 +402,30 @@ directory, select directory. Lastly the file is opened."
           '(lambda ()
              (setq reb-re-syntax 'string)))
 
+;; `popwin'
+(defun my-register-helper-buffer (pattern &optional type &rest other)
+  "Register given buffer PATTERN as being for a specific TYPE of usage.
+Valid types are:
+  help
+  long-help
+  info
+  long-info
+
+Any other type is passed as-is to `popwin' as keywords, together with OTHER."
+  (let ((keywords
+         (append other
+                 (and type
+                    (case type
+                      ('help)
+                      ('long-help '(:position right :width 90))
+                      ('info '(:position bottom :stick t))
+                      ('long-info '(:position right :width 90 :stick t))
+                      (t (error (format "Unknown type: %s" type))))))))
+    (setq popwin:special-display-config
+          (delq (assoc pattern  popwin:special-display-config)
+                popwin:special-display-config))
+    (if keywords
+        (push (cons pattern keywords) popwin:special-display-config)
+      (push pattern popwin:special-display-config))))
 
 (provide 'my-behaviour)
