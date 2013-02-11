@@ -191,6 +191,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Templates
 
+(setq srecode-map-save-file (path my-cache-dir "srecode-map.el"))
 (global-srecode-minor-mode t)
 
 
@@ -261,6 +262,7 @@
 
 ;; TODO: not declared as auto-loaded...
 (require 'auto-complete)
+(setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
 (global-auto-complete-mode t)
 
 (defun my-ac-source-semantic-enable ()
