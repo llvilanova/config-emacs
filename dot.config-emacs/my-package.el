@@ -92,7 +92,8 @@ command to be run in a shell.")
                :url "https://github.com/llvilanova/auto-complete.git"
                :branch  "semantic-completion-placeholders"
                :depends (popup pos-tip fuzzy))
-        (:name auto-dictionary       :type elpa)
+        (:name auto-dictionary       :type git
+               :url "https://github.com/nschum/auto-dictionary-mode.git")
         (:name bibtex-utils          :type emacswiki)
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
