@@ -1,7 +1,5 @@
 ;;; init.el --- Start configuration process.
 
-(defvar my-emacs-load-start (current-time))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; This configuration assumes the following packages/libraries are available:
 ;;   - ditaa
@@ -89,8 +87,3 @@ cdr instead."
 ;; custom-set-*
 (load custom-file 'noerror)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(message "Load time: %ds"
-         (destructuring-bind (hi lo us ps) (current-time)
-           (- (+ hi lo) (+ (first my-emacs-load-start)
-                           (second my-emacs-load-start)))))
