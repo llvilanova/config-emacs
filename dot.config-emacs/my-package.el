@@ -152,6 +152,8 @@ command to be run in a shell.")
         (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
+        (:name lv                    :type git
+               :url "https://github.com/llvilanova/lv.git")
         magithub
         (:name magit
                :after (progn
