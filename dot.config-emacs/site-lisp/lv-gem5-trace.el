@@ -1,6 +1,6 @@
 ;;; lv-gem5-trace.el --- Log filter and highlighter for GEM5 traces
 
-;; Copyright (C) 2012 Lluís Vilanova
+;; Copyright (C) 2012-2013 Lluís Vilanova
 
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;; URL:
@@ -23,30 +23,36 @@
 ;;; Commentary:
 ;;
 ;; This extension specializes `lv-mode' to work with GEM5 traces.
+;;
+;; To activate it:
+;;   (require 'lv-gem5-trace)
+;;   (lv-mode t)
+;;
+;; To use it, see the help of `lv-mode'.
 
 ;;; Code:
 
 (require 'lv)
 
 
-(defvar lv--sn nil
+(defvar lv--gem5-sn nil
   "List of GEM5 instruction sequence numbers to select.")
-(make-local-variable 'lv--sn)
+(make-local-variable 'lv--gem5-sn)
 
-(defvar lv--sn-history nil
+(defvar lv--gem5-sn-history nil
   "List of arguments to `lv-add-sn' so far.")
 
-(defvar lv--sn-history-str nil
+(defvar lv--gem5-sn-history-str nil
   "List of arguments to `lv-add-sn' so far (stringified version).")
 
 
-(defun lv--sn-to-re (sn)
+(defun lv--gem5-sn-to-re (sn)
   "Return an appropriate regexp for the given sequence number."
   (format "\\[sn:%d\\]" sn))
 
 
 ;;;###autoload
-(defun lv-add-sn (&optional sn)
+(defun lv-add-gem5-sn (&optional sn)
   "Add a GEM5 instruction sequence number."
   (interactive)
   (when (and (not (called-interactively-p)) (not sn))
@@ -54,14 +60,14 @@
   (when (called-interactively-p)
     (setq sn (string-to-int
               (completing-read "Sequence number: " nil nil nil nil
-                               'lv--sn-history-str))))
-  (add-to-list 'lv--sn-history sn t)
-  (setq lv--sn-history-str (mapcar 'int-to-string lv--sn-history))
-  (add-to-list 'lv--sn sn)
-  (lv-add (lv--sn-to-re sn)))
+                               'lv--gem5-sn-history-str))))
+  (add-to-list 'lv--gem5-sn-history sn t)
+  (setq lv--gem5-sn-history-str (mapcar 'int-to-string lv--gem5-sn-history))
+  (add-to-list 'lv--gem5-sn sn)
+  (lv-add (lv--gem5-sn-to-re sn)))
 
 ;;;###autoload
-(defun lv-del-sn (&optional sn)
+(defun lv-del-gem5-sn (&optional sn)
   "Remove a GEM5 instruction sequence number."
   (interactive)
   (when (and (not (called-interactively-p)) (not sn))
@@ -69,13 +75,13 @@
   (when (called-interactively-p)
     (setq sn (string-to-int
               (completing-read "Sequence number: "
-                               (mapcar 'int-to-string lv--sn)))))
-  (setq lv--sn (remove sn lv--sn))
-  (lv-del (lv--sn-to-re sn)))
+                               (mapcar 'int-to-string lv--gem5-sn)))))
+  (setq lv--gem5-sn (remove sn lv--gem5-sn))
+  (lv-del (lv--gem5-sn-to-re sn)))
 
 
-(define-key lv-mode-map (kbd "C-c s") 'lv-add-sn)
-(define-key lv-mode-map (kbd "C-c S") 'lv-del-sn)
+(define-key lv-mode-map (kbd "C-c s") 'lv-add-gem5-sn)
+(define-key lv-mode-map (kbd "C-c S") 'lv-del-gem5-sn)
 
 
 (provide 'lv-gem5-trace)

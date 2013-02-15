@@ -1,6 +1,6 @@
 ;;; lv.el --- Log filter and highlighter
 
-;; Copyright (C) 2012 Lluís Vilanova
+;; Copyright (C) 2012-2013 Lluís Vilanova
 
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;; URL:
@@ -24,6 +24,12 @@
 ;;
 ;; This extension eases the visualisation of logs by showing lines and
 ;; highlighting their contents based on regular expressions.
+;;
+;; To activate it:
+;;   (require 'lv)
+;;   (lv-mode t)
+;;
+;; To use it, see the help of `lv-mode'.
 
 ;;; Code:
 
