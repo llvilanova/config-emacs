@@ -23,9 +23,11 @@
    (LaTeX-math-mode 1)                 ; nice math insertion menu
    (TeX-fold-mode 1)                   ; nicely foldable environments...
    (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
-   (local-set-key [(})] (lambda () (interactive) (insert "}")
-                          ;; (save-excursion (backward-char) (TeX-fold-macro))))
-                          (TeX-fold-buffer)))
+   (local-set-key [(})] (lambda ()
+                          (interactive)
+                          (insert "}")
+                          (when TeX-fold-mode
+                            (TeX-fold-buffer))))
    ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
    ;; (orgtbl-mode 1)                     ; support for org's tables
    ))
