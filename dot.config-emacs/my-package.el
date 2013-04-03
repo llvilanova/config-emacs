@@ -131,8 +131,6 @@ command to be run in a shell.")
         (:name gdb-shell             :type elpa)
         (:name gnus-notifications    :type http
                :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
-        (:name gnus-desktop-notify   :type http
-               :url "http://www.thregr.org/~wavexx/hacks/gnus-desktop-notify/gnus-desktop-notify.el")
         (:name google-maps
                :features nil)
         (:name google-weather
