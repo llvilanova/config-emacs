@@ -167,6 +167,7 @@ command to be run in a shell.")
         (:name org-gnome-calendar    :type git
                :url "https://github.com/llvilanova/org-gnome-calendar"
                :after (global-org-gnome-calendar-mode))
+        paredit
         (:name popwin
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
