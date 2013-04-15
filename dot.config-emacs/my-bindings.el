@@ -23,6 +23,8 @@
 
 (global-set-key [(control x) (r) (b)] 'my-jump-to-bookmark)
 (global-set-key [(control z)] popwin:keymap)
+(global-set-key [(meta shift up)] 'my-move-line-up)
+(global-set-key [(meta shift down)] 'my-move-line-down)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -147,12 +149,6 @@
   '(progn
      (define-key framepop-map [f7] 'framepop-toggle-frame)
      (define-key framepop-map "f" 'my-framepop-toggle-with-focus)))
-
-;; `gud'
-(global-set-key [(meta shift down)]  'gud-next)   ;; next line
-(global-set-key [(meta shift right)] 'gud-step)   ;; step into line
-(global-set-key [(meta shift up)]    'gud-finish) ;; finish function
-(global-set-key [(meta shift left)]  'gud-until)  ;; until line
 
 ;; `gnus'
 (global-set-key [f12] 'my-gnus-start-or-hide)
