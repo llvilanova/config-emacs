@@ -51,6 +51,8 @@
 (global-set-key [(control w)] 'my-kill-word-or-region-dwim)
 ;; Show line numbers when using `goto-line'
 (global-set-key (vector 'remap 'goto-line) 'my-goto-line-with-feedback)
+;; Join following line into this one
+(global-set-key [(meta j)] (lambda () (interactive) (join-line -1)))
 
 ;; `ace-jump-mode'
 (global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
