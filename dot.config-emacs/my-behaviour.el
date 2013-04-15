@@ -164,22 +164,19 @@ If COMMENTFIRST is non-nil, comment the original line."
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
-;; `whitespace': highlight and fix lines breaking formatting rules
+(setq-default show-trailing-whitespace t)
+
+;; `whitespace': highlight lines breaking formatting rules
+(require 'whitespace)
 (setq whitespace-style
       '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
       whitespace-line-column nil)
-(global-whitespace-mode t)
-;; nuke whitespaces when writing to a file
-(add-hook 'find-file-hook
-          (lambda ()
-            (setq whitespace-indent-tabs-mode indent-tabs-mode)))
-;; (add-hook 'before-save-hook 'whitespace-cleanup)
+(add-hook 'find-file-hook 'whitespace-mode)
 
 (defun my-toggle-tabs ()
   "Toggle TAB usage on the visualization of lines breaking formatting rules."
   (interactive)
-  (setq indent-tabs-mode (not indent-tabs-mode)
-        whitespace-indent-tabs-mode indent-tabs-mode)
+  (setq indent-tabs-mode (not indent-tabs-mode))
   (if indent-tabs-mode
       (message "Using tabs")
     (message "Using spaces"))
