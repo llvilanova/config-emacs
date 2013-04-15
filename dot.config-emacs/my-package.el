@@ -208,7 +208,7 @@ command to be run in a shell.")
                :after (wrap-region-global-mode))
         (:name xcscope
                :features nil)
-        (:name yasnippet             :type elpa)
+        yasnippet
         ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
