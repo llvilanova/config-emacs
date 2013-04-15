@@ -147,7 +147,6 @@ command to be run in a shell.")
                :after (progn
                         (ido-mode 1)
                         (ido-ubiquitous-mode 1)))
-        (:name iedit                 :type emacswiki)
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
         (:name lv                    :type git

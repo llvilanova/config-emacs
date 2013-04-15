@@ -52,9 +52,6 @@
 ;; Show line numbers when using `goto-line'
 (global-set-key (vector 'remap 'goto-line) 'my-goto-line-with-feedback)
 
-;; `iedit': interactive string replacement
-(global-set-key [(control \;)] 'my-iedit-dwim)
-
 ;; `ace-jump-mode'
 (global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
 (global-set-key [(control c) (control j) (w)] 'ace-jump-word-mode)
@@ -64,12 +61,10 @@
 (global-set-key [(control shift return)] 'er/expand-region)
 
 ;; `multiple-cursors'
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'my-mc/mark-all)
-(global-set-key (kbd "C-c C->") 'mc/mark-more-like-this-extended)
-
+(global-set-key [(control \;)] 'mc/mark-all-like-this-dwim)
+(global-set-key [(control meta \;)] 'mc/edit-lines)
+(global-set-key [(control meta \,)] 'mc/mark-more-like-this-extended)
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Files
