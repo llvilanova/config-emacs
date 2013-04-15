@@ -98,6 +98,7 @@ command to be run in a shell.")
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         cedet
+        cl-lib
         (:name cursor-chg            :type emacswiki)
         diminish
         (:name dired-details
