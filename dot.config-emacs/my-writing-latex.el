@@ -29,8 +29,7 @@
                           (when TeX-fold-mode
                             (TeX-fold-buffer))))
    ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
-   ;; (orgtbl-mode 1)                     ; support for org's tables
-   ))
+   (orgtbl-mode 1)))                   ; support for org's tables
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bibliography
