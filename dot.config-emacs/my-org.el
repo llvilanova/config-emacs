@@ -93,7 +93,7 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 '(:time "1d" :actions (-email)))
 (org-notify-add 'go-home
                 '(:time "-1s" :period "20s" :duration 10
-                  :actions (-message -ding -notify/window -sound))
+                        :actions (-message -ding -notify/window -sound))
                 '(:time "20m" :period "5m"  :duration 60
                         :actions (-message -notify/window -sound)))
 (display-time)
