@@ -72,13 +72,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General preferences
 
-(my-define-hook 'my-programming-mode-hook
-                '(c-mode-hook
-                  c++-mode-hook
-                  python-mode-hook
-                  emacs-lisp-mode-hook
-                  makefile-mode-hook))
-
 ;; ;; Make scripts executable on Save (saves having to do the chmod every time)
 ;; (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
@@ -89,29 +82,28 @@
 (defcustom my-guess-style t
   "Whether opening a new file should try to guess the indentation stule.")
 
-(my-add-hook
- 'my-programming-mode-hook
- (lambda ()
-   ;; (flyspell-prog-mode)       ; flyspell for comments and strings
+(add-hook 'prog-mode-hook
+          (lambda ()
+            ;; (flyspell-prog-mode)       ; flyspell for comments and strings
 
-   ;; Highlight parentheses around point
-   (highlight-parentheses-mode 1)
+            ;; Highlight parentheses around point
+            (highlight-parentheses-mode 1)
 
-   ;; Highlight TODO's and the like
-   (fic-ext-mode 1)
-   (diminish 'fic-ext-mode)
+            ;; Highlight TODO's and the like
+            (fic-ext-mode 1)
+            (diminish 'fic-ext-mode)
 
-   ;; (which-function-mode 1)    ; show current tag in modeline
+            ;; (which-function-mode 1)    ; show current tag in modeline
 
-   ;; Update the year in copyright message
-   (add-hook 'before-save-hook
-             (lambda ()
-               (when my-copyright-fixes
-                 (save-excursion (copyright-fix-years)))))
-   (add-hook 'before-save-hook 'copyright-update)
+            ;; Update the year in copyright message
+            (add-hook 'before-save-hook
+                      (lambda ()
+                        (when my-copyright-fixes
+                          (save-excursion (copyright-fix-years)))))
+            (add-hook 'before-save-hook 'copyright-update)
 
-   (when my-guess-style
-     (guess-style-guess-all))))         ; guess indentation style
+            (when my-guess-style
+              (guess-style-guess-all))))         ; guess indentation style
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -170,11 +162,11 @@
 ;; Documentation
 
 ;; Comment editing
-(my-add-hook 'my-programming-mode-hook
-             (lambda ()
-               (auto-fill-mode 1)         ; auto-wrap lines in comments
-               (require 'filladapt)
-               (turn-on-filladapt-mode)))
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (auto-fill-mode 1)         ; auto-wrap lines in comments
+            (require 'filladapt)
+            (turn-on-filladapt-mode)))
 (add-hook 'c-mode-common-hook
           (lambda ()
             ;; Auto-end comment block when inserting `/' (override: C-q /)
@@ -297,10 +289,10 @@
 ;; Special treatment for tags buffer
 (my-register-helper-buffer "*cscope*" 'long-help)
 
-(my-add-hook 'my-programming-mode-hook
-             (lambda ()
-               (require 'xcscope)
-               (cscope-minor-mode)))
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (require 'xcscope)
+            (cscope-minor-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

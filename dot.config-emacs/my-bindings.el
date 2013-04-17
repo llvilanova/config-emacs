@@ -86,35 +86,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; `my-programming-mode'
-(my-add-hook 'my-programming-mode-hook
-             (lambda ()
-               ;; Auto-indent new line
-               (local-set-key [return] 'newline-and-indent)
-               ;; ;; Auto-indent new line (plus previous)
-               ;; (local-set-key [return] 'reindent-then-newline-and-indent)
+(add-hook 'prog-mode-hook
+          (lambda ()
+            ;; Auto-indent new line
+            (local-set-key [return] 'newline-and-indent)
+            ;; ;; Auto-indent new line (plus previous)
+            ;; (local-set-key [return] 'reindent-then-newline-and-indent)
 
-               ;; `highlight-symbol'
-               (local-set-key [(meta f5)] 'highlight-symbol-at-point)
-               (local-set-key [(meta f6)] 'highlight-symbol-at-point)
-               (local-set-key [f5] 'highlight-symbol-prev)
-               (local-set-key [f6] 'highlight-symbol-next)
+            ;; `highlight-symbol'
+            (local-set-key [(meta f5)] 'highlight-symbol-at-point)
+            (local-set-key [(meta f6)] 'highlight-symbol-at-point)
+            (local-set-key [f5] 'highlight-symbol-prev)
+            (local-set-key [f6] 'highlight-symbol-next)
 
-               ;; `semantic'
-               (local-set-key [(control c) (i)] ; open included file at point
-                              'semantic-decoration-include-visit)
-               (local-set-key [(control c) (g)] ; jump to declaration
-                              'semantic-ia-fast-jump)
-               (local-set-key [(control c) (t)] ; toggle declaration / definition
-                              'semantic-analyze-proto-impl-toggle)
-               (local-set-key [f1] 'semantic-ia-show-summary)
-               (local-set-key [(meta f1)] 'semantic-ia-show-doc)
-               (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
+            ;; `semantic'
+            (local-set-key [(control c) (i)] ; open included file at point
+                           'semantic-decoration-include-visit)
+            (local-set-key [(control c) (g)] ; jump to declaration
+                           'semantic-ia-fast-jump)
+            (local-set-key [(control c) (t)] ; toggle declaration / definition
+                           'semantic-analyze-proto-impl-toggle)
+            (local-set-key [f1] 'semantic-ia-show-summary)
+            (local-set-key [(meta f1)] 'semantic-ia-show-doc)
+            (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
 (eval-after-load 'company
   '(progn
-     (my-add-hook 'my-programming-mode-hook
-                  (lambda ()
-                    ;; `company'
-                    (local-set-key [(meta tab)] 'company-complete)))))
+     (add-hook 'prog-mode-hook
+               (lambda ()
+                 ;; `company'
+                 (local-set-key [(meta tab)] 'company-complete)))))
 (eval-after-load 'auto-complete
   '(progn
      (add-hook 'auto-complete-mode-hook
