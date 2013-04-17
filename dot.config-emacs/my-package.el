@@ -166,7 +166,10 @@ command to be run in a shell.")
                         '(require 'org-exp-bibtex)))
         (:name org-gnome-calendar    :type git
                :url "https://github.com/llvilanova/org-gnome-calendar"
-               :after (global-org-gnome-calendar-mode))
+               :after (progn
+                        (require 'dbus)
+                        (when (dbus-ignore-errors (dbus-init-bus :session))
+                          (global-org-gnome-calendar-mode))))
         paredit
         (:name popwin
                :features popwin
