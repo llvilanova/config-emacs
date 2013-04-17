@@ -219,6 +219,7 @@ command to be run in a shell.")
 
 
 (el-get 'sync '(el-get diminish))
+(el-get-cleanup (mapcar 'el-get-source-name el-get-sources))
 (el-get 'sync (append '(el-get)
                       (mapcar 'el-get-source-name el-get-sources)))
 (my-regenerate-autoloads)
