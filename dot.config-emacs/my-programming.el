@@ -123,7 +123,8 @@
             (add-to-list 'c-cleanup-list 'defun-close-semi)
             (add-to-list 'c-cleanup-list 'list-close-comma)
             (cpp-highlight-buffer t)))
-
+;; Otherwise overrides `c-toggle-auto-newline'
+(sp-local-pair 'c-mode "{" nil :actions nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python

@@ -195,6 +195,12 @@ command to be run in a shell.")
                             (list "epylint" (list local-file))))
                         (add-to-list 'flymake-allowed-file-name-masks
                                      '("\\.py\\'" my--flymake-pylint-init))))
+        (:name smartparens
+               :after (progn
+                        (require 'smartparens-config)
+                        (add-to-list 'LaTeX-mode-hook
+                                     (lambda () (require 'smartparens-latex)))
+                        (smartparens-global-mode)))
         (:name smex                  :type elpa)
         (:name sml-modeline          :type elpa)
         switch-window
@@ -208,9 +214,6 @@ command to be run in a shell.")
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
-        (:name wrap-region           :type http
-               :url "https://github.com/rejeep/wrap-region/raw/master/wrap-region.el"
-               :after (wrap-region-global-mode))
         (:name xcscope
                :features nil)
         yasnippet
