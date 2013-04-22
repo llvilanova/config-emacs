@@ -67,6 +67,7 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
       (if (member tag (org-get-tags-at current-headline))
           next-headline
         nil))))
+(require 'org)
 (add-to-list 'org-agenda-custom-commands
              '("p" "CFPs (Calls For Papers)"
                agenda ""
