@@ -120,6 +120,10 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
+        (:name flymake               :type git
+               :url "https://github.com/illusori/emacs-flymake"
+               :after (progn
+                        (setq flymake-number-of-errors-to-display nil)))
         (:name flymake-lua           :type http
                :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
                :description "Flymake support for Lua."
