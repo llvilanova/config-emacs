@@ -70,17 +70,17 @@ cdr instead."
 ;; Pull the rest of configuration
 (require 'cl)
 (require 'my-misc)
-(require 'my-personal nil t)            ; personal information, never upload
+(require 'my-personal nil t)              ; personal information, never upload
 (require 'my-cmdline)
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
-(require 'my-projects nil t)            ; personal project list, never upload
 (require 'my-writing)
 (require 'my-programming)
 (require 'my-org)
 (require 'my-mail)
 (require 'my-bindings)
+(require 'my-finish nil t)                ; personal code, never upload
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
