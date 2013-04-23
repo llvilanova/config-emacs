@@ -4,34 +4,7 @@
 ;; Frames
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; `framepop': Toggle visibility of a buffer pinned in a frame
-(when window-system
-  (setq framepop-enable-keybinding "<f7>")
-  (require 'framepop)
-
-  (defvar my-framepop-with-focus t)
-  (defun my-framepop-toggle-with-focus ()
-    "Toggle whether framepop should retain input focus."
-    (interactive)
-    (setq my-framepop-with-focus (not my-framepop-with-focus))
-    (if my-framepop-with-focus
-        (message "FramePop focused")
-      (message "FramePop unfocused")))
-
-  ;; advice framepop to allow input focus
-  (defadvice framepop-toggle-frame (after my-framepop-toggle-frame
-                                          activate)
-    "Switch input focus if necessary."
-    (if (and my-framepop-with-focus
-           framepop-frame
-           (eq t (frame-visible-p framepop-frame)))
-        (select-frame-set-input-focus framepop-frame)))
-  (defadvice framepop-display-buffer (after my-framepop-display-buffer
-                                            activate)
-    "Do not redirect input focus if thus is wanted."
-    (when my-framepop-with-focus
-      (redirect-frame-focus framepop-frame))))
-
+;; nil
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Windows
