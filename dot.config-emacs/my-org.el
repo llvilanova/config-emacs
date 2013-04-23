@@ -92,7 +92,15 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 '(:time "1m" :actions (-email))
                 '(:time "1w" :actions (-email))
                 '(:time "1d" :actions (-email)))
+(defun my-org-notify-expire (plist)
+  (with-current-buffer (find-buffer-visiting (plist-get plist :file))
+    (save-excursion
+      (goto-char (plist-get plist :begin))
+      (org-todo 'done)
+      (save-buffer nil))))
 (org-notify-add 'go-home
+                '(:time "-10m"
+                        :actions (my-org-notify-expire))
                 '(:time "-1s" :period "20s" :duration 10
                         :actions (-message -ding -notify/window -sound))
                 '(:time "20m" :period "5m"  :duration 60
