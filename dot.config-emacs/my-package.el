@@ -211,7 +211,19 @@ command to be run in a shell.")
         switch-window
         ;; (:name tempo-snippets        :type elpa)
         (:name undo-tree
-               :after (global-undo-tree-mode))
+               :after (progn
+                        (defadvice undo-tree-undo (around keep-region activate)
+                          "Keep region when undoing in region."
+                          (if (use-region-p)
+                              (let ((m (set-marker (make-marker) (mark)))
+                                    (p (set-marker (make-marker) (point))))
+                                ad-do-it
+                                (goto-char p)
+                                (set-mark m)
+                                (set-marker p nil)
+                                (set-marker m nil))
+                            ad-do-it))
+                        (global-undo-tree-mode))
         (:name unipoint              :type git
                :url "https://github.com/apgwoz/unipoint.git"
                :after (autoload 'unipoint-mode "unipoint"))
