@@ -105,6 +105,10 @@ command to be run in a shell.")
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
                         (dired-details-install)))
+        (:name disaster              :type git
+               :url "https://github.com/jart/disaster.git"
+               :after (eval-after-load 'cc-mode
+                        '(require 'disaster)))
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name dpkg-dev-el           :type apt-get)
@@ -223,7 +227,7 @@ command to be run in a shell.")
                                 (set-marker p nil)
                                 (set-marker m nil))
                             ad-do-it))
-                        (global-undo-tree-mode))
+                        (global-undo-tree-mode)))
         (:name unipoint              :type git
                :url "https://github.com/apgwoz/unipoint.git"
                :after (autoload 'unipoint-mode "unipoint"))
