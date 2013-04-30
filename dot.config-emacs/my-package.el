@@ -100,7 +100,16 @@ command to be run in a shell.")
         cedet
         cl-lib
         (:name cursor-chg            :type emacswiki)
-        diminish
+        (:name diminish
+               :after (progn
+                        (defmacro my-diminish-after (mode-name)
+                          `(eval-after-load ',mode-name
+                             '(diminish (intern (format "%s-mode" ',mode-name)))))
+                        (my-diminish-after elisp-slime-nav)
+                        (my-diminish-after flyspell)
+                        (my-diminish-after smartparens)
+                        (my-diminish-after visual-line)
+                        (my-diminish-after whitespace)))
         (:name dired-details
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
@@ -114,8 +123,6 @@ command to be run in a shell.")
         (:name dpkg-dev-el           :type apt-get)
         (:name elisp-slime-nav       :type elpa
                :after (progn
-                        (add-hook 'emacs-lisp-mode-hook
-                                  (lambda () (diminish 'elisp-slime-nav-mode)))
                         (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
         (:name emacs-goodies-el      :type apt-get)
         (:name enclose               :type http
