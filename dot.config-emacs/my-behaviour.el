@@ -140,10 +140,10 @@ If COMMENTFIRST is non-nil, comment the original line."
 (setq-default show-trailing-whitespace t)
 
 ;; `whitespace': highlight lines breaking formatting rules
-(require 'whitespace)
-(setq whitespace-style
-      '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
-      whitespace-line-column nil)
+(eval-after-load 'whitespace
+  '(setq whitespace-style
+         '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
+         whitespace-line-column nil))
 (add-hook 'find-file-hook 'whitespace-mode)
 
 (defun my-toggle-tabs ()
