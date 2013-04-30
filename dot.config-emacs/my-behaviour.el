@@ -218,47 +218,6 @@ then only one line is copied."
       ido-max-prospects 10              ; don't spam my minibuffer
       ido-confirm-unique-completion t)  ; wait for RET, even with unique completion
 
-;; `filecache': find files using a pre-loaded cache
-;; http://www.emacswiki.org/cgi-bin/wiki/FileNameCache
-(defvar my-filecache-dirs
-  (list my-home-dir
-        (path my-home-dir ".config" "emacs")
-        (path my-home-dir "Desktop")
-        (path my-home-dir "Documents")
-        (path my-home-dir "Projects"))
-  "Directories to cache with `filecache'.")
-(eval-after-load
-    "filecache"
-  '(progn
-     (message "Loading file cache...")
-     (file-cache-add-directory-list my-filecache-dirs)))
-(defun my-file-cache-ido-find-file (file)
-  "Using ido, interactively open file from file cache'.
-First select a file, matched using ido-switch-buffer against the contents
-in `file-cache-alist'. If the file exist in more than one
-directory, select directory. Lastly the file is opened."
-  (interactive (progn
-                 (require 'filecache)
-                 (list (my--file-cache-ido-read
-                        "File: "
-                        (mapcar
-                         (lambda (x)
-                           (car x))
-                         file-cache-alist)))))
-  (let* ((record (assoc file file-cache-alist)))
-    (find-file
-     (expand-file-name
-      file
-      (if (= (length record) 2)
-          (car (cdr record))
-        (my--file-cache-ido-read
-         (format "Find %s in dir: " file) (cdr record)))))))
-(defun my--file-cache-ido-read (prompt choices)
-  (let ((ido-make-buffer-list-hook
-         (lambda ()
-           (setq ido-temp-list choices))))
-    (ido-read-buffer prompt)))
-
 ;; `smex': command-completion interface on top of `ido'
 ;;         replaces emacs's default `execute-extended-command'
 ;;         supersedes `icomplete+'
@@ -301,13 +260,13 @@ directory, select directory. Lastly the file is opened."
 (setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
 
 ;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
-(setq time-stamp-active t               ; do enable time-stamps
-      time-stamp-line-limit 10               ; check first 10 buffer lines
-      time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
+(eval-after-load 'timestamp
+  (setq time-stamp-active t             ; do enable time-stamps
+        time-stamp-line-limit 10        ; check first 10 buffer lines
+        time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)")) ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; `desktop': maintain per-directory session information
-;;            supersedes `recentf'
 (desktop-save-mode 1)
 (setq desktop-save 'if-exists)          ; only save if desktop file exists
 
