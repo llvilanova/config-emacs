@@ -78,6 +78,13 @@
 (show-paren-mode t)                     ; highlight matching parenthesis...
 (setq show-paren-style 'mixed)          ; ...but whole region if out of window
 
+(defun my-smart-kill-whole-line (&optional arg)
+  "A simple wrapper around `kill-whole-line' that respects indentation."
+  (interactive "P")
+  (kill-whole-line arg)
+  (back-to-indentation))
+(global-set-key [remap kill-whole-line] 'my-smart-kill-whole-line)
+
 (defun my-duplicate-line (&optional commentfirst)
   "Duplicate line at point.
 If COMMENTFIRST is non-nil, comment the original line."
