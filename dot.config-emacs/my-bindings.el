@@ -155,20 +155,20 @@
             (define-key gnus-summary-mode-map [(shift g) (shift g)] 'gnus-group-make-nnir-group)))
 
 ;; `org-mode'
-(global-set-key [(control shift o) (l)] 'org-store-link)
-(global-set-key [(control shift o) (a)] 'org-agenda)
-(global-set-key [(control shift o) (s)] 'org-search-view)
-(global-set-key [(control shift o) (f)]
+(global-set-key [(super o) (l)] 'org-store-link)
+(global-set-key [(super o) (a)] 'org-agenda)
+(global-set-key [(super o) (s)] 'org-search-view)
+(global-set-key [(super o) (f)]
                 (lambda ()
                   (interactive)
                   (ido-find-file-in-dir org-directory)))
-(global-set-key [(control shift o) (b)] 'org-iswitchb)
-(global-set-key [(control shift o) (control c) (c)] 'org-capture)
+(global-set-key [(super o) (b)] 'org-iswitchb)
+(global-set-key [(super o) (control c) (c)] 'org-capture)
 (when (require 'org-secretary nil t)
-  (global-set-key [(control shift o) (w)] 'org-sec-set-with)
-  (global-set-key [(control shift o) (shift w)] 'org-sec-set-where)
-  (global-set-key [(control shift o) (d)] 'org-sec-set-dowith)
-  (global-set-key [(control shift o) (shift d)] 'org-sec-set-doat))
+  (global-set-key [(super o) (w)] 'org-sec-set-with)
+  (global-set-key [(super o) (shift w)] 'org-sec-set-where)
+  (global-set-key [(super o) (d)] 'org-sec-set-dowith)
+  (global-set-key [(super o) (shift d)] 'org-sec-set-doat))
 
 ;; `magit' in fullscreen
 (setq my-magit-status-windows nil)
