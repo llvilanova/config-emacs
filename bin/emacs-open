@@ -6,11 +6,10 @@ EMACS_EDITOR=`which emacsclient`
 
 if [ -x "$EMACS_EDITOR" ]; then
     if [ -n "$DISPLAY" ]; then
-        EMACS_ARGS=-c
+        $EMACS_EDITOR -c -F "((fullscreen . maximized))" -a "" "$@"
     else
-        EMACS_ARGS=-t
+        $EMACS_EDITOR -t -a "" "$@"
     fi
-    $EMACS_EDITOR $EMACS_ARGS -a "$BASE/emacs-start" "$@"
 else
     exit 1
 fi
