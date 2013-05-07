@@ -72,6 +72,12 @@
 
 ;; `dired'
 (global-set-key [(control x) (control j)] 'dired-jump)
+(define-key dired-mode-map
+  (vector 'remap 'beginning-of-buffer)
+  (lambda () (interactive) (beginning-of-buffer) (next-line 2)))
+(define-key dired-mode-map
+  (vector 'remap 'end-of-buffer)
+  (lambda () (interactive) (end-of-buffer) (next-line -1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Files
