@@ -181,6 +181,18 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 (setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block
       org-src-fontify-natively t)   ; and fontify accordingly
 
+;; Auto-update cookies
+(defun my-org-update-parent-cookie ()
+  (when (equal major-mode 'org-mode)
+    (save-excursion
+      (ignore-errors
+        (org-back-to-heading)
+        (org-update-parent-todo-statistics)))))
+(defadvice org-kill-line (after fix-cookies activate)
+  (my-org-update-parent-cookie))
+(defadvice kill-whole-line (after fix-cookies activate)
+  (my-org-update-parent-cookie))
+
 ;; ;; Linking
 ;; (require 'org-wikinodes)                ; enable camelcase auto-linking
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
