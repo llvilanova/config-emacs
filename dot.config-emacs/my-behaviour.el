@@ -289,6 +289,9 @@ then only one line is copied."
 ;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))
 
+;; `eshell'
+(setq eshell-directory-name (path my-cache-dir "eshell"))
+
 ;; `em-smart'
 ;; Be clever on `eshell' output
 (add-hook 'eshell-mode-hook
