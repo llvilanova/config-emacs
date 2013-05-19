@@ -128,6 +128,7 @@
             (cpp-highlight-buffer t)))
 ;; Otherwise overrides `c-toggle-auto-newline'
 (sp-local-pair 'c-mode "{" nil :actions nil)
+(sp-local-pair 'c++-mode "{" nil :actions nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
