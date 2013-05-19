@@ -163,6 +163,8 @@ command to be run in a shell.")
                :after (progn
                         (ido-mode 1)
                         (ido-ubiquitous-mode 1)))
+        (:name key-chord             :type emacswiki
+               :after (key-chord-mode t))
         (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
         (:name lv                    :type git

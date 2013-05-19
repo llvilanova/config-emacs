@@ -55,6 +55,8 @@
 (global-set-key (vector 'remap 'goto-line) 'my-goto-line-with-feedback)
 ;; Join following line into this one
 (global-set-key [(meta j)] (lambda () (interactive) (join-line -1)))
+;; Quickly insert ';' at the end of the line
+(key-chord-define-global ";;" "\C-e;")
 
 ;; `ace-jump-mode'
 (global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
