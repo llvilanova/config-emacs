@@ -268,6 +268,7 @@
 
 (eval-after-load 'auto-complete
   '(progn
+     (require 'semantic/ia)
      (require 'auto-complete-config)
      (ac-flyspell-workaround)
      (setq ac-dwim t                    ; be clever on TAB/RET
@@ -292,7 +293,7 @@
 ;; Code navigation
 
 ;; Special treatment for tags buffer
-(my-register-helper-buffer "*cscope*" 'long-help)
+;; (my-register-helper-buffer "*cscope*" 'long-help)
 
 (add-hook 'prog-mode-hook
           (lambda ()
