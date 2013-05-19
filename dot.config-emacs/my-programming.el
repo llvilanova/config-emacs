@@ -103,7 +103,10 @@
             (add-hook 'before-save-hook 'copyright-update)
 
             (when my-guess-style
-              (guess-style-guess-all))))         ; guess indentation style
+              (guess-style-guess-all))    ; guess indentation style
+
+            (outline-minor-mode t)
+            ))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

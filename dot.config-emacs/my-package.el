@@ -186,6 +186,17 @@ command to be run in a shell.")
                         (require 'dbus)
                         (when (dbus-ignore-errors (dbus-init-bus :session))
                           (global-org-gnome-calendar-mode))))
+        (:name outshine              :type git
+               :url "https://github.com/tj64/outshine.git"
+               :after (progn
+                        (autoload 'outshine-hook-function "outshine")
+                        (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+                        (add-hook 'outshine-hook
+                                  (lambda ()
+                                    (define-key outline-minor-mode-map (kbd "M-<up>") nil)
+                                    (define-key outline-minor-mode-map (kbd "M-<down>") nil)
+                                    (define-key outline-minor-mode-map (kbd "M-<left>") nil)
+                                    (define-key outline-minor-mode-map (kbd "M-<right>") nil)))))
         paredit
         (:name popwin
                :features popwin
