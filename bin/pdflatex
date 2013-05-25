@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Force pdflatex to activate synctex
+/usr/bin/pdflatex -synctex=1 $@

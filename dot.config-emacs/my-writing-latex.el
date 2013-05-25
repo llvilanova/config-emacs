@@ -14,6 +14,8 @@
 (add-hook
  'LaTeX-mode-hook
  (lambda ()
+   (TeX-PDF-mode 1)
+   (TeX-source-correlate-mode 1)
    (LaTeX-math-mode 1)                 ; nice math insertion menu
    (TeX-fold-mode 1)                   ; nicely foldable environments...
    (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
@@ -25,6 +27,20 @@
    ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
    (orgtbl-mode 1)                      ; support for org's tables
    (sp-local-pair 'latex-mode "\"" nil :actions nil)))
+
+;; Do not ask when running the viewer
+(after 'tex
+  (setq TeX-command-list
+        (mapcar
+         (lambda (elem)
+           (if (string= "View" (car elem))
+               (list (nth 0 elem)
+                     (nth 1 elem)
+                     (nth 2 elem)
+                     nil
+                     (nthcdr 4 elem))
+             elem))
+         TeX-command-list)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * Bibliography
