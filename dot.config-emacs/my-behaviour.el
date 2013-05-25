@@ -147,10 +147,10 @@ If COMMENTFIRST is non-nil, comment the original line."
 (setq-default show-trailing-whitespace t)
 
 ;; `whitespace': highlight lines breaking formatting rules
-(eval-after-load 'whitespace
-  '(setq whitespace-style
-         '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
-         whitespace-line-column nil))
+(after 'whitespace
+  (setq whitespace-style
+        '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
+        whitespace-line-column nil))
 (add-hook 'find-file-hook 'whitespace-mode)
 
 (defun my-toggle-tabs ()
@@ -260,7 +260,7 @@ then only one line is copied."
 (setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
 
 ;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
-(eval-after-load 'timestamp
+(after 'timestamp
   (setq time-stamp-active t             ; do enable time-stamps
         time-stamp-line-limit 10        ; check first 10 buffer lines
         time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)")) ; date format

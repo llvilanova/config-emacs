@@ -103,8 +103,8 @@ command to be run in a shell.")
         (:name diminish
                :after (progn
                         (defmacro my-diminish-after (mode-name)
-                          `(eval-after-load ',mode-name
-                             '(diminish (intern (format "%s-mode" ',mode-name)))))
+                          `(after ',mode-name
+                             (diminish (intern (format "%s-mode" ',mode-name)))))
                         (my-diminish-after elisp-slime-nav)
                         (my-diminish-after flyspell)
                         (my-diminish-after smartparens)
@@ -116,8 +116,8 @@ command to be run in a shell.")
                         (dired-details-install)))
         (:name disaster              :type git
                :url "https://github.com/jart/disaster.git"
-               :after (eval-after-load 'cc-mode
-                        '(require 'disaster)))
+               :after (after 'cc-mode
+                        (require 'disaster)))
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name dpkg-dev-el           :type apt-get)
@@ -180,8 +180,8 @@ command to be run in a shell.")
         (:name org-mode              :type apt-get)
         (:name org-exp-bibtex        :type http
                :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
-               :after (eval-after-load 'org-bibtex
-                        '(require 'org-exp-bibtex)))
+               :after (after 'org-bibtex
+                        (require 'org-exp-bibtex)))
         (:name org-gnome-calendar    :type git
                :url "https://github.com/llvilanova/org-gnome-calendar"
                :after (progn

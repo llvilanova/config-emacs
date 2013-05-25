@@ -18,21 +18,20 @@
 ;; Babel
 ;; For a list of supported languages / backends see:
 ;; http://orgmode.org/worg/org-contrib/babel/languages.php
-(eval-after-load 'org
-  '(progn
-     (org-babel-do-load-languages
-      'org-babel-load-languages
-      '((C . t)
-        (ditaa . t)
-        (dot . t)
-        (gnuplot . t)
-        (latex . t)
-        (octave . t)
-        (perl . t)
-        (python . t)
-        (R . t)
-        (screen . t)))
-     (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))
+(after 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (ditaa . t)
+     (dot . t)
+     (gnuplot . t)
+     (latex . t)
+     (octave . t)
+     (perl . t)
+     (python . t)
+     (R . t)
+     (screen . t)))
+  (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -112,28 +111,27 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Exporting
-(eval-after-load 'org-latex
-  '(progn
-     (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
-           '("rubber --pdf --into %o %f"))
-     ;; (setq org-export-latex-minted t)        ; export source code using `minted'
-     ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
+(after 'org-latex
+  (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
+        '("rubber --pdf --into %o %f"))
+  ;; (setq org-export-latex-minted t)        ; export source code using `minted'
+  ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
 
-     ;; Create bibliography file
-     (add-hook 'org-export-latex-after-save-hook
-               (lambda ()
-                 (with-current-buffer cbuf
-                   (org-bibtex (concat (file-name-sans-extension
-                                        (buffer-file-name)) ".bib")))))
-     ;; Remove temporary bibliography files when done
-     (setq org-export-pdf-logfiles
-           (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
-     ;; Remove other temporary files when done
-     (setq org-export-pdf-logfiles
-           (append org-export-pdf-logfiles '("loe" "lof")))
-     ;; Remove LaTeX file when done
-     (add-to-list 'org-export-pdf-logfiles "tex")))
-(eval-after-load 'org-exp
+  ;; Create bibliography file
+  (add-hook 'org-export-latex-after-save-hook
+            (lambda ()
+              (with-current-buffer cbuf
+                (org-bibtex (concat (file-name-sans-extension
+                                     (buffer-file-name)) ".bib")))))
+  ;; Remove temporary bibliography files when done
+  (setq org-export-pdf-logfiles
+        (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
+  ;; Remove other temporary files when done
+  (setq org-export-pdf-logfiles
+        (append org-export-pdf-logfiles '("loe" "lof")))
+  ;; Remove LaTeX file when done
+  (add-to-list 'org-export-pdf-logfiles "tex"))
+(after 'org-exp
   '(defadvice org-export (around my-disable-flyspell activate)
      "Disable flyspell while generating intermediate files for exporting."
      (let ((my-flyspell-mode-maybe-enabled nil))
@@ -175,8 +173,8 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 (setq org-return-follows-link t)
 
 ;; Show locations with `google-maps'
-(eval-after-load 'org
-  '(require 'org-location-google-maps))
+(after 'org
+  (require 'org-location-google-maps))
 
 ;; Code block editing
 (setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block

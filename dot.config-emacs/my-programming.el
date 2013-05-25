@@ -201,57 +201,55 @@
 ;; (require 'company)
 ;; (global-company-mode t)
 
-(eval-after-load 'company
-  '(progn
+(after 'company
+  (defun company-semantic (command &optional arg &rest ignored)
+    "A `company-mode' completion back-end using CEDET Semantic."
+    (interactive (list 'interactive))
+    (case command
+      ('interactive (company-begin-backend 'company-semantic))
+      ('prefix (and (memq major-mode company-semantic-modes)
+                  (semantic-active-p)
+                  (not (company-in-string-or-comment))
+                  (or (company-semantic--grab) 'stop)))
+      ;; ('candidates (if (and (equal arg "")
+      ;;                     (looking-back " "))
+      ;;                  (company-semantic-completions-raw arg)
+      ;;                (company-semantic-completions arg)))
+      ('candidates (or (company-semantic-completions arg)
+                      (company-semantic-completions-raw arg)))
+      ('meta (funcall company-semantic-metadata-function
+                      (assoc arg company-semantic--current-tags)))
+      ('doc-buffer (company-semantic-doc-buffer
+                    (assoc arg company-semantic--current-tags)))
+      ;; because "" is an empty context and doesn't return local variables
+      ('no-cache (equal arg ""))
+      ('location (let ((tag (assoc arg company-semantic--current-tags)))
+                   (when (buffer-live-p (semantic-tag-buffer tag))
+                     (cons (semantic-tag-buffer tag)
+                           (semantic-tag-start tag)))))))
 
-     (defun company-semantic (command &optional arg &rest ignored)
-       "A `company-mode' completion back-end using CEDET Semantic."
-       (interactive (list 'interactive))
-       (case command
-         ('interactive (company-begin-backend 'company-semantic))
-         ('prefix (and (memq major-mode company-semantic-modes)
-                     (semantic-active-p)
-                     (not (company-in-string-or-comment))
-                     (or (company-semantic--grab) 'stop)))
-         ;; ('candidates (if (and (equal arg "")
-         ;;                     (looking-back " "))
-         ;;                  (company-semantic-completions-raw arg)
-         ;;                (company-semantic-completions arg)))
-         ('candidates (or (company-semantic-completions arg)
-                         (company-semantic-completions-raw arg)))
-         ('meta (funcall company-semantic-metadata-function
-                         (assoc arg company-semantic--current-tags)))
-         ('doc-buffer (company-semantic-doc-buffer
-                       (assoc arg company-semantic--current-tags)))
-         ;; because "" is an empty context and doesn't return local variables
-         ('no-cache (equal arg ""))
-         ('location (let ((tag (assoc arg company-semantic--current-tags)))
-                      (when (buffer-live-p (semantic-tag-buffer tag))
-                        (cons (semantic-tag-buffer tag)
-                              (semantic-tag-start tag)))))))
+  ;; Temporarily disable `semantic-idle-summary-mode' when completing
+  (add-hook 'company-completion-started-hook
+            (lambda (manually) (my-set-minibuffer-helpers -1)))
+  (add-hook 'company-completion-cancelled-hook
+            (lambda (manually) (my-set-minibuffer-helpers 1)))
+  (add-hook 'company-completion-finished-hook
+            (lambda (candidate) (my-set-minibuffer-helpers 1)))
 
-     ;; Temporarily disable `semantic-idle-summary-mode' when completing
-     (add-hook 'company-completion-started-hook
-               (lambda (manually) (my-set-minibuffer-helpers -1)))
-     (add-hook 'company-completion-cancelled-hook
-               (lambda (manually) (my-set-minibuffer-helpers 1)))
-     (add-hook 'company-completion-finished-hook
-               (lambda (candidate) (my-set-minibuffer-helpers 1)))
+  ;; Special treatment for documentation buffer
+  (my-register-helper-buffer "*Company meta-data*" 'help)
 
-     ;; Special treatment for documentation buffer
-     (my-register-helper-buffer "*Company meta-data*" 'help)
-
-     ;; ;; Show documentation buffer when selecting a completion
-     ;; ;; taken from `company-show-doc-buffer'
-     ;; (add-hook 'company-completion-finished-hook
-     ;;           (lambda (candidate)
-     ;;             (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
-     ;;               (if doc-buffer
-     ;;                   (progn
-     ;;                     (with-current-buffer doc-buffer
-     ;;                       (goto-char (point-min)))
-     ;;                     (display-buffer doc-buffer t))))))
-     ))
+  ;; ;; Show documentation buffer when selecting a completion
+  ;; ;; taken from `company-show-doc-buffer'
+  ;; (add-hook 'company-completion-finished-hook
+  ;;           (lambda (candidate)
+  ;;             (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
+  ;;               (if doc-buffer
+  ;;                   (progn
+  ;;                     (with-current-buffer doc-buffer
+  ;;                       (goto-char (point-min)))
+  ;;                     (display-buffer doc-buffer t))))))
+  )
 
 
 ;; `auto-complete'
@@ -266,28 +264,27 @@
   (add-to-list 'ac-sources 'ac-source-semantic-raw)
   (add-to-list 'ac-sources 'ac-source-semantic))
 
-(eval-after-load 'auto-complete
-  '(progn
-     (require 'semantic/ia)
-     (require 'auto-complete-config)
-     (ac-flyspell-workaround)
-     (setq ac-dwim t                    ; be clever on TAB/RET
-           ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
-           ac-quick-help-delay 0.2      ; ... almost immediately
-           ac-auto-start nil              ; do not start automatically
-           ac-auto-show-menu nil          ; do not show menu when auto-starting
-           ac-use-menu-map t)           ; allow C-n/C-p in completion menu
-     (add-hook 'auto-complete-mode-hook
-               (lambda ()
-                 ;; (setq yas-trigger-key nil)
-                 (ac-set-trigger-key "TAB")))
+(after 'auto-complete
+  (require 'semantic/ia)
+  (require 'auto-complete-config)
+  (ac-flyspell-workaround)
+  (setq ac-dwim t                    ; be clever on TAB/RET
+        ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
+        ac-quick-help-delay 0.2      ; ... almost immediately
+        ac-auto-start nil              ; do not start automatically
+        ac-auto-show-menu nil          ; do not show menu when auto-starting
+        ac-use-menu-map t)           ; allow C-n/C-p in completion menu
+  (add-hook 'auto-complete-mode-hook
+            (lambda ()
+              ;; (setq yas-trigger-key nil)
+              (ac-set-trigger-key "TAB")))
 
-     (add-hook 'c-mode-common-hook
-               (lambda ()
-                 (add-to-list 'ac-sources 'ac-source-filename)
-                 (my-ac-source-semantic-enable)))
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (add-to-list 'ac-sources 'ac-source-filename)
+              (my-ac-source-semantic-enable)))
 
-     (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)))
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation

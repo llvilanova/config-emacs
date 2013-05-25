@@ -116,20 +116,18 @@
             (local-set-key [f1] 'semantic-ia-show-summary)
             (local-set-key [(meta f1)] 'semantic-ia-show-doc)
             (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
-(eval-after-load 'company
-  '(progn
-     (add-hook 'prog-mode-hook
-               (lambda ()
-                 ;; `company'
-                 (local-set-key [(meta tab)] 'company-complete)))))
-(eval-after-load 'auto-complete
-  '(progn
-     (add-hook 'auto-complete-mode-hook
-               (lambda ()
-                 ;; `auto-complete'
-                 (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-                 (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-                 (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))))
+(after 'company
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              ;; `company'
+              (local-set-key [(meta tab)] 'company-complete))))
+(after 'auto-complete
+  (add-hook 'auto-complete-mode-hook
+            (lambda ()
+              ;; `auto-complete'
+              (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+              (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
+              (define-key ac-mode-map (kbd "C-c H") 'ac-last-help))))
 
 ;; `my-writing-mode'
 (add-hook 'text-mode-hook
@@ -151,10 +149,9 @@
             (local-set-key [(meta p)] 'flymake-goto-prev-error)))
 
 ;; `framepop'
-(eval-after-load 'framepop
-  '(progn
-     (define-key framepop-map [f7] 'framepop-toggle-frame)
-     (define-key framepop-map "f" 'my-framepop-toggle-with-focus)))
+(after 'framepop
+  (define-key framepop-map [f7] 'framepop-toggle-frame)
+  (define-key framepop-map "f" 'my-framepop-toggle-with-focus))
 
 ;; `gnus'
 (global-set-key [f12] 'my-gnus-start-or-hide)

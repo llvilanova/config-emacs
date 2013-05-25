@@ -7,7 +7,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; * Definition of pervasive paths
+;; * Common routines and macros
 (defun path (&rest list)
   "Build a path by concatenating a list of strings.
 
@@ -18,6 +18,15 @@ directory path."
       (setq res (concat (file-name-as-directory res) elem)))
     res))
 
+(defmacro after (mode &rest body)
+  "`eval-after-load' MODE and evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,mode
+     '(progn ,@body)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; * Definition of pervasive paths
 ;; Where to store files
 (defconst my-home-dir   (expand-file-name "~"))
 (defconst my-config-dir (path my-home-dir ".config" "emacs"))
