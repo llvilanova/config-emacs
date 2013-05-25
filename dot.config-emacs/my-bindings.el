@@ -172,7 +172,7 @@
                   (interactive)
                   (ido-find-file-in-dir org-directory)))
 (global-set-key [(super o) (b)] 'org-iswitchb)
-(global-set-key [(super o) (control c) (c)] 'org-capture)
+(global-set-key [(super o) (c)] 'org-capture)
 (when (require 'org-secretary nil t)
   (global-set-key [(super o) (w)] 'org-sec-set-with)
   (global-set-key [(super o) (shift w)] 'org-sec-set-where)
