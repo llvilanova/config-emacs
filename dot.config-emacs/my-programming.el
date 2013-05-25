@@ -282,10 +282,10 @@
                  ;; (setq yas-trigger-key nil)
                  (ac-set-trigger-key "TAB")))
 
-     (my-add-hook 'c-mode-common-hook
-                  (lambda ()
-                    (add-to-list 'ac-sources 'ac-source-filename)
-                    (my-ac-source-semantic-enable)))
+     (add-hook 'c-mode-common-hook
+               (lambda ()
+                 (add-to-list 'ac-sources 'ac-source-filename)
+                 (my-ac-source-semantic-enable)))
 
      (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)))
 

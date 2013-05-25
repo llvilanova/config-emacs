@@ -130,9 +130,8 @@
                  (define-key ac-mode-map (kbd "C-c H") 'ac-last-help)))))
 
 ;; `my-writing-mode'
-(my-add-hook 'my-writing-mode-hook
-             (lambda ()
-               (local-set-key [(control c) (w)] 'wordnet-search)))
+(add-hook 'text-mode-hook
+          (lambda () (local-set-key [(control c) (w)] 'wordnet-search)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

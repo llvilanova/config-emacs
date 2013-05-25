@@ -1,13 +1,7 @@
 ;;; my-writing-latex.el --- (La)TeX editing preferences.
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Setup activation hooks (`my-latex-mode-hook')
-(my-define-hook 'my-latex-mode-hook '(LaTeX-mode-hook))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General settings
+;; * General settings
 (setq font-latex-user-keyword-classes   ; user-defined keyword highlighting
       '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command))
       TeX-parse-self t                  ; parse file on load
@@ -17,8 +11,8 @@
       TeX-fold-auto t)                  ; auto-fold new macros
 (setq-default TeX-master nil)           ; query for master file
 
-(my-add-hook
- 'my-latex-mode-hook
+(add-hook
+ 'LaTeX-mode-hook
  (lambda ()
    (LaTeX-math-mode 1)                 ; nice math insertion menu
    (TeX-fold-mode 1)                   ; nicely foldable environments...
@@ -33,9 +27,9 @@
    (sp-local-pair 'latex-mode "\"" nil :actions nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Bibliography
-(my-add-hook
- 'my-latex-mode-hook
+;; * Bibliography
+(add-hook
+ 'LaTeX-mode-hook
  (lambda ()
    (turn-on-reftex)                     ; activate RefTeX...
    (setq reftex-plug-into-AUCTeX 1      ; ...and integrate with AUCTex
@@ -48,9 +42,9 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Preview
-(my-add-hook
- 'my-latex-mode-hook
+;; * Preview
+(add-hook
+ 'LaTeX-mode-hook
  (lambda ()
    (setq preview-LaTeX-command          ; command for starting a preview
          '("%T %`%l \"\\nonstopmode\\nofiles\\PassOptionsToPackage{"
@@ -66,9 +60,9 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Compilation
-(my-add-hook
- 'my-latex-mode-hook
+;; * Compilation
+(add-hook
+ 'LaTeX-mode-hook
  (lambda ()
    (add-to-list 'TeX-command-list '("Makefile PDF" "make %s.pdf"
                                     TeX-run-compile nil t))
@@ -84,7 +78,7 @@
 (push
  '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
    1 2 3 5) flymake-err-line-patterns)
-(my-add-hook 'my-latex-mode-hook 'flymake-mode)
+(add-hook 'LaTeX-mode-hook 'flymake-mode)
 
 
 (provide 'my-writing-latex)

@@ -1,15 +1,10 @@
 ;;; my-writing.el --- Text editing preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Setup activation hooks (`my-writing-mode-hook')
-(my-define-hook 'my-writing-mode-hook '(text-mode-hook))
+;; * General settings
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General settings
-
-(my-add-hook
- 'my-writing-mode-hook
+(add-hook
+ 'text-mode-hook
  (lambda ()
    (setq fill-column 100000)           ; (hopefully) virtually infinite
    (visual-line-mode 1)                ; do not break lines in file (better VC)
@@ -18,7 +13,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Spelling
+;; * Spelling
 
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
@@ -29,7 +24,7 @@
   (when my-flyspell-mode-maybe-enabled
     (flyspell-mode arg)))
 (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
-(my-add-hook 'my-writing-mode-hook 'my-flyspell-mode-maybe)
+(add-hook 'text-mode-hook 'my-flyspell-mode-maybe)
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
@@ -37,7 +32,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; `predictive': Predictive text completion
+;; * `predictive': Predictive text completion
 ;; http://www.emacswiki.org/emacs/PredictiveMode
 
 ;; Auto-create personal dictionary
@@ -57,11 +52,11 @@
       auto-completion-syntax-alist '(accept . word) ; non-word char accepts
       completion-auto-show nil)         ; no auto completion-ui
 
-;; (my-add-hook 'my-writing-mode-hook 'predictive-mode)
+;; (add-hook 'text-mode-hook 'predictive-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+;; * Miscellaneous
 
 (add-hook 'doc-view-mode-hook 'auto-revert-mode) ; refresh doc-view on changes
 (setq doc-view-continuous t)            ; change page when hitting page bounds
