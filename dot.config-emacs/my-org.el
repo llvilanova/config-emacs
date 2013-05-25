@@ -56,6 +56,7 @@
   "Skip all entries that correspond to TAG.
 
 If OTHERS is true, skip all entries that do not correspond to TAG."
+  (show-all)
   (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
         (current-headline (or (and (org-at-heading-p)
                                 (point))
