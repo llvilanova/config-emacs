@@ -57,6 +57,8 @@
 (global-set-key [(meta j)] (lambda () (interactive) (join-line -1)))
 ;; Quickly insert ';' at the end of the line
 (key-chord-define-global ";;" "\C-e;")
+;; Make C-a smarter
+(global-set-key [remap move-beginning-of-line] 'my-move-beginning-of-line)
 
 ;; `ace-jump-mode'
 (global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
