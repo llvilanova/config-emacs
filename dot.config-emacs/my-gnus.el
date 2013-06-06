@@ -299,14 +299,18 @@ See (info \"(gnus)Group Line Specification\")."
 ;; Accounts
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun my-add-gnus-account (id name mail)
+(defun my-add-gnus-account (id name mail &rest extra)
   (add-to-list 'gnus-secondary-select-methods
-               `(nnimap ,id
-                        (nnimap-stream shell)
-                        (nnimap-shell-program
-                         ,(format "/usr/lib/dovecot/imap -c ~/.dovecotrc-%s"
-                                  (downcase id)))
-                        (nnir-search-engine imap)))
+               (let ((res
+                      `(nnimap ,id
+                               (nnimap-inbox "INBOX")
+                               ;; (nnimap-unsplittable-articles '(%Deleted))
+                               (nnimap-stream shell)
+                               (nnimap-shell-program
+                                ,(format "/usr/lib/dovecot/imap -c ~/.dovecotrc-%s"
+                                         (downcase id)))
+                               (nnir-search-engine imap))))
+                 (append res extra)))
   (add-to-list 'gnus-posting-styles
                `(,(concat "^[^\+:]+\\+" id ":")
                  (name ,name)
