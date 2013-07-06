@@ -183,6 +183,16 @@ then only one line is copied."
     (insert line "\n")
     (move-to-column col)))
 
+(defun my-auto-make-directory (&optional buf)
+  "Create intermediate directories for file."
+  (let* ((buf (or buf (current-buffer)))
+         (parent (file-name-directory (buffer-file-name buf))))
+    (unless (file-accessible-directory-p parent)
+      (when (yes-or-no-p (format "Create intermediate directories? (%s)"
+                                 parent))
+        (make-directory parent t)))))
+(add-hook 'before-save-hook 'my-auto-make-directory)
+
 ;; `global-auto-revert-mode'
 (global-auto-revert-mode 1)                  ; auto refresh buffers ...
 (setq global-auto-revert-non-file-buffers t) ; ... including dired ...
