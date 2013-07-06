@@ -56,17 +56,27 @@ If nil, WINDOW is `selected-window'."
         (goto-line (read-number "Goto line: ")))
     (linum-mode -1)))
 
-(defun my-dwim-vc (&optional buf)
-  "Start version control interface according to the backend for given buffer."
-  (interactive)
+(defun my-dwim-vc (dir &optional backend)
+  "Start version control interface according to the backend of current buffer.
+
+If called with a prefix, prompts the user for the backend."
+  (interactive
+   (list
+    (or (and (buffer-file-name)
+          (file-name-directory (buffer-file-name)))
+       (read-directory-name "Select directory: "))
+    (if current-prefix-arg
+        (intern
+         (completing-read
+          "Use VC backend: "
+          (mapcar (lambda (b) (list (symbol-name b)))
+                  vc-handled-backends)
+          nil t nil nil)))))
   (require 'vc)
-  (let ((dir (or (and (buffer-file-name buf)
-                   (file-name-directory (buffer-file-name buf)))
-                (and (called-interactively-p 'interactive)
-                   (read-directory-name "Select directory: ")))))
-    (case (vc-responsible-backend dir)
-      ('Git (magit-status dir))
-      (t    (vc-dir dir)))))
+  (setq backend (or backend (vc-responsible-backend dir)))
+  (case backend
+    ('Git (magit-status dir))
+    (t    (vc-dir dir))))
 
 ;; TODO: remove once Gnus is updated
 (defun gnus-funcall-no-warning (function &rest args)
