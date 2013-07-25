@@ -140,6 +140,16 @@ If called with a prefix, prompts the user for the backend."
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 
+(defun copy-current-buffer-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
+
 (defun rotate-windows ()
   "Rotate your windows."
   (interactive)
