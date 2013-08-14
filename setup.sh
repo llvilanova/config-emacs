@@ -62,7 +62,9 @@ setup_files()
 }
 
 setup_file .config/emacs ~/.emacs.d
+mkdir -p $HOME/.config
 setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
+mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 setup_files $BASE/bin ~/bin
 
