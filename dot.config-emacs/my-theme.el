@@ -25,6 +25,7 @@
                                 :foreground "#a0a0a0" :background "#222222"))))
  ;; General text editing area
  '(highlight ((t (:background "#283242"))))
+ '(hl-line   ((t (:background "#283242"))))
  ;; Specifics
  '(diff-function         ((t (:foreground "#00bbdd"))))
  '(diff-header           ((t (:foreground "LightBlue1"))))

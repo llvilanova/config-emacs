@@ -155,6 +155,11 @@ command to be run in a shell.")
                :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
+        (:name hl-line+              :type emacswiki
+               :after (progn
+                        (require 'cursor-chg)
+                        (toggle-hl-line-when-idle t)
+                        (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
         (:name ido-settings          :type http
                :depends ido-yes-or-no
                :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"

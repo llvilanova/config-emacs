@@ -74,7 +74,6 @@
 
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
-(global-hl-line-mode t)                 ; highlight current line
 (show-paren-mode t)                     ; highlight matching parenthesis...
 (setq show-paren-style 'mixed)          ; ...but whole region if out of window
 
