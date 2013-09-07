@@ -120,6 +120,8 @@ command to be run in a shell.")
                         (require 'disaster)))
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
+        (:name doc-present           :type git
+               :url "https://github.com/dengste/doc-present.git")
         (:name dpkg-dev-el           :type apt-get)
         (:name elisp-slime-nav       :type elpa
                :after (progn
