@@ -64,6 +64,9 @@
 ;; Searching
 (require 'nnir)
 
+;; Expiration
+(remove-hook 'gnus-summary-prepare-exit-hook 'gnus-summary-expire-articles)
+(gnus-demon-add-handler 'gnus-group-expire-all-groups 240 t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Summary
