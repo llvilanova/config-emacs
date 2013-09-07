@@ -10,7 +10,7 @@
 (define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
 
 ;; Move between windows
-(windmove-default-keybindings 'meta)
+(windmove-default-keybindings 'super)
 (global-set-key [(control x) (left)]  'windmove-left)
 (global-set-key [(control x) (right)] 'windmove-right)
 (global-set-key [(control x) (up)]    'windmove-up)
