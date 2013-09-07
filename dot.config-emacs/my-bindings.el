@@ -41,6 +41,9 @@
 ;; Editing
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Smart open line
+(global-set-key [(meta shift o)] 'my-smart-open-line-above)
+(global-set-key [(meta o)] 'my-smart-open-line)
 ;; Delete line and remaining blanks (like `dd' in VIM)
 (global-set-key [(control delete)] 'kill-whole-line)
 ;; Duplicate current line
