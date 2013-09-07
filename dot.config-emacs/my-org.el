@@ -230,20 +230,20 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
    ;; work templates
    ("a" "Appointment"                     entry (file+headline "Work.org"
                                                                "Tasks")
-    "* %^{Appointment}T %?")
+    "* %^{Appointment}T %?\n%a\n  %i")
    ("s" "Schedule"                        entry (file+headline "Work.org"
                                                                "Tasks")
-    "* %?\nSCHEDULED: %^{Schedule}T")
+    "* %?\nSCHEDULED: %^{Schedule}T\n%a\n  %i")
    ("d" "Deadline"                        entry (file+headline "Work.org"
                                                                "Tasks")
     "* TODO %?\nDEADLINE: %^{Deadline}t")
    ("t" "Todo"                            entry (file+headline "Work.org"
                                                                "Tasks")
-    "* TODO %?\n%i\n  %a")
+    "* TODO %?\n%a\n  %i")
 
    ("i" "Idea"                            entry (file+headline "Work.org"
                                                                "Brainstorming")
-    "* %^{Title}\n%i\n  %a")
+    "* %^{Title}\n%a\n  %i")
    ("c" "Conference"                      entry (file+headline "Events.org"
                                                                "Conferences")
     ;; (function 'org-capture-cfp-reuse "Events.org" "Conferences" 'org-capture-cfp-mail-conference)
@@ -283,6 +283,11 @@ DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6
     :immediate-finish t)
    ))
 
+(defun my-org-capture ()
+  (interactive)
+  (org-store-link nil)
+  (org-capture))
+
 (defun my-org-capture-other-frame ()
   "Create a new frame and run org-capture."
   (interactive)
@@ -295,16 +300,17 @@ DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6
                 (auto-raise . t)))
   (select-frame-by-name "Org-Capture")
   (if (condition-case nil
-          (progn (org-capture) t)
+          (progn (my-org-capture) t)
         (error nil))
       (delete-other-windows)
-    (my-org-capture-other-frame-cleanup)))
+    (my-org-capture-other-frame--cleanup)))
 
-(defun my-org-capture-other-frame-cleanup ()
+(defun my-org-capture-other-frame--cleanup ()
   "Close the Org-Capture frame."
   (if (equal "Org-Capture" (frame-parameter nil 'name))
       (delete-frame)))
-(add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame-cleanup)
+
+(add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame--cleanup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
