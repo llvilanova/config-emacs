@@ -1,7 +1,6 @@
 #!/bin/sh
 # Open an emacsclient if possible, otherwise start a new emacs
 
-BASE=`dirname $0`
 EMACS_EDITOR=`which emacsclient`
 
 if [ -x "$EMACS_EDITOR" ]; then

@@ -9,9 +9,9 @@ EMACS_EDITOR=`which emacsclient`
 
 if [ -x "$EMACS_EDITOR" ]; then
     if [ -n "$DISPLAY" ]; then
-        $EMACS_EDITOR -c -F "((fullscreen . maximized))" -a vi "$@"
+        $EMACS_EDITOR -c -F "((fullscreen . maximized))" -a "" "$@"
     else
-        $EMACS_EDITOR -t -a vi "$@"
+        $EMACS_EDITOR -t -a "" "$@"
     fi
 else
     vi "$@"                     # Never fails!
