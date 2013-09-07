@@ -62,6 +62,8 @@
 (key-chord-define-global ";;" "\C-e;")
 ;; Make C-a smarter
 (global-set-key [remap move-beginning-of-line] 'my-move-beginning-of-line)
+;; Eval-and-replace
+(global-set-key [(control c) (control e)] 'my-eval-and-replace)
 
 ;; `ace-jump-mode'
 (global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
