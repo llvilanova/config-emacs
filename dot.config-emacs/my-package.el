@@ -197,13 +197,7 @@ command to be run in a shell.")
                :url "https://github.com/tj64/outshine.git"
                :after (progn
                         (autoload 'outshine-hook-function "outshine")
-                        (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
-                        (add-hook 'outshine-hook
-                                  (lambda ()
-                                    (define-key outline-minor-mode-map (kbd "M-<up>") nil)
-                                    (define-key outline-minor-mode-map (kbd "M-<down>") nil)
-                                    (define-key outline-minor-mode-map (kbd "M-<left>") nil)
-                                    (define-key outline-minor-mode-map (kbd "M-<right>") nil)))))
+                        (add-hook 'outline-minor-mode-hook 'outshine-hook-function)))
         paredit
         (:name popwin
                :features popwin
