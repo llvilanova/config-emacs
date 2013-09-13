@@ -216,24 +216,10 @@
 (global-set-key [(control f9)] 'magit-status) ; force `magit'
 
 ;; `eshell' in fullscreen
-(defun my-eshell ()
-  "Bring up a full-screen eshell or restore previous config."
-  (interactive)
-  (if (string= "eshell-mode" major-mode)
-      (jump-to-register :shell-fullscreen)
-    (progn
-      (window-configuration-to-register :shell-fullscreen)
-      (call-interactively 'eshell)
-      (delete-other-windows))))
-(defun my-eshell-in-current-dir ()
-  (interactive)
-  (let ((dir default-directory))
-    (call-interactively 'my-eshell)
-    (when (string= "eshell-mode" major-mode)
-      (eshell/cd dir)
-      (eshell-send-input))))
-(global-set-key [(super e)] 'my-eshell)
-(global-set-key [(control super e)] 'my-eshell-in-current-dir)
+(global-set-key [(super e)] '(lambda () (interactive) (my-eshell 'other-window nil)))
+(global-set-key [(control super e)] '(lambda () (interactive) (my-eshell 'other-window t)))
+(global-set-key [(super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen nil)))
+(global-set-key [(control super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen t)))
 
 
 (provide 'my-bindings)

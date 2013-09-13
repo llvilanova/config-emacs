@@ -284,4 +284,24 @@ Position the cursor at it's beginning, according to the current mode."
             (define-key shell-mode-map
               (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
 
+;; `eshell'
+(defun my-eshell (mode to-current-dir)
+  (if (string= "eshell-mode" major-mode)
+      (jump-to-register :my-eshell-window-config)
+    (let ((dir default-directory))
+      (window-configuration-to-register :my-eshell-window-config)
+      (case mode
+        ('fullscreen
+         (call-interactively 'eshell)
+         (delete-other-windows))
+        ('other-window
+         (if (one-window-p)
+             (split-window)
+           (other-window 1))
+         (call-interactively 'eshell))
+        (t (error "Unknown my-esshell mode: %s" mode)))
+      (when to-current-dir
+        (eshell/cd dir)
+        (eshell-send-input)))))
+
 (provide 'my-misc)
