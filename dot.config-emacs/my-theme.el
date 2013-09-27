@@ -23,6 +23,10 @@
  '(mode-line-buffer-id ((t (:bold t :foreground "orange"))))
  '(mode-line-inactive ((t (:box (:line-width 1 :color nil :style released-button)
                                 :foreground "#a0a0a0" :background "#222222"))))
+ '(flycheck-color-mode-line-error-face ((t (:inherit flycheck-fringe-error
+                                                     :foreground "#ff8080"))))
+ '(flycheck-color-mode-line-warning-face ((t (:inherit flycheck-fringe-warning
+                                                     :foreground "#ffb080"))))
  ;; General text editing area
  '(highlight ((t (:background "#283242"))))
  '(hl-line   ((t (:background "#283242"))))

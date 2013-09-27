@@ -134,6 +134,13 @@ command to be run in a shell.")
                :after (add-to-list 'fic-highlighted-words "XXX"))
         (:name flycheck
                :after (global-flycheck-mode t))
+        (:name flycheck-color-mode-line :type github
+               :pkgname "flycheck/flycheck-color-mode-line"
+               :after (after 'flycheck
+                        (require 'flycheck-color-mode-line)
+                        (add-hook 'flycheck-mode-hook
+                                  'flycheck-color-mode-line-mode))
+               )
         (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
