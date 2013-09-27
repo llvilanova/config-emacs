@@ -132,15 +132,8 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
-        (:name flymake               :type github
-               :pkgname "illusori/emacs-flymake"
-               :after (progn
-                        (setq flymake-number-of-errors-to-display nil)))
-        (:name flymake-lua           :type http
-               :website "https://github.com/sroccaserra/emacs/blob/master/flymake-lua.el"
-               :description "Flymake support for Lua."
-               :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
-               :post-init (add-hook 'lua-mode-hook 'flymake-lua-load))
+        (:name flycheck
+               :after (global-flycheck-mode t))
         (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
@@ -208,17 +201,7 @@ command to be run in a shell.")
                :pkgname "mattharrison/pretty-mode"
                ;; Seems `global-pretty-mode' is broken
                :after (add-hook 'find-file-hook 'turn-on-pretty-if-desired))
-        (:name pylint                :type apt-get
-               :after (when (load "flymake" t)
-                        (defun my--flymake-pylint-init ()
-                          (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                                             'flymake-create-temp-inplace))
-                                 (local-file (file-relative-name
-                                              temp-file
-                                              (file-name-directory buffer-file-name))))
-                            (list "epylint" (list local-file))))
-                        (add-to-list 'flymake-allowed-file-name-masks
-                                     '("\\.py\\'" my--flymake-pylint-init))))
+        (:name pylint                :type apt-get)
         (:name smartparens
                :after (progn
                         (require 'smartparens-config)

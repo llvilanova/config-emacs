@@ -148,12 +148,12 @@
 ;; `compile'
 (global-set-key [f8] 'my-dwim-compile)
 
-;; `flymake'
-(add-hook 'flymake-mode-hook
+;; `flycheck'
+(add-hook 'flycheck-mode-hook
           (lambda ()
             ;; Keymaps to navigate between the errors
-            (local-set-key [(meta n)] 'flymake-goto-next-error)
-            (local-set-key [(meta p)] 'flymake-goto-prev-error)))
+            (local-set-key [(meta n)] 'flycheck-next-error)
+            (local-set-key [(meta p)] 'flycheck-previous-error)))
 
 ;; `framepop'
 (after 'framepop

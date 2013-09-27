@@ -133,14 +133,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
 
-;; `flymake'
-(add-hook 'python-mode-hook
-          (lambda ()
-            (when (buffer-file-name)
-              ;; Configure to wait a bit longer after edits before starting
-              (setq-default flymake-no-changes-timeout '3)
-              (flymake-mode t))))
-
 ;; `ipython'
 (add-hook 'python-mode-hook
           (lambda ()
@@ -354,16 +346,18 @@ If ARG is not nil, force a call to `compile'."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; `flymake': Continuous compilation
+;; `flycheck': Continuous compilation
 
-;; Show error message in minibuffer
-(defun my-flymake-show-message ()
-  (if (get-char-property (point) 'flymake-overlay)
-      (let ((help (get-char-property (point) 'help-echo)))
-        (if help (message "%s" help)))))
-(add-hook 'post-command-hook
-          (lambda ()
-            (my-set-minibuffer-helpers (not (my-flymake-show-message)))))
+(after 'flycheck
+  ;; Re-define to work almost immediately
+  (defun flycheck-show-error-at-point-soon ()
+    "Show the first error message at point in minibuffer asap.
+
+Show the error message at point in minibuffer after a short delay."
+    (flycheck-cancel-error-show-error-timer)
+    (when (flycheck-overlays-at (point))
+      (setq flycheck-error-show-error-timer
+            (run-at-time 0.1 nil 'flycheck-show-error-at-point)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

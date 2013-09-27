@@ -88,13 +88,5 @@
                                     TeX-run-compile nil t))
    (setq TeX-command-default "Makefile PDF")))
 
-;; `flymake''
-(defun flymake-get-tex-args (file-name)
-  (list "chktex" (list "-r" "-I" "-q" "--nowarn" "6" "-v0" "-v0" file-name)))
-(push
- '("^\\(\.+\.tex\\):\\([0-9]+\\):\\([0-9]+\\):\\([0-9]+\\):\\(.+\\)"
-   1 2 3 5) flymake-err-line-patterns)
-(add-hook 'LaTeX-mode-hook 'flymake-mode)
-
 
 (provide 'my-writing-latex)
