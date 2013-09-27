@@ -192,6 +192,7 @@ command to be run in a shell.")
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
         (:name pos-tip               :type elpa)
+        powerline
         ;; (:name predictive
         ;;        :after (progn
         ;;                 (autoload 'predictive-mode "predictive" nil t)

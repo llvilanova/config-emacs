@@ -60,6 +60,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modeline appearance
 
+(powerline-default-theme)
 (line-number-mode t)                         ; line numbers
 (column-number-mode t)                       ; column numbers
 (size-indication-mode t)                     ; file size
