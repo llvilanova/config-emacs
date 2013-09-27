@@ -88,10 +88,7 @@ command to be run in a shell.")
                :after (setq ack-executable (executable-find "ack-grep")))
         (:name asciidoc              :type elpa)
         auctex                          ; TODO: temporarily using upstream
-        (:name auto-complete         :type git
-               :url "https://github.com/llvilanova/auto-complete.git"
-               :branch  "semantic-completion-placeholders"
-               :depends (popup pos-tip fuzzy))
+        auto-complete
         (:name auto-dictionary       :type git
                :url "https://github.com/nschum/auto-dictionary-mode.git")
         (:name bibtex-utils          :type emacswiki)

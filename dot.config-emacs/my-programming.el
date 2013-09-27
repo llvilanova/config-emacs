@@ -259,6 +259,34 @@
 (setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
 (global-auto-complete-mode t)
 
+;; Enhance semantic completion with yasnippet
+(after 'auto-complete-config
+  (defun ac-semantic-action ()
+    (when (and (boundp 'yas/minor-mode) yas/minor-mode)
+      (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
+             (class (semantic-tag-class tag))
+             (args))
+        (when (eq class 'function)
+          (setq args (semantic-tag-function-arguments tag))
+          (yas/expand-snippet
+           (concat "("
+                   (mapconcat
+                    (lambda (arg)
+                      (let ((arg-type (semantic-format-tag-type arg nil))
+                            (arg-name (semantic-format-tag-name arg nil)))
+                        (concat "${"
+                                (if (string= arg-name "")
+                                    arg-type
+                                  (concat arg-type " " arg-name))
+                                "}")))
+                    args
+                    ", ")
+                   ")$0"))))))
+  (add-to-list 'ac-source-semantic
+               '((action . ac-semantic-action)))
+  (add-to-list 'ac-source-semantic-raw
+               '((action . ac-semantic-action))))
+
 (defun my-ac-source-semantic-enable ()
   (yas-minor-mode 1)                    ; enable yasnippet for arg placeholders
   (add-to-list 'ac-sources 'ac-source-semantic-raw)
