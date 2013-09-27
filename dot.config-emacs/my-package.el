@@ -106,7 +106,11 @@ command to be run in a shell.")
                         (my-diminish-after flyspell)
                         (my-diminish-after smartparens)
                         (my-diminish-after visual-line)
-                        (my-diminish-after whitespace)))
+                        (my-diminish-after whitespace)
+                        (my-diminish-after filladapt)
+                        (my-diminish-after auto-complete)
+                        (my-diminish-after auto-fill)
+                        (my-diminish-after highlight-parentheses)))
         (:name dired-details
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
