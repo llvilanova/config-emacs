@@ -181,7 +181,10 @@ command to be run in a shell.")
         (:name multiple-cursors
                :features multiple-cursors)
         ;; multi-term
-        (:name org-mode              :type apt-get)
+        (:name org-mode
+               :branch "maint"
+               :after (after 'org-bibtex
+                        (require 'ox-bibtex)))
         (:name org-gnome-calendar    :type git
                :url "https://github.com/llvilanova/org-gnome-calendar"
                :after (progn
