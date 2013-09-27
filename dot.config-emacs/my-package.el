@@ -241,9 +241,6 @@ command to be run in a shell.")
                                 (set-marker m nil))
                             ad-do-it))
                         (global-undo-tree-mode)))
-        (:name unipoint              :type git
-               :url "https://github.com/apgwoz/unipoint.git"
-               :after (autoload 'unipoint-mode "unipoint"))
         (:name wgrep                 :type git
                :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
         (:name wordnet               :type http
