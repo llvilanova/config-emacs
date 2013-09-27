@@ -35,24 +35,26 @@
 ;; * `predictive': Predictive text completion
 ;; http://www.emacswiki.org/emacs/PredictiveMode
 
-;; Auto-create personal dictionary
-(let* ((my-dicts-dir    (path my-data-dir "predictive"))
-       (my-dict-english (path my-dicts-dir "my-dict-english")))
-  (add-to-list 'load-path my-dicts-dir)
-  (unless (file-exists-p (concat my-dict-english ".el"))
-    (make-directory my-dicts-dir t)
-    (predictive-create-dict 'my-dict-english my-dict-english nil nil)
-    (predictive-save-dict my-dict-english)))
+(after 'predictive
+  ;; Auto-create personal dictionary
+  (let* ((my-dicts-dir    (path my-data-dir "predictive"))
+         (my-dict-english (path my-dicts-dir "my-dict-english")))
+    (add-to-list 'load-path my-dicts-dir)
+    (unless (file-exists-p (concat my-dict-english ".el"))
+      (make-directory my-dicts-dir t)
+      (predictive-create-dict 'my-dict-english my-dict-english nil nil)
+      (predictive-save-dict my-dict-english)))
 
-(setq predictive-main-dict '(my-dict-english dict-english)
-      predictive-auto-learn t           ; update frequency counts
-      predictive-auto-add-to-dict nil   ; should add new words to 1st dict ...
-      predictive-add-to-dict-ask t      ; ... but ask before adding
-      predictive-which-dict-mode t      ; show current dict in mode line
-      auto-completion-syntax-alist '(accept . word) ; non-word char accepts
-      completion-auto-show nil)         ; no auto completion-ui
+  (setq predictive-main-dict '(my-dict-english dict-english)
+        predictive-auto-learn t           ; update frequency counts
+        predictive-auto-add-to-dict nil   ; should add new words to 1st dict ...
+        predictive-add-to-dict-ask t      ; ... but ask before adding
+        predictive-which-dict-mode t      ; show current dict in mode line
+        auto-completion-syntax-alist '(accept . word) ; non-word char accepts
+        completion-auto-show nil)         ; no auto completion-ui
 
-;; (add-hook 'text-mode-hook 'predictive-mode)
+  ;; (add-hook 'text-mode-hook 'predictive-mode)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
