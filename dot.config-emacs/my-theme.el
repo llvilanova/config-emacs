@@ -33,6 +33,8 @@
  '(py-XXX-tag-face       ((t (:bold t :foreground "red"))))
  '(sml-modeline-end-face ((t (:background "#000000"))))
  '(sml-modeline-vis-face ((t (:background "#666666")))))
+ '(flycheck-error ((t (:underline "Red1"))))
+ '(flycheck-warning ((t (:underline "DarkOrange"))))
 
 ;; (custom-theme-set-variables
 ;;  'my
