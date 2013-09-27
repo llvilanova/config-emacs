@@ -89,8 +89,8 @@ command to be run in a shell.")
         (:name asciidoc              :type elpa)
         auctex                          ; TODO: temporarily using upstream
         auto-complete
-        (:name auto-dictionary       :type git
-               :url "https://github.com/nschum/auto-dictionary-mode.git")
+        (:name auto-dictionary       :type github
+               :pkgname "nschum/auto-dictionary-mode")
         (:name bibtex-utils          :type emacswiki)
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
@@ -115,14 +115,14 @@ command to be run in a shell.")
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
                         (dired-details-install)))
-        (:name disaster              :type git
-               :url "https://github.com/jart/disaster.git"
+        (:name disaster              :type github
+               :pkgname "jart/disaster"
                :after (after 'cc-mode
                         (require 'disaster)))
         (:name doc-mode              :type http
                :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
-        (:name doc-present           :type git
-               :url "https://github.com/dengste/doc-present.git")
+        (:name doc-present           :type github
+               :pkgname "dengste/doc-present")
         (:name dpkg-dev-el           :type apt-get)
         (:name elisp-slime-nav       :type elpa
                :after (progn
@@ -132,8 +132,8 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
-        (:name flymake               :type git
-               :url "https://github.com/illusori/emacs-flymake"
+        (:name flymake               :type github
+               :pkgname "illusori/emacs-flymake"
                :after (progn
                         (setq flymake-number-of-errors-to-display nil)))
         (:name flymake-lua           :type http
@@ -141,8 +141,7 @@ command to be run in a shell.")
                :description "Flymake support for Lua."
                :url "https://raw.github.com/sroccaserra/emacs/master/flymake-lua.el"
                :post-init (add-hook 'lua-mode-hook 'flymake-lua-load))
-        (:name fuzzy                 :type git
-               :url "https://github.com/auto-complete/fuzzy-el"
+        (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
@@ -172,8 +171,8 @@ command to be run in a shell.")
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
         (:name lua-mode              :type apt-get)
-        (:name lv                    :type git
-               :url "https://github.com/llvilanova/lv.git")
+        (:name lv                    :type github
+               :pkgname "llvilanova/lv")
         (:name magit
                :after (progn
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
@@ -185,14 +184,14 @@ command to be run in a shell.")
                :branch "maint"
                :after (after 'org-bibtex
                         (require 'ox-bibtex)))
-        (:name org-gnome-calendar    :type git
-               :url "https://github.com/llvilanova/org-gnome-calendar"
+        (:name org-gnome-calendar    :type github
+               :pkgname "llvilanova/org-gnome-calendar"
                :after (progn
                         (require 'dbus)
                         (when (dbus-ignore-errors (dbus-init-bus :session))
                           (global-org-gnome-calendar-mode))))
-        (:name outshine              :type git
-               :url "https://github.com/tj64/outshine.git"
+        (:name outshine              :type github
+               :pkgname "tj64/outshine"
                :after (progn
                         (autoload 'outshine-hook-function "outshine")
                         (add-hook 'outline-minor-mode-hook 'outshine-hook-function)))
@@ -204,9 +203,9 @@ command to be run in a shell.")
         ;;        :after (progn
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
-        (:name pretty-mode           :type git
+        (:name pretty-mode           :type github
                :features (pretty-mode)
-               :url "https://github.com/mattharrison/pretty-mode.git"
+               :pkgname "mattharrison/pretty-mode"
                ;; Seems `global-pretty-mode' is broken
                :after (add-hook 'find-file-hook 'turn-on-pretty-if-desired))
         (:name pylint                :type apt-get
@@ -226,7 +225,7 @@ command to be run in a shell.")
                         (add-to-list 'LaTeX-mode-hook
                                      (lambda () (require 'smartparens-latex)))
                         (smartparens-global-mode)))
-        (:name smex                  :type elpa)
+        smex
         (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
@@ -244,8 +243,8 @@ command to be run in a shell.")
                                 (set-marker m nil))
                             ad-do-it))
                         (global-undo-tree-mode)))
-        (:name wgrep                 :type git
-               :url "https://github.com/mhayashi1120/Emacs-wgrep.git")
+        (:name wgrep                 :type github
+               :pkgname "mhayashi1120/Emacs-wgrep")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name xcscope
