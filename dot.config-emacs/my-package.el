@@ -171,7 +171,6 @@ command to be run in a shell.")
                         (ido-ubiquitous-mode 1)))
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
-        (:name lisppaste             :type elpa)
         (:name lua-mode              :type apt-get)
         (:name lv                    :type git
                :url "https://github.com/llvilanova/lv.git")
