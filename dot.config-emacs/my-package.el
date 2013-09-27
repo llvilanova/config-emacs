@@ -128,8 +128,6 @@ command to be run in a shell.")
                :after (progn
                         (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
         (:name emacs-goodies-el      :type apt-get)
-        (:name enclose               :type http
-               :url "https://github.com/rejeep/enclose/raw/master/enclose.el")
         expand-region
         (:name fic-ext-mode
                :lazy t
