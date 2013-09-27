@@ -182,10 +182,6 @@ command to be run in a shell.")
                :features multiple-cursors)
         ;; multi-term
         (:name org-mode              :type apt-get)
-        (:name org-exp-bibtex        :type http
-               :url "http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=contrib/lisp/org-exp-bibtex.el"
-               :after (after 'org-bibtex
-                        (require 'org-exp-bibtex)))
         (:name org-gnome-calendar    :type git
                :url "https://github.com/llvilanova/org-gnome-calendar"
                :after (progn
