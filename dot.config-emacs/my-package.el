@@ -199,7 +199,6 @@ command to be run in a shell.")
                :after (progn
                         (autoload 'outshine-hook-function "outshine")
                         (add-hook 'outline-minor-mode-hook 'outshine-hook-function)))
-        paredit
         (:name popwin
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
