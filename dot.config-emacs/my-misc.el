@@ -63,7 +63,7 @@ If called with a prefix, prompts the user for the backend."
   (interactive
    (list
     (or (buffer-file-name)
-       (read-file-name "Select directory: "))
+       (read-directory-name "Select directory: "))
     (if current-prefix-arg
         (intern
          (completing-read
