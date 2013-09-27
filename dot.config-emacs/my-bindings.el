@@ -25,6 +25,7 @@
 (global-set-key [(control z)] popwin:keymap)
 (global-set-key [(meta shift up)] 'my-move-line-up)
 (global-set-key [(meta shift down)] 'my-move-line-down)
+(global-set-key [(control x) (control shift j)] 'my-dwim-dired-jump)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

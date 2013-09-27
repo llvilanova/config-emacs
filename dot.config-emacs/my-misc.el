@@ -150,6 +150,16 @@ If called with a prefix, prompts the user for the backend."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+(defun my-dwim-dired-jump (&optional other-window)
+  "If in a project, jump to its root directory, otherwise call `dired-jump'."
+  (interactive "P")
+  (dired-jump other-window
+              (and (ede-current-project)
+                 (ede-project-root-directory (ede-current-project)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Windows
+
 (defun rotate-windows ()
   "Rotate your windows."
   (interactive)
