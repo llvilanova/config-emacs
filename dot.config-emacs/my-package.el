@@ -175,7 +175,6 @@ command to be run in a shell.")
         (:name lua-mode              :type apt-get)
         (:name lv                    :type git
                :url "https://github.com/llvilanova/lv.git")
-        magithub
         (:name magit
                :after (progn
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
