@@ -127,7 +127,7 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   (setq org-latex-logfiles-extensions
         (append '("bbl" "blg" "bib")    ; bibliography
                 '("loe" "lof")          ; other
-                '("tex")                ; LaTeX
+                '("synctex.gz" "tex")   ; LaTeX
                 org-latex-logfiles-extensions))
 
   ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
