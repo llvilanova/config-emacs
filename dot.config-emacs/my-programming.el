@@ -360,13 +360,14 @@ Show the error message at point in minibuffer after a short delay."
             (run-at-time 0.1 nil 'flycheck-show-error-at-point)))))
 
 ;; Linux-specific includes & defines
-(add-hook 'find-file-hook
-          (lambda ()
-            (when (ede-linux-project-p (ede-current-project))
-              (setq flycheck-clang-include-path
-                    (oref (ede-current-project) include-path))
-              (setq flycheck-clang-definitions
-                    '("-D__KERNEL__")))) t)
+(defun my-flycheck-linux ()
+ (require 'ede/linux)
+ (when (ede-linux-project-p (ede-current-project))
+  (setq flycheck-clang-include-path
+   (oref (ede-current-project) include-path))
+  (setq flycheck-clang-definitions
+   '("-D__KERNEL__"))))
+(add-hook 'find-file-hook 'my-flycheck-linux t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
