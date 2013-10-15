@@ -115,6 +115,21 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 (after 'ox-latex
   (setq org-latex-listings 'minted)
   (add-to-list 'org-latex-packages-alist '("" "minted"))
+
+  ;; ;; Create bibliography file
+  ;; (add-hook 'org-export-latex-after-save-hook
+  ;;           (lambda ()
+  ;;             (with-current-buffer cbuf
+  ;;               (org-bibtex (concat (file-name-sans-extension
+  ;;                                    (buffer-file-name)) ".bib")))))
+
+  ;; Remove temporary files when done
+  (setq org-latex-logfiles-extensions
+        (append '("bbl" "blg" "bib")    ; bibliography
+                '("loe" "lof")          ; other
+                '("tex")                ; LaTeX
+                org-latex-logfiles-extensions))
+
   ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
   ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
   (setq org-latex-pdf-process
@@ -126,26 +141,28 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 elem))
              org-latex-pdf-process)))
 
-(after 'org-latex
-  ;; Create bibliography file
-  (add-hook 'org-export-latex-after-save-hook
-            (lambda ()
-              (with-current-buffer cbuf
-                (org-bibtex (concat (file-name-sans-extension
-                                     (buffer-file-name)) ".bib")))))
-  ;; Remove temporary bibliography files when done
-  (setq org-export-pdf-logfiles
-        (append org-export-pdf-logfiles '("bbl" "blg" "bib")))
-  ;; Remove other temporary files when done
-  (setq org-export-pdf-logfiles
-        (append org-export-pdf-logfiles '("loe" "lof")))
-  ;; Remove LaTeX file when done
-  (add-to-list 'org-export-pdf-logfiles "tex"))
-(after 'org-exp
-  '(defadvice org-export (around my-disable-flyspell activate)
-     "Disable flyspell while generating intermediate files for exporting."
-     (let ((my-flyspell-mode-maybe-enabled nil))
-       ad-do-it)))
+(after 'ox
+  (defvar my-org-latex-filter-fancyvrb-options "")
+
+  ;; (defadvice org-export (around my-disable-flyspell activate)
+  ;;   "Disable flyspell while generating intermediate files for exporting."
+  ;;   (let ((my-flyspell-mode-maybe-enabled nil))
+  ;;     ad-do-it)))
+
+  (defun my-org-latex-filter-fancyvrb (text backend info)
+    "Convert begin/end{verbatim} to begin/end{Verbatim}.
+    Allows use of the fancyvrb latex package."
+    (when (org-export-derived-backend-p backend 'latex)
+      (replace-regexp-in-string
+       "\\\\begin{verbatim}"
+       (format "\\\\begin{Verbatim}%s" my-org-latex-filter-fancyvrb-options)
+       (replace-regexp-in-string
+        "\\\\end{verbatim}"
+        "\\\\end{Verbatim}"
+        text))))
+
+  (add-to-list 'org-export-filter-final-output-functions
+               'my-org-latex-filter-fancyvrb))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
