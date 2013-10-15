@@ -111,12 +111,22 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Exporting
-(after 'org-latex
-  (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
-        '("rubber --pdf --into %o %f"))
-  ;; (setq org-export-latex-minted t)        ; export source code using `minted'
-  ;; (add-to-list 'org-export-latex-packages-alist "\\usepackage{minted}")
 
+(after 'ox-latex
+  (setq org-latex-listings 'minted)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
+  ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
+  (setq org-latex-pdf-process
+        (map 'list
+             (lambda (elem)
+               (replace-regexp-in-string
+                " -interaction "
+                " -shell-escape -interaction "
+                elem))
+             org-latex-pdf-process)))
+
+(after 'org-latex
   ;; Create bibliography file
   (add-hook 'org-export-latex-after-save-hook
             (lambda ()
