@@ -1,14 +1,7 @@
 #!/bin/sh
-# Open an emacsclient if possible, otherwise start a new emacs
 
-EMACS_EDITOR=`which emacsclient`
-
-if [ -x "$EMACS_EDITOR" ]; then
-    if [ -n "$DISPLAY" ]; then
-        $EMACS_EDITOR -c -F "((fullscreen . maximized))" -a "" "$@"
-    else
-        $EMACS_EDITOR -t -a "" "$@"
-    fi
+if [ -n "$DISPLAY" ]; then
+    emacs-frame "$@"
 else
-    exit 1
+    emacs-terminal "$@"
 fi
