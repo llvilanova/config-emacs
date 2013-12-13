@@ -76,7 +76,7 @@ If called with a prefix, prompts the user for the backend."
   (let ((root (vc-call-backend backend 'root path)))
     (case backend
       ('Git (magit-status root))
-      (t    (vc-dir root)))))
+      (t    (vc-dir root backend)))))
 
 ;; TODO: remove once Gnus is updated
 (defun gnus-funcall-no-warning (function &rest args)
