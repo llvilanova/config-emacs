@@ -76,7 +76,7 @@
 (global-set-key [(control shift return)] 'er/expand-region)
 
 ;; `multiple-cursors'
-(global-set-key [(control \;)] 'mc/mark-all-like-this-dwim)
+(global-set-key [(control \;)] 'mc/mark-all-dwim)
 (global-set-key [(control meta \;)] 'mc/edit-lines)
 (global-set-key [(control meta \,)] 'mc/mark-more-like-this-extended)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
