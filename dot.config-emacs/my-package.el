@@ -213,9 +213,8 @@ command to be run in a shell.")
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
         (:name pretty-mode           :type github
                :features (pretty-mode)
-               :pkgname "mattharrison/pretty-mode"
-               ;; Seems `global-pretty-mode' is broken
-               :after (add-hook 'find-file-hook 'turn-on-pretty-if-desired))
+               :pkgname "akatov/pretty-mode"
+               :after (global-pretty-mode t))
         (:name pylint                :type apt-get)
         (:name smartparens
                :after (progn
