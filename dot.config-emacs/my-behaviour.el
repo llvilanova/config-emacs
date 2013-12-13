@@ -74,8 +74,8 @@
 
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
-(show-paren-mode t)                     ; highlight matching parenthesis...
-(setq show-paren-style 'mixed)          ; ...but whole region if out of window
+(smartparens-global-mode t)             ; highlight matching parenthesis
+(show-smartparens-global-mode t)
 
 (defun my-smart-kill-whole-line (&optional arg)
   "A simple wrapper around `kill-whole-line' that respects indentation."

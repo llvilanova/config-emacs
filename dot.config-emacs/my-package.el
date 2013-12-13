@@ -219,8 +219,7 @@ command to be run in a shell.")
                :after (progn
                         (require 'smartparens-config)
                         (add-to-list 'LaTeX-mode-hook
-                                     (lambda () (require 'smartparens-latex)))
-                        (smartparens-global-mode)))
+                                     (lambda () (require 'smartparens-latex)))))
         smex
         (:name sml-modeline          :type elpa)
         switch-window
