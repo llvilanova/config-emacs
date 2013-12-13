@@ -94,7 +94,8 @@ command to be run in a shell.")
         (:name bibtex-utils          :type emacswiki)
         ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
-        cedet
+        (:name cedet
+               :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
         cl-lib
         (:name cursor-chg            :type emacswiki)
         (:name diminish
