@@ -174,6 +174,7 @@ command to be run in a shell.")
                :after (progn
                         (ido-mode 1)
                         (ido-ubiquitous-mode 1)))
+        jinja2-mode
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
         (:name lua-mode              :type apt-get)
