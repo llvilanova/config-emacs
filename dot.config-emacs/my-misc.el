@@ -53,7 +53,7 @@ If nil, WINDOW is `selected-window'."
   (unwind-protect
       (progn
         (linum-mode 1)
-        (goto-line (read-number "Goto line: ")))
+        (call-interactively 'goto-line))
     (linum-mode -1)))
 
 (defun my-dwim-vc (path &optional backend)
