@@ -240,6 +240,7 @@ command to be run in a shell.")
                                 (set-marker m nil))
                             ad-do-it))
                         (global-undo-tree-mode)))
+        (:name use-package)
         (:name wgrep                 :type github
                :pkgname "mhayashi1120/Emacs-wgrep")
         (:name wordnet               :type http
@@ -257,5 +258,6 @@ command to be run in a shell.")
 (el-get 'sync (append '(el-get)
                       (mapcar 'el-get-source-name el-get-sources)))
 (my-regenerate-autoloads)
+(require 'use-package)
 
 (provide 'my-package)
