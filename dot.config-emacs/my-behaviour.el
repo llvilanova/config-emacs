@@ -210,6 +210,7 @@ then only one line is copied."
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (ido-mode 1)
 (ido-everywhere 1)                      ; use for many file dialogs
+(flx-ido-mode 1)
 (setq ido-save-directory-list-file (path my-cache-dir "ido.last")
       ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
       ido-default-file-method 'maybe-frame ; ask if buffer in other frame must be re-opened

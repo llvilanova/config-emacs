@@ -138,6 +138,7 @@ command to be run in a shell.")
         (:name fic-ext-mode
                :lazy t
                :after (add-to-list 'fic-highlighted-words "XXX"))
+        flx
         (:name flycheck
                :after (global-flycheck-mode t))
         (:name flycheck-color-mode-line :type github
