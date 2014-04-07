@@ -210,11 +210,12 @@ then only one line is copied."
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (ido-mode 1)
 (ido-everywhere 1)                      ; use for many file dialogs
-(flx-ido-mode 1)
+(flx-ido-mode 1)                        ; smarter flexible search
 (setq ido-save-directory-list-file (path my-cache-dir "ido.last")
       ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
       ido-default-file-method 'maybe-frame ; ask if buffer in other frame must be re-opened
       ido-case-fold  t                  ; be case-insensitive
+      ido-use-faces nil                   ; do not hide `flx' highlighting
       ido-enable-last-directory-history t ; remember last used dirs
       ido-max-work-directory-list 30    ; should be enough
       ido-max-work-file-list      50    ; remember many
