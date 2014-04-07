@@ -67,17 +67,17 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
       (if (member tag (org-get-tags-at current-headline))
           next-headline
         nil))))
-(require 'org)
-(add-to-list 'org-agenda-custom-commands
-             '("p" "CFPs (Calls For Papers)"
-               agenda ""
-               ((org-agenda-skip-function-global nil)
-                (org-agenda-skip-function
-                 '(my-org-agenda-skip-tag "conference" t)))))
-(setq org-agenda-skip-function-global
-      (lambda ()
-        (or (apply 'my-org-agenda-skip-tag "conference" nil)
-           (apply 'my-org-agenda-skip-tag "gohome" nil))))
+(after 'org-agenda
+  (add-to-list 'org-agenda-custom-commands
+               '("p" "CFPs (Calls For Papers)"
+                 agenda ""
+                 ((org-agenda-skip-function-global nil)
+                  (org-agenda-skip-function
+                   '(my-org-agenda-skip-tag "conference" t)))))
+  (setq org-agenda-skip-function-global
+        (lambda ()
+          (or (apply 'my-org-agenda-skip-tag "conference" nil)
+             (apply 'my-org-agenda-skip-tag "gohome" nil)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
