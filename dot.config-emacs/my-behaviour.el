@@ -1,32 +1,32 @@
 ;;; my-behaviour.el --- Global behaviour settings.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Frames
+;;; Frames
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; nil
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Windows
+;;; Windows
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Scrolling
+;;;; Scrolling
 (setq scroll-margin 1                   ; do smooth scrolling, ...
       scroll-conservatively 100000      ; ... the defaults ...
       scroll-up-aggressively 0.01       ; ... are very ...
       scroll-down-aggressively 0.01)    ; ... annoying
 
-;; Window sizes
+;;;; Window sizes
 (setq window-combination-resize t       ; try to be fair creating windows ...
       window-combination-limit t)       ; ... as well as deleting them
 
 (put 'narrow-to-region 'disabled nil)     ; enable region narrowing
 (put 'erase-buffer 'disabled nil)
 
-;; Undo / redo window configurations
+;;;; Undo / redo window configurations
 (winner-mode 1)
 
-;; Quickly change buffer organization
+;;;; Quickly change buffer organization
 (setq my--swapping-buffer nil)
 (setq my--swapping-window nil)
 (defun my-swap-buffers-in-windows ()
@@ -53,10 +53,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Buffers
+;;; Buffers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Default editing parameters
+;;;; Default editing parameters
 (setq-default fill-column       80      ; text width
               comment-column    40      ; `comment-indent'
               indent-tabs-mode nil      ; never use tabs
@@ -109,12 +109,12 @@ If COMMENTFIRST is non-nil, comment the original line."
     (cua--rectangle    'cua-cut-rectangle)
     (t                 'backward-kill-word))))
 
-;; `saveplace': restore last cursor position in file
+;;;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
 (setq-default save-place t)             ; activate it for all buffers
 (require 'saveplace)
 
-;; backups: all in one single place
+;;;; backups: all in one single place
 (setq my-backup-dir (path my-cache-dir "backups" ""))
 (make-directory my-backup-dir t)
 (setq make-backup-files t               ; do make backups ...
@@ -126,17 +126,17 @@ If COMMENTFIRST is non-nil, comment the original line."
       kept-old-versions 5
       delete-old-versions t)
 
-;; auto-save files
+;;;; auto-save files
 (defconst my-auto-saves-root (path my-cache-dir "auto-saves" ""))
 (make-directory my-auto-saves-root t)
 (setq auto-save-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)"
                                         ,(path my-auto-saves-root "\\1") t)))
 
-;; auto-save sessions
+;;;; auto-save sessions
 (setq auto-save-list-file-prefix        ; location for auto-save sessions
       (path my-cache-dir "auto-save-list" ""))
 
-;; `uniquify': nicer unique names for buffers
+;;;; `uniquify': nicer unique names for buffers
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward
       uniquify-separator ":"
@@ -145,7 +145,7 @@ If COMMENTFIRST is non-nil, comment the original line."
 
 (setq-default show-trailing-whitespace t)
 
-;; `whitespace': highlight lines breaking formatting rules
+;;;; `whitespace': highlight lines breaking formatting rules
 (after 'whitespace
   (setq whitespace-style
         '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
@@ -192,20 +192,20 @@ then only one line is copied."
         (make-directory parent t)))))
 (add-hook 'before-save-hook 'my-auto-make-directory)
 
-;; `global-auto-revert-mode'
+;;;; `global-auto-revert-mode'
 (global-auto-revert-mode 1)                  ; auto refresh buffers ...
 (setq global-auto-revert-non-file-buffers t) ; ... including dired ...
 (setq auto-revert-verbose nil)                 ; ... but be quiet about it
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Minibuffer
+;;; Minibuffer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (fset 'yes-or-no-p 'y-or-n-p)           ; enable y/n answers to yes/no
 (file-name-shadow-mode t)               ; shadow / dim parts of file names
 
-;; `ido': integrates both buffers and files completion
+;;;; `ido': integrates both buffers and files completion
 ;;        supersedes `iswitchb' `icicles'
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (ido-mode 1)
@@ -229,17 +229,17 @@ then only one line is copied."
       ido-max-prospects 10              ; don't spam my minibuffer
       ido-confirm-unique-completion t)  ; wait for RET, even with unique completion
 
-;; `smex': command-completion interface on top of `ido'
+;;;; `smex': command-completion interface on top of `ido'
 ;;         replaces emacs's default `execute-extended-command'
 ;;         supersedes `icomplete+'
 (setq smex-save-file (path my-cache-dir "smex.save"))
 (smex-initialize)
 
-;; `icomplete-mode'
+;;;; `icomplete-mode'
 ;; Complements `smex' where it is not used
 (icomplete-mode)
 
-;; `ibuffer': dired-style buffer selection
+;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
 (defvar my-ibuffer-saved-filter-groups
@@ -261,31 +261,31 @@ then only one line is copied."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Misc
+;;; Misc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq tramp-persistency-file-name (path my-cache-dir "tramp"))
 
-;; `browse-kill-ring': kill ring browser on M-y
+;;;; `browse-kill-ring': kill ring browser on M-y
 (browse-kill-ring-default-keybindings)
 (setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
 
-;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
+;;;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
 (after 'timestamp
   (setq time-stamp-active t             ; do enable time-stamps
         time-stamp-line-limit 10        ; check first 10 buffer lines
         time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)")) ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
-;; `desktop': maintain per-directory session information
+;;;; `desktop': maintain per-directory session information
 (desktop-save-mode 1)
 (setq desktop-save 'if-exists)          ; only save if desktop file exists
 
-;; `savehist': save minibuffer history
+;;;; `savehist': save minibuffer history
 (setq savehist-file (path my-cache-dir "history"))
 (savehist-mode t)
 
-;; `bookmark+': bookmark everything
+;;;; `bookmark+': bookmark everything
 (setq bookmark-default-file (path my-data-dir "bookmarks"))
 (defun my-jump-to-bookmark (bookmark)
   (interactive (list (my--bookmark-ido-read "Jump to bookmark: ")))
@@ -297,13 +297,13 @@ then only one line is copied."
            (setq ido-temp-list (bookmark-all-names)))))
     (ido-read-buffer prompt)))
 
-;; `url'
+;;;; `url'
 (setq url-configuration-directory (path my-cache-dir "url" ""))
 
-;; `eshell'
+;;;; `eshell'
 (setq eshell-directory-name (path my-cache-dir "eshell"))
 
-;; `em-smart'
+;;;; `em-smart'
 ;; Be clever on `eshell' output
 (add-hook 'eshell-mode-hook
           (lambda ()
@@ -315,12 +315,12 @@ then only one line is copied."
 
 (put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 
-;; `re-builder'
+;;;; `re-builder'
 (add-hook 'reb-mode-hook
           (lambda ()
             (setq reb-re-syntax 'string)))
 
-;; `popwin'
+;;;; `popwin'
 (defun my-register-helper-buffer (pattern &optional type &rest other)
   "Register given buffer PATTERN as being for a specific TYPE of usage.
 Valid types are:
