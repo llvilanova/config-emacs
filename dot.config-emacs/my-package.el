@@ -198,11 +198,11 @@ command to be run in a shell.")
                         (require 'dbus)
                         (when (dbus-ignore-errors (dbus-init-bus :session))
                           (global-org-gnome-calendar-mode))))
-        (:name outshine              :type github
-               :pkgname "tj64/outshine"
+        (:name outshine
                :after (progn
                         (autoload 'outshine-hook-function "outshine")
-                        (add-hook 'outline-minor-mode-hook 'outshine-hook-function)))
+                        (add-hook 'outline-minor-mode-hook
+                        'outshine-hook-function)))
         (:name popwin
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
