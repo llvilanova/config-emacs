@@ -83,6 +83,8 @@ command to be run in a shell.")
       '(
         (:name ace-jump-mode
                :features nil)
+        (:name ace-window            :type github
+               :pkgname "abo-abo/ace-window")
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (setq ack-executable (executable-find "ack-grep")))
