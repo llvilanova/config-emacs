@@ -173,7 +173,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Templates
 
-(setq srecode-map-save-file (path my-cache-dir "srecode-map.el"))
+(setq srecode-map-save-file (path my-cache-dir "srecode-map.el")
+      srecode-insert-ask-variable-method 'field)
 (global-srecode-minor-mode t)
 
 
