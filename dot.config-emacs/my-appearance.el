@@ -1,12 +1,12 @@
 ;;; my-appearance.el --- Graphical appearance settings
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Color theming
+;;; Color theming
 
 (load-theme 'my t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Frame parameters
+;;; Frame parameters
 
 (defun my-frame-parameters (frame)
   "Set font and color theme on a frame."
@@ -24,7 +24,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Global appearance
+;;; Global appearance
 
 (tool-bar-mode -1)                           ; do not show the toolbar ...
 (menu-bar-mode -1)                           ; ... nor the menu ...
@@ -58,7 +58,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Modeline appearance
+;;; Modeline appearance
 
 (powerline-default-theme)
 (line-number-mode t)                         ; line numbers
@@ -74,7 +74,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; utf8 / input-method
+;;; utf8 / input-method
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -86,7 +86,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+;;; Miscellaneous
 
 ;; Change shell's color scheme
 (ansi-color-map-update 'ansi-color-names-vector
