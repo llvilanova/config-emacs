@@ -308,6 +308,7 @@ See (info \"(gnus)Group Line Specification\")."
                (let ((res
                       `(nnimap ,id
                                (nnimap-inbox "INBOX")
+                               (nnimap-split-inbox nnimap-inbox)
                                ;; (nnimap-unsplittable-articles '(%Deleted))
                                (nnimap-stream shell)
                                (nnimap-shell-program
