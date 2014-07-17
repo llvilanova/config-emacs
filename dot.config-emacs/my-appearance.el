@@ -98,4 +98,9 @@
                                             elem)))
                                         ansi-color-names-vector)))
 
+;; `eww'
+(defun my-eww-appearance ()
+  (setq show-trailing-whitespace nil))
+(add-hook 'eww-mode-hook 'my-eww-appearance)
+
 (provide 'my-appearance)
