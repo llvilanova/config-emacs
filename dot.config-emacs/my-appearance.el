@@ -4,6 +4,7 @@
 ;;; Color theming
 
 (load-theme 'my t)
+(setq initial-major-mode 'fundamental-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Frame parameters
@@ -51,26 +52,28 @@
       inhibit-startup-echo-area-message t)   ; ... startup messages
 
 ;; `cursor-chg': context-specific cursor appearence
-(require 'cursor-chg)
-(setq curchg-default-cursor-color "Yellow")
-(curchg-toggle-cursor-type-when-idle 1)
-(change-cursor-mode 1)
+(use-package cursor-chg
+  :config
+  (progn
+    (setq curchg-default-cursor-color "Yellow")
+    (curchg-toggle-cursor-type-when-idle 1)
+    (change-cursor-mode 1)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline appearance
 
-(powerline-default-theme)
+(use-package powerline
+  :init (powerline-default-theme))
 (line-number-mode t)                         ; line numbers
 (column-number-mode t)                       ; column numbers
 (size-indication-mode t)                     ; file size
 (display-time-mode t)                        ; current time
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
-(sml-modeline-mode 1)                        ; ... but in modeline
-(set-variable 'sml-modeline-len 10)
-
-;; `diminish'
-(diminish 'undo-tree-mode)
+(use-package sml-modeline
+  :init (progn
+          (sml-modeline-mode 1)              ; ... but in modeline
+          (set-variable 'sml-modeline-len 10)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,10 +1,10 @@
 ;;; my-package.el --- Package management
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Package sources
+;;; Package sources
 
 ;; `el-get' auto-installation
-(setq el-get-dir (path my-config-dir "el-get" ""))
+(setq el-get-dir (path my-cache-dir "el-get" ""))
 (add-to-list 'load-path (path el-get-dir "el-get"))
 (unless (require 'el-get nil t)
   ;; download, build & load
@@ -17,9 +17,10 @@
     (with-current-buffer buffer
       (end-of-buffer)
       (eval-print-last-sexp))))
-
+(el-get 'sync '(el-get))
 
 ;; `package' auto-installation
+(setq package-user-dir (path my-cache-dir "elpa"))
 (el-get 'sync '(package))
 (add-to-list 'package-archives          ; additional repositiories
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -27,7 +28,6 @@
   ;; first-time initialization
   (package-refresh-contents))
 (package-initialize t)
-
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
@@ -71,15 +71,30 @@ command to be run in a shell.")
                       (directory-files autoload-dir t "\\.el$")))
         (message "Updating autoloads...")
         (let (emacs-lisp-mode-hook)
-          (when (not (file-exists-p autoload-file))
-            (add-hook 'after-init-hook 'my-recompile-init))
+          (my-recompile-init)
           (update-directory-autoloads autoload-dir))))
     (load autoload-file)))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Re-generate autoloads and re-compile local code (if necessary)
+(my-regenerate-autoloads)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Package list
-(setq el-get-sources
+;;; Package management
+
+(defun my-add-packages (packages)
+  "Install list of packages using `el-get' and add to `el-get-sources'."
+  (setq el-get-sources (append el-get-sources packages))
+  (el-get 'sync (mapcar 'el-get-source-name packages)))
+
+(setq el-get-sources '(use-package))
+(el-get 'sync '(el-get use-package))
+(require 'use-package)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Initial package list
+(my-add-packages
       '(
         (:name ace-jump-mode
                :features nil)
@@ -89,7 +104,7 @@ command to be run in a shell.")
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (setq ack-executable (executable-find "ack-grep")))
         (:name asciidoc              :type elpa)
-        auctex                          ; TODO: temporarily using upstream
+        (:name auctex                :type apt-get)
         auto-complete
         (:name auto-dictionary       :type github
                :pkgname "nschum/auto-dictionary-mode")
@@ -156,10 +171,6 @@ command to be run in a shell.")
         (:name gdb-shell             :type elpa)
         (:name gnus-notifications    :type http
                :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
-        (:name google-maps
-               :features nil)
-        (:name google-weather
-               :features nil)
         (:name guess-style           :type http
                :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
         (:name highlight-parentheses :type elpa)
@@ -170,10 +181,6 @@ command to be run in a shell.")
                         (toggle-hl-line-when-idle t)
                         (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
         hungry-delete
-        (:name ido-settings          :type http
-               :depends ido-yes-or-no
-               :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"
-               :features (ido-settings))
         (:name ido-ubiquitous
                :after (progn
                         (ido-mode 1)
@@ -192,7 +199,7 @@ command to be run in a shell.")
                :features multiple-cursors)
         ;; multi-term
         (:name org-mode
-               :branch "maint"
+               ;:branch "maint"
                :after (after 'org-bibtex
                         (require 'ox-bibtex)))
         (:name org-gnome-calendar    :type github
@@ -229,21 +236,7 @@ command to be run in a shell.")
         (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
-        (:name undo-tree
-               :after (progn
-                        (defadvice undo-tree-undo (around keep-region activate)
-                          "Keep region when undoing in region."
-                          (if (use-region-p)
-                              (let ((m (set-marker (make-marker) (mark)))
-                                    (p (set-marker (make-marker) (point))))
-                                ad-do-it
-                                (goto-char p)
-                                (set-mark m)
-                                (set-marker p nil)
-                                (set-marker m nil))
-                            ad-do-it))
-                        (global-undo-tree-mode)))
-        (:name use-package)
+        undo-tree
         (:name wgrep                 :type github
                :pkgname "mhayashi1120/Emacs-wgrep")
         (:name wordnet               :type http
@@ -252,15 +245,6 @@ command to be run in a shell.")
                :features nil)
         yasnippet
         ))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-(el-get 'sync '(el-get diminish))
-(el-get-cleanup (append '(el-get)
-                        (mapcar 'el-get-source-name el-get-sources)))
-(el-get 'sync (append '(el-get)
-                      (mapcar 'el-get-source-name el-get-sources)))
-(my-regenerate-autoloads)
-(require 'use-package)
 
 (provide 'my-package)

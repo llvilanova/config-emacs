@@ -67,44 +67,48 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
       (if (member tag (org-get-tags-at current-headline))
           next-headline
         nil))))
-(after 'org-agenda
-  (add-to-list 'org-agenda-custom-commands
-               '("p" "CFPs (Calls For Papers)"
-                 agenda ""
-                 ((org-agenda-skip-function-global nil)
-                  (org-agenda-skip-function
-                   '(my-org-agenda-skip-tag "conference" t)))))
-  (setq org-agenda-skip-function-global
-        (lambda ()
-          (or (apply 'my-org-agenda-skip-tag "conference" nil)
-             (apply 'my-org-agenda-skip-tag "gohome" nil)))))
+(use-package org-agenda
+  :config
+  (progn
+    (add-to-list 'org-agenda-custom-commands
+                 '("p" "CFPs (Calls For Papers)"
+                   agenda ""
+                   ((org-agenda-skip-function-global nil)
+                    (org-agenda-skip-function
+                     '(my-org-agenda-skip-tag "conference" t)))))
+    (setq org-agenda-skip-function-global
+          (lambda ()
+            (or (apply 'my-org-agenda-skip-tag "conference" nil)
+               (apply 'my-org-agenda-skip-tag "gohome" nil))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Notifications
-(require 'org-notify)
-(require 'org-notify-sound)
-(org-notify-start)
-(org-notify-add 'default
-                '(:time "1h" :actions (-notify/window -sound)
-                        :period "2m" :duration 60))
-(org-notify-add 'conference
-                '(:time "1m" :actions (-email))
-                '(:time "1w" :actions (-email))
-                '(:time "1d" :actions (-email)))
 (defun my-org-notify-expire (plist)
   (with-current-buffer (find-buffer-visiting (plist-get plist :file))
     (save-excursion
       (goto-char (plist-get plist :begin))
       (org-todo 'done)
       (save-buffer nil))))
-(org-notify-add 'go-home
-                '(:time "-10m"
-                        :actions (my-org-notify-expire))
-                '(:time "-1s" :period "20s" :duration 10
-                        :actions (-message -ding -notify/window -sound))
-                '(:time "20m" :period "5m"  :duration 60
-                        :actions (-message -notify/window -sound)))
+
+(after 'org-notify
+  (org-notify-start)
+  (after 'org-notify-sound
+    (org-notify-add 'default
+                    '(:time "1h" :actions (-notify/window -sound)
+                            :period "2m" :duration 60))
+    (org-notify-add 'conference
+                    '(:time "1m" :actions (-email))
+                    '(:time "1w" :actions (-email))
+                    '(:time "1d" :actions (-email)))
+    (org-notify-add 'go-home
+                    '(:time "-10m"
+                            :actions (my-org-notify-expire))
+                    '(:time "-1s" :period "20s" :duration 10
+                            :actions (-message -ding -notify/window -sound))
+                    '(:time "20m" :period "5m"  :duration 60
+                            :actions (-message -notify/window -sound)))))
+
 (display-time)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -198,10 +202,6 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 ;; To follow links with RET, rather than a 2 key combo:
 (setq org-return-follows-link t)
-
-;; Show locations with `google-maps'
-(after 'org
-  (require 'org-location-google-maps))
 
 ;; Code block editing
 (setq org-src-tab-acts-natively t   ; use TAB as in the native mode of the block

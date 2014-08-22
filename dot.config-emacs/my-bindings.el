@@ -23,7 +23,6 @@
 ;;;; Buffers
 
 (global-set-key [(control x) (r) (b)] 'my-jump-to-bookmark)
-(global-set-key [(control z)] popwin:keymap)
 (global-set-key [(meta shift down)] 'move-text-down)
 (global-set-key [(meta shift up)] 'move-text-up)
 (global-set-key [(control x) (control shift j)] 'my-dwim-dired-jump)
@@ -31,9 +30,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Minibuffer
-
-(global-set-key [(meta x)]       'smex)
-(global-set-key [(meta shift x)] 'smex-major-mode-commands)
 
 (global-set-key [(control x) (control b)] 'ibuffer)
 
@@ -61,7 +57,8 @@
 ;; Join following line into this one
 (global-set-key [(meta j)] (lambda () (interactive) (join-line -1)))
 ;; Quickly insert ';' at the end of the line
-(key-chord-define-global ";;" "\C-e;")
+(after 'key-chord
+  (key-chord-define-global ";;" "\C-e;"))
 ;; Make C-a smarter
 (global-set-key [remap move-beginning-of-line] 'my-move-beginning-of-line)
 ;; Eval-and-replace

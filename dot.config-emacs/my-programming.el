@@ -16,7 +16,9 @@
 ;; C-x B => MRU list of edited tags
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 ;; Convenience menu in 'mouse-3'
-(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+(use-package cedet-m3
+  :init
+  (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode))
 
 (semantic-mode 1)                       ; global minor mode
 
@@ -45,7 +47,9 @@
 
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
-(semanticdb-enable-cscope-databases)
+(use-package semantic/db-cscope
+  :init
+  (semanticdb-enable-cscope-databases))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Idle scheduler
@@ -79,19 +83,14 @@
 (setq copyright-year-ranges t)
 (defcustom my-copyright-fixes t
   "Whether to try to fix copyright information before writing.")
-(defcustom my-guess-style t
-  "Whether opening a new file should try to guess the indentation stule.")
 
 (add-hook 'prog-mode-hook
           (lambda ()
             ;; (flyspell-prog-mode)       ; flyspell for comments and strings
 
             ;; Highlight parentheses around point
-            (highlight-parentheses-mode 1)
-
-            ;; Highlight TODO's and the like
-            (fic-ext-mode 1)
-            (diminish 'fic-ext-mode)
+            (after 'highlight-parentheses
+              (highlight-parentheses-mode 1))
 
             ;; (which-function-mode 1)    ; show current tag in modeline
 
@@ -102,12 +101,26 @@
                           (save-excursion (copyright-fix-years)))))
             (add-hook 'before-save-hook 'copyright-update)
 
-            (when my-guess-style
-              (guess-style-guess-all))    ; guess indentation style
 
             (outline-minor-mode t)
             ))
 
+;; `fic-ext-mode': Highlight TODO's and the like
+(use-package fic-ext-mode
+  :diminish fic-ext-mode
+  :config (add-hook 'prog-mode-hook 'fic-ext-mode))
+
+;; `guess-style': guess indentation style
+(use-package guess-style
+  :init
+  (defcustom my-guess-style t
+    "Whether opening a new file should try to guess the indentation stule.")
+
+  :config
+  (progn
+    (defadvice guess-style-guess-all (around my-guess-style-guess-all)
+      (when my-guess-style
+        ad-do-it))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
@@ -127,8 +140,9 @@
             (add-to-list 'c-cleanup-list 'list-close-comma)
             (cpp-highlight-buffer t)))
 ;; Otherwise overrides `c-toggle-auto-newline'
-(sp-local-pair 'c-mode "{" nil :actions nil)
-(sp-local-pair 'c++-mode "{" nil :actions nil)
+(after 'smartparens-mode
+  (sp-local-pair 'c-mode "{" nil :actions nil)
+  (sp-local-pair 'c++-mode "{" nil :actions nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
@@ -175,7 +189,8 @@
 
 (setq srecode-map-save-file (path my-cache-dir "srecode-map.el")
       srecode-insert-ask-variable-method 'field)
-(global-srecode-minor-mode t)
+(use-package srecode/mode
+  :init (global-srecode-minor-mode t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -242,9 +257,11 @@
 ;; `auto-complete'
 
 ;; TODO: not declared as auto-loaded...
-(require 'auto-complete)
-(setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
-(global-auto-complete-mode t)
+(use-package auto-complete
+  :init
+  (progn
+    (setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
+    (global-auto-complete-mode t)))
 
 ;; Enhance semantic completion with yasnippet
 (after 'auto-complete-config
@@ -304,13 +321,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
 
-;; Special treatment for tags buffer
-;; (my-register-helper-buffer "*cscope*" 'long-help)
-
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (require 'xcscope)
-            (cscope-minor-mode)))
+;; `xcscope'
+(use-package xcscope
+  :init
+  (progn
+    ;; ;; Special treatment for tags buffer
+    ;; (my-register-helper-buffer "*cscope*" 'long-help)
+    (add-hook 'prog-mode-hook 'cscope-minor-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

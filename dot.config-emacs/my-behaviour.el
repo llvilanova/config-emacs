@@ -74,8 +74,12 @@
 
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
-(smartparens-global-mode t)             ; highlight matching parenthesis
-(show-smartparens-global-mode t)
+(use-package smartparens
+  :init
+  (progn
+    (require 'smartparens-config)
+    (smartparens-global-mode t)         ; highlight matching parenthesis
+    (show-smartparens-global-mode t)))
 
 (defun my-smart-kill-whole-line (&optional arg)
   "A simple wrapper around `kill-whole-line' that respects indentation."
@@ -216,6 +220,24 @@ then only one line is copied."
 (use-package hungry-delete
   :config (global-hungry-delete-mode))
 
+;;;; `undo-tree'
+(use-package undo-tree
+  :init global-undo-tree-mode
+  :diminish undo-tree-mode
+  :config
+  (progn
+    (defadvice undo-tree-undo (around keep-region activate)
+      "Keep region when undoing in region."
+      (if (use-region-p)
+          (let ((m (set-marker (make-marker) (mark)))
+                (p (set-marker (make-marker) (point))))
+            ad-do-it
+            (goto-char p)
+            (set-mark m)
+            (set-marker p nil)
+            (set-marker m nil))
+        ad-do-it))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer
@@ -229,7 +251,6 @@ then only one line is copied."
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (ido-mode 1)
 (ido-everywhere 1)                      ; use for many file dialogs
-(flx-ido-mode 1)                        ; smarter flexible search
 (setq ido-save-directory-list-file (path my-cache-dir "ido.last")
       ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
       ido-default-file-method 'maybe-frame ; ask if buffer in other frame must be re-opened
@@ -248,11 +269,21 @@ then only one line is copied."
       ido-max-prospects 10              ; don't spam my minibuffer
       ido-confirm-unique-completion t)  ; wait for RET, even with unique completion
 
+;;;; `flx-ido': smarter flexible search
+(use-package flx-ido
+  :init (flx-ido-mode 1))
+
 ;;;; `smex': command-completion interface on top of `ido'
 ;;         replaces emacs's default `execute-extended-command'
 ;;         supersedes `icomplete+'
-(setq smex-save-file (path my-cache-dir "smex.save"))
-(smex-initialize)
+(use-package smex
+  :init
+  (progn
+    (el-get nil '(smex))
+    (setq smex-save-file (path my-cache-dir "smex.save")))
+  :config (smex-initialize)
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands)))
 
 ;;;; `icomplete-mode'
 ;; Complements `smex' where it is not used
@@ -340,6 +371,8 @@ then only one line is copied."
             (setq reb-re-syntax 'string)))
 
 ;;;; `popwin'
+(use-package popwin
+  :bind ("C-z" . popwin:keymap))
 (defun my-register-helper-buffer (pattern &optional type &rest other)
   "Register given buffer PATTERN as being for a specific TYPE of usage.
 Valid types are:
@@ -358,11 +391,12 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
                       ('info '(:position bottom :stick t))
                       ('long-info '(:position right :width 90 :stick t))
                       (t (error (format "Unknown type: %s" type))))))))
-    (setq popwin:special-display-config
-          (delq (assoc pattern  popwin:special-display-config)
-                popwin:special-display-config))
-    (if keywords
-        (push (cons pattern keywords) popwin:special-display-config)
-      (push pattern popwin:special-display-config))))
+    (after 'popwin-mode
+      (setq popwin:special-display-config
+            (delq (assoc pattern  popwin:special-display-config)
+                  popwin:special-display-config))
+      (if keywords
+          (push (cons pattern keywords) popwin:special-display-config)
+        (push pattern popwin:special-display-config)))))
 
 (provide 'my-behaviour)

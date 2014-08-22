@@ -26,6 +26,8 @@
                             (TeX-fold-buffer))))
    ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
    (orgtbl-mode 1)                      ; support for org's tables
+   (after 'smartparens-global-mode
+     (require 'smartparens-latex))
    (sp-local-pair 'latex-mode "\"" nil :actions nil)))
 
 ;; Do not ask when running the viewer
