@@ -212,6 +212,10 @@ then only one line is copied."
 (setq global-auto-revert-non-file-buffers t) ; ... including dired ...
 (setq auto-revert-verbose nil)                 ; ... but be quiet about it
 
+;;;; `hungry-delete-mode'
+(use-package hungry-delete
+  :config (global-hungry-delete-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer

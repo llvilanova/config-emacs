@@ -169,6 +169,7 @@ command to be run in a shell.")
                         (require 'cursor-chg)
                         (toggle-hl-line-when-idle t)
                         (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
+        hungry-delete
         (:name ido-settings          :type http
                :depends ido-yes-or-no
                :url "https://raw.github.com/DarwinAwardWinner/dotemacs/master/site-lisp/settings/ido-settings.el"
