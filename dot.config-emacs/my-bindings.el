@@ -221,4 +221,18 @@
 (global-set-key [(control super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen t)))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Miscellaneous
+
+(define-prefix-command 'my-toggle-map)
+(define-key ctl-x-map "t" 'my-toggle-map)
+(define-key my-toggle-map "e" 'toggle-debug-on-error)
+(define-key my-toggle-map "f" 'auto-fill-mode)
+(define-key my-toggle-map "l" 'linum-mode)
+(define-key my-toggle-map "q" 'toggle-debug-on-quit)
+(define-key my-toggle-map "r" 'read-only-mode)
+(define-key my-toggle-map "v" 'visual-line-mode)
+(define-key my-toggle-map "w" 'whitespace-mode)
+
+
 (provide 'my-bindings)
