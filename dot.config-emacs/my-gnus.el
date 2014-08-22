@@ -1,11 +1,13 @@
 ;;; my-gnus.el --- GNUS settings.
 
+;;; Code:
+
 
 (setq gnus-parameters nil               ; reset parameters
       gnus-posting-styles nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Data folders and files
+;;;; Data folders and files
 
 (setq gnus-startup-file (path my-data-dir "gnus")
       gnus-save-newsrc-file nil         ; no .newsrc file ...
@@ -24,7 +26,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Mail scanning
+;;;; Mail scanning
 
 (setq gnus-notifications-minimum-level 2)
 (add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)
@@ -44,8 +46,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Group
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Group
 
 (setq gnus-keep-same-level 'best)       ; got to next higher-level group
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode) ; always start with topics
@@ -70,11 +71,10 @@
 (gnus-demon-add-handler 'gnus-group-expire-all-groups 240 t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Summary
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Summary
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Format
+;;;;; Format
 
 ;; Default
 (defun my-gnus-summary-tree-arrows-ascii-default ()
@@ -179,7 +179,7 @@ See (info \"(gnus)Group Line Specification\")."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+;;;;; Miscellaneous
 
 ;; Sorting
 (setq gnus-thread-sort-functions
@@ -203,8 +203,7 @@ See (info \"(gnus)Group Line Specification\")."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Article
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Article
 
 ;; Format
 (setq gnus-article-mode-line-format "Gnus: %p ► %S%m")
@@ -263,8 +262,7 @@ See (info \"(gnus)Group Line Specification\")."
   (my-gnus-patch-process "Reviewed-by"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Compose
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Compose
 
 ;; Default posting settings
 (add-to-list 'gnus-posting-styles
@@ -283,8 +281,7 @@ See (info \"(gnus)Group Line Specification\")."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Sending
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Sending
 
 ;; Save sent messages
 ;; (add-to-list 'gnus-parameters '("" (gcc-self . t)))
@@ -300,8 +297,7 @@ See (info \"(gnus)Group Line Specification\")."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Accounts
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Accounts
 
 (defun my-add-gnus-account (id name mail &rest extra)
   (add-to-list 'gnus-secondary-select-methods
@@ -326,7 +322,8 @@ See (info \"(gnus)Group Line Specification\")."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Personal settings
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Personal settings
 
 (load "my-gnus-personal" t)
+
+;;; my-gnus.el ends here
