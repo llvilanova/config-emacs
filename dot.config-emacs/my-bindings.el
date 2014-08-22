@@ -24,8 +24,8 @@
 
 (global-set-key [(control x) (r) (b)] 'my-jump-to-bookmark)
 (global-set-key [(control z)] popwin:keymap)
-(global-set-key [(meta shift up)] 'my-move-line-up)
-(global-set-key [(meta shift down)] 'my-move-line-down)
+(global-set-key [(meta shift down)] 'move-text-down)
+(global-set-key [(meta shift up)] 'move-text-up)
 (global-set-key [(control x) (control shift j)] 'my-dwim-dired-jump)
 
 
