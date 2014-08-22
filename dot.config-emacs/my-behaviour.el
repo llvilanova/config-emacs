@@ -109,6 +109,21 @@ If COMMENTFIRST is non-nil, comment the original line."
     (cua--rectangle    'cua-cut-rectangle)
     (t                 'backward-kill-word))))
 
+(defun my-narrow-or-widen-dwim (p)
+  "If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
+Intelligently means: region, subtree, or defun, whichever applies
+first.
+
+With prefix P, don't widen, just narrow even if buffer is already
+narrowed."
+  (interactive "P")
+  (declare (interactive-only))
+  (cond ((buffer-narrowed-p) (widen))
+        ((region-active-p)
+         (narrow-to-region (region-beginning) (region-end)))
+        ((derived-mode-p 'org-mode) (org-narrow-to-subtree))
+        (t (narrow-to-defun))))
+
 ;;;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
 (setq-default save-place t)             ; activate it for all buffers

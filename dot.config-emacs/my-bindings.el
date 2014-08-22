@@ -229,6 +229,7 @@
 (define-key my-toggle-map "e" 'toggle-debug-on-error)
 (define-key my-toggle-map "f" 'auto-fill-mode)
 (define-key my-toggle-map "l" 'linum-mode)
+(define-key my-toggle-map "n" 'my-narrow-or-widen-dwim)
 (define-key my-toggle-map "q" 'toggle-debug-on-quit)
 (define-key my-toggle-map "r" 'read-only-mode)
 (define-key my-toggle-map "v" 'visual-line-mode)
