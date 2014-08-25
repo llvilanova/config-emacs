@@ -110,7 +110,6 @@ command to be run in a shell.")
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
         cl-lib
-        (:name cursor-chg            :type emacswiki)
         (:name diminish
                :after (progn
                         (defmacro my-diminish-after (mode-name)
@@ -120,7 +119,6 @@ command to be run in a shell.")
                         (my-diminish-after auto-fill)
                         (my-diminish-after elisp-slime-nav)
                         (my-diminish-after flyspell)
-                        (my-diminish-after visual-line)
                         (my-diminish-after whitespace)
                         (my-diminish-after filladapt)
                         (my-diminish-after auto-complete)
@@ -169,11 +167,6 @@ command to be run in a shell.")
                :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
         (:name highlight-parentheses :type elpa)
         (:name highlight-symbol      :type elpa)
-        (:name hl-line+              :type emacswiki
-               :after (progn
-                        (require 'cursor-chg)
-                        (toggle-hl-line-when-idle t)
-                        (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
         hungry-delete
         jinja2-mode
         (:name key-chord             :type emacswiki

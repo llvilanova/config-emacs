@@ -1,5 +1,18 @@
 ;;; my-appearance.el --- Graphical appearance settings
 
+;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Packages
+
+(my-add-packages
+ '(
+   (:name cursor-chg            :type emacswiki)
+   (:name hl-line+              :type emacswiki
+          :depends cursor-chg)
+   ))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Color theming
 
@@ -92,6 +105,14 @@
 ;;; Buffer
 
 (global-prettify-symbols-mode 1)
+(diminish 'visual-line-mode)
+
+(use-package hl-line+
+  :init
+  (progn
+    (require 'cursor-chg)
+    (toggle-hl-line-when-idle t)
+    (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
