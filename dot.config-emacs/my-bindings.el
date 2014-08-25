@@ -10,14 +10,6 @@
 (global-set-key [pause] 'my-toggle-dedicated-window)
 (define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
 
-;; Move between windows
-(windmove-default-keybindings 'super)
-(global-set-key [(control x) (left)]  'windmove-left)
-(global-set-key [(control x) (right)] 'windmove-right)
-(global-set-key [(control x) (up)]    'windmove-up)
-(global-set-key [(control x) (down)]  'windmove-down)
-(global-set-key [(control x) (o)] 'ace-window)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Buffers
@@ -36,7 +28,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Editing
-
 
 ;; Smart open line
 (when (display-graphic-p)
@@ -64,19 +55,8 @@
 ;; Eval-and-replace
 (global-set-key [(control c) (control e)] 'my-eval-and-replace)
 
-;; `ace-jump-mode'
-(global-set-key [(control c) (control j) (c)] 'ace-jump-char-mode)
-(global-set-key [(control c) (control j) (w)] 'ace-jump-word-mode)
-(global-set-key [(control c) (control j) (l)] 'ace-jump-line-mode)
-
 ;; `expand-region'
 (global-set-key [(control shift return)] 'er/expand-region)
-
-;; `multiple-cursors'
-(global-set-key [(control \;)] 'mc/mark-all-dwim)
-(global-set-key [(control meta \;)] 'mc/edit-lines)
-(global-set-key [(control meta \,)] 'mc/mark-more-like-this-extended)
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;; `dired'
 (global-set-key [(control x) (control j)] 'dired-jump)

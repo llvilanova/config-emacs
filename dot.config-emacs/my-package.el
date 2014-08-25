@@ -96,10 +96,6 @@ command to be run in a shell.")
 ;;; Initial package list
 (my-add-packages
       '(
-        (:name ace-jump-mode
-               :features nil)
-        (:name ace-window            :type github
-               :pkgname "abo-abo/ace-window")
         (:name ack                   :type http
                :url "http://nschum.de/src/emacs/full-ack/full-ack.el"
                :after (setq ack-executable (executable-find "ack-grep")))
@@ -124,7 +120,6 @@ command to be run in a shell.")
                         (my-diminish-after auto-fill)
                         (my-diminish-after elisp-slime-nav)
                         (my-diminish-after flyspell)
-                        (my-diminish-after smartparens)
                         (my-diminish-after visual-line)
                         (my-diminish-after whitespace)
                         (my-diminish-after filladapt)
@@ -180,10 +175,6 @@ command to be run in a shell.")
                         (toggle-hl-line-when-idle t)
                         (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
         hungry-delete
-        (:name ido-ubiquitous
-               :after (progn
-                        (ido-mode 1)
-                        (ido-ubiquitous-mode 1)))
         jinja2-mode
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
@@ -194,8 +185,6 @@ command to be run in a shell.")
                :after (progn
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
                         (setq magit-diff-refine-hunk t)))
-        (:name multiple-cursors
-               :features multiple-cursors)
         ;; multi-term
         (:name org-mode
                ;:branch "maint"
@@ -222,16 +211,9 @@ command to be run in a shell.")
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
         (:name pylint                :type apt-get)
-        (:name smartparens
-               :after (progn
-                        (require 'smartparens-config)
-                        (add-to-list 'LaTeX-mode-hook
-                                     (lambda () (require 'smartparens-latex)))))
-        smex
         (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
-        undo-tree
         (:name wgrep                 :type github
                :pkgname "mhayashi1120/Emacs-wgrep")
         (:name wordnet               :type http

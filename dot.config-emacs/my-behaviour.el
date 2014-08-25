@@ -1,5 +1,29 @@
 ;;; my-behaviour.el --- Global behaviour settings.
 
+;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Packages
+
+(my-add-packages
+ '(
+   (:name ace-jump-mode
+          :features nil)
+   (:name ace-link              :type github
+          :pkgname "abo-abo/ace-link"
+          :depends noflet
+          :after (ace-link-setup-default))
+   (:name ace-window            :type github
+          :pkgname "abo-abo/ace-window")
+   god-mode
+   ido-ubiquitous
+   multiple-cursors
+   smartparens
+   smex
+   undo-tree
+   ))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Frames
 
@@ -22,6 +46,16 @@
 
 ;;;; Undo / redo window configurations
 (winner-mode 1)
+
+;;;; Move between windows
+(use-package windmove
+  :config (windmove-default-keybindings 'super)
+  :bind (("C-x <left>"  . windmove-left)
+         ("C-x <right>" . windmove-right)
+         ("C-x <up>"    . windmove-up)
+         ("C-x <down>"  . windmove-down)))
+(use-package ace-window
+  :bind ("C-x o" . ace-window))
 
 ;;;; Quickly change buffer organization
 (setq my--swapping-buffer nil)
@@ -71,11 +105,13 @@
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
 (use-package smartparens
+  :diminish smart-parens-mode
   :init
   (progn
     (require 'smartparens-config)
     (smartparens-global-mode t)         ; highlight matching parenthesis
-    (show-smartparens-global-mode t)))
+    (show-smartparens-global-mode t)
+    (add-to-list 'LaTeX-mode-hook (lambda () (require 'smartparens-latex)))))
 
 (defun my-smart-kill-whole-line (&optional arg)
   "A simple wrapper around `kill-whole-line' that respects indentation."
@@ -150,6 +186,13 @@ narrowed."
 ;;;; auto-save sessions
 (setq auto-save-list-file-prefix        ; location for auto-save sessions
       (path my-cache-dir "auto-save-list" ""))
+
+;;;; `ace-jump'
+(use-package ace-jump-mode
+  :bind (("C-c C-j j" . ace-jump-mode)
+         ("C-c C-j c" . ace-jump-char-mode)
+         ("C-c C-j w" . ace-jump-word-mode)
+         ("C-c C-j l" . ace-jump-line-mode)))
 
 ;;;; `uniquify': nicer unique names for buffers
 (require 'uniquify)
@@ -234,6 +277,12 @@ then only one line is copied."
             (set-marker m nil))
         ad-do-it))))
 
+(use-package multiple-cursors
+  :bind (("C-;"   . mc/mark-all-dwim)
+         ("C-M-;" . mc/edit-lines)
+         ("C-M-," . mc/mark-mode-like-this-extended)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer
@@ -263,6 +312,10 @@ then only one line is copied."
       ido-show-dot-for-dired nil        ; show '.' as first completion
       ido-max-prospects 10              ; don't spam my minibuffer
       ido-confirm-unique-completion t)  ; wait for RET, even with unique completion
+
+;;;; `ido-ubiquitous'
+(use-package ido-ubiquitous
+  :config (ido-ubiquitous-mode 1))
 
 ;;;; `flx-ido': smarter flexible search
 (use-package flx-ido
