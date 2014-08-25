@@ -132,7 +132,6 @@ command to be run in a shell.")
                         (my-diminish-after auto-fill)
                         (my-diminish-after highlight-parentheses)
                         (my-diminish-after hi-lock)
-                        (my-diminish-after pretty)
                         (my-diminish-after yas-minor)))
         (:name dired-details
                :after (progn
@@ -222,10 +221,6 @@ command to be run in a shell.")
         ;;        :after (progn
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
-        (:name pretty-mode           :type github
-               :features (pretty-mode)
-               :pkgname "akatov/pretty-mode"
-               :after (global-pretty-mode t))
         (:name pylint                :type apt-get)
         (:name smartparens
                :after (progn
