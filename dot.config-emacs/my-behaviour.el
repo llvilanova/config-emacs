@@ -261,7 +261,7 @@ then only one line is copied."
 
 ;;;; `undo-tree'
 (use-package undo-tree
-  :init global-undo-tree-mode
+  :init (global-undo-tree-mode)
   :diminish undo-tree-mode
   :config
   (progn
