@@ -101,11 +101,9 @@ command to be run in a shell.")
                :after (setq ack-executable (executable-find "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
-        auto-complete
         (:name auto-dictionary       :type github
                :pkgname "nschum/auto-dictionary-mode")
         (:name bibtex-utils          :type emacswiki)
-        ;; (:name company               :type elpa)
         ;; (:name cssh                  :type elpa)
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
@@ -134,41 +132,19 @@ command to be run in a shell.")
                :pkgname "jart/disaster"
                :after (after 'cc-mode
                         (require 'disaster)))
-        (:name doc-mode              :type http
-               :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
         (:name doc-present           :type github
                :pkgname "dengste/doc-present")
         (:name dpkg-dev-el           :type apt-get)
-        (:name elisp-slime-nav       :type elpa
-               :after (progn
-                        (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
         (:name emacs-goodies-el      :type apt-get)
         expand-region
-        (:name fic-ext-mode
-               :lazy t
-               :after (add-to-list 'fic-highlighted-words "XXX"))
         flx
-        (:name flycheck
-               :after (global-flycheck-mode t))
-        (:name flycheck-color-mode-line :type github
-               :pkgname "flycheck/flycheck-color-mode-line"
-               :after (after 'flycheck
-                        (require 'flycheck-color-mode-line)
-                        (add-hook 'flycheck-mode-hook
-                                  'flycheck-color-mode-line-mode))
-               )
         (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
         (:name gnus-notifications    :type http
                :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
-        (:name guess-style           :type http
-               :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
-        (:name highlight-parentheses :type elpa)
-        (:name highlight-symbol      :type elpa)
         hungry-delete
-        jinja2-mode
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
         (:name lua-mode              :type apt-get)
@@ -203,7 +179,6 @@ command to be run in a shell.")
         ;;        :after (progn
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
-        (:name pylint                :type apt-get)
         (:name sml-modeline          :type elpa)
         switch-window
         ;; (:name tempo-snippets        :type elpa)
@@ -212,7 +187,6 @@ command to be run in a shell.")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         (:name xcscope
-               :features nil)
         yasnippet
         ))
 
