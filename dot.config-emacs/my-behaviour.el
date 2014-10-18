@@ -105,7 +105,7 @@
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
 (use-package smartparens
-  :diminish smart-parens-mode
+  :diminish smartparens-mode
   :init
   (progn
     (require 'smartparens-config)
