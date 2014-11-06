@@ -196,8 +196,7 @@ narrowed."
 
 ;;;; `uniquify': nicer unique names for buffers
 (require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward
-      uniquify-separator ":"
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets
       uniquify-after-kill-buffer-p t
       uniquify-ignore-buffers-re "^\\*")
 
