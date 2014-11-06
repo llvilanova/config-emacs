@@ -360,6 +360,8 @@ then only one line is copied."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Misc
 
+(setq load-prefer-newer t)         ; prefer the newer file when loading .el/.elc
+
 (setq tramp-persistency-file-name (path my-cache-dir "tramp"))
 
 ;;;; `browse-kill-ring': kill ring browser on M-y
