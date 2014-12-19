@@ -1,5 +1,26 @@
 ;;; my-org.el --- OrgMode's preferences.
 
+;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Packages
+
+(defun my-org-setup ()
+  (my-add-packages
+   '(
+     (:name org-mode
+            ;:branch "maint"
+            :after (after 'org-bibtex
+                     (require 'ox-bibtex)))
+     (:name org-gnome-calendar    :type github
+            :pkgname "llvilanova/org-gnome-calendar"
+            :after (progn
+                     (require 'dbus)
+                     (when (dbus-ignore-errors (dbus-init-bus :session))
+                       (global-org-gnome-calendar-mode))))
+     )))
+(my-hook-once 'org-mode-hook #'my-org-setup)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Location
 (defconst org-directory (path my-home-dir "plans" ""))

@@ -153,16 +153,6 @@ command to be run in a shell.")
                         (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
                         (setq magit-diff-refine-hunk t)))
         ;; multi-term
-        (:name org-mode
-               ;:branch "maint"
-               :after (after 'org-bibtex
-                        (require 'ox-bibtex)))
-        (:name org-gnome-calendar    :type github
-               :pkgname "llvilanova/org-gnome-calendar"
-               :after (progn
-                        (require 'dbus)
-                        (when (dbus-ignore-errors (dbus-init-bus :session))
-                          (global-org-gnome-calendar-mode))))
         (:name outshine
                :after (progn
                         (autoload 'outshine-hook-function "outshine")
