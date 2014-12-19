@@ -24,10 +24,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Location
 (defconst org-directory (path my-home-dir "plans" ""))
-(setq org-agenda-files (list org-directory)
-      org-default-notes-file (path org-directory "Personal.org")
-      my-org-agenda-file (path my-cache-dir "org-agenda.txt")
-      org-agenda-skip-unavailable-files t
+(setq org-default-notes-file (path org-directory "Personal.org")
       org-completion-use-ido t
       org-pretty-entities t)
 ;; Contributed extensions
@@ -59,44 +56,51 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Agenda
 
-;; Appearance
-(setq org-agenda-span 14                ; show 2 weeks...
-      org-agenda-start-on-weekday 1)    ; ...starting on Monday
-
-;; Hide information
-(setq org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
-      org-agenda-todo-ignore-with-date t  ; ... in the TODO list...
-      org-agenda-todo-ignore-scheduled t  ; (they'll eventually appear)
-      org-agenda-skip-scheduled-if-done t ; completed tasks
-      org-agenda-skip-deadline-if-done t
-      org-agenda-dim-blocked-tasks t)     ; tasks blocked by dependencies
-
-;; Handle CFPs in a separate agenda view
-(defun my-org-agenda-skip-tag (tag &optional others)
-  "Skip all entries that correspond to TAG.
-
-If OTHERS is true, skip all entries that do not correspond to TAG."
-  (show-all)
-  (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
-        (current-headline (or (and (org-at-heading-p)
-                                (point))
-                             (save-excursion (org-back-to-heading)))))
-    (if others
-        (if (not (member tag (org-get-tags-at current-headline)))
-            next-headline
-          nil)
-      (if (member tag (org-get-tags-at current-headline))
-          next-headline
-        nil))))
 (use-package org-agenda
+  :defer t
   :config
   (progn
+    (setq
+     ;; location
+     org-agenda-files (list org-directory)
+     my-org-agenda-file (path my-cache-dir "org-agenda.txt")
+     org-agenda-skip-unavailable-files t
+     ;; appearance
+     org-agenda-span 14                  ; show 2 weeks...
+     org-agenda-start-on-weekday 1       ; ...starting on Monday
+     ;; hide information
+     org-agenda-todo-ignore-deadlines t  ; TODO's with scheduled date...
+     org-agenda-todo-ignore-with-date t  ; ... in the TODO list...
+     org-agenda-todo-ignore-scheduled t  ; (they'll eventually appear)
+     org-agenda-skip-scheduled-if-done t ; completed tasks
+     org-agenda-skip-deadline-if-done t
+     org-agenda-dim-blocked-tasks t      ; tasks blocked by dependencies
+     )
     (add-to-list 'org-agenda-custom-commands
                  '("p" "CFPs (Calls For Papers)"
                    agenda ""
                    ((org-agenda-skip-function-global nil)
                     (org-agenda-skip-function
                      '(my-org-agenda-skip-tag "conference" t)))))
+
+    ;; Handle CFPs in a separate agenda view
+    (defun my-org-agenda-skip-tag (tag &optional others)
+      "Skip all entries that correspond to TAG.
+
+If OTHERS is true, skip all entries that do not correspond to TAG."
+      (show-all)
+      (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
+            (current-headline (or (and (org-at-heading-p)
+                                       (point))
+                                  (save-excursion (org-back-to-heading)))))
+        (if others
+            (if (not (member tag (org-get-tags-at current-headline)))
+                next-headline
+              nil)
+          (if (member tag (org-get-tags-at current-headline))
+              next-headline
+            nil))))
+
     (setq org-agenda-skip-function-global
           (lambda ()
             (or (apply 'my-org-agenda-skip-tag "conference" nil)
