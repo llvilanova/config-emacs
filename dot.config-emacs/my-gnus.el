@@ -7,6 +7,15 @@
       gnus-posting-styles nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Packages
+
+(my-add-packages
+ '(
+   (:name gnus-notifications    :type http
+          :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
+   ))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Data folders and files
 
 (setq gnus-startup-file (path my-data-dir "gnus")
@@ -15,21 +24,24 @@
       )
 
 ;; Keep read articles and marks automatically synchronized
-(setq gnus-sync-backend "/heygate:.local/share/emacs/gnus-sync"
-      gnus-sync-global-vars `(gnus-newsrc-last-checked-date)
-      gnus-sync-newsrc-groups `("nntp" "nnrss")
-      ;; gnus-sync-newsrc-offsets `(2 3)
-      )
-(add-hook 'gnus-get-new-news-hook 'gnus-sync-read)
-(add-hook 'gnus-read-newsrc-el-hook 'gnus-sync-read)
-(require 'gnus-sync)
+;; (setq gnus-sync-backend "/heygate:.local/share/emacs/gnus-sync"
+;;       gnus-sync-global-vars `(gnus-newsrc-last-checked-date)
+;;       gnus-sync-newsrc-groups `("nntp" "nnrss")
+;;       ;; gnus-sync-newsrc-offsets `(2 3)
+;;       )
+;; (add-hook 'gnus-get-new-news-hook 'gnus-sync-read)
+;; (add-hook 'gnus-read-newsrc-el-hook 'gnus-sync-read)
+;; (require 'gnus-sync)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Mail scanning
 
-(setq gnus-notifications-minimum-level 2)
-(add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)
+(use-package gnus-notifications
+  :init
+  (progn
+    (setq gnus-notifications-minimum-level 2)
+    (add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)))
 
 (defun my-check-mail ()
   (interactive)

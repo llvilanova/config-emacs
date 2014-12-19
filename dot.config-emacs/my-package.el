@@ -142,8 +142,6 @@ command to be run in a shell.")
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
-        (:name gnus-notifications    :type http
-               :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
         hungry-delete
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
