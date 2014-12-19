@@ -7,14 +7,9 @@
 
 (my-add-packages
  '(
-   (:name ace-jump-mode
-          :features nil)
-   (:name ace-link              :type github
-          :pkgname "abo-abo/ace-link"
-          :depends noflet
-          :after (ace-link-setup-default))
-   (:name ace-window            :type github
-          :pkgname "abo-abo/ace-window")
+   ace-jump-mode
+   ace-link
+   ace-window
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -282,6 +277,10 @@ then only one line is copied."
          ("C-M-," . mc/mark-mode-like-this-extended)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
+(use-package ace-link
+  :init
+  (progn
+    (ace-link-setup-default)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer
