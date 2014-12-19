@@ -108,11 +108,10 @@
 (diminish 'visual-line-mode)
 
 (use-package hl-line+
-  :init
-  (progn
-    (require 'cursor-chg)
-    (toggle-hl-line-when-idle t)
-    (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
+ :init
+ (progn
+   (hl-line-toggle-when-idle t)
+   (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
