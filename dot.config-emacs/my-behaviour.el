@@ -446,4 +446,8 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
           (push (cons pattern keywords) popwin:special-display-config)
         (push pattern popwin:special-display-config)))))
 
+;; `god-mode': Control- and Meta-less commands
+(use-package god-mode
+  :bind (("M-ESC" . god-local-mode)))
+
 (provide 'my-behaviour)
