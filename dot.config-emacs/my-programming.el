@@ -5,40 +5,38 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
 
-(add-hook
- 'prog-mode-hook
- (lambda ()
-   (my-add-packages
-    '(
-      auto-complete
-      ;; (:name company               :type elpa)
-      (:name doc-mode              :type http
-             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
-      (:name elisp-slime-nav       :type elpa
-             :after (progn
-                      (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
-      (:name fic-ext-mode
-             :lazy t
-             :after (add-to-list 'fic-highlighted-words "XXX"))
-      (:name flycheck
-             :after (global-flycheck-mode t))
-      (:name flycheck-color-mode-line :type github
-             :pkgname "flycheck/flycheck-color-mode-line"
-             :after (after 'flycheck
-                      (require 'flycheck-color-mode-line)
-                      (add-hook 'flycheck-mode-hook
-                                'flycheck-color-mode-line-mode))
-             )
-      (:name guess-style           :type http
-             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
-      (:name highlight-parentheses :type elpa)
-      (:name highlight-symbol      :type elpa)
-      jinja2-mode
-      (:name pylint                :type apt-get)
-      (:name xcscope
-             :features nil)
-      ))
-   ))
+(defun my-programming-setup ()
+  (my-add-packages
+   '(
+     auto-complete
+     ;; (:name company               :type elpa)
+     (:name doc-mode              :type http
+            :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
+     (:name elisp-slime-nav       :type elpa
+            :after (progn
+                     (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
+     (:name fic-ext-mode
+            :lazy t
+            :after (add-to-list 'fic-highlighted-words "XXX"))
+     (:name flycheck
+            :after (global-flycheck-mode t))
+     (:name flycheck-color-mode-line :type github
+            :pkgname "flycheck/flycheck-color-mode-line"
+            :after (after 'flycheck
+                     (require 'flycheck-color-mode-line)
+                     (add-hook 'flycheck-mode-hook
+                               'flycheck-color-mode-line-mode))
+            )
+     (:name guess-style           :type http
+            :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
+     (:name highlight-parentheses :type elpa)
+     (:name highlight-symbol      :type elpa)
+     jinja2-mode
+     (:name pylint                :type apt-get)
+     (:name xcscope
+            :features nil)
+     )))
+(my-hook-once 'prog-mode-hook #'my-programming-setup)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
