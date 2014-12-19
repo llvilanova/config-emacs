@@ -23,7 +23,7 @@
 (setq package-user-dir (path my-cache-dir "elpa"))
 (el-get 'sync '(package))
 (add-to-list 'package-archives          ; additional repositiories
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (unless (file-exists-p (path package-user-dir "archives"))
   ;; first-time initialization
   (package-refresh-contents))
