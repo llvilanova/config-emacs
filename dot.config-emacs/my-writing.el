@@ -1,6 +1,17 @@
 ;;; my-writing.el --- Text editing preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Packages
+
+(defun my-writing-setup ()
+  (my-add-packages
+   '(
+     auto-dictionary
+     )))
+(my-hook-once 'text-mode-hook #'my-writing-setup)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
 
 (add-hook
@@ -23,7 +34,6 @@
 (defun my-flyspell-mode-maybe (&optional arg)
   (when my-flyspell-mode-maybe-enabled
     (flyspell-mode arg)))
-(add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 (add-hook 'text-mode-hook 'my-flyspell-mode-maybe)
 
 ;; `wordnet'

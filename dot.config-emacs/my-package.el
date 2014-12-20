@@ -101,8 +101,6 @@ command to be run in a shell.")
                :after (setq ack-executable (executable-find "ack-grep")))
         (:name asciidoc              :type elpa)
         (:name auctex                :type apt-get)
-        (:name auto-dictionary       :type github
-               :pkgname "nschum/auto-dictionary-mode")
         (:name bibtex-utils          :type emacswiki)
         ;; (:name cssh                  :type elpa)
         (:name cedet
