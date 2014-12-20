@@ -1,6 +1,16 @@
 ;;; my-writing-latex.el --- (La)TeX editing preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Packages
+
+(defun my-writing-latex-setup ()
+  (my-add-packages
+   '(
+     (:name auctex                :type apt-get)
+     )))
+(my-hook-once 'LaTeX-mode-hook #'my-writing-latex-setup)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
 (setq font-latex-user-keyword-classes   ; user-defined keyword highlighting
       '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command))
