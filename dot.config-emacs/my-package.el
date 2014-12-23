@@ -144,10 +144,6 @@ command to be run in a shell.")
         (:name lua-mode              :type apt-get)
         (:name lv                    :type github
                :pkgname "llvilanova/lv")
-        (:name magit
-               :after (progn
-                        (add-hook 'magit-mode-hook 'turn-on-magit-stgit)
-                        (setq magit-diff-refine-hunk t)))
         ;; multi-term
         (:name outshine
                :after (progn
