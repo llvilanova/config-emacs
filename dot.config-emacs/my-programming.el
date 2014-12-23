@@ -32,8 +32,7 @@
      (:name highlight-symbol      :type elpa)
      jinja2-mode
      (:name pylint                :type apt-get)
-     (:name xcscope
-            :features nil)
+     xcscope
      )))
 (my-hook-once 'prog-mode-hook #'my-programming-setup)
 
@@ -357,11 +356,11 @@
 
 ;; `xcscope'
 (use-package xcscope
+  :defer t
   :init
   (progn
-    ;; ;; Special treatment for tags buffer
-    ;; (my-register-helper-buffer "*cscope*" 'long-help)
-    (add-hook 'prog-mode-hook 'cscope-minor-mode)))
+    ;; Special treatment for tags buffer
+    (my-register-helper-buffer "*cscope*" 'long-help)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
