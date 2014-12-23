@@ -8,10 +8,6 @@
 (defun my-org-setup ()
   (my-add-packages
    '(
-     (:name org-mode
-            ;:branch "maint"
-            :after (after 'org-bibtex
-                     (require 'ox-bibtex)))
      (:name org-gnome-calendar    :type github
             :pkgname "llvilanova/org-gnome-calendar"
             :after (progn
