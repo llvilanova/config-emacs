@@ -12,9 +12,7 @@
      company-mode
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
-     (:name elisp-slime-nav       :type elpa
-            :after (progn
-                     (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)))
+     (:name elisp-slime-nav       :type elpa)
      (:name fic-ext-mode
             :lazy t
             :after (add-to-list 'fic-highlighted-words "XXX"))
@@ -151,6 +149,16 @@
     (defadvice guess-style-guess-all (around my-guess-style-guess-all)
       (when my-guess-style
         ad-do-it))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lisp
+
+(use-package elisp-slime-nav
+  :defer t
+  :diminish elisp-slime-nav-mode
+  :init (add-hook 'emacs-lisp-mode-hook #'elisp-slime-nav-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
