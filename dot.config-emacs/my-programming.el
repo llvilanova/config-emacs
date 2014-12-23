@@ -18,8 +18,7 @@
      (:name fic-ext-mode
             :lazy t
             :after (add-to-list 'fic-highlighted-words "XXX"))
-     (:name flycheck
-            :after (global-flycheck-mode t))
+     flycheck
      (:name flycheck-color-mode-line :type github
             :pkgname "flycheck/flycheck-color-mode-line"
             :after (after 'flycheck
@@ -394,16 +393,9 @@ If ARG is not nil, force a call to `compile'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; `flycheck': Continuous compilation
 
-(after 'flycheck
-  ;; Re-define to work almost immediately
-  (defun flycheck-show-error-at-point-soon ()
-    "Show the first error message at point in minibuffer asap.
-
-Show the error message at point in minibuffer after a short delay."
-    (flycheck-cancel-error-show-error-timer)
-    (when (flycheck-overlays-at (point))
-      (setq flycheck-error-show-error-timer
-            (run-at-time 0.1 nil 'flycheck-show-error-at-point)))))
+(use-package flycheck
+  :defer t
+  :init (global-flycheck-mode t))
 
 ;; Linux-specific includes & defines
 (defun my-flycheck-linux ()
