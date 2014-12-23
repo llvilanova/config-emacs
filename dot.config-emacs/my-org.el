@@ -143,6 +143,10 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Exporting
 
+(use-package org-bibtex
+  :defer t
+  :config (require 'ox-bibtex))
+
 (after 'ox-latex
   (setq org-latex-listings 'minted)
   (add-to-list 'org-latex-packages-alist '("" "minted"))
