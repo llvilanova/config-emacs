@@ -13,6 +13,7 @@
    god-mode
    ido-ubiquitous
    multiple-cursors
+   outshine
    smartparens
    smex
    undo-tree
@@ -281,6 +282,15 @@ then only one line is copied."
   :init
   (progn
     (ace-link-setup-default)))
+
+;;;; `outshine'
+(use-package outshine
+  :defer t
+  :init
+  (progn
+    (autoload 'outshine-hook-function "outshine")
+    (add-hook 'outline-minor-mode-hook
+              'outshine-hook-function)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer

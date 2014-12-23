@@ -145,11 +145,6 @@ command to be run in a shell.")
         (:name lv                    :type github
                :pkgname "llvilanova/lv")
         ;; multi-term
-        (:name outshine
-               :after (progn
-                        (autoload 'outshine-hook-function "outshine")
-                        (add-hook 'outline-minor-mode-hook
-                        'outshine-hook-function)))
         (:name popwin
                :features popwin
                :after (setq display-buffer-function 'popwin:display-buffer))
