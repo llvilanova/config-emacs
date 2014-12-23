@@ -60,13 +60,20 @@
  'LaTeX-mode-hook
  (lambda ()
    (turn-on-reftex)                     ; activate RefTeX...
-   (setq reftex-plug-into-AUCTeX 1      ; ...and integrate with AUCTex
-         bib-cite-use-reftex-view-crossref t)
-   (bib-cite-minor-mode 1)))            ; show citation info in minibuffer
+   (setq reftex-plug-into-AUCTeX 1)))   ; ...and integrate with AUCTex
 (add-hook
  'bibtex-mode
  (lambda ()
    (require 'bibtex-utils)))            ; insert keywords on entry (C-c k)
+
+;; `bib-cite': show citation info in minibuffer
+(use-package bib-cite
+  :defer t
+  :diminish bib-cite-minor-mode
+  :init
+  (add-hook 'LateX-mode-hook #'bib-cite-minor-mode)
+  :config
+  (setq reftex-plug-into-AUCTeX bib-cite-use-reftex-view-crossref t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
