@@ -163,6 +163,21 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   ;;               (org-bibtex (concat (file-name-sans-extension
   ;;                                    (buffer-file-name)) ".bib")))))
 
+  ;; moderncv
+  (add-to-list 'org-latex-classes
+               '("moderncv"
+                 "\\documentclass[1pt]{moderncv}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ))
+  ;; moderncv conflicts with marvosym
+  (setq org-latex-default-packages-alist
+        (cl-remove-if
+         (lambda (elem) (and (listp elem)
+                        (or (string= "marvosym" (cadr elem))
+                            (string= "hyperref" (cadr elem)))))
+         org-latex-default-packages-alist))
+  (setq org-latex-hyperref-template "")
+
   ;; Remove temporary files when done
   (setq org-latex-logfiles-extensions
         (append '("bbl" "blg" "bib")    ; bibliography
