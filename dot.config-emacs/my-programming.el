@@ -187,16 +187,22 @@
 ;; Documentation
 
 ;; Comment editing
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (auto-fill-mode 1)         ; auto-wrap lines in comments
-            (require 'filladapt)
-            (turn-on-filladapt-mode)))
 (add-hook 'c-mode-common-hook
           (lambda ()
             ;; Auto-end comment block when inserting `/' (override: C-q /)
-            (add-to-list 'c-cleanup-list 'comment-close-slash)
-            (c-setup-filladapt)))
+            (add-to-list 'c-cleanup-list 'comment-close-slash)))
+
+;; `filladapt-mode': fill comment blocks
+(use-package filladapt
+  :defer t
+  :diminish filladapt-mode
+  :init
+  (progn
+    (add-hook 'prog-mode-hook
+              (lambda ()
+                (auto-fill-mode 1)
+                (turn-on-filladapt-mode)))
+    (add-hook 'c-mode-common-hook #'c-setup-filladapt)))
 
 ;; `doc-mode': manage doxygen documentation
 (use-package doc-mode
