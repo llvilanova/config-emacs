@@ -8,8 +8,8 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     auto-complete
-     ;; (:name company               :type elpa)
+     ;; auto-complete
+     company-mode
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa
@@ -288,6 +288,7 @@
 
 ;; `auto-complete'
 (use-package auto-complete
+  :disabled t
   :bind (("M-<tab>" . auto-complete)
          ("C-c h" . ac-last-quick-help)
          ("C-c H" . ac-last-help))
@@ -326,6 +327,7 @@
                 ;; (setq yas-trigger-key nil)
                 (ac-set-trigger-key "TAB")))))
 (use-package auto-complete-config
+  :disabled t
   :defer t
   :config
   (progn
