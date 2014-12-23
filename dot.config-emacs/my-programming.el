@@ -287,68 +287,74 @@
 
 
 ;; `auto-complete'
-
-;; TODO: not declared as auto-loaded...
 (use-package auto-complete
+  :bind (("M-<tab>" . auto-complete)
+         ("C-c h" . ac-last-quick-help)
+         ("C-c H" . ac-last-help))
+  :defer t
+  :diminish auto-complete-mode
   :init
   (progn
     (setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
-    (global-auto-complete-mode t)))
 
-;; Enhance semantic completion with yasnippet
-(after 'auto-complete-config
-  (defun ac-semantic-action ()
-    (when (and (boundp 'yas/minor-mode) yas/minor-mode)
-      (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
-             (class (semantic-tag-class tag))
-             (args))
-        (when (eq class 'function)
-          (setq args (semantic-tag-function-arguments tag))
-          (yas/expand-snippet
-           (concat "("
-                   (mapconcat
-                    (lambda (arg)
-                      (let ((arg-type (semantic-format-tag-type arg nil))
-                            (arg-name (semantic-format-tag-name arg nil)))
-                        (concat "${"
-                                (if (string= arg-name "")
-                                    arg-type
-                                  (concat arg-type " " arg-name))
-                                "}")))
-                    args
-                    ", ")
-                   ")$0"))))))
-  (add-to-list 'ac-source-semantic
-               '((action . ac-semantic-action)))
-  (add-to-list 'ac-source-semantic-raw
-               '((action . ac-semantic-action))))
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (add-to-list 'ac-sources 'ac-source-filename)
+                (my-ac-source-semantic-enable)))
+    (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup))
+  :config
+  (progn
+    (global-auto-complete-mode t)
 
-(defun my-ac-source-semantic-enable ()
-  (yas-minor-mode 1)                    ; enable yasnippet for arg placeholders
-  (add-to-list 'ac-sources 'ac-source-semantic-raw)
-  (add-to-list 'ac-sources 'ac-source-semantic))
+    (require 'yasnippet)
+    (defun my-ac-source-semantic-enable ()
+      (yas-minor-mode 1)                ; enable yasnippet for arg placeholders
+      (add-to-list 'ac-sources 'ac-source-semantic-raw)
+      (add-to-list 'ac-sources 'ac-source-semantic))
 
-(after 'auto-complete
-  (require 'semantic/ia)
-  (require 'auto-complete-config)
-  (ac-flyspell-workaround)
-  (setq ac-dwim t                    ; be clever on TAB/RET
-        ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
-        ac-quick-help-delay 0.2      ; ... almost immediately
-        ac-auto-start nil              ; do not start automatically
-        ac-auto-show-menu nil          ; do not show menu when auto-starting
-        ac-use-menu-map t)           ; allow C-n/C-p in completion menu
-  (add-hook 'auto-complete-mode-hook
-            (lambda ()
-              ;; (setq yas-trigger-key nil)
-              (ac-set-trigger-key "TAB")))
-
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (add-to-list 'ac-sources 'ac-source-filename)
-              (my-ac-source-semantic-enable)))
-
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup))
+    (require 'semantic/ia)
+    (require 'auto-complete-config)
+    (ac-flyspell-workaround)
+    (setq ac-dwim t                    ; be clever on TAB/RET
+          ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
+          ac-quick-help-delay 0.2      ; ... almost immediately
+          ac-auto-start nil              ; do not start automatically
+          ac-auto-show-menu nil          ; do not show menu when auto-starting
+          ac-use-menu-map t)           ; allow C-n/C-p in completion menu
+    (add-hook 'auto-complete-mode-hook
+              (lambda ()
+                ;; (setq yas-trigger-key nil)
+                (ac-set-trigger-key "TAB")))))
+(use-package auto-complete-config
+  :defer t
+  :config
+  (progn
+    ;; Enhance semantic completion with yasnippet
+    (defun ac-semantic-action ()
+      (when (and (boundp 'yas/minor-mode) yas/minor-mode)
+        (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
+               (class (semantic-tag-class tag))
+               (args))
+          (when (eq class 'function)
+            (setq args (semantic-tag-function-arguments tag))
+            (yas/expand-snippet
+             (concat "("
+                     (mapconcat
+                      (lambda (arg)
+                        (let ((arg-type (semantic-format-tag-type arg nil))
+                              (arg-name (semantic-format-tag-name arg nil)))
+                          (concat "${"
+                                  (if (string= arg-name "")
+                                      arg-type
+                                    (concat arg-type " " arg-name))
+                                  "}")))
+                      args
+                      ", ")
+                     ")$0"))))))
+    (add-to-list 'ac-source-semantic
+                 '((action . ac-semantic-action)))
+    (add-to-list 'ac-source-semantic-raw
+                 '((action . ac-semantic-action)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation

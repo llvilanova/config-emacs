@@ -98,13 +98,6 @@
             (local-set-key [f1] 'semantic-ia-show-summary)
             (local-set-key [(meta f1)] 'semantic-ia-show-doc)
             (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
-(after 'auto-complete
-  (add-hook 'auto-complete-mode-hook
-            (lambda ()
-              ;; `auto-complete'
-              (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-              (define-key ac-mode-map (kbd "C-c h") 'ac-last-quick-help)
-              (define-key ac-mode-map (kbd "C-c H") 'ac-last-help))))
 
 ;; `my-writing-mode'
 (add-hook 'text-mode-hook
