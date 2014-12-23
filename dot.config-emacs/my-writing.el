@@ -30,11 +30,16 @@
       ispell-extra-args '("--sug-mode=ultra"))
 
 ;; `flyspell'
-(defvar my-flyspell-mode-maybe-enabled t)
-(defun my-flyspell-mode-maybe (&optional arg)
-  (when my-flyspell-mode-maybe-enabled
-    (flyspell-mode arg)))
-(add-hook 'text-mode-hook 'my-flyspell-mode-maybe)
+(use-package flyspell
+  :diminish flyspell-mode
+  :init
+  (progn
+    (defvar my-flyspell-mode-maybe-enabled t)
+    (defun my-flyspell-mode-maybe (&optional arg)
+      (when my-flyspell-mode-maybe-enabled
+        (flyspell-mode arg)))
+    (add-hook 'text-mode-hook #'my-flyspell-mode-maybe)))
+
 
 ;; `wordnet'
 (autoload 'wordnet-search "wordnet")
