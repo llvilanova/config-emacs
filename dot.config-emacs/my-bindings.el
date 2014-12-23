@@ -98,11 +98,6 @@
             (local-set-key [f1] 'semantic-ia-show-summary)
             (local-set-key [(meta f1)] 'semantic-ia-show-doc)
             (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
-(after 'company
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              ;; `company'
-              (local-set-key [(meta tab)] 'company-complete))))
 (after 'auto-complete
   (add-hook 'auto-complete-mode-hook
             (lambda ()
