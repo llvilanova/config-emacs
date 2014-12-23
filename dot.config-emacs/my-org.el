@@ -13,6 +13,11 @@
 (defun my-org-setup ()
   (my-add-packages
    '(
+     (:name org-ref               :type http
+            :url "https://raw.githubusercontent.com/jkitchin/jmax/master/org-ref.org"
+            :build (list
+                    "emacs --batch --eval \"(progn (require 'ob-tangle) (org-babel-tangle-file \\\"org-ref.org\\\"))\"")
+            :compile "org-ref.el")
      )))
 (my-hook-once 'org-mode-hook #'my-org-setup)
 
