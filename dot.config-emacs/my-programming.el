@@ -152,9 +152,18 @@
       (when my-guess-style
         ad-do-it))))
 
+;; `highlight-symbol': text/symbol highlighting
+(use-package highlight-symbol
+  :bind (("M-<f6>" . highlight-symbol-at-point)
+         ("<f5>" . highlight-symbol-prev)
+         ("<f6>" . highlight-symbol-next)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Lisp
+
+(add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
+;; TODO: electric-pair-mode
 
 (use-package elisp-slime-nav
   :defer t

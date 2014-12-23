@@ -113,7 +113,6 @@ command to be run in a shell.")
                         (my-diminish-after abbrev)
                         (my-diminish-after auto-fill)
                         (my-diminish-after auto-fill)
-                        (my-diminish-after hi-lock)
                         (my-diminish-after yas-minor)))
         (:name dired-details
                :after (progn

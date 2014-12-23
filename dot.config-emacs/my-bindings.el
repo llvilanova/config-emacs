@@ -82,12 +82,6 @@
             ;; ;; Auto-indent new line (plus previous)
             ;; (local-set-key [return] 'reindent-then-newline-and-indent)
 
-            ;; `highlight-symbol'
-            (local-set-key [(meta f5)] 'highlight-symbol-at-point)
-            (local-set-key [(meta f6)] 'highlight-symbol-at-point)
-            (local-set-key [f5] 'highlight-symbol-prev)
-            (local-set-key [f6] 'highlight-symbol-next)
-
             ;; `semantic'
             (local-set-key [(control c) (i)] ; open included file at point
                            'semantic-decoration-include-visit)
