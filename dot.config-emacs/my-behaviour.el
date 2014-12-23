@@ -199,11 +199,16 @@ narrowed."
 (setq-default show-trailing-whitespace t)
 
 ;;;; `whitespace': highlight lines breaking formatting rules
-(after 'whitespace
-  (setq whitespace-style
-        '(face trailing lines-tail space-before-tab indentation empty space-after-tab)
-        whitespace-line-column nil))
-(add-hook 'find-file-hook 'whitespace-mode)
+(use-package whitespace
+  :diminish whitespace-mode
+  :init
+  (add-hook 'fund-file-hook #'whitespace-mode)
+  :config
+  (progn
+    (setq whitespace-style
+          '(face trailing lines-tail space-before-tab indentation empty
+                 space-after-tab)
+          whitespace-line-column nil)))
 
 (defun my-toggle-tabs ()
   "Toggle TAB usage on the visualization of lines breaking formatting rules."
