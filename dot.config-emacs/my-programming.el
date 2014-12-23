@@ -196,8 +196,13 @@
           (lambda ()
             ;; Auto-end comment block when inserting `/' (override: C-q /)
             (add-to-list 'c-cleanup-list 'comment-close-slash)
-            (doc-mode t)               ; manage doxygen documentation
             (c-setup-filladapt)))
+
+;; `doc-mode': manage doxygen documentation
+(use-package doc-mode
+  :defer t
+  :diminish doc-mode
+  :init (add-hook 'c-mode-common-hook #'doc-mode))
 
 
 ;; Documentation editors
