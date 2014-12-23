@@ -70,7 +70,10 @@ directory path."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Remove unused packages
-(el-get-cleanup (append '(el-get) (mapcar 'el-get-source-name el-get-sources)))
+(defun my-el-get-cleanup ()
+  "Remove unused packages."
+  (interactive)
+  (el-get-cleanup (append '(el-get) (mapcar 'el-get-source-name el-get-sources))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; custom-set-*
