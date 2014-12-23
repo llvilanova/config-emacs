@@ -116,10 +116,6 @@
           (lambda ()
             ;; (flyspell-prog-mode)       ; flyspell for comments and strings
 
-            ;; Highlight parentheses around point
-            (after 'highlight-parentheses
-              (highlight-parentheses-mode 1))
-
             ;; (which-function-mode 1)    ; show current tag in modeline
 
             ;; Update the year in copyright message
@@ -132,6 +128,12 @@
 
             (outline-minor-mode t)
             ))
+
+;; `highlight-parentheses': highlight parentheses around point
+(use-package highlight-parentheses
+  :defer t
+  :diminish highlight-parentheses-mode
+  :init (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
 
 ;; `fic-ext-mode': Highlight TODO's and the like
 (use-package fic-ext-mode
