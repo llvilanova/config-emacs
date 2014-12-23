@@ -5,15 +5,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Packages
 
+(my-add-packages
+ '(
+   (:name org-gnome-calendar    :type github
+          :pkgname "llvilanova/org-gnome-calendar")
+   ))
 (defun my-org-setup ()
   (my-add-packages
    '(
-     (:name org-gnome-calendar    :type github
-            :pkgname "llvilanova/org-gnome-calendar"
-            :after (progn
-                     (require 'dbus)
-                     (when (dbus-ignore-errors (dbus-init-bus :session))
-                       (global-org-gnome-calendar-mode))))
      )))
 (my-hook-once 'org-mode-hook #'my-org-setup)
 
@@ -100,7 +99,14 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
     (setq org-agenda-skip-function-global
           (lambda ()
             (or (apply 'my-org-agenda-skip-tag "conference" nil)
-               (apply 'my-org-agenda-skip-tag "gohome" nil))))))
+                (apply 'my-org-agenda-skip-tag "gohome" nil))))))
+
+(use-package org-gnome-calendar
+  :config
+  (progn
+    (require 'dbus)
+    (when (dbus-ignore-errors (dbus-init-bus :session))
+      (global-org-gnome-calendar-mode))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
