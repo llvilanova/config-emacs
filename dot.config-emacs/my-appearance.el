@@ -77,6 +77,7 @@
 ;;; Modeline appearance
 
 (use-package powerline
+  :if (display-graphic-p)
   :init (powerline-default-theme))
 (line-number-mode t)                         ; line numbers
 (column-number-mode t)                       ; column numbers
