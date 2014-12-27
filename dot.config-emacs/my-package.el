@@ -105,15 +105,6 @@ command to be run in a shell.")
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
         cl-lib
-        (:name diminish
-               :after (progn
-                        (defmacro my-diminish-after (mode-name)
-                          `(after ',mode-name
-                             (diminish (intern (format "%s-mode" ',mode-name)))))
-                        (my-diminish-after abbrev)
-                        (my-diminish-after auto-fill)
-                        (my-diminish-after auto-fill)
-                        (my-diminish-after yas-minor)))
         (:name dired-details
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")

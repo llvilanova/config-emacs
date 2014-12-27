@@ -8,6 +8,7 @@
 (my-add-packages
  '(
    (:name cursor-chg            :type emacswiki)
+   diminish
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    ))
@@ -88,6 +89,10 @@
   :init (progn
           (sml-modeline-mode 1)              ; ... but in modeline
           (set-variable 'sml-modeline-len 10)))
+
+(use-package diminish
+  :diminish (abbrev-mode
+             auto-fill-function))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
