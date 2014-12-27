@@ -155,7 +155,6 @@ command to be run in a shell.")
                :pkgname "mhayashi1120/Emacs-wgrep")
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
-        yasnippet
         ))
 
 

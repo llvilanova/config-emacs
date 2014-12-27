@@ -31,6 +31,7 @@
      jinja2-mode
      (:name pylint                :type apt-get)
      xcscope
+     yasnippet
      )))
 (my-hook-once 'prog-mode-hook #'my-programming-setup)
 
@@ -245,6 +246,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code completion
+
+;; `yasnippet'
+(use-package yasnippet
+  :defer t
+  :diminish yas-minor-mode)
+
 
 ;; `company'
 (use-package company
