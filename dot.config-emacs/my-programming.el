@@ -127,8 +127,7 @@
             (add-hook 'before-save-hook 'copyright-update)
 
 
-            (outline-minor-mode t)
-            ))
+            (outline-minor-mode t)))
 
 ;; `highlight-parentheses': highlight parentheses around point
 (use-package highlight-parentheses

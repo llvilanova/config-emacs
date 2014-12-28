@@ -297,6 +297,12 @@ then only one line is copied."
     (add-hook 'outline-minor-mode-hook
               'outshine-hook-function)))
 
+;;;; `outline'
+(use-package outline
+  :defer t
+  :diminish outline-minor-mode)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Minibuffer
 
