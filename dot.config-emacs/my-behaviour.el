@@ -12,6 +12,7 @@
    ace-window
    (:name cssh                  :type elpa)
    (:name dired-details         :type elpa)
+   (:name expand-region         :type elpa)
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -303,6 +304,11 @@ then only one line is copied."
 (use-package outline
   :defer t
   :diminish outline-minor-mode)
+
+;;;; `expand-region'
+(use-package expand-region
+  :defer t
+  :bind ("C-M-<return>" . er/expand-region))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

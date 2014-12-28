@@ -55,9 +55,6 @@
 ;; Eval-and-replace
 (global-set-key [(control c) (control e)] 'my-eval-and-replace)
 
-;; `expand-region'
-(global-set-key [(control shift return)] 'er/expand-region)
-
 ;; `dired'
 (global-set-key [(control x) (control j)] 'dired-jump)
 (define-key dired-mode-map
