@@ -47,9 +47,6 @@
 (global-set-key (vector 'remap 'goto-line) 'my-goto-line-with-feedback)
 ;; Join following line into this one
 (global-set-key [(meta j)] (lambda () (interactive) (join-line -1)))
-;; Quickly insert ';' at the end of the line
-(after 'key-chord
-  (key-chord-define-global ";;" "\C-e;"))
 ;; Make C-a smarter
 (global-set-key [remap move-beginning-of-line] 'my-move-beginning-of-line)
 ;; Eval-and-replace

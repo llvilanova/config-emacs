@@ -18,6 +18,7 @@
    god-mode
    (:name hungry-delete         :type elpa)
    ido-ubiquitous
+   (:name key-chord             :type elpa)
    multiple-cursors
    outshine
    smartparens
@@ -317,6 +318,14 @@ then only one line is copied."
 (use-package fancy-narrow
   :bind (([remap narrow-to-region] . fancy-narrow-to-region)
          ([remap widen] . fancy-widen)))
+
+;;;; `key-chord'
+(use-package key-chord
+  :config
+  (progn
+    (key-chord-mode t)
+    ;; insert ';' at the end of the line
+    (key-chord-define-global ";;" "\C-e;")))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
