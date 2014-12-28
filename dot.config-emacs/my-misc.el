@@ -103,6 +103,15 @@ If called with a prefix, prompts the user for the backend."
   (let ((cb (my-hook-once-generate hook func)))
     (add-hook hook cb append)))
 
+(defun my-add-init-hook (hook func)
+  "Add FUNC in HOOK after Emacs has initialized.
+
+This ensures the hook will be the first element."
+  (lexical-let ((hook hook)
+                (func func))
+    (add-hook 'after-init-hook
+              (lambda () (my-hook-once hook func)))))
+
 (defun my-delay-function (func)
   "Delay execution of FUNC until next user's command."
   (my-hook-once 'pre-command-hook func))

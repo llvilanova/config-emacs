@@ -8,7 +8,7 @@
    '(
      (:name auctex                :type apt-get)
      )))
-(my-hook-once 'LaTeX-mode-hook #'my-writing-latex-setup)
+(my-add-init-hook 'LaTeX-mode-hook #'my-writing-latex-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings

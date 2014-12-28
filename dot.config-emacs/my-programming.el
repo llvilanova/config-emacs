@@ -28,12 +28,13 @@
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
      (:name highlight-parentheses :type elpa)
      (:name highlight-symbol      :type elpa)
+     (:name irony-mode            :type apt-get)
      jinja2-mode
      (:name pylint                :type apt-get)
      xcscope
      yasnippet
      )))
-(my-hook-once 'prog-mode-hook #'my-programming-setup)
+(my-add-init-hook 'prog-mode-hook #'my-programming-setup)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

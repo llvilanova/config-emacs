@@ -8,7 +8,7 @@
    '(
      auto-dictionary
      )))
-(my-hook-once 'text-mode-hook #'my-writing-setup)
+(my-add-init-hook 'text-mode-hook #'my-writing-setup)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

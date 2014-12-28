@@ -19,7 +19,7 @@
                     "emacs --batch --eval \"(progn (require 'ob-tangle) (org-babel-tangle-file \\\"org-ref.org\\\"))\"")
             :compile "org-ref.el")
      )))
-(my-hook-once 'org-mode-hook #'my-org-setup)
+(my-add-init-hook 'org-mode-hook #'my-org-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Location
