@@ -179,6 +179,9 @@
 (global-set-key [(super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen nil)))
 (global-set-key [(control super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen t)))
 
+;; `info-display-manual'
+(global-set-key [(control h) (i)] #'info-display-manual)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Miscellaneous
