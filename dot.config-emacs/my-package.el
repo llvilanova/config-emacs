@@ -99,7 +99,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name gdb-shell             :type elpa)
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
         (:name hungry-delete         :type elpa)
