@@ -13,6 +13,7 @@
    (:name cssh                  :type elpa)
    (:name dired-details         :type elpa)
    (:name expand-region         :type elpa)
+   (:name fancy-narrow          :type elpa)
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -309,6 +310,11 @@ then only one line is copied."
 (use-package expand-region
   :defer t
   :bind ("C-M-<return>" . er/expand-region))
+
+;;;; `fancy-narrow'
+(use-package fancy-narrow
+  :bind (([remap narrow-to-region] . fancy-narrow-to-region)
+         ([remap widen] . fancy-widen)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

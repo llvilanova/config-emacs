@@ -102,7 +102,6 @@ command to be run in a shell.")
         (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
-        (:name fancy-narrow          :type elpa)
         (:name gdb-shell             :type elpa)
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
