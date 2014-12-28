@@ -99,7 +99,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name lua-mode              :type apt-get)
         (:name lv                    :type github
                :pkgname "llvilanova/lv")
         ;; (:name multi-term            :type elpa)
