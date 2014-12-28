@@ -98,10 +98,10 @@ If called with a prefix, prompts the user for the backend."
                           (,func))))
     sym))
 
-(defun my-hook-once (hook func)
+(defun my-hook-once (hook func &optional append)
   "Add FUNC in HOOK to execute only once."
   (let ((cb (my-hook-once-generate hook func)))
-    (add-hook hook cb)))
+    (add-hook hook cb append)))
 
 (defun my-delay-function (func)
   "Delay execution of FUNC until next user's command."

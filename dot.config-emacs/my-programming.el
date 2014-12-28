@@ -438,7 +438,7 @@ If ARG is not nil, force a call to `compile'."
 
 (use-package flycheck
   :defer t
-  :init (global-flycheck-mode t))
+  :init (my-hook-once 'prog-mode-hook #'global-flycheck-mode t))
 
 ;; Linux-specific includes & defines
 (defun my-flycheck-linux ()
