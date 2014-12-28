@@ -97,9 +97,6 @@ command to be run in a shell.")
 (my-add-packages
  '(
    cedet
-        (:name disaster              :type elpa
-               :after (after 'cc-mode
-                        (require 'disaster)))
         (:name doc-present           :type github
                :pkgname "dengste/doc-present")
         (:name dpkg-dev-el           :type apt-get)

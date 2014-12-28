@@ -10,6 +10,7 @@
    '(
      ;; (:name auto-complete         :type elpa)
      company-mode
+     (:name disaster              :type elpa)
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
@@ -193,6 +194,10 @@
 (after 'smartparens-mode
   (sp-local-pair 'c-mode "{" nil :actions nil)
   (sp-local-pair 'c++-mode "{" nil :actions nil))
+
+(use-package disaster
+  :defer t
+  :init (add-hook 'c-mode-common-hook (lambda () (require 'disaster))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
