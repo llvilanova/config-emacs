@@ -97,8 +97,6 @@ command to be run in a shell.")
 (my-add-packages
  '(
    cedet
-        (:name doc-present           :type github
-               :pkgname "dengste/doc-present")
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
         (:name fuzzy
