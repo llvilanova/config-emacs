@@ -7,6 +7,7 @@
   (my-add-packages
    '(
      (:name auctex                :type apt-get)
+     (:name bibtex-utils          :type elpa)
      )))
 (my-add-init-hook 'LaTeX-mode-hook #'my-writing-latex-setup)
 

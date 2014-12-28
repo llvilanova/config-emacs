@@ -96,7 +96,6 @@ command to be run in a shell.")
 ;;; Initial package list
 (my-add-packages
       '(
-        (:name bibtex-utils          :type emacswiki)
         ;; (:name cssh                  :type elpa)
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
