@@ -99,9 +99,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name fuzzy
-               :features fuzzy
-               :after (turn-on-fuzzy-isearch))
         (:name gdb-shell             :type elpa)
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))

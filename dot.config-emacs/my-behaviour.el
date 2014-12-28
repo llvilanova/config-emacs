@@ -14,6 +14,7 @@
    (:name dired-details         :type elpa)
    (:name expand-region         :type elpa)
    (:name fancy-narrow          :type elpa)
+   (:name fuzzy                 :type elpa)
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -494,5 +495,10 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
   :defer t
   :commands dired-details-install
   :init (my-hook-once 'dired-mode-hook #'dired-details-install))
+
+;; `fuzzy'
+(use-package fuzzy
+  :init (turn-on-fuzzy-isearch))
+
 
 (provide 'my-behaviour)
