@@ -6,7 +6,7 @@
 (defun my-writing-setup ()
   (my-add-packages
    '(
-     auto-dictionary
+     (:name auto-dictionary       :type elpa)
      )))
 (my-add-init-hook 'text-mode-hook #'my-writing-setup)
 

@@ -104,46 +104,42 @@ command to be run in a shell.")
         ;; (:name cssh                  :type elpa)
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
-        cl-lib
-        (:name dired-details
+        (:name dired-details         ;:type elpa
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
                         (dired-details-install)))
-        (:name disaster              :type github
-               :pkgname "jart/disaster"
+        (:name disaster              :type elpa
                :after (after 'cc-mode
                         (require 'disaster)))
         (:name doc-present           :type github
                :pkgname "dengste/doc-present")
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        expand-region
-        flx
         (:name fuzzy
                :features fuzzy
                :after (turn-on-fuzzy-isearch))
+        (:name expand-region         :type elpa)
+        (:name fancy-narrow          :type elpa)
         (:name gdb-shell             :type elpa)
-        hungry-delete
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
+        (:name hungry-delete         :type elpa)
         (:name lua-mode              :type apt-get)
         (:name lv                    :type github
                :pkgname "llvilanova/lv")
-        ;; multi-term
-        (:name popwin
-               :features popwin
+        ;; (:name multi-term            :type elpa)
+        (:name popwin                :type elpa
                :after (setq display-buffer-function 'popwin:display-buffer))
         (:name pos-tip               :type elpa)
-        powerline
+        (:name powerline             :type elpa)
         ;; (:name predictive
         ;;        :after (progn
         ;;                 (autoload 'predictive-mode "predictive" nil t)
         ;;                 (autoload 'predictive-create-dict "predictive" nil t)))
         (:name sml-modeline          :type elpa)
-        switch-window
+        (:name switch-window         :type elpa)
         ;; (:name tempo-snippets        :type elpa)
-        (:name wgrep                 :type github
-               :pkgname "mhayashi1120/Emacs-wgrep")
+        (:name wgrep                 :type elpa)
         (:name wordnet               :type http
                :url "http://xwl.appspot.com/ref/wordnet.el")
         ))

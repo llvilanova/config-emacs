@@ -8,15 +8,15 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     ;; auto-complete
+     ;; (:name auto-complete         :type elpa)
      company-mode
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
-     (:name fic-ext-mode
+     (:name fic-ext-mode          :type elpa
             :lazy t
             :after (add-to-list 'fic-highlighted-words "XXX"))
-     flycheck
+     (:name flycheck              :type elpa)
      (:name flycheck-color-mode-line :type github
             :pkgname "flycheck/flycheck-color-mode-line"
             :after (after 'flycheck
@@ -29,10 +29,10 @@
      (:name highlight-parentheses :type elpa)
      (:name highlight-symbol      :type elpa)
      (:name irony-mode            :type apt-get)
-     jinja2-mode
+     (:name jinja2-mode           :type elpa)
      (:name pylint                :type apt-get)
-     xcscope
-     yasnippet
+     (:name xcscope               :type elpa)
+     (:name yasnippet             :type elpa)
      )))
 (my-add-init-hook 'prog-mode-hook #'my-programming-setup)
 
