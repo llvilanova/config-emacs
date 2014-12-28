@@ -95,9 +95,8 @@ command to be run in a shell.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Initial package list
 (my-add-packages
-      '(
-        (:name cedet
-               :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
+ '(
+   cedet
         (:name dired-details         ;:type elpa
                :after (progn
                         (setq-default dired-details-hidden-string "--- ")
