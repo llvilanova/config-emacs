@@ -101,7 +101,6 @@ command to be run in a shell.")
         (:name emacs-goodies-el      :type apt-get)
         (:name key-chord             :type emacswiki
                :after (key-chord-mode t))
-        (:name hungry-delete         :type elpa)
         (:name lua-mode              :type apt-get)
         (:name lv                    :type github
                :pkgname "llvilanova/lv")

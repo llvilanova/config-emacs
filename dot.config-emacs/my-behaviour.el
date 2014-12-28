@@ -16,6 +16,7 @@
    (:name fancy-narrow          :type elpa)
    (:name fuzzy                 :type elpa)
    god-mode
+   (:name hungry-delete         :type elpa)
    ido-ubiquitous
    multiple-cursors
    outshine
