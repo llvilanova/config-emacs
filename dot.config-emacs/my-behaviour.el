@@ -10,6 +10,7 @@
    ace-jump-mode
    ace-link
    ace-window
+   (:name cssh                  :type elpa)
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -470,5 +471,9 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
 ;; `god-mode': Control- and Meta-less commands
 (use-package god-mode
   :bind (("M-ESC" . god-local-mode)))
+
+;; `cssh'
+(use-package cssh
+  :config (cssh-define-global-bindings))
 
 (provide 'my-behaviour)

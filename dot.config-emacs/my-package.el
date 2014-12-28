@@ -96,7 +96,6 @@ command to be run in a shell.")
 ;;; Initial package list
 (my-add-packages
       '(
-        ;; (:name cssh                  :type elpa)
         (:name cedet
                :after (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib")))
         (:name dired-details         ;:type elpa
