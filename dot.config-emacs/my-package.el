@@ -97,10 +97,6 @@ command to be run in a shell.")
 (my-add-packages
  '(
    cedet
-        (:name dired-details         ;:type elpa
-               :after (progn
-                        (setq-default dired-details-hidden-string "--- ")
-                        (dired-details-install)))
         (:name disaster              :type elpa
                :after (after 'cc-mode
                         (require 'disaster)))

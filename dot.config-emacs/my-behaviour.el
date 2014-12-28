@@ -11,6 +11,7 @@
    ace-link
    ace-window
    (:name cssh                  :type elpa)
+   (:name dired-details         :type elpa)
    god-mode
    ido-ubiquitous
    multiple-cursors
@@ -475,5 +476,11 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
 ;; `cssh'
 (use-package cssh
   :config (cssh-define-global-bindings))
+
+;; `dired'
+(use-package dired-details
+  :defer t
+  :commands dired-details-install
+  :init (my-hook-once 'dired-mode-hook #'dired-details-install))
 
 (provide 'my-behaviour)
