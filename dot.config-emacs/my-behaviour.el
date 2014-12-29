@@ -467,7 +467,7 @@ then only one line is copied."
 
 ;;;; `popwin'
 (use-package popwin
-  :bind ("C-z" . popwin:keymap))
+  :init (global-set-key (kbd "C-z") popwin:keymap))
 (defun my-register-helper-buffer (pattern &optional type &rest other)
   "Register given buffer PATTERN as being for a specific TYPE of usage.
 Valid types are:
