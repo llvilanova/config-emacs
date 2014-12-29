@@ -14,6 +14,7 @@
    (:name dired-details         :type elpa)
    (:name expand-region         :type elpa)
    (:name fancy-narrow          :type elpa)
+   flx
    (:name fuzzy                 :type elpa)
    god-mode
    (:name hungry-delete         :type elpa)
