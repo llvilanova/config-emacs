@@ -90,6 +90,7 @@ command to be run in a shell.")
 (setq el-get-sources '(use-package))
 (el-get 'sync '(el-get use-package))
 (require 'use-package)
+;; (setq use-package-verbose t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
