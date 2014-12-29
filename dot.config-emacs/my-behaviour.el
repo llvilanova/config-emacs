@@ -415,11 +415,12 @@ then only one line is copied."
 (setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
 
 ;;;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
-(after 'timestamp
+(use-package time-stamp
+  :init (add-hook 'write-file-hooks 'time-stamp) ; update when saving
+  :config
   (setq time-stamp-active t             ; do enable time-stamps
         time-stamp-line-limit 10        ; check first 10 buffer lines
         time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)")) ; date format
-(add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;;;; `desktop': maintain per-directory session information
 (desktop-save-mode 1)
@@ -485,13 +486,12 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
                       ('info '(:position bottom :stick t))
                       ('long-info '(:position right :width 90 :stick t))
                       (t (error (format "Unknown type: %s" type))))))))
-    (after 'popwin-mode
-      (setq popwin:special-display-config
-            (delq (assoc pattern  popwin:special-display-config)
-                  popwin:special-display-config))
-      (if keywords
-          (push (cons pattern keywords) popwin:special-display-config)
-        (push pattern popwin:special-display-config)))))
+    (setq popwin:special-display-config
+          (delq (assoc pattern  popwin:special-display-config)
+                popwin:special-display-config))
+    (if keywords
+        (push (cons pattern keywords) popwin:special-display-config)
+      (push pattern popwin:special-display-config))))
 
 ;; `god-mode': Control- and Meta-less commands
 (use-package god-mode
