@@ -8,6 +8,8 @@
    '(
      (:name auto-dictionary       :type elpa)
      ;; predictive
+     (:name wordnet               :type http
+            :url "http://xwl.appspot.com/ref/wordnet.el")
      )))
 (my-add-init-hook 'text-mode-hook #'my-writing-setup)
 

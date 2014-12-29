@@ -100,8 +100,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name wordnet               :type http
-               :url "http://xwl.appspot.com/ref/wordnet.el")
         ))
 
 
