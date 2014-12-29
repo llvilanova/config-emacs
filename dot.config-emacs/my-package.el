@@ -98,7 +98,6 @@ command to be run in a shell.")
 (my-add-packages
  '(
    cedet
-        (:name emacs-goodies-el      :type apt-get)
         ))
 
 
