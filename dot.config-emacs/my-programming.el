@@ -193,10 +193,15 @@
             (add-to-list 'c-cleanup-list 'defun-close-semi)
             (add-to-list 'c-cleanup-list 'list-close-comma)
             (cpp-highlight-buffer t)))
+
 ;; Otherwise overrides `c-toggle-auto-newline'
-(after 'smartparens-mode
-  (sp-local-pair 'c-mode "{" nil :actions nil)
-  (sp-local-pair 'c++-mode "{" nil :actions nil))
+(use-package smartparens
+  :defer t
+  :init
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (sp-local-pair 'c-mode "{" nil :actions nil)
+              (sp-local-pair 'c++-mode "{" nil :actions nil))))
 
 (use-package disaster
   :defer t
