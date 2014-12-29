@@ -100,8 +100,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name popwin                :type elpa
-               :after (setq display-buffer-function 'popwin:display-buffer))
         (:name pos-tip               :type elpa)
         (:name powerline             :type elpa)
         ;; (:name predictive
