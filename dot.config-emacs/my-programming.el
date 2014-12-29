@@ -9,7 +9,9 @@
   (my-add-packages
    '(
      ;; (:name auto-complete         :type elpa)
+     ;; (:name ac-irony              :type elpa)
      company-mode
+     (:name company-irony         :type elpa)
      (:name disaster              :type elpa)
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
@@ -18,6 +20,7 @@
             :lazy t
             :after (add-to-list 'fic-highlighted-words "XXX"))
      (:name flycheck              :type elpa)
+     (:name flycheck-irony        :type elpa)
      (:name flycheck-color-mode-line :type github
             :pkgname "flycheck/flycheck-color-mode-line"
             :after (after 'flycheck
