@@ -47,7 +47,9 @@
                     (sp-local-pair 'latex-mode "\"" nil :actions nil))))
 
 ;; Do not ask when running the viewer
-(after 'tex
+(use-package tex
+  :defer t
+  :config
   (setq TeX-command-list
         (mapcar
          (lambda (elem)
