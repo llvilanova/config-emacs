@@ -123,11 +123,6 @@
 (global-set-key [(super o) (b)] 'org-iswitchb)
 (global-set-key [(super o) (c)] 'my-org-capture)
 (global-set-key [(super o) (C)] 'my-org-capture-other-frame)
-(when (require 'org-secretary nil t)
-  (global-set-key [(super o) (w)] 'org-sec-set-with)
-  (global-set-key [(super o) (shift w)] 'org-sec-set-where)
-  (global-set-key [(super o) (d)] 'org-sec-set-dowith)
-  (global-set-key [(super o) (shift d)] 'org-sec-set-doat))
 
 ;; `magit' in fullscreen
 (setq my-magit-status-windows nil)

@@ -291,8 +291,13 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 ;; Secretary
 (use-package org-secretary
   :defer t
-  :init
-  (after 'org-agenda
+  :bind (("C-M-S-o w" . org-sec-set-with)
+         ("C-M-S-o S-w" . org-sec-set-where)
+         ("C-M-S-o d" . org-sec-set-dowith)
+         ("C-M-S-o S-d" . org-sec-set-doat))
+  :config
+  (progn
+    (require 'org-agenda)
     (setq org-sec-me "Lluis"
           org-agenda-custom-commands
           (append
@@ -312,6 +317,9 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                (org-sec-stuck-with-view "STUCK with")))
              ("J" "Interactive TODO dowith and TASK with"
               ((org-sec-who-view "TODO dowith"))))))))
+(use-package org-agenda
+ :defer t
+ :config (require 'org-secretary))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
