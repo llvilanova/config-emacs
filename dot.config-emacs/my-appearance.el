@@ -12,6 +12,7 @@
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    (:name popwin                :type elpa)
+   (:name powerline             :type elpa)
    ))
 
 
