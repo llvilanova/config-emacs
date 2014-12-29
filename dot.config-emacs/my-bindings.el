@@ -105,11 +105,6 @@
             (local-set-key [(meta n)] 'flycheck-next-error)
             (local-set-key [(meta p)] 'flycheck-previous-error)))
 
-;; `framepop'
-(after 'framepop
-  (define-key framepop-map [f7] 'framepop-toggle-frame)
-  (define-key framepop-map "f" 'my-framepop-toggle-with-focus))
-
 ;; `gnus'
 (global-set-key [f12] 'my-gnus-start-or-hide)
 (add-hook 'gnus-startup-hook
