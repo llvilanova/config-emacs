@@ -31,6 +31,7 @@
    (:name lv                    :type github
           :pkgname "llvilanova/lv")
    (:name multi-term            :type elpa)
+   (:name wgrep                 :type elpa)
    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
