@@ -95,28 +95,6 @@ If nil, WINDOW is `selected-window'."
         (call-interactively 'goto-line))
     (linum-mode -1)))
 
-(defun my-dwim-vc (path &optional backend)
-  "Start version control interface according to the backend of current buffer.
-
-If called with a prefix, prompts the user for the backend."
-  (interactive
-   (list
-    (or (buffer-file-name)
-       (read-directory-name "Select directory: "))
-    (if current-prefix-arg
-        (intern
-         (completing-read
-          "Use VC backend: "
-          (mapcar (lambda (b) (list (symbol-name b)))
-                  vc-handled-backends)
-          nil t nil nil)))))
-  (require 'vc)
-  (setq backend (or backend (vc-responsible-backend path)))
-  (let ((root (vc-call-backend backend 'root path)))
-    (case backend
-      ('Git (magit-status root))
-      (t    (vc-dir root backend)))))
-
 ;; TODO: remove once Gnus is updated
 (defun gnus-funcall-no-warning (function &rest args)
   (when (fboundp function)
