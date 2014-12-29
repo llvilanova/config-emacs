@@ -126,9 +126,12 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
       (org-todo 'done)
       (save-buffer nil))))
 
-(after 'org-notify
-  (org-notify-start)
-  (after 'org-notify-sound
+(use-package org-notify
+  :defer t
+  :commands org-notify-start
+  :init (org-notify-start)
+  :config
+  (progn
     (org-notify-add 'default
                     '(:time "1h" :actions (-notify/window -sound)
                             :period "2m" :duration 60))
