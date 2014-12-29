@@ -98,7 +98,7 @@ command to be run in a shell.")
 (my-add-packages
  '(
    cedet
-        ))
+   ))
 
 
 (provide 'my-package)
