@@ -16,9 +16,7 @@
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
-     (:name fic-ext-mode          :type elpa
-            :lazy t
-            :after (add-to-list 'fic-highlighted-words "XXX"))
+     (:name fic-ext-mode          :type elpa)
      (:name flycheck              :type elpa)
      (:name flycheck-irony        :type elpa)
      (:name flycheck-color-mode-line :type github
@@ -144,8 +142,10 @@
 
 ;; `fic-ext-mode': Highlight TODO's and the like
 (use-package fic-ext-mode
+  :defer t
   :diminish fic-ext-mode
-  :config (add-hook 'prog-mode-hook 'fic-ext-mode))
+  :init (add-hook 'prog-mode-hook 'fic-ext-mode)
+  :config (add-to-list 'fic-highlighted-words "XXX"))
 
 ;; `guess-style': guess indentation style
 (use-package guess-style
