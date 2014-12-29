@@ -100,7 +100,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name sml-modeline          :type elpa)
         (:name switch-window         :type elpa)
         ;; (:name tempo-snippets        :type elpa)
         (:name wgrep                 :type elpa)

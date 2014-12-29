@@ -13,6 +13,7 @@
           :depends cursor-chg)
    (:name popwin                :type elpa)
    (:name powerline             :type elpa)
+   (:name sml-modeline          :type elpa)
    ))
 
 
