@@ -28,6 +28,7 @@
 
 (my-add-packages
  '(
+   (:name dpkg-dev-el           :type apt-get)
    (:name lv                    :type github
           :pkgname "llvilanova/lv")
    (:name multi-term            :type elpa)
