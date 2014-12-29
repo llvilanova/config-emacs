@@ -149,9 +149,12 @@
 
 ;; `guess-style': guess indentation style
 (use-package guess-style
+  :defer t
   :init
-  (defcustom my-guess-style t
-    "Whether opening a new file should try to guess the indentation stule.")
+  (progn
+    (add-hook 'prog-mode-hook #'guess-style-guess-all)
+    (defcustom my-guess-style t
+      "Whether opening a new file should try to guess the indentation stule."))
 
   :config
   (progn
