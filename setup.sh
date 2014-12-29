@@ -48,25 +48,11 @@ setup_file_rel()
     setup_file $sourcerel $2
 }
 
-setup_files()
-{
-    local sourcedir targetdir sourcefile targetfile
-
-    sourcedir=$(readlink -f $1)
-    targetdir=$(readlink -f $2)
-    for i in $sourcedir/*; do
-        sourcefile=$(readlink -f $i)
-        targetfile=$targetdir/$(basename $sourcefile)
-        setup_file_rel "$sourcefile" "$targetfile"
-    done
-}
-
-setup_file .config/emacs ~/.emacs.d
+setup_file $HOME/.config/emacs $HOME/.emacs.d
 mkdir -p $HOME/.config
 setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
 mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
-setup_files $BASE/bin ~/bin
 
 ctrl_c() {
     exit 1
@@ -92,4 +78,13 @@ done
 
 rm -f $TMPFILE
 
-exit $res
+if [ $RES -eq 0 ]; then
+    echo
+    echo
+    echo
+    echo "You should add '$BASE/bin' to your PATH"
+    echo
+    echo
+fi
+
+exit $RES
