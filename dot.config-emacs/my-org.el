@@ -158,8 +158,6 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   :defer t
   :config (require 'ox-bibtex))
 
-(after 'ox
-  (defvar my-org-latex-filter-fancyvrb-options "")
 (use-package ox-latex
   :defer t
   :config
@@ -207,26 +205,31 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                   elem))
                org-latex-pdf-process))))
 
+(use-package ox
+  :defer t
+  :config
+  (progn
+    (defvar my-org-latex-filter-fancyvrb-options "")
 
-  ;; (defadvice org-export (around my-disable-flyspell activate)
-  ;;   "Disable flyspell while generating intermediate files for exporting."
-  ;;   (let ((my-flyspell-mode-maybe-enabled nil))
-  ;;     ad-do-it)))
+    ;; (defadvice org-export (around my-disable-flyspell activate)
+    ;;   "Disable flyspell while generating intermediate files for exporting."
+    ;;   (let ((my-flyspell-mode-maybe-enabled nil))
+    ;;     ad-do-it)))
 
-  (defun my-org-latex-filter-fancyvrb (text backend info)
-    "Convert begin/end{verbatim} to begin/end{Verbatim}.
+    (defun my-org-latex-filter-fancyvrb (text backend info)
+      "Convert begin/end{verbatim} to begin/end{Verbatim}.
     Allows use of the fancyvrb latex package."
-    (when (org-export-derived-backend-p backend 'latex)
-      (replace-regexp-in-string
-       "\\\\begin{verbatim}"
-       (format "\\\\begin{Verbatim}%s" my-org-latex-filter-fancyvrb-options)
-       (replace-regexp-in-string
-        "\\\\end{verbatim}"
-        "\\\\end{Verbatim}"
-        text))))
+      (when (org-export-derived-backend-p backend 'latex)
+        (replace-regexp-in-string
+         "\\\\begin{verbatim}"
+         (format "\\\\begin{Verbatim}%s" my-org-latex-filter-fancyvrb-options)
+         (replace-regexp-in-string
+          "\\\\end{verbatim}"
+          "\\\\end{Verbatim}"
+          text))))
 
-  (add-to-list 'org-export-filter-final-output-functions
-               'my-org-latex-filter-fancyvrb))
+    (add-to-list 'org-export-filter-final-output-functions
+                 'my-org-latex-filter-fancyvrb)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
