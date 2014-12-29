@@ -100,7 +100,6 @@ command to be run in a shell.")
    cedet
         (:name dpkg-dev-el           :type apt-get)
         (:name emacs-goodies-el      :type apt-get)
-        (:name pos-tip               :type elpa)
         (:name powerline             :type elpa)
         ;; (:name predictive
         ;;        :after (progn
