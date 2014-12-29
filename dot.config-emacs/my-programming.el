@@ -20,12 +20,7 @@
      (:name flycheck              :type elpa)
      (:name flycheck-irony        :type elpa)
      (:name flycheck-color-mode-line :type github
-            :pkgname "flycheck/flycheck-color-mode-line"
-            :after (after 'flycheck
-                     (require 'flycheck-color-mode-line)
-                     (add-hook 'flycheck-mode-hook
-                               'flycheck-color-mode-line-mode))
-            )
+            :pkgname "flycheck/flycheck-color-mode-line")
      (:name guess-style           :type http
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
      (:name highlight-parentheses :type elpa)
@@ -462,6 +457,10 @@ If ARG is not nil, force a call to `compile'."
   (setq flycheck-clang-definitions
    '("-D__KERNEL__"))))
 (add-hook 'find-file-hook 'my-flycheck-linux t)
+
+(use-package flycheck-color-mode-line
+  :defer t
+  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
