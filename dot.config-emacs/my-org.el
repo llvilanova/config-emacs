@@ -158,52 +158,55 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   :defer t
   :config (require 'ox-bibtex))
 
-(after 'ox-latex
-  (setq org-latex-listings 'minted)
-  (add-to-list 'org-latex-packages-alist '("" "minted"))
-
-  ;; ;; Create bibliography file
-  ;; (add-hook 'org-export-latex-after-save-hook
-  ;;           (lambda ()
-  ;;             (with-current-buffer cbuf
-  ;;               (org-bibtex (concat (file-name-sans-extension
-  ;;                                    (buffer-file-name)) ".bib")))))
-
-  ;; moderncv
-  (add-to-list 'org-latex-classes
-               '("moderncv"
-                 "\\documentclass[1pt]{moderncv}"
-                 ("\\section{%s}" . "\\section*{%s}")
-                 ))
-  ;; moderncv conflicts with marvosym
-  (setq org-latex-default-packages-alist
-        (cl-remove-if
-         (lambda (elem) (and (listp elem)
-                        (or (string= "marvosym" (cadr elem))
-                            (string= "hyperref" (cadr elem)))))
-         org-latex-default-packages-alist))
-  (setq org-latex-hyperref-template "")
-
-  ;; Remove temporary files when done
-  (setq org-latex-logfiles-extensions
-        (append '("bbl" "blg" "bib")    ; bibliography
-                '("loe" "lof")          ; other
-                '("synctex.gz" "tex")   ; LaTeX
-                org-latex-logfiles-extensions))
-
-  ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
-  ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
-  (setq org-latex-pdf-process
-        (map 'list
-             (lambda (elem)
-               (replace-regexp-in-string
-                " -interaction "
-                " -shell-escape -interaction "
-                elem))
-             org-latex-pdf-process)))
-
 (after 'ox
   (defvar my-org-latex-filter-fancyvrb-options "")
+(use-package ox-latex
+  :defer t
+  :config
+  (progn
+    (setq org-latex-listings 'minted)
+    (add-to-list 'org-latex-packages-alist '("" "minted"))
+
+    ;; ;; Create bibliography file
+    ;; (add-hook 'org-export-latex-after-save-hook
+    ;;           (lambda ()
+    ;;             (with-current-buffer cbuf
+    ;;               (org-bibtex (concat (file-name-sans-extension
+    ;;                                    (buffer-file-name)) ".bib")))))
+
+    ;; moderncv
+    (add-to-list 'org-latex-classes
+                 '("moderncv"
+                   "\\documentclass[1pt]{moderncv}"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ))
+    ;; moderncv conflicts with marvosym
+    (setq org-latex-default-packages-alist
+          (cl-remove-if
+           (lambda (elem) (and (listp elem)
+                          (or (string= "marvosym" (cadr elem))
+                              (string= "hyperref" (cadr elem)))))
+           org-latex-default-packages-alist))
+    (setq org-latex-hyperref-template "")
+
+    ;; Remove temporary files when done
+    (setq org-latex-logfiles-extensions
+          (append '("bbl" "blg" "bib")    ; bibliography
+                  '("loe" "lof")          ; other
+                  '("synctex.gz" "tex")   ; LaTeX
+                  org-latex-logfiles-extensions))
+
+    ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
+    ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
+    (setq org-latex-pdf-process
+          (map 'list
+               (lambda (elem)
+                 (replace-regexp-in-string
+                  " -interaction "
+                  " -shell-escape -interaction "
+                  elem))
+               org-latex-pdf-process))))
+
 
   ;; (defadvice org-export (around my-disable-flyspell activate)
   ;;   "Disable flyspell while generating intermediate files for exporting."
