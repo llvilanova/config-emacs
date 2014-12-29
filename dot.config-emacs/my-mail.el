@@ -10,15 +10,18 @@
 ;;       read-mail-command 'wl)
 
 ;; Sending
-(setq message-send-mail-function 'message-send-mail-with-sendmail
-      sendmail-program "/usr/bin/msmtp"
-      message-sendmail-extra-arguments '("--read-recipients")
+(setq sendmail-program "/usr/bin/msmtp"
       send-mail-function 'message-send-mail-with-sendmail)
-(after 'message
-  (add-to-list 'message-send-hook
-               (lambda ()
-                 (setq message-sendmail-envelope-from
-                       (mail-strip-quoted-names (mail-fetch-field "From"))))))
+(use-package message
+  :defer t
+  :config
+  (progn
+    (setq message-send-mail-function 'message-send-mail-with-sendmail
+          message-sendmail-extra-arguments '("--read-recipients"))
+    (add-to-list 'message-send-hook
+                 (lambda ()
+                   (setq message-sendmail-envelope-from
+                         (mail-strip-quoted-names (mail-fetch-field "From")))))))
 
 ;; Gnus
 (setq gnus-init-file (path my-config-dir "my-gnus.el"))
