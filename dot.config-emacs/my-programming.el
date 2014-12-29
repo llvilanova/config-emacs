@@ -32,6 +32,7 @@
      (:name irony-mode            :type apt-get)
      (:name jinja2-mode           :type elpa)
      (:name lua-mode              :type apt-get)
+     (:name macrostep             :type elpa)
      (:name pylint                :type apt-get)
      (:name xcscope               :type elpa)
      (:name yasnippet             :type elpa)
