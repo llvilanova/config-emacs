@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014 Lluís Vilanova
+;; Copyright (C) 2014-2015 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -30,6 +30,8 @@
  '(
    (:name dpkg-dev-el           :type apt-get)
    (:name emacs-goodies-el      :type apt-get)
+   (:name info-buffer           :type github
+          :pkgname "llvilanova/info-buffer")
    (:name lv                    :type github
           :pkgname "llvilanova/lv")
    (:name multi-term            :type elpa)
@@ -322,6 +324,10 @@ Position the cursor at it's beginning, according to the current mode."
       (when to-current-dir
         (eshell/cd dir)
         (eshell-send-input)))))
+
+;; `info'
+(use-package info-buffer
+  :bind (("C-h i" . info-display-manual-in-buffer)))
 
 (provide 'my-misc)
 ;;; my-misc.el ends here
