@@ -133,6 +133,7 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   :init (org-notify-start)
   :config
   (progn
+    (require 'org-agenda)
     (org-notify-add 'default
                     '(:time "1h" :actions (-notify/window -sound)
                             :period "2m" :duration 60))
