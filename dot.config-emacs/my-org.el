@@ -327,93 +327,103 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Capture
-(setq
- org-capture-templates
- '(
-   ;; work templates
-   ("a" "Appointment"                     entry (file+headline "Work.org"
-                                                               "Tasks")
-    "* %^{Appointment}T %?\n%a\n  %i")
-   ("s" "Schedule"                        entry (file+headline "Work.org"
-                                                               "Tasks")
-    "* %?\nSCHEDULED: %^{Schedule}T\n%a\n  %i")
-   ("d" "Deadline"                        entry (file+headline "Work.org"
-                                                               "Tasks")
-    "* TODO %?\nDEADLINE: %^{Deadline}t")
-   ("t" "Todo"                            entry (file+headline "Work.org"
-                                                               "Tasks")
-    "* TODO %?\n%a\n  %i")
 
-   ("i" "Idea"                            entry (file+headline "Work.org"
-                                                               "Brainstorming")
-    "* %^{Title}\n%a\n  %i")
-   ("c" "Conference"                      entry (file+headline "Events.org"
-                                                               "Conferences")
-    ;; (function 'org-capture-cfp-reuse "Events.org" "Conferences" 'org-capture-cfp-mail-conference)
-    "* [[%(org-capture-cfp-url)][%(org-capture-cfp-mail-conference)]]    :%^{Acronym}:%?
+(use-package org-capture
+  :defer t
+  :bind (("C-M-S-o c" . my-org-capture)
+         ("C-M-S-o C" . my-org-capture-other-frame))
+  :init
+  (progn
+    (defun my-org-capture ()
+      (interactive)
+      (org-store-link nil)
+      (org-capture))
+
+    (defun my-org-capture-other-frame ()
+      "Create a new frame and run org-capture."
+      (interactive)
+      (make-frame '((name . "Org-Capture")
+                    (width  . 120)
+                    (height .  20)
+                    (menu-bar-lines . 0)
+                    (tool-bar-lines . 0)
+                    (auto-lower . nil)
+                    (auto-raise . t)))
+      (select-frame-by-name "Org-Capture")
+      (if (condition-case nil
+              (progn (my-org-capture) t)
+            (error nil))
+          (delete-other-windows)
+        (my-org-capture-other-frame--cleanup)))
+
+    (defun my-org-capture-other-frame--cleanup ()
+      "Close the Org-Capture frame."
+      (if (equal "Org-Capture" (frame-parameter nil 'name))
+          (delete-frame))))
+
+  :config
+  (progn
+    (add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame--cleanup)
+
+    (setq
+     org-capture-templates
+     '(
+       ;; work templates
+       ("a" "Appointment"                     entry (file+headline "Work.org"
+                                                                   "Tasks")
+        "* %^{Appointment}T %?\n%a\n  %i")
+       ("s" "Schedule"                        entry (file+headline "Work.org"
+                                                                   "Tasks")
+        "* %?\nSCHEDULED: %^{Schedule}T\n%a\n  %i")
+       ("d" "Deadline"                        entry (file+headline "Work.org"
+                                                                   "Tasks")
+        "* TODO %?\nDEADLINE: %^{Deadline}t")
+       ("t" "Todo"                            entry (file+headline "Work.org"
+                                                                   "Tasks")
+        "* TODO %?\n%a\n  %i")
+
+       ("i" "Idea"                            entry (file+headline "Work.org"
+                                                                   "Brainstorming")
+        "* %^{Title}\n%a\n  %i")
+       ("c" "Conference"                      entry (file+headline "Events.org"
+                                                                   "Conferences")
+        ;; (function 'org-capture-cfp-reuse "Events.org" "Conferences" 'org-capture-cfp-mail-conference)
+        "* [[%(org-capture-cfp-url)][%(org-capture-cfp-mail-conference)]]    :%^{Acronym}:%?
 ** Abstract
 DEADLINE: <%(org-capture-cfp-date \"Abstract submission: \" \"abstract\" \"submission\") ++1y -1w>
 ** Paper
 DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6m>"
-    )
+        )
 
-   ;; personal templates
-   ("W" "Web"                             entry (file+headline "Personal.org"
-                                                               "Interessant")
-    "* %U %^{Description}\n%c"
-    :immediate-finish t)
-   ("C" "Clipboard"                       entry (file+headline "Personal.org"
-                                                               "Interessant")
-    "* %U %^{Description}\n%c\n%x"
-    :immediate-finish t)
+       ;; personal templates
+       ("W" "Web"                             entry (file+headline "Personal.org"
+                                                                   "Interessant")
+        "* %U %^{Description}\n%c"
+        :immediate-finish t)
+       ("C" "Clipboard"                       entry (file+headline "Personal.org"
+                                                                   "Interessant")
+        "* %U %^{Description}\n%c\n%x"
+        :immediate-finish t)
 
-   ("A" "Appointment"                     entry (file+headline "Personal.org"
-                                                               "Tasques")
-    "* %^{Appointment}T %?")
-   ("S" "Schedule"                        entry (file+headline "Personal.org"
-                                                               "Tasques")
-    "* %?\nSCHEDULED: %^{Schedule}T")
-   ("D" "Deadline"                        entry (file+headline "Personal.org"
-                                                               "Tasques")
-    "* TODO %?\nDEADLINE: %^{Deadline}t")
-   ("T" "Todo"                            entry (file+headline "Personal.org"
-                                                               "Tasques")
-    "* TODO %?\n%i\n%a")
+       ("A" "Appointment"                     entry (file+headline "Personal.org"
+                                                                   "Tasques")
+        "* %^{Appointment}T %?")
+       ("S" "Schedule"                        entry (file+headline "Personal.org"
+                                                                   "Tasques")
+        "* %?\nSCHEDULED: %^{Schedule}T")
+       ("D" "Deadline"                        entry (file+headline "Personal.org"
+                                                                   "Tasques")
+        "* TODO %?\nDEADLINE: %^{Deadline}t")
+       ("T" "Todo"                            entry (file+headline "Personal.org"
+                                                                   "Tasques")
+        "* TODO %?\n%i\n%a")
 
-   ("P" "Préstec"                         entry (file+headline "Personal.org"
-                                                               "Préstecs")
-    "* %u %^{Objecte} -> %^{Persona}"
-    :immediate-finish t)
-   ))
+       ("P" "Préstec"                         entry (file+headline "Personal.org"
+                                                                   "Préstecs")
+        "* %u %^{Objecte} -> %^{Persona}"
+        :immediate-finish t)
+       ))))
 
-(defun my-org-capture ()
-  (interactive)
-  (org-store-link nil)
-  (org-capture))
-
-(defun my-org-capture-other-frame ()
-  "Create a new frame and run org-capture."
-  (interactive)
-  (make-frame '((name . "Org-Capture")
-                (width  . 120)
-                (height .  20)
-                (menu-bar-lines . 0)
-                (tool-bar-lines . 0)
-                (auto-lower . nil)
-                (auto-raise . t)))
-  (select-frame-by-name "Org-Capture")
-  (if (condition-case nil
-          (progn (my-org-capture) t)
-        (error nil))
-      (delete-other-windows)
-    (my-org-capture-other-frame--cleanup)))
-
-(defun my-org-capture-other-frame--cleanup ()
-  "Close the Org-Capture frame."
-  (if (equal "Org-Capture" (frame-parameter nil 'name))
-      (delete-frame)))
-
-(add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame--cleanup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

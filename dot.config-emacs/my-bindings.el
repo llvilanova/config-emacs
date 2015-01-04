@@ -120,8 +120,6 @@
                   (interactive)
                   (ido-find-file-in-dir org-directory)))
 (global-set-key [(super o) (b)] 'org-iswitchb)
-(global-set-key [(super o) (c)] 'my-org-capture)
-(global-set-key [(super o) (C)] 'my-org-capture-other-frame)
 
 ;; `eshell' in fullscreen
 (global-set-key [(super e)] '(lambda () (interactive) (my-eshell 'other-window nil)))
