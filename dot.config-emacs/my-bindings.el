@@ -114,7 +114,6 @@
 
 ;; `org-mode'
 (global-set-key [(super o) (l)] 'org-store-link)
-(global-set-key [(super o) (a)] 'org-agenda)
 (global-set-key [(super o) (s)] 'org-search-view)
 (global-set-key [(super o) (f)]
                 (lambda ()

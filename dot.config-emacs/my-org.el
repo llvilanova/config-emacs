@@ -61,6 +61,7 @@
 
 (use-package org-agenda
   :defer t
+  :bind (("C-M-S-o a" . org-agenda))
   :config
   (progn
     (setq
