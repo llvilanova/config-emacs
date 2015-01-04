@@ -330,31 +330,29 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 (use-package org-capture
   :defer t
-  :bind (("C-M-S-o c" . my-org-capture)
-         ("C-M-S-o C" . my-org-capture-other-frame))
+  :bind (("C-M-S-o c" . my-org-capture))
   :init
   (progn
-    (defun my-org-capture ()
-      (interactive)
+    (defun my-org-capture (other-frame)
+      (interactive "P")
       (org-store-link nil)
-      (org-capture))
-
-    (defun my-org-capture-other-frame ()
-      "Create a new frame and run org-capture."
-      (interactive)
-      (make-frame '((name . "Org-Capture")
-                    (width  . 120)
-                    (height .  20)
-                    (menu-bar-lines . 0)
-                    (tool-bar-lines . 0)
-                    (auto-lower . nil)
-                    (auto-raise . t)))
-      (select-frame-by-name "Org-Capture")
-      (if (condition-case nil
-              (progn (my-org-capture) t)
-            (error nil))
-          (delete-other-windows)
-        (my-org-capture-other-frame--cleanup)))
+      (if other-frame
+          (progn
+            (make-frame '((name . "Org-Capture")
+                          (width  . 120)
+                          (height .  20)
+                          (menu-bar-lines . 0)
+                          (tool-bar-lines . 0)
+                          (auto-lower . nil)
+                          (auto-raise . t)))
+            (select-frame-by-name "Org-Capture")
+            (if (condition-case nil
+                    (progn (org-capture) t)
+                  (error nil))
+                (delete-other-windows)
+              (my-org-capture-other-frame--cleanup))
+            )
+        (org-capture)))
 
     (defun my-org-capture-other-frame--cleanup ()
       "Close the Org-Capture frame."
