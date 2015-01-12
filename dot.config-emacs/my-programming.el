@@ -409,6 +409,7 @@
   :defer t
   :init
   (progn
+    (add-hook 'c-mode-common-hook #'cscope-minor-mode)
     ;; Special treatment for tags buffer
     (my-register-helper-buffer "*cscope*" 'long-help)))
 
