@@ -13,7 +13,8 @@
           :depends cursor-chg)
    (:name popwin                :type elpa)
    (:name powerline             :type elpa)
-   (:name sml-modeline          :type elpa)
+   (:name smart-mode-line       :type elpa
+          :depends (dash rich-minority))
    ))
 
 
@@ -80,18 +81,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline appearance
 
-(use-package powerline
-  :if (display-graphic-p)
-  :init (powerline-default-theme))
 (line-number-mode t)                         ; line numbers
 (column-number-mode t)                       ; column numbers
 (size-indication-mode t)                     ; file size
 (display-time-mode t)                        ; current time
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
-(use-package sml-modeline
+
+(use-package smart-mode-line
   :init (progn
-          (sml-modeline-mode 1)              ; ... but in modeline
-          (set-variable 'sml-modeline-len 10)))
+          (setq-default sml/no-confirm-load-theme t)
+          (setq-default sml/theme 'powerline)
+          (setq-default sml/name-width 30)
+          (sml/setup)))
 
 (use-package diminish
   :diminish (abbrev-mode
