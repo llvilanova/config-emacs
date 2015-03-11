@@ -11,7 +11,6 @@
    ace-link
    ace-window
    (:name cssh                  :type elpa)
-   (:name dired-details         :type elpa)
    (:name expand-region         :type elpa)
    (:name fancy-narrow          :type elpa)
    flx
@@ -499,10 +498,7 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
   :config (cssh-define-global-bindings))
 
 ;; `dired'
-(use-package dired-details
-  :defer t
-  :commands dired-details-install
-  :init (my-hook-once 'dired-mode-hook #'dired-details-install))
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 ;; `fuzzy'
 (use-package fuzzy
