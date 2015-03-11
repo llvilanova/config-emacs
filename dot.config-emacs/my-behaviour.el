@@ -199,10 +199,7 @@ narrowed."
          ("C-c C-j l" . ace-jump-line-mode)))
 
 ;;;; `uniquify': nicer unique names for buffers
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets
-      uniquify-after-kill-buffer-p t
-      uniquify-ignore-buffers-re "^\\*")
+(setq-default uniquify-ignore-buffers-re "^\\*")
 
 (setq-default show-trailing-whitespace t)
 
