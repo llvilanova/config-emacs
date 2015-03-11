@@ -84,8 +84,6 @@
 ;; `prog-mode'
 (add-hook 'prog-mode-hook
           (lambda ()
-            ;; Auto-indent new line (TODO: `electric-indent-mode')
-            (local-set-key [return] 'newline-and-indent)
             ;; ;; Auto-indent new line (plus previous)
             ;; (local-set-key [return] 'reindent-then-newline-and-indent)
 
