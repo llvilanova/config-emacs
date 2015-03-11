@@ -33,6 +33,12 @@
     (setq ede-project-directories t)        ; TODO: unsafe
     (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib"))))
 
+(defun my-cedet-toggle ()
+  (interactive)
+  (call-interactively #'global-semanticdb-minor-mode)
+  (call-interactively #'global-semantic-idle-scheduler-mode)
+  (call-interactively #'global-semantic-decoration-mode)
+  (call-interactively #'global-semantic-highlight-func-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version control
