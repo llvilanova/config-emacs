@@ -331,6 +331,7 @@ See (info \"(gnus)Group Line Specification\")."
                                          (downcase id)))
                                (nnir-search-engine imap))))
                  (append res extra)))
+  (add-to-list 'message-dont-reply-to-names mail)
   (add-to-list 'gnus-posting-styles
                `(,(concat "^[^\+:]+\\+" id ":")
                  (name ,name)
