@@ -323,8 +323,8 @@ See (info \"(gnus)Group Line Specification\")."
                (let ((res
                       `(nnimap ,id
                                (nnimap-inbox "INBOX")
-                               (nnimap-split-inbox nnimap-inbox)
-                               ;; (nnimap-unsplittable-articles '(%Deleted))
+                               (nnimap-split-methods #'gnus-group-split)
+                               (nnimap-split-fancy (: gnus-group-split-fancy nil nil "INBOX"))
                                (nnimap-stream shell)
                                (nnimap-shell-program
                                 ,(format "/usr/lib/dovecot/imap -c ~/.dovecotrc-%s"
