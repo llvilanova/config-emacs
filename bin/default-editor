@@ -1,7 +1,7 @@
 #!/bin/sh
 EMACS_EDITOR=`which emacsclient`
 if [ -x "$EMACS_EDITOR" ]; then
-    emacs-open "$@"
+    exec emacs-open "$@"
 else
-    vi "$@"
+    exec vi "$@"
 fi
