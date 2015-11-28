@@ -195,9 +195,16 @@ See (info \"(gnus)Group Line Specification\")."
 
 ;; Sorting
 (setq gnus-thread-sort-functions
-      (list 'gnus-thread-sort-by-number
-            'gnus-thread-sort-by-score
-            'gnus-thread-sort-by-total-score))
+      '((not gnus-thread-sort-by-date)
+        gnus-thread-sort-by-score
+        gnus-thread-sort-by-total-score))
+
+(setq gnus-article-sort-functions
+      '(gnus-thread-sort-by-date))
+
+(setq gnus-subthread-sort-functions
+      '(gnus-thread-sort-by-most-recent-date
+        gnus-thread-sort-by-date))
 
 ;; Scoring
 (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; highlight followups
