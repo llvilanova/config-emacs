@@ -7,19 +7,14 @@
 
 (my-add-packages
  '((:name magit
-          :type github
-          :pkgname "magit/magit"
-          :branch "next"
+          :type elpa
           :depends (dash magit-git-modes))
    (:name magit-git-modes
           :type github
-          :pkgname "magit/git-modes"
-          :branch "next"
-          )
+          :pkgname "magit/git-modes")
    (:name magit-stgit
           :type github
           :pkgname "magit/magit-stgit"
-          :branch "next"
           :depends magit)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
