@@ -6,12 +6,7 @@
 ;;; Packages
 
 (my-add-packages
- '((:name magit
-          :type elpa
-          :depends (dash magit-git-modes))
-   (:name magit-git-modes
-          :type github
-          :pkgname "magit/git-modes")
+ '((:name magit)
    (:name magit-stgit
           :type github
           :pkgname "magit/magit-stgit"
@@ -86,7 +81,6 @@ If called with a prefix, prompts the user for the backend."
       (set-window-configuration my-vc-dir-windows))))
 
 (use-package magit
-  :diminish magit-auto-revert-mode
   :defer t
   :commands magit-status
   :config
