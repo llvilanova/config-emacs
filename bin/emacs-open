@@ -1,5 +1,6 @@
 #!/bin/sh
 
+TERM=xterm-256color
 if [ -n "$DISPLAY" ]; then
     exec emacs-frame-new "$@"
 else
