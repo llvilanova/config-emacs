@@ -22,8 +22,11 @@
 ;; `package' auto-installation
 (setq package-user-dir (path my-cache-dir "elpa"))
 (el-get 'sync '(package))
-(add-to-list 'package-archives          ; additional repositiories
-             '("melpa" . "http://melpa.org/packages/") t)
+;; build local el-get recipes when updating elpa
+(require 'el-get-elpa)
+(defun my-package-refresh-contents-advice ()
+  (el-get-elpa-build-local-recipes nil t))
+(advice-add #'package-refresh-contents :after #'my-package-refresh-contents-advice)
 (unless (file-exists-p (path package-user-dir "archives"))
   ;; first-time initialization
   (package-refresh-contents))
