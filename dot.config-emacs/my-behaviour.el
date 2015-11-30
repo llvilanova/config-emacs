@@ -503,6 +503,7 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
 
 ;; `fuzzy'
 (use-package fuzzy
+  :commands turn-on-fuzzy-isearch
   :init (turn-on-fuzzy-isearch))
 
 
