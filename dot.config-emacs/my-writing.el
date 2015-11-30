@@ -8,8 +8,7 @@
    '(
      (:name auto-dictionary       :type elpa)
      ;; predictive
-     (:name wordnet               :type http
-            :url "http://xwl.appspot.com/ref/wordnet.el")
+     wn-org
      )))
 (my-add-init-hook 'text-mode-hook #'my-writing-setup)
 
@@ -43,10 +42,12 @@
         (flyspell-mode arg)))
     (add-hook 'text-mode-hook #'my-flyspell-mode-maybe)))
 
-
-;; `wordnet'
-(autoload 'wordnet-search "wordnet")
-(my-register-helper-buffer "*WordNet*" 'help)
+;; `wn-org'
+(use-package wn-org
+  :commands wn-org-search
+  :bind ("C-x w" . wn-org-search)
+  :init (progn
+          (my-register-helper-buffer "*WordNet*" 'help)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -98,10 +98,6 @@
             (local-set-key [(meta f1)] 'semantic-ia-show-doc)
             (local-set-key [(shift f1)] 'semantic-ia-describe-class)))
 
-;; `my-writing-mode'
-(add-hook 'text-mode-hook
-          (lambda () (local-set-key [(control c) (w)] 'wordnet-search)))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Applications
