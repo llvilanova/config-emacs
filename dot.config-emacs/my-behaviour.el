@@ -7,9 +7,10 @@
 
 (my-add-packages
  '(
-   ace-jump-mode
+   ace-isearch
    ace-link
    ace-window
+   anzu
    (:name cssh                  :type elpa)
    (:name expand-region         :type elpa)
    (:name fancy-narrow          :type elpa)
@@ -191,12 +192,16 @@ narrowed."
 (setq auto-save-list-file-prefix        ; location for auto-save sessions
       (path my-cache-dir "auto-save-list" ""))
 
-;;;; `ace-jump'
-(use-package ace-jump-mode
-  :bind (("C-c C-j j" . ace-jump-mode)
-         ("C-c C-j c" . ace-jump-char-mode)
-         ("C-c C-j w" . ace-jump-word-mode)
-         ("C-c C-j l" . ace-jump-line-mode)))
+;;;; `ace-isearch'
+(use-package ace-isearch
+  :init (setq ace-isearch-jump-delay 0.8
+              ;; ace-isearch-function 'avy-goto-word-1
+              ace-isearch-use-function-from-isearch nil)
+  :config (global-ace-isearch-mode))
+
+;;;; `anzu'
+(use-package anzu
+  :config (global-anzu-mode))
 
 ;;;; `uniquify': nicer unique names for buffers
 (setq-default uniquify-ignore-buffers-re "^\\*")
