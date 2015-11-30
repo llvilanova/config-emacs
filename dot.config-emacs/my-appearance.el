@@ -13,7 +13,7 @@
           :depends cursor-chg)
    (:name popwin                :type elpa)
    (:name powerline             :type elpa)
-   (:name smart-mode-line       :type elpa
+   (:name smart-mode-line
           :depends (dash rich-minority))
    ))
 
