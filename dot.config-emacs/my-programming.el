@@ -51,6 +51,7 @@
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 ;; Convenience menu in 'mouse-3'
 (use-package cedet-m3
+  :commands global-cedet-m3-minor-mode
   :init
   (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode))
 
