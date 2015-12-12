@@ -322,13 +322,14 @@ See (info \"(gnus)Group Line Specification\")."
   (add-to-list 'gnus-secondary-select-methods
                (let ((res
                       `(nnimap ,id
+                               (nnimap-address "localhost")
+                               (nnimap-user ,id)
+                               (nnimap-stream network)
+                               ;; (nnimap-stream shell)
+                               ;; (nnimap-shell-program ,(format "/usr/lib/dovecot/imap -c ~/.dovecotrc-%s" (downcase id)))
                                (nnimap-inbox "INBOX")
                                (nnimap-split-methods #'gnus-group-split)
                                (nnimap-split-fancy (: gnus-group-split-fancy nil nil "INBOX"))
-                               (nnimap-stream shell)
-                               (nnimap-shell-program
-                                ,(format "/usr/lib/dovecot/imap -c ~/.dovecotrc-%s"
-                                         (downcase id)))
                                (nnir-search-engine imap))))
                  (append res extra)))
   (add-to-list 'message-dont-reply-to-names mail)
@@ -338,7 +339,9 @@ See (info \"(gnus)Group Line Specification\")."
                  (address ,mail))))
 
 (setq gnus-select-method            '(nnnil "nil")
-      gnus-secondary-select-methods nil)
+      gnus-secondary-select-methods nil
+      message-dont-reply-to-names   nil
+      gnus-posting-styles           nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
