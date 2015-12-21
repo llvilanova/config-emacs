@@ -151,19 +151,31 @@ If COMMENTFIRST is non-nil, comment the original line."
     (t                 'backward-kill-word))))
 
 (defun my-narrow-or-widen-dwim (p)
-  "If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
-Intelligently means: region, subtree, or defun, whichever applies
-first.
+  "Widen if buffer is narrowed, narrow-dwim otherwise.
+Dwim means: region, org-src-block, org-subtree, or defun,
+whichever applies first. Narrowing to org-src-block actually
+calls `org-edit-src-code'.
 
-With prefix P, don't widen, just narrow even if buffer is already
-narrowed."
+With prefix P, don't widen, just narrow even if buffer is
+already narrowed."
   (interactive "P")
   (declare (interactive-only))
-  (cond ((buffer-narrowed-p) (widen))
+  (cond ((and (buffer-narrowed-p) (not p)) (widen))
+        ((and fancy-narrow--overlay-left (overlay-buffer fancy-narrow--overlay-left) (not p))
+         (fancy-widen))
         ((region-active-p)
-         (narrow-to-region (region-beginning) (region-end)))
-        ((derived-mode-p 'org-mode) (org-narrow-to-subtree))
-        (t (narrow-to-defun))))
+         (fancy-narrow-to-region (region-beginning) (region-end)))
+        ((derived-mode-p 'org-mode)
+         ;; `org-edit-src-code' is not a real narrowing
+         ;; command. Remove this first conditional if you
+         ;; don't want it.
+         (cond ((ignore-errors (org-edit-src-code))
+                (delete-other-windows))
+               ((ignore-errors (org-narrow-to-block) t))
+               (t (org-narrow-to-subtree))))
+        ((derived-mode-p 'latex-mode)
+         (LaTeX-narrow-to-environment))
+        (t (fancy-narrow-to-defun))))
 
 ;;;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
