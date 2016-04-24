@@ -528,6 +528,12 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
 ;; `dired'
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+;; `dired-filter'
+(use-package dired-filter
+  :ensure t
+  :init (add-hook 'dired-mode-hook #'dired-filter-mode)
+  :config (define-key dired-mode-map (kbd "/") dired-filter-map))
+
 ;; `fuzzy'
 (use-package fuzzy
   :commands turn-on-fuzzy-isearch
