@@ -286,8 +286,9 @@ See (info \"(gnus)Group Line Specification\")."
       (error "Could not find where to insert the tag"))
     (search-forward "---")
     (beginning-of-line)
-    (insert (format "\n%s: %s <%s>\n\n\n"
-                    tag user-full-name user-mail-address))))
+    ;; (insert (format "\n%s: %s <%s>\n\n\n"
+    ;;                 tag user-full-name user-mail-address))))
+    (insert (format "\n%s: Lluís Vilanova <vilanova@ac.upc.edu>\n\n\n" tag))))
 
 (defun my-gnus-patch-review ()
   (interactive)
