@@ -550,5 +550,9 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
 (use-package info+
   :ensure t)
 
+(use-package which-key
+  :ensure t
+  :defer 1
+  :config (which-key-mode))
 
 (provide 'my-behaviour)
