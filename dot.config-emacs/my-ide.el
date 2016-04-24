@@ -87,6 +87,20 @@ If called with a prefix, prompts the user for the backend."
   (progn
     (setq magit-diff-refine-hunk nil)
 
+    ;; Add github pull requests
+    (defun my-magit-github-add-PR-fetch ()
+      "If refs/pull is not defined on a GH repo, define it."
+      (let ((fetch-address
+             "+refs/pull/*/head:refs/pull/origin/*"))
+        (unless (member
+                 fetch-address
+                 (magit-get-all "remote" "origin" "fetch"))
+          (when (string-match
+                 "github" (magit-get "remote" "origin" "url"))
+            (magit-git-string
+             "config" "--add" "remote.origin.fetch"
+             fetch-address)))))
+
     ;; `magit' in fullscreen
     (setq my-magit-status-windows nil)
     (make-variable-frame-local 'my-magit-status-windows)
@@ -99,7 +113,9 @@ If called with a prefix, prompts the user for the backend."
       "Restores the previous window configuration and kills the magit buffer"
       (interactive)
       (kill-buffer)
-      (set-window-configuration my-magit-status-windows))))
+      (set-window-configuration my-magit-status-windows)))
+  :init
+  (add-hook 'magit-mode-hook #'my-magit-github-add-PR-fetch))
 
 (use-package magit-stgit
   :defer t
