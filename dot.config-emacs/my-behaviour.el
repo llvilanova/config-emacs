@@ -131,6 +131,24 @@
   (back-to-indentation))
 (global-set-key [remap kill-whole-line] 'my-smart-kill-whole-line)
 
+(defmacro my-with-bol-prefix (function)
+  "Define a new function which calls FUNCTION.
+Except it moves to beginning of line before calling FUNCTION when
+called with a prefix argument. The FUNCTION still receives the
+prefix argument."
+  (let ((name (intern (format "my-%s-BOL" function))))
+    `(progn
+       (defun ,name (p)
+         ,(format
+           "Call `%s', but move to BOL when called with a prefix argument."
+           function)
+         (interactive "P")
+         (when p
+           (forward-line 0))
+         (call-interactively ',function))
+       ',name)))
+(global-set-key [remap kill-line] (my-with-bol-prefix kill-line))
+
 (defun my-duplicate-line (&optional commentfirst)
   "Duplicate line at point.
 If COMMENTFIRST is non-nil, comment the original line."
