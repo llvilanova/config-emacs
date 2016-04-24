@@ -366,6 +366,7 @@ then only one line is copied."
 (ido-everywhere 1)                      ; use for many file dialogs
 (setq ido-save-directory-list-file (path my-cache-dir "ido.last")
       ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
+      ido-auto-merge-delay-time 9999    ; do not look for file names on other dirs
       ido-default-file-method 'maybe-frame ; ask if buffer in other frame must be re-opened
       ido-case-fold  t                  ; be case-insensitive
       ido-use-faces nil                   ; do not hide `flx' highlighting
