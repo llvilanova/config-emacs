@@ -12,8 +12,6 @@
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    (:name popwin                :type elpa)
-   (:name smart-mode-line
-          :depends (dash rich-minority))
    ))
 
 
@@ -95,12 +93,18 @@
   :init (setq-default powerline-default-separator 'chamfer))
 
 (use-package smart-mode-line
+  :ensure t
+  :defer 1
+  :commands (sml/setup)
   :init (progn
           (setq-default sml/no-confirm-load-theme t)
-          (setq-default sml/theme 'powerline)
-          (setq-default sml/name-width 30)
-          (sml/setup)))
+          (setq-default sml/name-width 30))
+  :config (sml/setup))
 
+(use-package smart-mode-line-powerline-theme
+  :ensure t
+  :init (progn
+          (setq-default sml/theme 'powerline)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
