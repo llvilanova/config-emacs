@@ -43,19 +43,31 @@
     (setq gnus-notifications-minimum-level 2)
     (add-hook 'gnus-after-getting-new-news-hook 'gnus-notifications)))
 
-(defun my-check-mail ()
-  (interactive)
-  (my-run-async
-   "fetchmail" ""
-   (lambda (&rest args)
-     (my-run-async
-      "offlineimap" ""
-      (lambda (&rest args) (gnus-demon-scan-news))))))
+(defun my-check-mail (&optional folder)
+  (interactive "P")
+  (if folder
+      (let ((group (gnus-group-group-name))
+            account
+            folder)
+        (when (string-match "nnimap\\+\\([^:]+\\):\\(.*\\)" group)
+          (setq account (match-string 1 group)
+                folder (match-string 2 group))
+          (my-run-async "offlineimap" (format "-a %s -f %s"
+                                              (downcase account) folder)
+                        (lambda (&rest args) (gnus-demon-scan-news)))
+          (message ">> %s %s" account folder)))
+    (my-run-async
+     "fetchmail" ""
+     (lambda (&rest args)
+       (my-run-async
+        "offlineimap" ""
+        (lambda (&rest args) (gnus-demon-scan-news)))))))
 
-(gnus-demon-add-handler 'my-check-mail 5 nil)
-;; Immediately start checking for new mail
-(my-check-mail)
+;; (gnus-demon-add-handler 'my-check-mail 5 nil)
+;; ;; Immediately start checking for new mail
+;; (my-check-mail)
 
+(define-key gnus-group-mode-map "f" 'my-check-mail)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Group
