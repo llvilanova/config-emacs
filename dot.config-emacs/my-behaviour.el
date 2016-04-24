@@ -435,8 +435,11 @@ then only one line is copied."
 (setq tramp-persistency-file-name (path my-cache-dir "tramp"))
 
 ;;;; `browse-kill-ring': kill ring browser on M-y
-(browse-kill-ring-default-keybindings)
-(setq browse-kill-ring-quit-action 'save-and-restore) ; restore window config
+(use-package browse-kill-ring
+  :config
+  (progn
+    (browse-kill-ring-default-keybindings)
+    (setq browse-kill-ring-quit-action 'save-and-restore))) ; restore window config
 
 ;;;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
 (use-package time-stamp
