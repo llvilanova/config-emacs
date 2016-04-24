@@ -86,6 +86,11 @@
       (message "Buffer and window marked for swapping."))))
 
 
+;;;; Dedicated windows
+(use-package dedicated
+  :ensure t
+  :bind ("<pause>" . dedicated-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Buffers
 
