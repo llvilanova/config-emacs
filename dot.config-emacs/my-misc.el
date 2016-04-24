@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014-2015 Lluís Vilanova
+;; Copyright (C) 2014-2016 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -46,34 +46,6 @@
 Taken from org-mode's `org-prgram-exists'."
   (if (eq system-type 'gnu/linux)
       (= 0 (call-process "which" nil nil nil program-name))))
-
-
-(defun my-toggle-dedicated-window (&optional window)
-  "Toggle whether WINDOW is dedicated or not.
-If nil, WINDOW is `selected-window'."
-  (interactive)
-  (let* ((window (or window (selected-window)))
-         (dedicated (window-dedicated-p window)))
-    (set-window-dedicated-p window (not dedicated))))
-
-(defun my--mode-line-toggle-dedicated-window (event)
-  "Like `my-toggle-dedicated-window', but for the mode-line."
-  (interactive "e")
-  (my-toggle-dedicated-window (posn-window (event-start event))))
-
-(let ((value (default-value 'mode-line-buffer-identification)))
-  (add-to-list 'value
-               '(:propertize
-                 (:eval (if (window-dedicated-p (selected-window))
-                            " [D]" " [ ]"))
-                 local-map
-                 (keymap
-                  (mode-line keymap
-                             (mouse-1 . my--mode-line-toggle-dedicated-window)))
-                 mouse-face mode-line-highlight
-                 help-echo "Dedicated window\nmouse-1: Toggle dedicated window")
-               t)
-  (setq-default mode-line-buffer-identification value))
 
 
 (defun my-run-async (program args callback)
