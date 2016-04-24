@@ -211,6 +211,22 @@ This ensures the hook will be the first element."
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
+(defun my-swap-window-buffers-by-dnd (drag-event)
+  "Swaps the buffers displayed in the DRAG-EVENT's start and end window."
+  (interactive "e")
+  (let ((start-win (cl-caadr drag-event))
+        (end-win   (cl-caaddr drag-event)))
+    (when (and (windowp start-win)
+               (windowp end-win)
+               (not (eq start-win end-win))
+               (not (memq (minibuffer-window)
+                          (list start-win end-win))))
+      (let ((bs (window-buffer start-win))
+            (be (window-buffer end-win)))
+        (unless (eq bs be)
+          (set-window-buffer start-win be)
+          (set-window-buffer end-win bs))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Editing
 
