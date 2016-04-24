@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   ace-isearch
    ace-link
    ace-window
    anzu
@@ -204,12 +203,6 @@ already narrowed."
 (setq auto-save-list-file-prefix        ; location for auto-save sessions
       (path my-cache-dir "auto-save-list" ""))
 
-;;;; `ace-isearch'
-(use-package ace-isearch
-  :init (setq ace-isearch-jump-delay 0.8
-              ;; ace-isearch-function 'avy-goto-word-1
-              ace-isearch-use-function-from-isearch nil)
-  :config (global-ace-isearch-mode))
 
 ;;;; `anzu'
 (use-package anzu
