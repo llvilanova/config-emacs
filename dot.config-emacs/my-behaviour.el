@@ -209,6 +209,13 @@ already narrowed."
 (setq auto-save-list-file-prefix        ; location for auto-save sessions
       (path my-cache-dir "auto-save-list" ""))
 
+;;;; `avy'
+(use-package avy
+  :ensure t
+  :bind (("C-c C-j c" . avy-goto-char)
+         ("C-c C-j w" . avy-goto-word-1)
+         ("C-c C-j l" . avy-goto-line)
+         ("C-'" . avy-isearch)))
 
 ;;;; `anzu'
 (use-package anzu
