@@ -7,15 +7,6 @@
       gnus-posting-styles nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Packages
-
-(my-add-packages
- '(
-   (:name gnus-notifications    :type http
-          :url "http://git.gnus.org/cgit/gnus.git/plain/lisp/gnus-notifications.el")
-   ))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Data folders and files
 
 (setq gnus-startup-file (path my-data-dir "gnus")
