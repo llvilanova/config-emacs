@@ -12,7 +12,6 @@
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    (:name popwin                :type elpa)
-   (:name powerline             :type elpa)
    (:name smart-mode-line
           :depends (dash rich-minority))
    ))
@@ -87,6 +86,14 @@
 (display-time-mode t)                        ; current time
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
 
+(use-package diminish
+  :diminish (abbrev-mode
+             auto-fill-function))
+
+(use-package powerline
+  :ensure t
+  :init (setq-default powerline-default-separator 'chamfer))
+
 (use-package smart-mode-line
   :init (progn
           (setq-default sml/no-confirm-load-theme t)
@@ -94,9 +101,6 @@
           (setq-default sml/name-width 30)
           (sml/setup)))
 
-(use-package diminish
-  :diminish (abbrev-mode
-             auto-fill-function))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
