@@ -539,5 +539,12 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
   :commands turn-on-fuzzy-isearch
   :init (turn-on-fuzzy-isearch))
 
+;; `ediff'
+(use-package ediff
+  :init (progn
+          (setq ediff-split-window-function 'split-window-horizontally
+                ediff-window-setup-function 'ediff-setup-windows-plain)
+          (add-hook 'ediff-after-quit-hook-internal 'winner-undo)))
+
 
 (provide 'my-behaviour)
