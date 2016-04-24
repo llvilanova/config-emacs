@@ -137,15 +137,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
 
-;; Change shell's color scheme
-(ansi-color-map-update 'ansi-color-names-vector
-                       (vconcat (mapcar (lambda (elem)
-                                          (cond
-                                           ((string= elem "blue")
-                                            "deep sky blue")
-                                           (t
-                                            elem)))
-                                        ansi-color-names-vector)))
+;; ;; Change shell's color scheme
+(add-hook 'after-init-hook
+          (lambda ()
+            (ansi-color-map-update 'ansi-color-names-vector
+                                   (vconcat (mapcar (lambda (elem)
+                                                      (cond
+                                                       ((string= elem "blue")
+                                                        "deep sky blue")
+                                                       (t
+                                                        elem)))
+                                                    ansi-color-names-vector)))))
 
 ;; `eww'
 (defun my-eww-appearance ()
