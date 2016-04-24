@@ -546,5 +546,9 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
                 ediff-window-setup-function 'ediff-setup-windows-plain)
           (add-hook 'ediff-after-quit-hook-internal 'winner-undo)))
 
+;; `info+'
+(use-package info+
+  :ensure t)
+
 
 (provide 'my-behaviour)
