@@ -105,6 +105,7 @@
 (transient-mark-mode t)                 ; show current 'selection'
 (delete-selection-mode t)               ; delete the selection with a keypress
 (cua-selection-mode t)                  ; enable CUA behaviour without C-[zxvc]
+(setq scroll-margin 3)                  ; always show some lines around cursor
 
 (setq search-highlight t                ; highlight when searching...
       query-replace-highlight t         ; ...and replacing
