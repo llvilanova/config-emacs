@@ -314,7 +314,18 @@ then only one line is copied."
 (use-package ace-link
   :init
   (progn
-    (ace-link-setup-default)))
+    ;; bound to "o"
+    (ace-link-setup-default)
+    ;; bound to "M-o"
+    (use-package org-mode
+      :config
+      (define-key org-mode-map (kbd "M-o") 'ace-link-org))
+    (use-package gnus
+      :config
+      (progn
+        (define-key gnus-summary-mode-map (kbd "M-o") 'ace-link-gnus)
+        (define-key gnus-article-mode-map (kbd "M-o") 'ace-link-gnus)))
+    (global-set-key (kbd "M-o") 'ace-link-addr)))
 
 ;;;; `outshine'
 (use-package outshine
