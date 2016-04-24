@@ -91,6 +91,7 @@
 (require 'nnir)
 
 ;; Expiration
+(setq nnmail-expiry-wait 1460)
 (remove-hook 'gnus-summary-prepare-exit-hook 'gnus-summary-expire-articles)
 (gnus-demon-add-handler 'gnus-group-expire-all-groups 240 t)
 
