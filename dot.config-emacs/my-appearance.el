@@ -3,15 +3,6 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-(my-add-packages
- '(
-   (:name popwin                :type elpa)
-   ))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Color theming
 
 (load-theme 'my t)
@@ -129,9 +120,6 @@
   :config
   (hl-line-toggle-when-idle t)
   (hl-line-when-idle-interval (+ 1 curchg-idle-interval)))
-
-(use-package popwin
-  :init (setq display-buffer-function 'popwin:display-buffer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous

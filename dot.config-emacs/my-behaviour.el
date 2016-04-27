@@ -525,31 +525,47 @@ then only one line is copied."
 
 ;;;; `popwin'
 (use-package popwin
-  :init (global-set-key (kbd "C-z") popwin:keymap))
-(defun my-register-helper-buffer (pattern &optional type &rest other)
-  "Register given buffer PATTERN as being for a specific TYPE of usage.
-Valid types are:
-  help
-  long-help
-  info
-  long-info
+  :ensure t
+  :commands
+  popwin:display-buffer
+  popwin-mode
+  :bind-keymap
+  ("C-z" . popwin:keymap)
+  :init
+  (setq display-buffer-function 'popwin:display-buffer)
+  (setq popwin:special-display-config)
+  (defun my-register-helper-buffer (pattern &optional type &rest other)
+    "Register given buffer PATTERN as being for a specific TYPE of usage.
+Valid types are: help long-help info long-info
 
 Any other type is passed as-is to `popwin' as keywords, together with OTHER."
-  (let ((keywords
-         (append other
-                 (and type
-                    (case type
-                      ('help)
-                      ('long-help '(:position right :width 90))
-                      ('info '(:position bottom :stick t))
-                      ('long-info '(:position right :width 90 :stick t))
-                      (t (error (format "Unknown type: %s" type))))))))
-    (setq popwin:special-display-config
-          (delq (assoc pattern  popwin:special-display-config)
-                popwin:special-display-config))
-    (if keywords
-        (push (cons pattern keywords) popwin:special-display-config)
-      (push pattern popwin:special-display-config))))
+    (let ((keywords
+           (append other
+                   (case type
+                     (nil)
+                     ('help)
+                     ('long-help '(:position right :width 90))
+                     ('info '(:position bottom :stick t))
+                     ('long-info '(:position right :width 90 :stick t))
+                     (t (error (format "Unknown type: %s" type)))))))
+      (setq popwin:special-display-config
+            (delq (assoc pattern popwin:special-display-config)
+                  popwin:special-display-config))
+      (if keywords
+          (push (cons pattern keywords) popwin:special-display-config)
+        (push pattern popwin:special-display-config))))
+  :config
+  (popwin-mode 1)
+  ;; Integrate customized values into the variable
+  (let ((orig (or (cadar (get 'popwin:special-display-config 'customized-value))
+                  (cadar (get 'popwin:special-display-config 'saved-value))
+                  (cadar (get 'popwin:special-display-config 'standard-value)))))
+    (mapc
+     (lambda (elem)
+       (let ((key (if (listp elem) (car elem) elem)))
+         (unless (assoc key popwin:special-display-config)
+           (add-to-list 'popwin:special-display-config elem t))))
+     orig)))
 
 ;; `god-mode': Control- and Meta-less commands
 (use-package god-mode
