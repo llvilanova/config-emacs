@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   ace-link
    ace-window
    anzu
    (:name cssh                  :type elpa)
@@ -331,20 +330,23 @@ then only one line is copied."
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 (use-package ace-link
+  :ensure t
+  :defer 2
+  :bind ("C-x C-M-o" . ace-link-addr)
   :init
-  (progn
-    ;; bound to "o"
-    (ace-link-setup-default)
-    ;; bound to "M-o"
-    (use-package org-mode
-      :config
-      (define-key org-mode-map (kbd "M-o") 'ace-link-org))
-    (use-package gnus
-      :config
-      (progn
-        (define-key gnus-summary-mode-map (kbd "M-o") 'ace-link-gnus)
-        (define-key gnus-article-mode-map (kbd "M-o") 'ace-link-gnus)))
-    (global-set-key (kbd "M-o") 'ace-link-addr)))
+  ;; bound to "C-x C-M-o"
+  (use-package org
+    :config
+    (define-key org-mode-map (kbd "C-x C-M-o") 'ace-link-org))
+  ;; bound to "M-o"
+  (use-package gnus
+    :config
+    (progn
+      (define-key gnus-summary-mode-map (kbd "M-o") 'ace-link-gnus)
+      (define-key gnus-article-mode-map (kbd "M-o") 'ace-link-gnus)))
+  :config
+  ;; bound to "o"
+  (ace-link-setup-default))
 
 ;;;; `outshine'
 (use-package outshine
