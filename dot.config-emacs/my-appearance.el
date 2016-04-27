@@ -8,7 +8,6 @@
 (my-add-packages
  '(
    (:name cursor-chg            :type emacswiki)
-   diminish
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    (:name popwin                :type elpa)
@@ -85,6 +84,7 @@
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
 
 (use-package diminish
+  :ensure t
   :diminish (abbrev-mode
              auto-fill-function))
 
