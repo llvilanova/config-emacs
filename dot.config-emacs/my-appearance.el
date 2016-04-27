@@ -7,8 +7,6 @@
 
 (my-add-packages
  '(
-   (:name hl-line+              :type emacswiki
-          :depends cursor-chg)
    (:name popwin                :type elpa)
    ))
 
@@ -126,10 +124,11 @@
 (diminish 'visual-line-mode)
 
 (use-package hl-line+
- :init
- (progn
-   (hl-line-toggle-when-idle t)
-   (hl-line-when-idle-interval (+ 1 curchg-idle-interval))))
+  :ensure t
+  :defer 2
+  :config
+  (hl-line-toggle-when-idle t)
+  (hl-line-when-idle-interval (+ 1 curchg-idle-interval)))
 
 (use-package popwin
   :init (setq display-buffer-function 'popwin:display-buffer))
