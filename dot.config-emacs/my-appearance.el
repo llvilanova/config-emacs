@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   (:name cursor-chg            :type emacswiki)
    (:name hl-line+              :type emacswiki
           :depends cursor-chg)
    (:name popwin                :type elpa)
@@ -67,11 +66,12 @@
 
 ;; `cursor-chg': context-specific cursor appearence
 (use-package cursor-chg
+  :ensure t
+  :defer 1
   :config
-  (progn
-    (setq curchg-default-cursor-color "Yellow")
-    (curchg-toggle-cursor-type-when-idle 1)
-    (change-cursor-mode 1)))
+  (setq curchg-default-cursor-color "Yellow")
+  (curchg-toggle-cursor-type-when-idle 1)
+  (change-cursor-mode 1))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
