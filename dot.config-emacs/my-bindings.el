@@ -102,9 +102,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Applications
 
-;; `compile'
-(global-set-key [f8] 'my-dwim-compile)
-
 ;; `flycheck'
 (add-hook 'flycheck-mode-hook
           (lambda ()

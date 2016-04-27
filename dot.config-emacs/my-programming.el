@@ -425,28 +425,43 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Compilation
 
-(setq compilation-scroll-output t)      ; follow compilation output
-;; compilation-window-height 10         ; fix maximum number of lines
+(use-package compile
+  :bind ("<f8>" . my-dwim-compile)
 
-;; Save compilation commands in desktop
-(add-to-list 'desktop-globals-to-save 'compile-command)
-(add-to-list 'desktop-globals-to-save 'compile-history)
+  :init
+  (setq compilation-scroll-output t  ; follow compilation output
+        ;; compilation-window-height 10 ; fix maximum number of lines
+        )
 
-;; All-in-one DWIM compilation
-(defun my-dwim-compile (arg)
-  "DWIM compilation.
+  :config
+  ;; Save compilation commands in desktop
+  (use-package desktop
+    :config
+    (add-to-list 'desktop-globals-to-save 'compile-command)
+    (add-to-list 'desktop-globals-to-save 'compile-history))
+
+  (require 'ansi-color)
+  (defun my-colorize-compilation ()
+    "Colorize from `compilation-filter-start' to `point'."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region
+       compilation-filter-start (point))))
+
+  (add-hook 'compilation-filter-hook #'my-colorize-compilation)
+
+  (defun my-dwim-compile (arg)
+    "DWIM compilation.
 If compilation is running, use `kill-compilation'.
 Otherwise, use `recompile'.
 
 If ARG is not nil, force a call to `compile'."
-  (interactive "P")
-  (if arg
-      (call-interactively 'compile nil (vector (list 4)))
-    (condition-case nil
-        (call-interactively 'kill-compilation)
-      (error (call-interactively 'recompile))))
-  nil)
-
+    (interactive "P")
+    (if arg
+        (call-interactively 'compile nil (vector (list 4)))
+      (condition-case nil
+          (call-interactively 'kill-compilation)
+        (error (call-interactively 'recompile))))
+    nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; `flycheck': Continuous compilation
