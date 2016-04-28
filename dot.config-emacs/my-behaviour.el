@@ -608,4 +608,25 @@ Any other type is passed as-is to `popwin' as keywords, together with OTHER."
   :defer 1
   :config (which-key-mode))
 
+
+;;;; Editing as sudo
+
+;; (defadvice ido-find-file (after find-file-sudo activate)
+;;   "Find file as root if necessary."
+;;   (unless (and buffer-file-name
+;;                (file-writable-p buffer-file-name))
+;;     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defun my-find-alternate-file-or-as-sudo ()
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (if (or (file-writable-p file-name) (not file-name))
+        (ido-find-alternate-file)
+      (find-alternate-file (concat "/sudo::" file-name)))))
+;; (global-set-key [remap ido-find-alternate-file] 'my-find-alternate-file-or-as-sudo)
+(global-set-key [(control x) (control v)] 'my-find-alternate-file-or-as-sudo)
+
+;;; Postamble
+
 (provide 'my-behaviour)
+;;; my-behaviour.el ends here
