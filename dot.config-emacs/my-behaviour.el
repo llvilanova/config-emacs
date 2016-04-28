@@ -95,10 +95,11 @@
 ;;; Buffers
 
 ;;;; Default editing parameters
-(setq-default fill-column       80      ; text width
-              comment-column    40      ; `comment-indent'
-              indent-tabs-mode nil      ; never use tabs
-              tab-width          8)     ; just 'cause almost everybody uses 8
+(setq-default fill-column       80        ; text width
+              comment-column    40        ; `comment-indent'
+              tab-always-indent 'complete ; indent or complete otherwise
+              indent-tabs-mode nil        ; never use tabs
+              tab-width          8)       ; just 'cause almost everybody uses 8
 
 (setq require-final-newline t)          ; end files with a newline
 
