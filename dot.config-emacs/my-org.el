@@ -10,12 +10,6 @@
    (:name org-gnome-calendar    :type github
           :pkgname "llvilanova/org-gnome-calendar")
    ))
-(defun my-org-setup ()
-  (my-add-packages
-   '(
-     org-ref
-     )))
-(my-add-init-hook 'org-mode-hook #'my-org-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Location
