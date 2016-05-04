@@ -143,7 +143,6 @@
                   ("e" toggle-debug-on-error   "toggle-debug-on-error")
                   ("f" auto-fill-mode          "auto-fill-mode")
                   ("l" linum-mode              "linux-mode")
-                  ("n" my-narrow-or-widen-dwim "my-narrow-or-widen-dwim")
                   ("q" toggle-debug-on-quit    "toggle-debug-on-quit")
                   ("r" read-only-mode          "read-only-mode")
                   ("v" visual-line-mode        "visual-line-mode")
