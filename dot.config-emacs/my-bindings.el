@@ -20,7 +20,6 @@
 
 (global-set-key [(meta f9)] 'maximize-window)
 (global-set-key [(control f9)] 'minimize-window)
-(global-set-key [pause] 'my-toggle-dedicated-window)
 (define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
 
 
