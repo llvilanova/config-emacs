@@ -315,9 +315,11 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                (org-sec-stuck-with-view "STUCK with")))
              ("J" "Interactive TODO dowith and TASK with"
               ((org-sec-who-view "TODO dowith"))))))))
+
 (use-package org-agenda
- :defer t
- :config (require 'org-secretary))
+  :defer t
+  :config
+  (require 'org-secretary))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
