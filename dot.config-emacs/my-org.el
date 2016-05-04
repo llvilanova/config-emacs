@@ -160,49 +160,48 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 (use-package ox-latex
   :defer t
   :config
-  (progn
-    (setq org-latex-listings 'minted)
-    (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; (setq org-latex-listings 'minted)
+  ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; (setq org-latex-with-hyperref nil)
 
-    ;; ;; Create bibliography file
-    ;; (add-hook 'org-export-latex-after-save-hook
-    ;;           (lambda ()
-    ;;             (with-current-buffer cbuf
-    ;;               (org-bibtex (concat (file-name-sans-extension
-    ;;                                    (buffer-file-name)) ".bib")))))
+  ;; ;; Create bibliography file
+  ;; (add-hook 'org-export-latex-after-save-hook
+  ;;           (lambda ()
+  ;;             (with-current-buffer cbuf
+  ;;               (org-bibtex (concat (file-name-sans-extension
+  ;;                                    (buffer-file-name)) ".bib")))))
 
-    ;; moderncv
-    (add-to-list 'org-latex-classes
-                 '("moderncv"
-                   "\\documentclass[1pt]{moderncv}"
-                   ("\\section{%s}" . "\\section*{%s}")
-                   ))
-    ;; moderncv conflicts with marvosym
-    (setq org-latex-default-packages-alist
-          (cl-remove-if
-           (lambda (elem) (and (listp elem)
-                          (or (string= "marvosym" (cadr elem))
-                              (string= "hyperref" (cadr elem)))))
-           org-latex-default-packages-alist))
-    (setq org-latex-hyperref-template "")
+  ;; moderncv
+  (add-to-list 'org-latex-classes
+               '("moderncv"
+                 "\\documentclass[1pt]{moderncv}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ))
+  ;; moderncv conflicts with marvosym
+  (setq org-latex-default-packages-alist
+        (cl-remove-if
+         (lambda (elem) (and (listp elem)
+                        (or (string= "marvosym" (cadr elem))
+                            (string= "hyperref" (cadr elem)))))
+         org-latex-default-packages-alist))
 
-    ;; Remove temporary files when done
-    (setq org-latex-logfiles-extensions
-          (append '("bbl" "blg" "bib")    ; bibliography
-                  '("loe" "lof")          ; other
-                  '("synctex.gz" "tex")   ; LaTeX
-                  org-latex-logfiles-extensions))
+  ;; Remove temporary files when done
+  (setq org-latex-logfiles-extensions
+        (append '("bbl" "blg" "bib")    ; bibliography
+                '("loe" "lof")          ; other
+                '("synctex.gz" "tex")   ; LaTeX
+                org-latex-logfiles-extensions))
 
-    ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
-    ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
-    (setq org-latex-pdf-process
-          (map 'list
-               (lambda (elem)
-                 (replace-regexp-in-string
-                  " -interaction "
-                  " -shell-escape -interaction "
-                  elem))
-               org-latex-pdf-process))))
+  ;; (setq org-latex-to-pdf-process ; use `rubber' to export LaTeX to PDF
+  ;;       '("rubber -c 'setlist arguments -shell-escape' --pdf --into %o %f"))
+  (setq org-latex-pdf-process
+        (map 'list
+             (lambda (elem)
+               (replace-regexp-in-string
+                " -interaction "
+                " -shell-escape -interaction "
+                elem))
+             org-latex-pdf-process)))
 
 (use-package ox
   :defer t
