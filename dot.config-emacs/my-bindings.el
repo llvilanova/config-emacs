@@ -21,7 +21,7 @@
 (global-set-key [(meta f9)] 'maximize-window)
 (global-set-key [(control f9)] 'minimize-window)
 (define-key ctl-x-4-map (kbd "s") 'my-swap-buffers-in-windows)
-
+(global-set-key (kbd "<C-S-drag-mouse-1>") #'my-swap-window-buffers-by-dnd)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Buffers
