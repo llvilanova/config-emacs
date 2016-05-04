@@ -107,11 +107,12 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
                 (apply 'my-org-agenda-skip-tag "gohome" nil))))))
 
 (use-package org-gnome-calendar
+  :defer 2
+  :commands global-org-gnome-calendar-mode
   :config
-  (progn
-    (require 'dbus)
-    (when (dbus-ignore-errors (dbus-init-bus :session))
-      (global-org-gnome-calendar-mode))))
+  (require 'dbus)
+  (when (dbus-ignore-errors (dbus-init-bus :session))
+    (global-org-gnome-calendar-mode)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
