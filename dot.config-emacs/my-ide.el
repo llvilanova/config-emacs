@@ -81,39 +81,38 @@ If called with a prefix, prompts the user for the backend."
       (set-window-configuration my-vc-dir-windows))))
 
 (use-package magit
-  :defer t
   :commands magit-status
   :config
-  (progn
-    (setq magit-diff-refine-hunk nil)
+  (setq magit-diff-refine-hunk nil)
 
-    ;; Add github pull requests
-    (defun my-magit-github-add-PR-fetch ()
-      "If refs/pull is not defined on a GH repo, define it."
-      (let ((fetch-address
-             "+refs/pull/*/head:refs/pull/origin/*"))
-        (unless (member
-                 fetch-address
-                 (magit-get-all "remote" "origin" "fetch"))
-          (when (string-match
-                 "github" (magit-get "remote" "origin" "url"))
-            (magit-git-string
-             "config" "--add" "remote.origin.fetch"
-             fetch-address)))))
+  ;; Add github pull requests
+  (defun my-magit-github-add-PR-fetch ()
+    "If refs/pull is not defined on a GH repo, define it."
+    (let ((fetch-address
+           "+refs/pull/*/head:refs/pull/origin/*"))
+      (unless (member
+               fetch-address
+               (magit-get-all "remote" "origin" "fetch"))
+        (when (string-match
+               "github" (magit-get "remote" "origin" "url"))
+          (magit-git-string
+           "config" "--add" "remote.origin.fetch"
+           fetch-address)))))
 
-    ;; `magit' in fullscreen
-    (setq my-magit-status-windows nil)
-    (make-variable-frame-local 'my-magit-status-windows)
-    (defadvice magit-status (around magit-fullscreen activate)
-      (setq my-magit-status-windows (current-window-configuration))
-      ad-do-it
-      (delete-other-windows)
-      (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
-    (defun my-magit-quit-session ()
-      "Restores the previous window configuration and kills the magit buffer"
-      (interactive)
-      (kill-buffer)
-      (set-window-configuration my-magit-status-windows)))
+  ;; `magit' in fullscreen
+  (setq my-magit-status-windows nil)
+  (make-variable-frame-local 'my-magit-status-windows)
+  (defadvice magit-status (around magit-fullscreen activate)
+    (setq my-magit-status-windows (current-window-configuration))
+    ad-do-it
+    (delete-other-windows)
+    (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
+  (defun my-magit-quit-session ()
+    "Restores the previous window configuration and kills the magit buffer"
+    (interactive)
+    (kill-buffer)
+    (set-window-configuration my-magit-status-windows))
+
   :init
   (add-hook 'magit-mode-hook #'my-magit-github-add-PR-fetch))
 
