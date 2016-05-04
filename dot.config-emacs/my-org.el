@@ -33,22 +33,22 @@
 ;; For a list of supported languages / backends see:
 ;; http://orgmode.org/worg/org-contrib/babel/languages.php
 (use-package org
+  :ensure t
   :defer t
   :config
-  (progn
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((C . t)
-       (ditaa . t)
-       (dot . t)
-       (gnuplot . t)
-       (latex . t)
-       (octave . t)
-       (perl . t)
-       (python . t)
-       (R . t)
-       (screen . t)))
-    (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((C . t)
+     (ditaa . t)
+     (dot . t)
+     (gnuplot . t)
+     (latex . t)
+     (octave . t)
+     (perl . t)
+     (python . t)
+     (R . t)
+     (screen . t)))
+  (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
