@@ -50,8 +50,9 @@
 
 (setq visible-bell t)                        ; no annoying sounds
 
-(setq inhibit-startup-message t              ; don't show ...
-      inhibit-startup-echo-area-message t)   ; ... startup messages
+(setq inhibit-startup-message t)                     ; don't show ...
+(put 'inhibit-startup-echo-area-message 'saved-value ; ... startup messages
+     (setq inhibit-startup-echo-area-message (user-login-name)))
 
 ;; `cursor-chg': context-specific cursor appearence
 (use-package cursor-chg
