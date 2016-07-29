@@ -437,6 +437,14 @@ then only one line is copied."
 (add-hook 'ibuffer-mode-hook
           (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 
+;;;; Create parents
+(defun my-make-parent-directory ()
+  "Make sure the directory of `buffer-file-name' exists."
+  (let ((dir (file-name-directory buffer-file-name)))
+    (when (yes-or-no-p (format "Create directory \"%s\"?" dir))
+      (make-directory dir t))))
+(add-hook 'find-file-not-found-functions #'my-make-parent-directory)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Misc
