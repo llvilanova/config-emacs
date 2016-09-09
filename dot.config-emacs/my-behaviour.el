@@ -576,6 +576,14 @@ then only one line is copied."
 ;; (global-set-key [remap ido-find-alternate-file] 'my-find-alternate-file-or-as-sudo)
 (global-set-key [(control x) (control v)] 'my-find-alternate-file-or-as-sudo)
 
+;;;; GnuPG
+(use-package epa-file
+  :ensure t
+  :defer 2
+  :config
+  (epa-file-enable))
+
+
 ;;; Postamble
 
 (provide 'my-behaviour)
