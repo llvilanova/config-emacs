@@ -86,9 +86,9 @@
   :ensure t
   :defer 1
   :commands (sml/setup)
-  :init (progn
-          (setq-default sml/no-confirm-load-theme t)
-          (setq-default sml/name-width 30))
+  :init
+  (setq-default sml/no-confirm-load-theme t)
+  (setq-default sml/name-width 30)
   :config (sml/setup))
 
 (use-package smart-mode-line-powerline-theme
