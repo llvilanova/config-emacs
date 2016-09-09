@@ -89,12 +89,12 @@ If called with a prefix, prompts the user for the backend."
   (defun my-magit-github-add-PR-fetch ()
     "If refs/pull is not defined on a GH repo, define it."
     (let ((fetch-address
-           "+refs/pull/*/head:refs/pull/origin/*"))
+           "+refs/pull/*/head:refs/pull/origin/*")
+          (remote-url (magit-get "remote" "origin" "url")))
       (unless (member
                fetch-address
                (magit-get-all "remote" "origin" "fetch"))
-        (when (string-match
-               "github" (magit-get "remote" "origin" "url"))
+        (when (and remote-url (string-match "github" remote-url))
           (magit-git-string
            "config" "--add" "remote.origin.fetch"
            fetch-address)))))
