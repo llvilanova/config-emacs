@@ -45,9 +45,7 @@
 ;; `wn-org'
 (use-package wn-org
   :commands wn-org-search
-  :bind ("C-x w" . wn-org-search)
-  :init (progn
-          (my-register-helper-buffer "*WordNet*" 'help)))
+  :bind ("C-x w" . wn-org-search))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

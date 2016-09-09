@@ -409,17 +409,11 @@
 (use-package xcscope
   :defer t
   :init
-  (progn
-    (add-hook 'c-mode-common-hook #'cscope-minor-mode)
-    ;; Special treatment for tags buffer
-    (my-register-helper-buffer "*cscope*" 'long-help)))
+  (add-hook 'c-mode-common-hook #'cscope-minor-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code help
-
-;; Special treatment for documentation buffer
-(my-register-helper-buffer "*TAG DOCUMENTATION*" 'help)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -519,9 +513,6 @@ If ARG is not nil, force a call to `compile'."
 ;; vc
 (setq vc-delete-logbuf-window nil       ; bury log after commit (do not delete)
       vc-diff-switches "-u")            ; use unified diff by default
-(my-register-helper-buffer 'diff-mode 'long-info)
-(my-register-helper-buffer 'log-edit-mode 'info)
-(my-register-helper-buffer 'vc-git-log-edit-mode 'info)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
