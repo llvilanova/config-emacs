@@ -8,10 +8,7 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     ;; (:name auto-complete         :type elpa)
      ;; (:name ac-irony              :type elpa)
-     company-mode
-     (:name company-irony         :type elpa)
      (:name disaster              :type elpa)
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
@@ -269,138 +266,25 @@
 
 ;; `company'
 (use-package company
+  :ensure t
   :bind (("M-<tab>" . company-complete))
-  :defer t
   :config
-  (progn
-    (global-company-mode t)
+  (global-company-mode t)
 
-    (require 'company-semantic)
+  (use-package company-c-headers
+    :ensure t
+    :commands 'company-c-headers
+    :init (add-hook 'company-backends 'company-c-headers))
 
-    ;; Temporarily disable `semantic-idle-summary-mode' when completing
-    (add-hook 'company-completion-started-hook
-              (lambda (manually) (my-set-minibuffer-helpers -1)))
-    (add-hook 'company-completion-cancelled-hook
-              (lambda (manually) (my-set-minibuffer-helpers 1)))
-    (add-hook 'company-completion-finished-hook
-              (lambda (candidate) (my-set-minibuffer-helpers 1)))
+  (use-package company-irony
+    :ensure t
+    :commands 'company-irony
+    :init (add-hook 'company-backends 'company-irony))
 
-    ;; Special treatment for documentation buffer
-    (my-register-helper-buffer "*Company meta-data*" 'help)
-
-    ;; ;; Show documentation buffer when selecting a completion
-    ;; ;; taken from `company-show-doc-buffer'
-    ;; (add-hook 'company-completion-finished-hook
-    ;;           (lambda (candidate)
-    ;;             (let ((doc-buffer (company-call-backend 'doc-buffer candidate)))
-    ;;               (if doc-buffer
-    ;;                   (progn
-    ;;                     (with-current-buffer doc-buffer
-    ;;                       (goto-char (point-min)))
-    ;;                     (display-buffer doc-buffer t))))))
-    ))
-(use-package company-semantic
-  :defer t
-  :config
-  (progn
-    (defun company-semantic (command &optional arg &rest ignored)
-      "A `company-mode' completion back-end using CEDET Semantic."
-      (interactive (list 'interactive))
-      (case command
-        ('interactive (company-begin-backend 'company-semantic))
-        ('prefix (and (memq major-mode company-semantic-modes)
-                      (semantic-active-p)
-                      (not (company-in-string-or-comment))
-                      (or (company-semantic--grab) 'stop)))
-        ;; ('candidates (if (and (equal arg "")
-        ;;                     (looking-back " "))
-        ;;                  (company-semantic-completions-raw arg)
-        ;;                (company-semantic-completions arg)))
-        ('candidates (or (company-semantic-completions arg)
-                         (company-semantic-completions-raw arg)))
-        ('meta (funcall company-semantic-metadata-function
-                        (assoc arg company-semantic--current-tags)))
-        ('doc-buffer (company-semantic-doc-buffer
-                      (assoc arg company-semantic--current-tags)))
-        ;; because "" is an empty context and doesn't return local variables
-        ('no-cache (equal arg ""))
-        ('location (let ((tag (assoc arg company-semantic--current-tags)))
-                     (when (buffer-live-p (semantic-tag-buffer tag))
-                       (cons (semantic-tag-buffer tag)
-                             (semantic-tag-start tag)))))))))
-
-
-;; `auto-complete'
-(use-package auto-complete
-  :disabled t
-  :bind (("M-<tab>" . auto-complete)
-         ("C-c h" . ac-last-quick-help)
-         ("C-c H" . ac-last-help))
-  :defer t
-  :diminish auto-complete-mode
-  :init
-  (progn
-    (setq ac-comphist-file (path my-cache-dir "ac-comphist.dat"))
-
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (add-to-list 'ac-sources 'ac-source-filename)
-                (my-ac-source-semantic-enable)))
-    (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup))
-  :config
-  (progn
-    (global-auto-complete-mode t)
-
-    (require 'yasnippet)
-    (defun my-ac-source-semantic-enable ()
-      (yas-minor-mode 1)                ; enable yasnippet for arg placeholders
-      (add-to-list 'ac-sources 'ac-source-semantic-raw)
-      (add-to-list 'ac-sources 'ac-source-semantic))
-
-    (require 'semantic/ia)
-    (require 'auto-complete-config)
-    (ac-flyspell-workaround)
-    (setq ac-dwim t                    ; be clever on TAB/RET
-          ac-use-quick-help t          ; show popup (otherwise use f1/C-?) ...
-          ac-quick-help-delay 0.2      ; ... almost immediately
-          ac-auto-start nil              ; do not start automatically
-          ac-auto-show-menu nil          ; do not show menu when auto-starting
-          ac-use-menu-map t)           ; allow C-n/C-p in completion menu
-    (add-hook 'auto-complete-mode-hook
-              (lambda ()
-                ;; (setq yas-trigger-key nil)
-                (ac-set-trigger-key "TAB")))))
-(use-package auto-complete-config
-  :disabled t
-  :defer t
-  :config
-  (progn
-    ;; Enhance semantic completion with yasnippet
-    (defun ac-semantic-action ()
-      (when (and (boundp 'yas/minor-mode) yas/minor-mode)
-        (let* ((tag (car (last (oref (semantic-analyze-current-context) prefix))))
-               (class (semantic-tag-class tag))
-               (args))
-          (when (eq class 'function)
-            (setq args (semantic-tag-function-arguments tag))
-            (yas/expand-snippet
-             (concat "("
-                     (mapconcat
-                      (lambda (arg)
-                        (let ((arg-type (semantic-format-tag-type arg nil))
-                              (arg-name (semantic-format-tag-name arg nil)))
-                          (concat "${"
-                                  (if (string= arg-name "")
-                                      arg-type
-                                    (concat arg-type " " arg-name))
-                                  "}")))
-                      args
-                      ", ")
-                     ")$0"))))))
-    (add-to-list 'ac-source-semantic
-                 '((action . ac-semantic-action)))
-    (add-to-list 'ac-source-semantic-raw
-                 '((action . ac-semantic-action)))))
+  (use-package company-quickhelp
+    :ensure t
+    :commands 'company-quickhelp-mode
+    :init (add-hook 'company-mode-hook 'company-quickhelp-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Code navigation
