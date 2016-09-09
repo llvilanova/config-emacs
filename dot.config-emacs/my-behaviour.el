@@ -11,7 +11,6 @@
    anzu
    (:name cssh                  :type elpa)
    (:name expand-region         :type elpa)
-   (:name fancy-narrow          :type elpa)
    flx
    (:name fuzzy                 :type elpa)
    god-mode
@@ -43,7 +42,8 @@
 (setq window-combination-resize t       ; try to be fair creating windows ...
       window-combination-limit t)       ; ... as well as deleting them
 
-(put 'narrow-to-region 'disabled nil)     ; enable region narrowing
+(put 'narrow-to-region 'disabled nil)   ; enable region narrowing
+(put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 (put 'erase-buffer 'disabled nil)
 
 ;;;; Undo / redo window configurations
@@ -347,7 +347,18 @@ then only one line is copied."
          ([remap widen] . fancy-widen)))
 
 (use-package narrow-or-widen-dwim
-  :bind ("C-x n" . narrow-or-widen-dwim))
+  :init
+  (defun my-narrow-or-widen-dwim (p)
+    "`narrow-or-widen-dwim' with an indirect buffer when called with prefix."
+    (interactive "P")
+    (if p
+        (let ((buf (clone-indirect-buffer nil nil)))
+          (with-current-buffer buf
+            (narrow-or-widen-dwim nil)
+            (switch-to-buffer buf)))
+      (narrow-or-widen-dwim nil)))
+  :commands narrow-or-widen-dwim
+  :bind ("C-x n" . my-narrow-or-widen-dwim))
 
 ;;;; `key-chord'
 (use-package key-chord
@@ -503,8 +514,6 @@ then only one line is copied."
                   esell-review-quick-commands nil
                   eshell-smart-space-goes-to-end t)
             (eshell-smart-initialize)))
-
-(put 'narrow-to-page 'disabled nil)     ; do not barf about narrowing
 
 ;;;; `re-builder'
 (add-hook 'reb-mode-hook
