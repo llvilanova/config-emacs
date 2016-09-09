@@ -122,6 +122,13 @@
   (hl-line-toggle-when-idle t)
   (hl-line-when-idle-interval (+ 1 curchg-idle-interval)))
 
+;; temporarily highlight changes from pasting etc
+(use-package volatile-highlights
+  :ensure t
+  :defer 2
+  :config
+  (volatile-highlights-mode t))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
 
