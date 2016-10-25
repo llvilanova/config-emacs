@@ -12,7 +12,6 @@
    flx
    god-mode
    ido-ubiquitous
-   (:name key-chord             :type elpa)
    multiple-cursors
    outshine
    smartparens
@@ -360,6 +359,7 @@ then only one line is copied."
 
 ;;;; `key-chord'
 (use-package key-chord
+  :ensure t
   :config
   (progn
     (key-chord-mode t)
