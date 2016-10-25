@@ -8,7 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     (:name fic-ext-mode          :type elpa)
      (:name flycheck              :type elpa)
      (:name flycheck-irony        :type elpa)
      (:name flycheck-color-mode-line :type github
@@ -130,6 +129,7 @@
 
 ;; `fic-ext-mode': Highlight TODO's and the like
 (use-package fic-ext-mode
+  :ensure t
   :defer t
   :diminish fic-ext-mode
   :init (add-hook 'prog-mode-hook 'fic-ext-mode)
