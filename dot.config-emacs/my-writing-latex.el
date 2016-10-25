@@ -3,12 +3,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
 
-(defun my-writing-latex-setup ()
-  (my-add-packages
-   '(
-     (:name bibtex-utils          :type elpa)
-     )))
-(my-add-init-hook 'LaTeX-mode-hook #'my-writing-latex-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
@@ -93,6 +87,10 @@
   (add-hook 'LateX-mode-hook #'bib-cite-minor-mode)
   :config
   (setq reftex-plug-into-AUCTeX bib-cite-use-reftex-view-crossref t))
+;; ;; `bibtex-utils'
+;; (use-package bibtex-utils
+;;   :ensure t)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
