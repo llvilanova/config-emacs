@@ -9,7 +9,6 @@
  '(
    ace-window
    anzu
-   (:name expand-region         :type elpa)
    flx
    (:name fuzzy                 :type elpa)
    god-mode
@@ -337,6 +336,7 @@ then only one line is copied."
 
 ;;;; `expand-region'
 (use-package expand-region
+  :ensure t
   :defer t
   :bind ("C-M-<return>" . er/expand-region))
 
