@@ -135,6 +135,7 @@
 ;; ;; Change shell's color scheme
 (add-hook 'after-init-hook
           (lambda ()
+            (require 'ansi-color)
             (ansi-color-map-update 'ansi-color-names-vector
                                    (vconcat (mapcar (lambda (elem)
                                                       (cond
