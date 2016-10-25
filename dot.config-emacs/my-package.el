@@ -3,7 +3,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Package sources
 
-;; `el-get' auto-installation
+;; `el-get'
 (setq el-get-dir (path my-cache-dir "el-get" ""))
 (add-to-list 'load-path (path el-get-dir "el-get"))
 (unless (require 'el-get nil t)
@@ -19,25 +19,31 @@
       (eval-print-last-sexp))))
 (el-get 'sync '(el-get))
 
-;; `package' auto-installation
+
+;; `package'
+(require 'package)
+(setq package-enable-at-startup nil)
 (setq package-user-dir (path my-cache-dir "elpa"))
-(el-get 'sync '(package))
-;; build local el-get recipes when updating elpa
-(require 'el-get-elpa)
-(defun my-package-refresh-contents-advice ()
-  (el-get-elpa-build-local-recipes nil t))
-(advice-add #'package-refresh-contents :after #'my-package-refresh-contents-advice)
-(unless (file-exists-p (path package-user-dir "archives"))
-  ;; first-time initialization
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(package-initialize)
+(unless package-archive-contents
   (package-refresh-contents))
-(package-initialize t)
+
+
+;; `use-package'
+;(setq use-package-verbose t)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
 
 ;; local site-lisp
 (defconst my-code-dir (path my-config-dir "site-lisp"))
 (add-to-list 'load-path my-code-dir)
 
-;; Taken from `starter-kit-defuns'
 
+;; Taken from `starter-kit-defuns'
 (defvar my-recompile-objs (list ;; my-config-dir
                                 my-code-dir)
   "List of recompilation objectives.
@@ -89,19 +95,6 @@ command to be run in a shell.")
   "Install list of packages using `el-get' and add to `el-get-sources'."
   (setq el-get-sources (append el-get-sources packages))
   (el-get 'sync (mapcar 'el-get-source-name packages)))
-
-(setq el-get-sources '(use-package))
-(el-get 'sync '(el-get use-package))
-(require 'use-package)
-;; (setq use-package-verbose t)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Initial package list
-(my-add-packages
- '(
-   cedet
-   ))
 
 
 (provide 'my-package)

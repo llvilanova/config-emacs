@@ -3,6 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Common routines and macros
 
+;(package-initialize)
+
 (defun path (&rest list)
   "Build a path by concatenating a list of strings.
 
@@ -12,12 +14,6 @@ directory path."
     (dolist (elem (cdr list))
       (setq res (concat (file-name-as-directory res) elem)))
     res))
-
-(defmacro after (file &rest body)
-  "`eval-after-load' FILE and evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,file
-     '(progn ,@body)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
