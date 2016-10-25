@@ -8,10 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     (:name flycheck              :type elpa)
-     (:name flycheck-irony        :type elpa)
-     (:name flycheck-color-mode-line :type github
-            :pkgname "flycheck/flycheck-color-mode-line")
      (:name guess-style           :type http
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
      (:name highlight-parentheses :type elpa)
@@ -334,22 +330,22 @@ If ARG is not nil, force a call to `compile'."
 ;; `flycheck': Continuous compilation
 
 (use-package flycheck
-  :defer t
-  :init (my-hook-once 'prog-mode-hook #'global-flycheck-mode t))
+  :ensure t
+  :commands global-flycheck-mode
+  :init
+  (add-hook 'after-init-hook 'global-flycheck-mode)
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11"))))
 
 ;; Linux-specific includes & defines
 (defun my-flycheck-linux ()
- (require 'ede/linux)
- (when (ede-linux-project-p (ede-current-project))
-  (setq flycheck-clang-include-path
-   (oref (ede-current-project) include-path))
-  (setq flycheck-clang-definitions
-   '("-D__KERNEL__"))))
+  (require 'ede/linux)
+  (when (ede-linux-project-p (ede-current-project))
+    (setq flycheck-clang-include-path
+          (oref (ede-current-project) include-path))
+    (setq flycheck-clang-definitions
+          '("-D__KERNEL__"))))
 (add-hook 'find-file-hook 'my-flycheck-linux t)
 
-(use-package flycheck-color-mode-line
-  :defer t
-  :init (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
