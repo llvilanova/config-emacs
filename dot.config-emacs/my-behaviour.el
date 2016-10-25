@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   ace-window
    anzu
    flx
    god-mode
@@ -52,6 +51,7 @@
          ("C-x <up>"    . windmove-up)
          ("C-x <down>"  . windmove-down)))
 (use-package ace-window
+  :ensure t
   :config (setq aw-leading-char-style 'path)
   :bind ("C-x o" . ace-window))
 
