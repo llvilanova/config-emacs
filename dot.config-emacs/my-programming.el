@@ -13,7 +13,6 @@
      (:name irony-mode            :type apt-get)
      (:name lua-mode              :type apt-get)
      (:name pylint                :type apt-get)
-     (:name yasnippet             :type elpa)
      )))
 (my-add-init-hook 'prog-mode-hook #'my-programming-setup)
 
@@ -242,6 +241,7 @@
 
 ;; `yasnippet'
 (use-package yasnippet
+  :ensure t
   :defer t
   :diminish yas-minor-mode)
 
