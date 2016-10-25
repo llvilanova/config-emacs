@@ -6,21 +6,12 @@
 (defun my-writing-latex-setup ()
   (my-add-packages
    '(
-     (:name auctex                :type apt-get)
      (:name bibtex-utils          :type elpa)
      )))
 (my-add-init-hook 'LaTeX-mode-hook #'my-writing-latex-setup)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
-(setq font-latex-user-keyword-classes   ; user-defined keyword highlighting
-      '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command))
-      TeX-parse-self t                  ; parse file on load
-      TeX-auto-save t                   ; store parsed information...
-      TeX-auto-local (path ".auto" "")  ; ...here
-      TeX-style-local (path ".style" "")
-      TeX-fold-auto t)                  ; auto-fold new macros
-(setq-default TeX-master nil)           ; query for master file
 
 (add-hook
  'LaTeX-mode-hook
@@ -45,6 +36,26 @@
                   (lambda ()
                     (require 'smartparens-latex)
                     (sp-local-pair 'latex-mode "\"" nil :actions nil))))
+
+(use-package auctex
+  :ensure t
+  :mode ("\\.tex" . TeX-latex-mode)
+  ;; :commands (latex-mode LaTeX-mode plain-tex-mode)
+  :init
+  (setq-default TeX-parse-self t                 ; parse file on load
+                TeX-auto-save t                  ; store parsed information...
+                TeX-auto-local (path ".auto" "") ; ...here
+                TeX-save-query t                 ; ask saving before compilation
+                TeX-style-local (path ".style" "")
+                TeX-fold-auto t                  ; auto-fold new macros
+                TeX-PDF-mode 1
+                TeX-master nil)                  ; query for master file
+  (setq-default font-latex-user-keyword-classes  ; user-defined keyword highlighting
+                '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command)))
+  ;; (add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
+  ;; (add-hook 'LaTeX-mode-hook #'flyspell-mode)
+  ;; (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
+  )
 
 ;; Do not ask when running the viewer
 (use-package tex
