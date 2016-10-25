@@ -8,7 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     ;; (:name ac-irony              :type elpa)
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
