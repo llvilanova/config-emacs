@@ -9,7 +9,6 @@
  '(
    ace-window
    anzu
-   (:name cssh                  :type elpa)
    (:name expand-region         :type elpa)
    flx
    (:name fuzzy                 :type elpa)
@@ -523,10 +522,6 @@ then only one line is copied."
 ;; `god-mode': Control- and Meta-less commands
 (use-package god-mode
   :bind (("M-ESC" . god-local-mode)))
-
-;; `cssh'
-(use-package cssh
-  :config (cssh-define-global-bindings))
 
 ;; `dired'
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
