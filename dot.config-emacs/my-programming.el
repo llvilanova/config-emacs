@@ -9,7 +9,6 @@
   (my-add-packages
    '(
      ;; (:name ac-irony              :type elpa)
-     (:name disaster              :type elpa)
      (:name doc-mode              :type http
             :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
@@ -409,5 +408,9 @@ If ARG is not nil, force a call to `compile'."
   (setq diff-switches (list diff-switches)))
 (add-to-list 'diff-switches "-u")
 (setq diff-switches (remove "-c" diff-switches))
+
+;; `disaster'
+(use-package disaster
+  :ensure t)
 
 (provide 'my-programming)
