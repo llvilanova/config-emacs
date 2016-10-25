@@ -34,7 +34,6 @@
           :pkgname "llvilanova/info-buffer")
    (:name lv                    :type github
           :pkgname "llvilanova/lv")
-   (:name wgrep                 :type elpa)
    ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -315,6 +314,13 @@ Position the cursor at it's beginning, according to the current mode."
 ;; `info'
 (use-package info-buffer
   :bind (("C-h i" . info-display-manual-in-buffer)))
+
+;; `wgrep'
+(use-package wgrep
+  :ensure t
+  :commands wgrep-toggle-readonly-area
+  :bind (:map grep-mode-map
+	 ("C-c C-p" . wgrep-toggle-readonly-area)))
 
 (provide 'my-misc)
 ;;; my-misc.el ends here
