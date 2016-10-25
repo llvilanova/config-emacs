@@ -9,7 +9,6 @@
  '(
    flx
    god-mode
-   ido-ubiquitous
    smex
    ))
 
@@ -404,6 +403,7 @@ then only one line is copied."
 
 ;;;; `ido-ubiquitous'
 (use-package ido-ubiquitous
+  :ensure t
   :config (ido-ubiquitous-mode 1))
 
 ;;;; `flx-ido': smarter flexible search
