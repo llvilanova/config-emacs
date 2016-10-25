@@ -10,7 +10,6 @@
    flx
    god-mode
    ido-ubiquitous
-   multiple-cursors
    outshine
    smex
    ))
@@ -294,6 +293,7 @@ then only one line is copied."
         ad-do-it))))
 
 (use-package multiple-cursors
+  :ensure t
   :bind (("C-;"   . mc/mark-all-dwim)
          ("C-M-;" . mc/edit-lines)
          ("C-M-," . mc/mark-mode-like-this-extended)
