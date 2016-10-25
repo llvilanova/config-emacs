@@ -10,7 +10,6 @@
    '(
      (:name guess-style           :type http
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
-     (:name highlight-parentheses :type elpa)
      (:name highlight-symbol      :type elpa)
      (:name irony-mode            :type apt-get)
      (:name jinja2-mode           :type elpa)
@@ -119,6 +118,7 @@
 
 ;; `highlight-parentheses': highlight parentheses around point
 (use-package highlight-parentheses
+  :ensure t
   :defer t
   :diminish highlight-parentheses-mode
   :init (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
