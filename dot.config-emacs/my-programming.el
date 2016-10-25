@@ -10,7 +10,6 @@
    '(
      (:name guess-style           :type http
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
-     (:name highlight-symbol      :type elpa)
      (:name irony-mode            :type apt-get)
      (:name jinja2-mode           :type elpa)
      (:name lua-mode              :type apt-get)
@@ -148,6 +147,7 @@
 
 ;; `highlight-symbol': text/symbol highlighting
 (use-package highlight-symbol
+  :ensure t
   :bind (("M-<f6>" . highlight-symbol-at-point)
          ("<f5>" . highlight-symbol-prev)
          ("<f6>" . highlight-symbol-next)))
