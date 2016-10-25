@@ -13,7 +13,6 @@
    ido-ubiquitous
    multiple-cursors
    outshine
-   smartparens
    smex
    undo-tree
    ))
@@ -110,6 +109,7 @@
 (global-font-lock-mode t)               ; always do syntax highlighting
 (blink-cursor-mode -1)                  ; don't blink cursor
 (use-package smartparens
+  :ensure t
   :diminish smartparens-mode
   :init
   (progn
