@@ -10,7 +10,6 @@
    flx
    god-mode
    ido-ubiquitous
-   outshine
    smex
    ))
 
@@ -320,6 +319,7 @@ then only one line is copied."
 
 ;;;; `outshine'
 (use-package outshine
+  :ensure t
   :defer t
   :init
   (progn
