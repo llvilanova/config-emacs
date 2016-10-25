@@ -8,7 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     (:name elisp-slime-nav       :type elpa)
      (:name fic-ext-mode          :type elpa)
      (:name flycheck              :type elpa)
      (:name flycheck-irony        :type elpa)
@@ -165,6 +164,7 @@
 ;; TODO: electric-pair-mode
 
 (use-package elisp-slime-nav
+  :ensure t
   :defer t
   :diminish elisp-slime-nav-mode
   :init (add-hook 'emacs-lisp-mode-hook #'elisp-slime-nav-mode))
