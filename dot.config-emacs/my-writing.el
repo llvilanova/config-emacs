@@ -6,7 +6,6 @@
 (defun my-writing-setup ()
   (my-add-packages
    '(
-     (:name auto-dictionary       :type elpa)
      ;; predictive
      wn-org
      )))
@@ -30,6 +29,12 @@
 
 (setq ispell-program-name "aspell"
       ispell-extra-args '("--sug-mode=ultra"))
+
+;; `auto-dictionary'
+(use-package auto-dictionary
+  :ensure t
+  :defer t
+  :init (add-hook 'text-mode-hook #'auto-dictionary-mode))
 
 ;; `flyspell'
 (use-package flyspell
