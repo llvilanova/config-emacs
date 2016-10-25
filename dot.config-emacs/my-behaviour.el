@@ -8,7 +8,6 @@
 (my-add-packages
  '(
    god-mode
-   smex
    ))
 
 
@@ -414,6 +413,7 @@ then only one line is copied."
 ;;         replaces emacs's default `execute-extended-command'
 ;;         supersedes `icomplete+'
 (use-package smex
+  :ensure t
   :init
   (progn
     (el-get nil '(smex))
