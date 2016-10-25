@@ -8,8 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     (:name doc-mode              :type http
-            :url "http://nschum.de/src/emacs/doc-mode/doc-mode.el")
      (:name elisp-slime-nav       :type elpa)
      (:name fic-ext-mode          :type elpa)
      (:name flycheck              :type elpa)
@@ -232,13 +230,6 @@
                 (auto-fill-mode 1)
                 (turn-on-filladapt-mode)))
     (add-hook 'c-mode-common-hook #'c-setup-filladapt)))
-
-;; `doc-mode': manage doxygen documentation
-(use-package doc-mode
-  :defer t
-  :diminish doc-mode
-  :init (add-hook 'c-mode-common-hook #'doc-mode))
-
 
 ;; Documentation editors
 (setq c-doc-comment-style nil)
