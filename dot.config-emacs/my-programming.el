@@ -12,7 +12,6 @@
             :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
      (:name irony-mode            :type apt-get)
      (:name lua-mode              :type apt-get)
-     (:name macrostep             :type elpa)
      (:name pylint                :type apt-get)
      (:name xcscope               :type elpa)
      (:name yasnippet             :type elpa)
@@ -400,6 +399,10 @@ If ARG is not nil, force a call to `compile'."
 
 ;; `jinja2-mode'
 (use-package jinja2-mode
+  :ensure t)
+
+;; `macrostep'
+(use-package macrostep
   :ensure t)
 
 
