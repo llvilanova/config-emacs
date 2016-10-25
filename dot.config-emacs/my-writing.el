@@ -6,7 +6,6 @@
 (defun my-writing-setup ()
   (my-add-packages
    '(
-     ;; predictive
      wn-org
      )))
 (my-add-init-hook 'text-mode-hook #'my-writing-setup)
@@ -58,6 +57,7 @@
 
 (use-package predictive
   :disabled t
+  :ensure t
   :defer t
   :init (add-hook 'text-mode-hook #'predictive-mode)
   :config
