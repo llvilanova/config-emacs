@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   flx
    god-mode
    smex
    ))
@@ -408,6 +407,7 @@ then only one line is copied."
 
 ;;;; `flx-ido': smarter flexible search
 (use-package flx-ido
+  :ensure t
   :init (flx-ido-mode 1))
 
 ;;;; `smex': command-completion interface on top of `ido'
