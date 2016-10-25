@@ -2,14 +2,6 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-(my-add-packages
- '(
-   god-mode
-   ))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Frames
@@ -520,6 +512,7 @@ then only one line is copied."
 
 ;; `god-mode': Control- and Meta-less commands
 (use-package god-mode
+  :ensure t
   :bind (("M-ESC" . god-local-mode)))
 
 ;; `dired'
