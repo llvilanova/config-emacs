@@ -2,16 +2,6 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-(my-add-packages
- '((:name magit)
-   (:name magit-stgit
-          :type github
-          :pkgname "magit/magit-stgit"
-          :depends magit)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Project management (EDE)
 
@@ -81,6 +71,7 @@ If called with a prefix, prompts the user for the backend."
       (set-window-configuration my-vc-dir-windows))))
 
 (use-package magit
+  :ensure t
   :commands magit-status
   :config
   (setq magit-diff-refine-hunk nil)
@@ -117,6 +108,7 @@ If called with a prefix, prompts the user for the backend."
   (add-hook 'magit-mode-hook #'my-magit-github-add-PR-fetch))
 
 (use-package magit-stgit
+  :ensure t
   :defer t
   :commands magit-stgit-mode
   :init (add-hook 'magit-mode-hook 'magit-stgit-mode))
