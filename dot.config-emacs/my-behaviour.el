@@ -11,7 +11,6 @@
    anzu
    flx
    god-mode
-   (:name hungry-delete         :type elpa)
    ido-ubiquitous
    (:name key-chord             :type elpa)
    multiple-cursors
@@ -274,6 +273,7 @@ then only one line is copied."
 
 ;;;; `hungry-delete-mode'
 (use-package hungry-delete
+  :ensure t
   :config (global-hungry-delete-mode))
 
 ;;;; `undo-tree'
