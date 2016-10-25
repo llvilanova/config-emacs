@@ -13,7 +13,6 @@
      (:name irony-mode            :type apt-get)
      (:name lua-mode              :type apt-get)
      (:name pylint                :type apt-get)
-     (:name xcscope               :type elpa)
      (:name yasnippet             :type elpa)
      )))
 (my-add-init-hook 'prog-mode-hook #'my-programming-setup)
@@ -274,9 +273,10 @@
 
 ;; `xcscope'
 (use-package xcscope
+  :ensure t
   :defer t
   :init
-  (add-hook 'c-mode-common-hook #'cscope-minor-mode)
+  (add-hook 'c-mode-common-hook #'cscope-minor-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
