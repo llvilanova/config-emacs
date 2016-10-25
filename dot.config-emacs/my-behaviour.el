@@ -10,7 +10,6 @@
    ace-window
    anzu
    flx
-   (:name fuzzy                 :type elpa)
    god-mode
    (:name hungry-delete         :type elpa)
    ido-ubiquitous
@@ -534,6 +533,7 @@ then only one line is copied."
 
 ;; `fuzzy'
 (use-package fuzzy
+  :ensure t
   :commands turn-on-fuzzy-isearch
   :init (turn-on-fuzzy-isearch))
 
