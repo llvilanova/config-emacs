@@ -7,7 +7,6 @@
 
 (my-add-packages
  '(
-   anzu
    flx
    god-mode
    ido-ubiquitous
@@ -206,6 +205,7 @@ If COMMENTFIRST is non-nil, comment the original line."
 
 ;;;; `anzu'
 (use-package anzu
+  :ensure t
   :config (global-anzu-mode))
 
 ;;;; `uniquify': nicer unique names for buffers
