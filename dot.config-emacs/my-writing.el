@@ -51,6 +51,16 @@
   :commands wn-org-search
   :bind ("C-x w" . wn-org-search))
 
+;; `define-word'
+(defun my-define-word-dwim (word)
+  (interactive (list (read-string "Word: "
+                                  (substring-no-properties
+                                   (thing-at-point 'word)))))
+  (define-word word))
+(use-package define-word
+  :ensure t
+  :bind ("C-x W" . my-define-word-dwim))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * `predictive': Predictive text completion
