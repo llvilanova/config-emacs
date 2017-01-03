@@ -1,16 +1,6 @@
 ;;; my-writing.el --- Text editing preferences.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-(my-add-packages
- '(
-   (:name wn-org  :type http
-          :url "https://raw.githubusercontent.com/Henry/dot-emacs/master/my-lisp/wn-org.el")
-   ))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
 
 (add-hook
@@ -44,11 +34,6 @@
       (when my-flyspell-mode-maybe-enabled
         (flyspell-mode arg)))
     (add-hook 'text-mode-hook #'my-flyspell-mode-maybe)))
-
-;; `wn-org'
-(use-package wn-org
-  :commands wn-org-search
-  :bind ("C-x w" . wn-org-search))
 
 ;; `define-word'
 (defun my-define-word-dwim (word)
