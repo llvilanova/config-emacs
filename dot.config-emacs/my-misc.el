@@ -28,7 +28,6 @@
 
 (my-add-packages
  '(
-   (:name emacs-goodies-el      :type apt-get)
    (:name info-buffer           :type github
           :pkgname "llvilanova/info-buffer")
    (:name lv                    :type github
