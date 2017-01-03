@@ -414,7 +414,9 @@ then only one line is copied."
 
 ;;;; `icomplete-mode'
 ;; Complements `smex' where it is not used
-(icomplete-mode)
+(use-package icomplete
+  :init
+  (icomplete-mode))
 
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
