@@ -54,6 +54,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BBDB
 
+(use-package bbdb
+  :ensure t)
+
 (setq bbdb-file (path my-data-dir "bbdb"))
 (require 'bbdb)                         ; TODO: autoload should take care of it
 (bbdb-initialize)

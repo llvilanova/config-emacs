@@ -299,9 +299,12 @@ See (info \"(gnus)Group Line Specification\")."
       '(gnus-find-subscribed-addresses)) ; support `Mail-Followup-To'
 
 ;; `bbdb'
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-message)
-(add-hook 'message-setup-hook 'bbdb-define-all-aliases)
+(use-package bbdb
+  :init
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-message)
+  (add-hook 'mail-setup-hook 'bbdb-mail-aliases)
+  (add-hook 'message-setup-hook 'bbdb-mail-aliases))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
