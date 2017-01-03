@@ -96,6 +96,12 @@
   :init (progn
           (setq-default sml/theme 'powerline)))
 
+(use-package eyebrowse
+  :ensure t
+  :defer 3
+  :config
+  (eyebrowse-mode))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utf8 / input-method
@@ -132,7 +138,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
 
-;; ;; Change shell's color scheme
+;; Change shell's color scheme
 (add-hook 'after-init-hook
           (lambda ()
             (require 'ansi-color)
