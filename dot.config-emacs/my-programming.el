@@ -191,9 +191,10 @@
 ;; Python
 
 ;; `ipython'
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq python-shell-interpreter "ipython")))
+(when (executable-find "ipython")
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq python-shell-interpreter "ipython"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
