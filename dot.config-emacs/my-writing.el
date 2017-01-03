@@ -35,6 +35,12 @@
         (flyspell-mode arg)))
     (add-hook 'text-mode-hook #'my-flyspell-mode-maybe)))
 
+;; `wordnut'
+(use-package wordnut
+  :ensure t
+  :commands wordnut-search
+  :bind ("C-x w" . wordnut-search))
+
 ;; `define-word'
 (defun my-define-word-dwim (word)
   (interactive (list (read-string "Word: "
