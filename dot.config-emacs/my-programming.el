@@ -124,6 +124,12 @@
   :init (add-hook 'prog-mode-hook 'fic-ext-mode)
   :config (add-to-list 'fic-highlighted-words "XXX"))
 
+;; `dtrt-indent': guess indentation style
+(use-package dtrt-indent
+  :ensure t
+  :init
+  (add-hook 'emacs-startup-hook #'dtrt-indent-mode))
+
 ;; `highlight-symbol': text/symbol highlighting
 (use-package highlight-symbol
   :ensure t
