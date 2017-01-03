@@ -134,7 +134,6 @@
     (add-hook 'prog-mode-hook #'guess-style-guess-all)
     (defcustom my-guess-style t
       "Whether opening a new file should try to guess the indentation stule."))
-
   :config
   (progn
     (defadvice guess-style-guess-all (around my-guess-style-guess-all)
@@ -147,6 +146,11 @@
   :bind (("M-<f6>" . highlight-symbol-at-point)
          ("<f5>" . highlight-symbol-prev)
          ("<f6>" . highlight-symbol-next)))
+
+(use-package page-break-lines
+  :ensure t
+  :init
+  (add-hook 'emacs-startup-hook #'global-page-break-lines-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
