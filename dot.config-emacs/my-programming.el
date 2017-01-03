@@ -97,7 +97,7 @@
 
 (add-hook 'prog-mode-hook
           (lambda ()
-            ;; (flyspell-prog-mode)       ; flyspell for comments and strings
+            (flyspell-prog-mode)        ; flyspell for comments and strings
 
             ;; (which-function-mode 1)    ; show current tag in modeline
 
