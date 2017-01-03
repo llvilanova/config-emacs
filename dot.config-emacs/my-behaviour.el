@@ -101,8 +101,7 @@
     (require 'smartparens-config)
     (smartparens-global-mode t)         ; highlight matching parenthesis
     (show-smartparens-global-mode t)
-    (defvar LaTeX-mode-hook nil)
-    (add-to-list 'LaTeX-mode-hook (lambda () (require 'smartparens-latex)))))
+    (defvar LaTeX-mode-hook nil)))
 
 (defun my-smart-kill-whole-line (&optional arg)
   "A simple wrapper around `kill-whole-line' that respects indentation."
