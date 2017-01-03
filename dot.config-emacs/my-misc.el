@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014-2016 Lluís Vilanova
+;; Copyright (C) 2014-2017 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -315,7 +315,7 @@ Position the cursor at it's beginning, according to the current mode."
 (use-package info+
   :ensure t)
 (use-package info-buffer
-  :bind (("C-h i" . info-display-manual-in-buffer)))
+  :bind (("C-h i" . info-buffer)))
 
 ;; `wgrep'
 (use-package wgrep
