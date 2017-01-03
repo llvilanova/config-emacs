@@ -8,8 +8,6 @@
 (defun my-programming-setup ()
   (my-add-packages
    '(
-     (:name guess-style           :type http
-            :url "http://nschum.de/src/emacs/guess-style/guess-style.el")
      (:name irony-mode            :type apt-get)
      (:name lua-mode              :type apt-get)
      (:name pylint                :type apt-get)
@@ -125,20 +123,6 @@
   :diminish fic-ext-mode
   :init (add-hook 'prog-mode-hook 'fic-ext-mode)
   :config (add-to-list 'fic-highlighted-words "XXX"))
-
-;; `guess-style': guess indentation style
-(use-package guess-style
-  :defer t
-  :init
-  (progn
-    (add-hook 'prog-mode-hook #'guess-style-guess-all)
-    (defcustom my-guess-style t
-      "Whether opening a new file should try to guess the indentation stule."))
-  :config
-  (progn
-    (defadvice guess-style-guess-all (around my-guess-style-guess-all)
-      (when my-guess-style
-        ad-do-it))))
 
 ;; `highlight-symbol': text/symbol highlighting
 (use-package highlight-symbol
