@@ -3,14 +3,12 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Packages
+;;;; Preinit
 
-(my-add-packages
- '(
-   (:name hydra                 :type elpa)
-   ))
+(use-package hydra
+  :ensure t
+  :commands defhydra)
 
-(require 'hydra)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Frames
