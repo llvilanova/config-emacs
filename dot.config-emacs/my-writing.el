@@ -3,12 +3,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packages
 
-(defun my-writing-setup ()
-  (my-add-packages
-   '(
-     wn-org
-     )))
-(my-add-init-hook 'text-mode-hook #'my-writing-setup)
+(my-add-packages
+ '(
+   (:name wn-org  :type http
+          :url "https://raw.githubusercontent.com/Henry/dot-emacs/master/my-lisp/wn-org.el")
+   ))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
