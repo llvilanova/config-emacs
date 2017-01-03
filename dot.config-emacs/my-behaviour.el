@@ -407,9 +407,7 @@ then only one line is copied."
 (use-package smex
   :ensure t
   :init
-  (progn
-    (el-get nil '(smex))
-    (setq smex-save-file (path my-cache-dir "smex.save")))
+  (setq smex-save-file (path my-cache-dir "smex.save"))
   :config (smex-initialize)
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands)))
