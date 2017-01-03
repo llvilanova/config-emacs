@@ -565,7 +565,7 @@ then only one line is copied."
 (global-set-key [(control x) (control v)] 'my-find-alternate-file-or-as-sudo)
 
 ;;;; GnuPG
-(use-package epa-file
+(use-package epg
   :ensure t
   :defer 2
   :config
