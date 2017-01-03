@@ -312,6 +312,8 @@ Position the cursor at it's beginning, according to the current mode."
         (eshell-send-input)))))
 
 ;; `info'
+(use-package info+
+  :ensure t)
 (use-package info-buffer
   :bind (("C-h i" . info-display-manual-in-buffer)))
 
