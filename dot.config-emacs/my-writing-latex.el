@@ -27,13 +27,6 @@
     :defer t
     :init (add-hook 'LaTeX-mode-hook #'orgtbl-mode)))
 
-(use-package reftex
-  :ensure auctex
-  :defer t
-  :init
-  (setq reftex-plug-into-AUCTeX t)
-  (add-hook 'LaTeX-mode-hook  #'turn-on-reftex))
-
 (use-package tex
   :ensure auctex
   :defer t
@@ -84,14 +77,16 @@
 
 ;; * Bibliography
 (add-hook
- 'LaTeX-mode-hook
- (lambda ()
-   (turn-on-reftex)                     ; activate RefTeX...
-   (setq reftex-plug-into-AUCTeX 1)))   ; ...and integrate with AUCTex
-(add-hook
  'bibtex-mode
  (lambda ()
    (require 'bibtex-utils)))            ; insert keywords on entry (C-c k)
+
+(use-package reftex
+  :ensure auctex
+  :defer t
+  :init
+  (setq reftex-plug-into-AUCTeX t)
+  (add-hook 'LaTeX-mode-hook  #'turn-on-reftex))
 
 ;; `bib-cite': show citation info in minibuffer
 (use-package bib-cite
