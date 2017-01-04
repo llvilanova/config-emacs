@@ -2,8 +2,8 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Packages
+
+;;; Packages
 
 (my-add-packages
  '(
@@ -11,14 +11,15 @@
           :pkgname "llvilanova/org-gnome-calendar")
    ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Location
+(use-package org-plus-contrib
+  :ensure t)
+
+
+;;; Location
 (defconst org-directory (path my-home-dir "plans" ""))
 (setq org-default-notes-file (path org-directory "Personal.org")
       org-completion-use-ido t
       org-pretty-entities t)
-;; Contributed extensions
-(add-to-list 'load-path "/usr/share/org-mode/lisp")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
