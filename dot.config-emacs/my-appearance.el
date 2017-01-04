@@ -83,12 +83,10 @@
 
 (use-package smart-mode-line
   :ensure t
-  :defer 1
   :commands (sml/setup)
   :init
   (setq-default sml/no-confirm-load-theme t)
-  (setq-default sml/name-width 30)
-  :config (sml/setup))
+  (add-hook 'emacs-startup-hook 'sml/setup))
 
 (use-package smart-mode-line-powerline-theme
   :ensure t
