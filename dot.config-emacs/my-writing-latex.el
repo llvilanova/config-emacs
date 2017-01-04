@@ -1,35 +1,6 @@
 ;;; my-writing-latex.el --- (La)TeX editing preferences.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * General settings
-
-(add-hook
- 'LaTeX-mode-hook
- (lambda ()
-   (TeX-PDF-mode 1)
-   (TeX-source-correlate-mode 1)
-   (LaTeX-math-mode 1)                 ; nice math insertion menu
-   (TeX-fold-mode 1)                   ; nicely foldable environments...
-   (TeX-fold-buffer)                   ; ... and pre-fold entire buffer
-   (local-set-key [(})] (lambda ()
-                          (interactive)
-                          (insert "}")
-                          (when TeX-fold-mode
-                            (TeX-fold-buffer))))
-   ;; (outline-minor-mode 1)              ; foldable regions a-la-vim
-   (orgtbl-mode 1)                      ; support for org's tables
-   ))
-
-(use-package smartparens
-  :defer t
-  :init (add-hook 'LaTeX-mode-hook
-                  (lambda ()
-                    (require 'smartparens-latex)
-                    (sp-local-pair 'latex-mode "\"" nil :actions nil))))
 
 (use-package auctex
   :ensure t
@@ -46,15 +17,30 @@
                 TeX-master nil)                  ; query for master file
   (setq-default font-latex-user-keyword-classes  ; user-defined keyword highlighting
                 '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command)))
-  ;; (add-hook 'LaTeX-mode-hook #'LaTeX-preview-setup)
-  ;; (add-hook 'LaTeX-mode-hook #'flyspell-mode)
-  ;; (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
-  )
 
-;; Do not ask when running the viewer
-(use-package tex
+  ;; foldable regions
+  (use-package outline
+    :defer t
+    :init (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
+  ;; support for org's tables
+  (use-package org-table
+    :defer t
+    :init (add-hook 'LaTeX-mode-hook #'orgtbl-mode)))
+
+(use-package reftex
+  :ensure auctex
   :defer t
+  :init
+  (setq reftex-plug-into-AUCTeX t)
+  (add-hook 'LaTeX-mode-hook  #'turn-on-reftex))
+
+(use-package tex
+  :ensure auctex
+  :defer t
+  :init
+  (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
   :config
+  ;; do not ask when running the viewer
   (setq TeX-command-list
         (mapcar
          (lambda (elem)
@@ -63,11 +49,39 @@
                      (nth 1 elem)
                      (nth 2 elem)
                      nil
-                     (nthcdr 4 elem))
+                     (nth 4 elem)
+                     (nthcdr 5 elem))
              elem))
          TeX-command-list)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package latex
+  :ensure auctex
+  :defer t
+  :commands (LaTeX-math-mode)
+  :init
+  ;; nice math insertion menu
+  (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode))
+
+(use-package tex-fold
+  :ensure auctex
+  :defer t
+  :commands (TeX-fold-buffer)
+  :init
+  ;; ... and pre-fold entire buffer
+  (add-hook 'LaTeX-mode-hook #'TeX-fold-buffer)
+  ;; nicely foldable environments ...
+  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
+  ;; auto-fold on closing brace
+  (add-hook
+   'LaTeX-mode-hook
+   (lambda ()
+     (local-set-key [(})] (lambda ()
+                            (interactive)
+                            (insert "}")
+                            (when TeX-fold-mode
+                              (TeX-fold-buffer)))))))
+
+
 ;; * Bibliography
 (add-hook
  'LaTeX-mode-hook
