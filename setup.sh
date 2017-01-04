@@ -58,14 +58,14 @@ EDITOR="$BASE/bin/default-editor"
 VISUAL="\$EDITOR -nw"
 export EDITOR ALTERNATE_EDITOR VISUAL
 
-alias e=\$EDITOR
+alias e="\$EDITOR"
 alias et=emacs-terminal
 alias er=emacs-frame-reuse
 alias en=emacs-frame-new
 alias E="SUDO_EDITOR=\"\$EDITOR -t -a emacs\" sudoedit"
 
-ediff () { ~/bin/emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
-gdbtool () { ~/bin/emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
+ediff () { emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
+gdbtool () { emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
 EOF
 
 echo " done"

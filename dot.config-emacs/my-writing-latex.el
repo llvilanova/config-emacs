@@ -99,16 +99,9 @@
 ;; `bib-cite': show citation info in minibuffer
 (use-package bib-cite
   :defer t
-  :diminish bib-cite-minor-mode
   :init
-  (add-hook 'LateX-mode-hook #'bib-cite-minor-mode)
-  :config
-  (setq reftex-plug-into-AUCTeX bib-cite-use-reftex-view-crossref t))
-;; ;; `bibtex-utils'
-;; (use-package bibtex-utils
-;;   :ensure t)
-
-
+  (setq-default bib-cite-use-reftex-view-crossref t)
+  (add-hook 'LaTeX-mode-hook #'turn-on-bib-cite))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; * Preview
