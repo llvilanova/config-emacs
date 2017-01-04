@@ -88,11 +88,6 @@
   (setq-default sml/no-confirm-load-theme t)
   (add-hook 'emacs-startup-hook 'sml/setup))
 
-(use-package smart-mode-line-powerline-theme
-  :ensure t
-  :init (progn
-          (setq-default sml/theme 'powerline)))
-
 (use-package eyebrowse
   :ensure t
   :defer 3
