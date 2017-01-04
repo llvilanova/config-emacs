@@ -68,7 +68,8 @@
 (line-number-mode t)                         ; line numbers
 (column-number-mode t)                       ; column numbers
 (size-indication-mode t)                     ; file size
-(display-time-mode t)                        ; current time
+(unless (display-graphic-p)
+  (display-time-mode t))                     ; current time
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
 
 (use-package diminish
