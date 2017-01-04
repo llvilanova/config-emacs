@@ -76,10 +76,6 @@
 
 
 ;; * Bibliography
-(add-hook
- 'bibtex-mode
- (lambda ()
-   (require 'bibtex-utils)))            ; insert keywords on entry (C-c k)
 
 (use-package reftex
   :ensure auctex
@@ -87,6 +83,18 @@
   :init
   (setq reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook  #'turn-on-reftex))
+
+;; `bibtex-utils': insert keywords on entry (C-c k) & manage search results
+(use-package bibtex
+  :defer t
+  :config
+  (use-package bibtex-utils
+    :ensure t
+    :commands (bu-make-field-keywords
+               bibtex-search-minor-mode)
+    :bind (:map bibtex-mode-map
+                ("C-c k" . bu-make-field-keywords))
+    :init (add-hook 'bibtex-mode-hook #'bibtex-search-minor-mode)))
 
 ;; `bib-cite': show citation info in minibuffer
 (use-package bib-cite
