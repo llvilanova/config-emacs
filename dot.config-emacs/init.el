@@ -52,7 +52,6 @@ directory path."
 
 (require 'cl)
 (require 'my-misc)
-(require 'my-cmdline)
 (require 'my-appearance)
 (require 'my-behaviour)
 (require 'my-ide)
