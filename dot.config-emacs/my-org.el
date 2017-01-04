@@ -176,11 +176,9 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
     (add-to-list 'org-export-filter-final-output-functions
                  'my-org-latex-filter-fancyvrb)))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+
+;;; Miscellaneous
 
 ;; Common tags
 (setq org-tag-alist '(
@@ -230,11 +228,9 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
 
 ;; ;; Linking
 ;; (require 'org-wikinodes)                ; enable camelcase auto-linking
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Secretary
+
+;;; Secretary
 (use-package org-secretary
   :defer t
   :bind (("C-M-S-o w" . org-sec-set-with)
@@ -268,11 +264,9 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   :defer t
   :config
   (require 'org-secretary))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Capture
+
+;;; Capture
 
 (use-package org-capture
   :defer t
@@ -368,7 +362,5 @@ DEADLINE: <%(org-capture-cfp-date \"Paper submission: \" \"submission\") ++1y -6
         :immediate-finish t)
        ))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
+
 (provide 'my-org)
