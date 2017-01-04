@@ -1,9 +1,6 @@
 #!/bin/bash -e
 
-# if [ $# -ne  ]; then
-#     echo "Usage: `basename $0` <base installation path>"
-#     exit 1
-# fi
+echo -n "Setting up Emacs's directories..."
 
 BASE=$(dirname `readlink -f $0`)
 
@@ -54,37 +51,24 @@ setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
 mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 
-ctrl_c() {
-    exit 1
-}
-trap ctrl_c INT
+cat >$BASE/bashrc <<EOF
+PATH="$BASE/bin":\$PATH
 
-# Run until successfully finishes or same error message repeats
-set -o pipefail
-prevline=""
-TMPFILE=`mktemp`
-while true; do
-    set +e
-    /usr/bin/emacs --batch --eval '(load-file "~/.config/emacs/init.el")' |& tee $TMPFILE
-    RES=$?
-    set -e
+EDITOR="$BASE/bin/default-editor"
+VISUAL="\$EDITOR -nw"
+export EDITOR ALTERNATE_EDITOR VISUAL
 
-    line=`tail -1 $TMPFILE`
-    if [ "$RES" == 0 -o "$prevline" == "$line" ]; then
-        break
-    fi
-    prevline="$line"
-done
+alias e=\$EDITOR
+alias et=emacs-terminal
+alias er=emacs-frame-reuse
+alias en=emacs-frame-new
+alias E="SUDO_EDITOR=\"\$EDITOR -t -a emacs\" sudoedit"
 
-rm -f $TMPFILE
+ediff () { ~/bin/emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
+gdbtool () { ~/bin/emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
+EOF
 
-if [ $RES -eq 0 ]; then
-    echo
-    echo
-    echo
-    echo "You should add '$BASE/bin' to your PATH"
-    echo
-    echo
-fi
+echo " done"
 
-exit $RES
+echo "You should add the following to your ~/.bashrc:"
+echo "  source $BASE/bashrc"
