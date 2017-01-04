@@ -90,9 +90,7 @@
 
 (use-package eyebrowse
   :ensure t
-  :defer 3
-  :config
-  (eyebrowse-mode))
+  :init (add-hook 'emacs-startup-hook 'eyebrowse-mode))
 
 (use-package spaceline
   :ensure t
