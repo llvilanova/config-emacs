@@ -94,11 +94,11 @@
 
 (use-package spaceline
   :ensure t
-  :defer 2
-  :config
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
-  (spaceline-info-mode))
+  :init (add-hook 'emacs-startup-hook
+                  (lambda ()
+                    (require 'spaceline-config)
+                    (spaceline-spacemacs-theme)
+                    (spaceline-info-mode))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utf8 / input-method
