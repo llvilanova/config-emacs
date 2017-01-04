@@ -81,45 +81,25 @@ If OTHERS is true, skip all entries that do not correspond to TAG."
   (require 'dbus)
   (when (dbus-ignore-errors (dbus-init-bus :session))
     (global-org-gnome-calendar-mode)))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Notifications
-(defun my-org-notify-expire (plist)
-  (with-current-buffer (find-buffer-visiting (plist-get plist :file))
-    (save-excursion
-      (goto-char (plist-get plist :begin))
-      (org-todo 'done)
-      (save-buffer nil))))
-
+
+;;; Notifications
 (use-package org-notify
-  :defer t
   :commands org-notify-start
-  :init (org-notify-start)
+  :init
+  (add-hook 'emacs-startup-hook #'org-notify-start)
   :config
-  (progn
-    (require 'org-agenda)
-    (org-notify-add 'default
-                    '(:time "1h" :actions (-notify/window -sound)
-                            :period "2m" :duration 60))
-    (org-notify-add 'conference
-                    '(:time "1m" :actions (-email))
-                    '(:time "1w" :actions (-email))
-                    '(:time "1d" :actions (-email)))
-    (org-notify-add 'go-home
-                    '(:time "-10m"
-                            :actions (my-org-notify-expire))
-                    '(:time "-1s" :period "20s" :duration 10
-                            :actions (-message -ding -notify/window -sound))
-                    '(:time "20m" :period "5m"  :duration 60
-                            :actions (-message -notify/window -sound)))))
+  (require 'org-agenda)
+  (org-notify-add 'default
+                  '(:time "1h" :actions (-notify/window)
+                          :period "2m" :duration 60))
+  (org-notify-add 'submission
+                  '(:time "1m" :actions (-email))
+                  '(:time "1w" :actions (-email))
+                  '(:time "1d" :actions (-email))))
 
-(display-time)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Exporting
+
+;;; Exporting
 
 (use-package org-bibtex
   :defer t
