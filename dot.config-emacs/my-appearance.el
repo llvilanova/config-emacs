@@ -143,6 +143,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
 
+;; Add vertical window separator (console mode)
+(defun my-change-window-divider ()
+  (unless (display-graphic-p)
+    (let ((display-table (or buffer-display-table standard-display-table)))
+      (set-display-table-slot display-table 5 ?│)
+      (set-window-display-table (selected-window) display-table))))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (add-hook 'window-configuration-change-hook 'my-change-window-divider)))
+
 ;; Change shell's color scheme
 (add-hook 'after-init-hook
           (lambda ()
