@@ -62,9 +62,9 @@
 
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
-(use-package semantic/db-cscope
-  :init
-  (semanticdb-enable-cscope-databases))
+;; (use-package semantic/db-cscope
+;;   :init
+;;   (semanticdb-enable-cscope-databases))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Idle scheduler
