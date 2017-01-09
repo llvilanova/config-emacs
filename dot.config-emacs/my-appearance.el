@@ -127,7 +127,7 @@
 ;; temporarily highlight changes from pasting etc
 (use-package volatile-highlights
   :ensure t
-  :defer 2
+  :diminish volatile-highlights-mode
   :config
   (volatile-highlights-mode t))
 
