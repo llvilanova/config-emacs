@@ -46,11 +46,11 @@
   "Swap buffers between two windows"
   (interactive)
   (if (and my--swapping-window
-         my--swapping-buffer)
+           my--swapping-buffer)
       (let ((this-buffer (current-buffer))
             (this-window (selected-window)))
         (if (and (window-live-p my--swapping-window)
-               (buffer-live-p my--swapping-buffer))
+                 (buffer-live-p my--swapping-buffer))
             (progn (switch-to-buffer my--swapping-buffer)
                    (select-window my--swapping-window)
                    (switch-to-buffer this-buffer)
