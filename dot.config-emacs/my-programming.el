@@ -324,6 +324,7 @@ If ARG is not nil, force a call to `compile'."
 
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :commands global-flycheck-mode
   :init
   (add-hook 'after-init-hook 'global-flycheck-mode)
