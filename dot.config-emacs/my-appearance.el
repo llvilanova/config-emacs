@@ -83,10 +83,10 @@
 
 (use-package smart-mode-line
   :ensure t
-  :commands (sml/setup)
   :init
   (setq-default sml/no-confirm-load-theme t)
-  (add-hook 'emacs-startup-hook 'sml/setup))
+  :config
+  (sml/setup))
 
 (use-package eyebrowse
   :ensure t
