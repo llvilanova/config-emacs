@@ -191,6 +191,8 @@ If COMMENTFIRST is non-nil, comment the original line."
 ;;;; `anzu'
 (use-package anzu
   :ensure t
+  :diminish anzu-mode
+  :init (setq-default anzu-cons-mode-line-p nil)
   :config (global-anzu-mode))
 
 ;;;; `uniquify': nicer unique names for buffers
