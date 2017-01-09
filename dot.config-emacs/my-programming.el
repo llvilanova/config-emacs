@@ -221,6 +221,10 @@
 ;; Documentation editors
 (setq c-doc-comment-style nil)
 
+;; `x86-lookup'
+(use-package x86-lookup
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Templates
