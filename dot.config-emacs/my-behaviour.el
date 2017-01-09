@@ -553,7 +553,7 @@ then only one line is copied."
 
 (use-package which-key
   :ensure t
-  :defer 1
+  :diminish which-key-mode
   :config (which-key-mode))
 
 
