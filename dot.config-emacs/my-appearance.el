@@ -120,7 +120,6 @@
 
 (use-package hl-line+
   :ensure t
-  :defer 2
   :config
   (hl-line-toggle-when-idle t)
   (hl-line-when-idle-interval (+ 1 curchg-idle-interval)))
