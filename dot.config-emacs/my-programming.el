@@ -2,8 +2,8 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Semantic
+
+;; * Semantic
 
 ;; ;; show summary of symbol under point
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
@@ -40,8 +40,8 @@
   "Temporarily enable/disable helpers that show state in the minibuffer."
   (setq my--enable-semantic-idle-summary-idle-function state))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Code tagging (semanticdb)
+
+;; ** Code tagging (semanticdb)
 (setq semanticdb-default-save-directory ; where to store tag cache files
       (path my-cache-dir "semanticdb")) ; TODO: use a project-specific dir
 
@@ -53,12 +53,12 @@
 ;;   :init
 ;;   (semanticdb-enable-cscope-databases))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Idle scheduler
+
+;; ** Idle scheduler
 (global-semantic-idle-local-symbol-highlight-mode 1) ; highlight symbol under point
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+
+;; ** Miscellaneous
 (require 'semantic/sb)                  ; display semantic tags in SpeedBar
 (semantic-toggle-decoration-style "semantic-tag-boundary" -1)
 (semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
@@ -67,11 +67,10 @@
 (ede-enable-generic-projects)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Code editing
+
+;; * Code editing
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; General preferences
+;; ** General preferences
 
 ;; ;; Make scripts executable on Save (saves having to do the chmod every time)
 ;; (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
@@ -131,8 +130,7 @@
   (add-hook 'emacs-startup-hook #'global-page-break-lines-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Lisp
+;; ** Lisp
 
 (add-hook 'eval-expression-minibuffer-setup-hook 'eldoc-mode)
 ;; TODO: electric-pair-mode
@@ -144,8 +142,7 @@
   :init (add-hook 'emacs-lisp-mode-hook #'elisp-slime-nav-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
+;; ** CC Mode -- C, C++, Objective-C, Java, IDL, Pike, ...
 
 (setq-default
  c-default-style "stroustrup"           ; indentation style
@@ -175,8 +172,8 @@
   :defer t
   :init (add-hook 'c-mode-common-hook (lambda () (require 'disaster))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Python
+
+;; ** Python
 
 ;; `ipython'
 (when (executable-find "ipython")
@@ -185,8 +182,7 @@
               (setq python-shell-interpreter "ipython"))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Documentation
+;; ** Documentation
 
 ;; Comment editing
 (add-hook 'c-mode-common-hook
@@ -213,8 +209,7 @@
   :ensure t)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Templates
+;; ** Templates
 
 (setq srecode-map-save-file (path my-cache-dir "srecode-map.el")
       srecode-insert-ask-variable-method 'field)
@@ -222,8 +217,7 @@
 ;;   :init (global-srecode-minor-mode t))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Code completion
+;; ** Code completion
 
 ;; `yasnippet'
 (use-package yasnippet
@@ -254,8 +248,8 @@
     :commands 'company-quickhelp-mode
     :init (add-hook 'company-mode-hook 'company-quickhelp-mode)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Code navigation
+
+;; ** Code navigation
 
 ;; `xcscope'
 (use-package xcscope
@@ -265,12 +259,12 @@
   (add-hook 'c-mode-common-hook #'cscope-minor-mode))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Code help
+
+;; * Code help
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Compilation
+
+;; ** Compilation
 
 (use-package compile
   :bind ("<f8>" . my-dwim-compile)
@@ -310,8 +304,8 @@ If ARG is not nil, force a call to `compile'."
         (error (call-interactively 'recompile))))
     nil))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; `flycheck': Continuous compilation
+
+;; ** `flycheck': Continuous compilation
 
 (use-package flycheck
   :ensure t
@@ -332,9 +326,7 @@ If ARG is not nil, force a call to `compile'."
 (add-hook 'find-file-hook 'my-flycheck-linux t)
 
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remote compilation
+;; ** Remote compilation
 
 ;; You can use `remote-compile' instead of compile to run compilation in
 ;; another host.
@@ -349,14 +341,12 @@ If ARG is not nil, force a call to `compile'."
 (add-to-list 'desktop-globals-to-save 'remote-shell-program)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Debugging
+;; ** Debugging
 
 (setq gdb-many-windows t)               ; it's usually nicer to have them all
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Version control
+;; ** Version control
 
 ;; psvn
 (add-hook 'svn-status-mode-hook
@@ -368,8 +358,8 @@ If ARG is not nil, force a call to `compile'."
 (setq vc-delete-logbuf-window nil       ; bury log after commit (do not delete)
       vc-diff-switches "-u")            ; use unified diff by default
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Miscellaneous
+
+;; ** Miscellaneous
 
 ;; `diff-mode'
 (setq diff-mode-hook '(diff-delete-empty-files ; do not show empty files
