@@ -3,19 +3,6 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
-
-(defun my-programming-setup ()
-  (my-add-packages
-   '(
-     (:name irony-mode            :type apt-get)
-     (:name lua-mode              :type apt-get)
-     (:name pylint                :type apt-get)
-     )))
-(my-add-init-hook 'prog-mode-hook #'my-programming-setup)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Semantic
 
 ;; ;; show summary of symbol under point
