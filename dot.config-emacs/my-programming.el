@@ -253,10 +253,10 @@
     :commands 'company-c-headers
     :init (add-hook 'company-backends 'company-c-headers))
 
-  (use-package company-irony
-    :ensure t
-    :commands 'company-irony
-    :init (add-hook 'company-backends 'company-irony))
+  ;; (use-package company-irony
+  ;;   :ensure t
+  ;;   :commands 'company-irony
+  ;;   :init (add-hook 'company-backends 'company-irony))
 
   (use-package company-quickhelp
     :ensure t
