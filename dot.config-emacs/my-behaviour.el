@@ -260,6 +260,7 @@ then only one line is copied."
 ;;;; `hungry-delete-mode'
 (use-package hungry-delete
   :ensure t
+  :diminish hungry-delete-mode
   :config (global-hungry-delete-mode))
 
 ;;;; `undo-tree'
