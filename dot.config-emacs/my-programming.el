@@ -227,8 +227,8 @@
 
 (setq srecode-map-save-file (path my-cache-dir "srecode-map.el")
       srecode-insert-ask-variable-method 'field)
-(use-package srecode/mode
-  :init (global-srecode-minor-mode t))
+;; (use-package srecode/mode
+;;   :init (global-srecode-minor-mode t))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
