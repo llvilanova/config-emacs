@@ -28,11 +28,12 @@
 ;; (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ;; C-x B => MRU list of edited tags
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-;; Convenience menu in 'mouse-3'
-(use-package cedet-m3
-  :commands global-cedet-m3-minor-mode
-  :init
-  (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode))
+
+;; ;; Convenience menu in 'mouse-3'
+;; (use-package cedet-m3
+;;   :commands global-cedet-m3-minor-mode
+;;   :init
+;;   (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode))
 
 (semantic-mode 1)                       ; global minor mode
 
