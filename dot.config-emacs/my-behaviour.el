@@ -289,21 +289,24 @@ then only one line is copied."
          ("C-M-," . mc/mark-mode-like-this-extended)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
+;;;; `ace-link'
 (use-package ace-link
   :ensure t
-  :defer 2
-  :bind ("C-x C-M-o" . ace-link-addr)
   :init
   ;; bound to "C-x C-M-o"
+  (use-package goto-address
+    :bind ("C-x C-M-o" . ace-link-addr)
+    :init (add-hook 'find-file-hook 'goto-address-mode))
   (use-package org
-    :config
-    (define-key org-mode-map (kbd "C-x C-M-o") 'ace-link-org))
+    :bind (:map org-mode-map
+                ("C-x C-M-o" . ace-link-org)))
   ;; bound to "M-o"
   (use-package gnus
-    :config
-    (progn
-      (define-key gnus-summary-mode-map (kbd "M-o") 'ace-link-gnus)
-      (define-key gnus-article-mode-map (kbd "M-o") 'ace-link-gnus)))
+    :bind
+    (:map gnus-summary-mode-map
+          ("M-o" . ace-link-gnus))
+    (:map gnus-article-mode-map
+          ("M-o" . ace-link-gnus)))
   :config
   ;; bound to "o"
   (ace-link-setup-default))
