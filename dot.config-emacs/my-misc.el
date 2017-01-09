@@ -37,13 +37,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Functions
 
-(defun my-program-exists (program-name)
-  "Checks whenever we can locate program and launch it.
-Taken from org-mode's `org-prgram-exists'."
-  (if (eq system-type 'gnu/linux)
-      (= 0 (call-process "which" nil nil nil program-name))))
-
-
 (defun my-run-async (program args callback)
   "Asynchronously run the given PROGRAM with arguments ARGS and invoke CALLBACK
   once finished."
@@ -65,43 +58,13 @@ Taken from org-mode's `org-prgram-exists'."
         (call-interactively 'goto-line))
     (linum-mode -1)))
 
-;; TODO: remove once Gnus is updated
-(defun gnus-funcall-no-warning (function &rest args)
-  (when (fboundp function)
-    (apply function args)))
-
-
-;; Temporary work around for packages using disappeared `make-local-hook'
-(defalias 'make-local-hook
-  (if (featurep 'xemacs)
-      'make-local-hook
-    'ignore))
-
-(defun my-hook-once-generate (hook func)
-  "Generate function to remove FUNC from hook HOOK."
-  (let ((sym (intern (concat "my-hook-once--" (symbol-name func)))))
-    (eval (macroexpand `(defun ,sym ()
-                          (remove-hook ',hook ',sym)
-                          (,func))))
-    sym))
-
-(defun my-hook-once (hook func &optional append)
-  "Add FUNC in HOOK to execute only once."
-  (let ((cb (my-hook-once-generate hook func)))
-    (add-hook hook cb append)))
-
-(defun my-add-init-hook (hook func)
-  "Add FUNC in HOOK after Emacs has initialized.
-
-This ensures the hook will be the first element."
-  (lexical-let ((hook hook)
-                (func func))
-    (add-hook 'after-init-hook
-              (lambda () (my-hook-once hook func)))))
-
 (defun my-delay-function (func)
   "Delay execution of FUNC until next user's command."
-  (my-hook-once 'pre-command-hook func))
+  (let ((sym (intern (concat "my-hook-once--" (symbol-name func)))))
+    (eval (macroexpand `(defun ,sym ()
+                          (remove-hook 'pre-command-hook ',sym)
+                          (,func))))
+    (add-hook 'pre-command-hook sym)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Buffers
@@ -151,7 +114,7 @@ This ensures the hook will be the first element."
   (interactive "P")
   (dired-jump other-window
               (and (ede-current-project)
-                 (ede-project-root-directory (ede-current-project)))))
+                   (ede-project-root-directory (ede-current-project)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Windows
