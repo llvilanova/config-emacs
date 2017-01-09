@@ -23,8 +23,8 @@
 
 ;;; Code:
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Packages
+
+;; * Packages
 
 (my-add-packages
  '(
@@ -34,8 +34,8 @@
           :pkgname "llvilanova/lv")
    ))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Functions
+
+;; * Functions
 
 (defun my-run-async (program args callback)
   "Asynchronously run the given PROGRAM with arguments ARGS and invoke CALLBACK
@@ -66,8 +66,8 @@
                           (,func))))
     (add-hook 'pre-command-hook sym)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Buffers
+
+;; * Buffers
 
 (defun rename-current-buffer-file ()
   "Renames current buffer and file it is visiting."
@@ -116,8 +116,8 @@
               (and (ede-current-project)
                    (ede-project-root-directory (ede-current-project)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Windows
+
+;; * Windows
 
 (defun rotate-windows ()
   "Rotate your windows."
@@ -186,8 +186,8 @@
           (set-window-buffer start-win be)
           (set-window-buffer end-win bs))))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Editing
+
+;; * Editing
 
 (defun my-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
@@ -238,8 +238,8 @@ Position the cursor at it's beginning, according to the current mode."
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Applications
+
+;; * Applications
 
 ;; `shell'
 (defun comint-delchar-or-eof-or-kill-buffer (arg)
