@@ -466,6 +466,11 @@ then only one line is copied."
   (browse-kill-ring-default-keybindings)
   (setq browse-kill-ring-quit-action 'save-and-restore)) ; restore window config
 
+;; Save whatever’s in the current (system) clipboard before
+;; replacing it with the Emacs’ text.
+;; https://github.com/dakrone/eos/blob/master/eos.org
+(setq save-interprogram-paste-before-kill t)
+
 ;;;; `time-stamp': Insert timestamp text if buffer has text "Time-stamp: <>"
 (use-package time-stamp
   :init (add-hook 'write-file-hooks 'time-stamp) ; update when saving
