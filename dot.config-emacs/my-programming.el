@@ -208,16 +208,15 @@
             (add-to-list 'c-cleanup-list 'comment-close-slash)))
 
 ;; `filladapt-mode': fill comment blocks
+;; http://wonderworks.com/download/filladapt.el
 (use-package filladapt
-  :defer t
   :diminish filladapt-mode
   :init
-  (progn
-    (add-hook 'prog-mode-hook
-              (lambda ()
-                (auto-fill-mode 1)
-                (turn-on-filladapt-mode)))
-    (add-hook 'c-mode-common-hook #'c-setup-filladapt)))
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (auto-fill-mode 1)
+              (turn-on-filladapt-mode)))
+  (add-hook 'c-mode-common-hook #'c-setup-filladapt))
 
 ;; Documentation editors
 (setq c-doc-comment-style nil)
