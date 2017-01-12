@@ -28,8 +28,6 @@
 
 (my-add-packages
  '(
-   (:name info-buffer           :type github
-          :pkgname "llvilanova/info-buffer")
    (:name lv                    :type github
           :pkgname "llvilanova/lv")
    ))
@@ -276,6 +274,7 @@ Position the cursor at it's beginning, according to the current mode."
 (use-package info+
   :ensure t)
 (use-package info-buffer
+  :ensure t
   :bind (("C-h i" . info-buffer)))
 
 ;; `wgrep'
