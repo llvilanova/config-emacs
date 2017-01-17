@@ -7,8 +7,8 @@ Clone and run setup.sh to point all files and configuration directories to your
 clone of the repository (can be run as many times as you want, in case you move
 your clone around):
 
-  git clone ... ~/emacs-config
-  ~/emacs-config/setup.sh
+    git clone ... ~/emacs-config
+    ~/emacs-config/setup.sh
 
 This generates a small bash script that you should include from your main
 bash configuration file (setup.sh prints the path after generating it). It sets
