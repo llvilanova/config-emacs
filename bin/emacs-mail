@@ -1,0 +1,2 @@
+#!/bin/sh
+exec emacs-open -n --eval "(browse-url-mail \"$@\")"
