@@ -136,10 +136,11 @@
 
 ;; Add vertical window separator (console mode)
 (defun my-change-window-divider ()
-  (unless (display-graphic-p)
-    (let ((display-table (or buffer-display-table standard-display-table)))
-      (set-display-table-slot display-table 5 ?│)
-      (set-window-display-table (selected-window) display-table))))
+  "Set a prettier window divider in console mode."
+  (unless standard-display-table
+    (setq standard-display-table (make-display-table)))
+  (set-display-table-slot standard-display-table 'vertical-border 
+                          (make-glyph-code ?\s 'vertical-border)))
 (add-hook 'emacs-startup-hook
           (lambda ()
             (add-hook 'window-configuration-change-hook 'my-change-window-divider)))
