@@ -52,19 +52,24 @@ mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 
 cat >$BASE/bashrc <<EOF
-PATH="$BASE/bin":\$PATH
-
+# use Emacs as default editor
 EDITOR="$BASE/bin/default-editor"
 VISUAL="\$EDITOR -nw"
 export EDITOR ALTERNATE_EDITOR VISUAL
 
+# add new commands to your search path
+PATH="$BASE/bin":\$PATH
+
+# open an emacs frame
 alias e="\$EDITOR"
-alias et=emacs-terminal
-alias er=emacs-frame-reuse
-alias en=emacs-frame-new
+# open an emacs frame in console-mode
+alias et="\$VISUAL"
+# open an emacs frame as root
 alias E="SUDO_EDITOR=\"\$EDITOR -t -a emacs\" sudoedit"
 
+# open emacs frame with ediff on two file
 ediff () { emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
+# open emacs frame with a new gdb session
 gdbtool () { emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
 EOF
 
