@@ -105,6 +105,7 @@ If called with a prefix, prompts the user for the backend."
     (set-window-configuration my-magit-status-windows))
 
   :init
+  (global-magit-file-mode)
   (add-hook 'magit-mode-hook #'my-magit-github-add-PR-fetch))
 
 (use-package magit-stgit
