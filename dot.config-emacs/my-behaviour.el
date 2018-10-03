@@ -10,6 +10,11 @@
           #'(lambda ()
               (raise-frame (selected-frame))))
 
+(defun my-new-frame-hook (frame)
+  (raise-frame frame)
+  (select-frame-set-input-focus frame))
+(add-hook 'after-make-frame-functions 'my-new-frame-hook)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Windows
 
