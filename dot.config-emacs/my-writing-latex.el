@@ -25,6 +25,7 @@
   ;; support for org's tables
   (use-package org-table
     :defer t
+    :commands orgtbl-mode
     :init (add-hook 'LaTeX-mode-hook #'orgtbl-mode)))
 
 (use-package tex
