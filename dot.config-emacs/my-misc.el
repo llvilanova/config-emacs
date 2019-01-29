@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014-2017 Lluís Vilanova
+;; Copyright (C) 2014-2019 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -22,15 +22,6 @@
 ;; Miscellaneous function definitions and settings.
 
 ;;; Code:
-
-
-;; * Packages
-
-(my-add-packages
- '(
-   (:name lv                    :type github
-          :pkgname "llvilanova/lv")
-   ))
 
 
 ;; * Functions
