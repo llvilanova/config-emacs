@@ -5,12 +5,6 @@
 
 ;;; Packages
 
-(my-add-packages
- '(
-   (:name org-gnome-calendar    :type github
-          :pkgname "llvilanova/org-gnome-calendar")
-   ))
-
 (use-package org-plus-contrib
   :ensure t)
 
