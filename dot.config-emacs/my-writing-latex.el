@@ -133,5 +133,9 @@
                                     TeX-run-compile nil t))
    (setq TeX-command-default "Makefile PDF")))
 
+(use-package pdf-tools
+  :ensure t
+  :config (pdf-tools-install))
+
 
 (provide 'my-writing-latex)
