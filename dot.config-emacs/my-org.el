@@ -47,8 +47,7 @@
 ;;; Exporting
 
 (use-package org-bibtex
-  :defer t
-  :config (require 'ox-bibtex))
+  :defer t)
 
 (use-package ox-latex
   :defer t
