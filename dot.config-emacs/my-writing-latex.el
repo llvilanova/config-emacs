@@ -91,11 +91,9 @@
   :config
   (use-package bibtex-utils
     :ensure t
-    :commands (bu-make-field-keywords
-               bibtex-search-minor-mode)
+    :commands (bu-make-field-keywords)
     :bind (:map bibtex-mode-map
-                ("C-c k" . bu-make-field-keywords))
-    :init (add-hook 'bibtex-mode-hook #'bibtex-search-minor-mode)))
+                ("C-c k" . bu-make-field-keywords))))
 
 ;; `bib-cite': show citation info in minibuffer
 (use-package bib-cite
