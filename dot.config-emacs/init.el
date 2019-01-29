@@ -58,7 +58,7 @@ directory path."
 (require 'my-writing)
 (require 'my-programming)
 (require 'my-org)
-(require 'my-mail)
+;; (require 'my-mail)
 (require 'my-bindings)
 (require 'my-personal nil t)           ; personal code & information, never upload
 
