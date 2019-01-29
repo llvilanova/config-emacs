@@ -57,10 +57,8 @@ If called with a prefix, prompts the user for the backend."
   :config
   (progn
     ;; `vc' in fullscreen
-    (setq my-vc-dir-windows nil)
-    (make-variable-frame-local 'my-vc-dir-windows)
     (defadvice vc-dir (around vc-dir-fullscreen activate)
-      (setq my-vc-dir-windows (current-window-configuration))
+      (set-frame-parameter nil 'my-vc-dir-windows (current-window-configuration))
       ad-do-it
       (delete-other-windows)
       (define-key vc-dir-mode-map (kbd "q") 'my-vc-dir-quit-session))
@@ -68,7 +66,7 @@ If called with a prefix, prompts the user for the backend."
       "Restores the previous window configuration and exits the vc buffer"
       (interactive)
       (quit-window)
-      (set-window-configuration my-vc-dir-windows))))
+      (set-window-configuration (frame-parameter nil 'my-vc-dir-windows)))))
 
 (use-package magit
   :ensure t
@@ -77,10 +75,8 @@ If called with a prefix, prompts the user for the backend."
   (setq magit-diff-refine-hunk nil)
 
   ;; `magit' in fullscreen
-  (setq my-magit-status-windows nil)
-  (make-variable-frame-local 'my-magit-status-windows)
   (defadvice magit-status (around magit-fullscreen activate)
-    (setq my-magit-status-windows (current-window-configuration))
+    (set-frame-parameter nil 'my-magit-status-windows (current-window-configuration))
     ad-do-it
     (delete-other-windows)
     (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
@@ -88,7 +84,7 @@ If called with a prefix, prompts the user for the backend."
     "Restores the previous window configuration and kills the magit buffer"
     (interactive)
     (kill-buffer)
-    (set-window-configuration my-magit-status-windows))
+    (set-window-configuration (frame-parameter nil 'my-magit-status-windows)))
 
   :init
   (global-magit-file-mode))
