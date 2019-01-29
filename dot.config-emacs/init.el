@@ -62,14 +62,6 @@ directory path."
 (require 'my-bindings)
 (require 'my-personal nil t)           ; personal code & information, never upload
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Remove unused packages
-(defun my-el-get-cleanup ()
-  "Remove unused packages."
-  (interactive)
-  (el-get-cleanup (append '(el-get) (mapcar 'el-get-source-name el-get-sources))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; custom-set-*
 (load custom-file 'noerror)

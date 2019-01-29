@@ -3,23 +3,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Package sources
 
-;; `el-get'
-(setq el-get-dir (path my-cache-dir "el-get" ""))
-(add-to-list 'load-path (path el-get-dir "el-get"))
-(unless (require 'el-get nil t)
-  ;; download, build & load
-  (let ((buffer
-         (or (url-retrieve-synchronously
-             "https://github.com/dimitri/el-get/raw/master/el-get-install.el")
-            (error "Could not download el-get installer")))
-        (el-get-install-branch "master")
-        (user-emacs-directory my-config-dir))
-    (with-current-buffer buffer
-      (end-of-buffer)
-      (eval-print-last-sexp))))
-(el-get 'sync '(el-get))
-
-
 ;; `package'
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -77,8 +60,8 @@ command to be run in a shell.")
     (let ((generated-autoload-file autoload-file))
       (when (or force
                 (not (file-exists-p autoload-file))
-                (some (lambda (f) (file-newer-than-file-p f autoload-file))
-                      (directory-files autoload-dir t "\\.el$")))
+                (seq-filter (lambda (f) (file-newer-than-file-p f autoload-file))
+			    (directory-files autoload-dir t "\\.el$")))
         (message "Updating autoloads...")
         (let (emacs-lisp-mode-hook)
           (my-recompile-init)
@@ -87,15 +70,5 @@ command to be run in a shell.")
 
 ;; Re-generate autoloads and re-compile local code (if necessary)
 (my-regenerate-autoloads)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Package management
-
-(defun my-add-packages (packages)
-  "Install list of packages using `el-get' and add to `el-get-sources'."
-  (setq el-get-sources (append el-get-sources packages))
-  (el-get 'sync (mapcar 'el-get-source-name packages)))
-
 
 (provide 'my-package)
