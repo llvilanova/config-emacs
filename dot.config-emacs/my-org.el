@@ -4,7 +4,7 @@
 
 
 ;;; Location
-(defconst org-directory (path my-home-dir "plans" ""))
+(defconst org-directory (path my-home-dir "Dropbox" "plans" ""))
 (setq org-default-notes-file (path org-directory "Personal.org")
       org-completion-use-ido t
       org-pretty-entities t)
