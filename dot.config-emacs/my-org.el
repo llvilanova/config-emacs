@@ -3,12 +3,6 @@
 ;;; Code:
 
 
-;;; Packages
-
-(use-package org-plus-contrib
-  :ensure t)
-
-
 ;;; Location
 (defconst org-directory (path my-home-dir "plans" ""))
 (setq org-default-notes-file (path org-directory "Personal.org")
