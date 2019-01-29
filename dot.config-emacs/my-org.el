@@ -42,20 +42,6 @@
     (global-org-gnome-calendar-mode)))
 
 
-;;; Notifications
-(use-package org-notify
-  :commands org-notify-start
-  :init
-  (add-hook 'emacs-startup-hook #'org-notify-start)
-  :config
-  (require 'org-agenda)
-  (org-notify-add 'default
-                  '(:time "1h" :actions (-notify/window)
-                          :period "2m" :duration 60))
-  (org-notify-add 'submission
-                  '(:time "1m" :actions (-email))
-                  '(:time "1w" :actions (-email))
-                  '(:time "1d" :actions (-email))))
 
 
 ;;; Exporting
