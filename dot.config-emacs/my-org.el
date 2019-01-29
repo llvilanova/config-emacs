@@ -54,7 +54,6 @@
   :config
   ;; (setq org-latex-listings 'minted)
   ;; (add-to-list 'org-latex-packages-alist '("" "minted"))
-  ;; (setq org-latex-with-hyperref nil)
 
   ;; ;; Create bibliography file
   ;; (add-hook 'org-export-latex-after-save-hook
@@ -139,9 +138,7 @@
 ;; Lifecycle
 (require 'org-faces)
 (setq org-todo-keywords                 ; TODO states
-      '((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")
-        (sequence "TASK(f)" "|" "DONE(d)")
-        (sequence "MAYBE(m)" "|" "CANCELLED(c)"))
+      '((sequence "MAYBE(m)" "TODO(t)" "|" "DONE(d)" "CANCELLED(c)"))
       org-todo-keyword-faces
       '(("MAYBE" . (:foreground "Pink"))
         ("CANCELLED" . (:foreground "Pale Green")))
