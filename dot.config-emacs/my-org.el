@@ -31,36 +31,7 @@
      org-agenda-skip-scheduled-if-done t ; completed tasks
      org-agenda-skip-deadline-if-done t
      org-agenda-dim-blocked-tasks t      ; tasks blocked by dependencies
-     )
-    (add-to-list 'org-agenda-custom-commands
-                 '("p" "CFPs (Calls For Papers)"
-                   agenda ""
-                   ((org-agenda-skip-function-global nil)
-                    (org-agenda-skip-function
-                     '(my-org-agenda-skip-tag "conference" t)))))
-
-    ;; Handle CFPs in a separate agenda view
-    (defun my-org-agenda-skip-tag (tag &optional others)
-      "Skip all entries that correspond to TAG.
-
-If OTHERS is true, skip all entries that do not correspond to TAG."
-      (show-all)
-      (let ((next-headline (save-excursion (or (outline-next-heading) (point-max))))
-            (current-headline (or (and (org-at-heading-p)
-                                       (point))
-                                  (save-excursion (org-back-to-heading)))))
-        (if others
-            (if (not (member tag (org-get-tags-at current-headline)))
-                next-headline
-              nil)
-          (if (member tag (org-get-tags-at current-headline))
-              next-headline
-            nil))))
-
-    (setq org-agenda-skip-function-global
-          (lambda ()
-            (or (apply 'my-org-agenda-skip-tag "conference" nil)
-                (apply 'my-org-agenda-skip-tag "gohome" nil))))))
+     )))
 
 (use-package org-gnome-calendar
   :defer 2
