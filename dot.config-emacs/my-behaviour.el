@@ -526,7 +526,8 @@ then only one line is copied."
 (defun my-make-parent-directory ()
   "Make sure the directory of `buffer-file-name' exists."
   (let ((dir (file-name-directory buffer-file-name)))
-    (when (yes-or-no-p (format "Create directory \"%s\"?" dir))
+    (when (and (not (file-directory-p dir))
+               (yes-or-no-p (format "Create directory \"%s\"?" dir)))
       (make-directory dir t))))
 (add-hook 'find-file-not-found-functions #'my-make-parent-directory)
 
