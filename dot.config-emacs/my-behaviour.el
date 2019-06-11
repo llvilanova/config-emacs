@@ -554,10 +554,6 @@ then only one line is copied."
                 ediff-window-setup-function 'ediff-setup-windows-plain)
           (add-hook 'ediff-after-quit-hook-internal 'winner-undo)))
 
-;; `info+'
-(use-package info+
-  :ensure t)
-
 (use-package which-key
   :ensure t
   :diminish which-key-mode
