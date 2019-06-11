@@ -451,57 +451,6 @@ then only one line is copied."
 (fset 'yes-or-no-p 'y-or-n-p)           ; enable y/n answers to yes/no
 (file-name-shadow-mode t)               ; shadow / dim parts of file names
 
-;;;; `ido': integrates both buffers and files completion
-;;        supersedes `iswitchb' `icicles'
-;; http://www.emacswiki.org/emacs/InteractivelyDoThings
-(ido-mode 1)
-(ido-everywhere 1)                      ; use for many file dialogs
-(setq ido-save-directory-list-file (path my-cache-dir "ido.last")
-      ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido")
-      ido-auto-merge-delay-time 9999    ; do not look for file names on other dirs
-      ido-default-file-method 'maybe-frame ; ask if buffer in other frame must be re-opened
-      ido-case-fold  t                  ; be case-insensitive
-      ido-use-faces nil                   ; do not hide `flx' highlighting
-      ido-enable-last-directory-history t ; remember last used dirs
-      ido-max-work-directory-list 30    ; should be enough
-      ido-max-work-file-list      50    ; remember many
-      ido-use-filename-at-point 'guess  ; use filename at point if looks like one
-      ido-use-url-at-point t            ; use url at point
-      ido-use-virtual-buffers t         ; show closed files in buffer list
-      ido-enable-flex-matching t        ; be flexible
-      ido-enable-tramp-completion nil
-      ido-confirm-unique-completion nil ; wait for RET even on one completion
-      ido-show-dot-for-dired nil        ; show '.' as first completion
-      ido-max-prospects 10              ; don't spam my minibuffer
-      ido-confirm-unique-completion t)  ; wait for RET, even with unique completion
-
-;;;; `ido-ubiquitous'
-(use-package ido-ubiquitous
-  :ensure t
-  :config (ido-ubiquitous-mode 1))
-
-;;;; `flx-ido': smarter flexible search
-(use-package flx-ido
-  :ensure t
-  :init (flx-ido-mode 1))
-
-;;;; `smex': command-completion interface on top of `ido'
-;;         replaces emacs's default `execute-extended-command'
-;;         supersedes `icomplete+'
-(use-package smex
-  :ensure t
-  :init
-  (setq smex-save-file (path my-cache-dir "smex.save"))
-  :config (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)))
-
-;;;; `icomplete-mode'
-;; Complements `smex' where it is not used
-(use-package icomplete
-  :init
-  (icomplete-mode))
-
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
@@ -613,12 +562,6 @@ then only one line is copied."
   :ensure t
   :init (add-hook 'dired-mode-hook #'dired-filter-mode)
   :config (define-key dired-mode-map (kbd "/") dired-filter-map))
-
-;; `fuzzy'
-(use-package fuzzy
-  :ensure t
-  :commands turn-on-fuzzy-isearch
-  :init (turn-on-fuzzy-isearch))
 
 ;; `ediff'
 (use-package ediff
