@@ -118,12 +118,6 @@
 (global-prettify-symbols-mode 1)
 (diminish 'visual-line-mode)
 
-(use-package hl-line+
-  :ensure t
-  :config
-  (hl-line-toggle-when-idle t)
-  (hl-line-when-idle-interval (+ 1 curchg-idle-interval)))
-
 ;; temporarily highlight changes from pasting etc
 (use-package volatile-highlights
   :ensure t
