@@ -261,10 +261,6 @@ Position the cursor at it's beginning, according to the current mode."
         (eshell/cd dir)
         (eshell-send-input)))))
 
-(use-package info-buffer
-  :ensure t
-  :bind (("C-h i" . info-buffer)))
-
 ;; `wgrep'
 (use-package wgrep
   :ensure t
