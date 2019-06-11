@@ -11,7 +11,7 @@
     (setq ede-project-placeholder-cache-file (path my-cache-dir "ede-projects.el"))
     (global-ede-mode 1)
     (setq ede-project-directories t)        ; TODO: unsafe
-    (add-to-list 'load-path (concat (el-get-package-directory 'cedet) "contrib"))))
+    ))
 
 (defun my-cedet-toggle ()
   (interactive)
