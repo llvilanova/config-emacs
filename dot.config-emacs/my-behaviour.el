@@ -325,9 +325,8 @@ then only one line is copied."
   :defer t
   :init
   (progn
-    (autoload 'outshine-hook-function "outshine")
     (add-hook 'outline-minor-mode-hook
-              'outshine-hook-function)))
+              'outshine-mode)))
 
 ;;;; `outline'
 (use-package outline
