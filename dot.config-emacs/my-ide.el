@@ -2,23 +2,27 @@
 
 ;;; Code:
 
+
+(use-package lsp-mode
+  :ensure t
+  :init (add-hook 'prog-mode-hook  #'lsp))
+
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode
+  :init
+  (add-hook 'lsp-mode-hook #'lsp-ui-mode)
+  (setq lsp-ui-flycheck-enable nil)
+  (setq lsp-ui-sideline-enable nil)
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  (define-key lsp-ui-mode-map (kbd "C-c l") #'lsp-ui-imenu))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Project management (EDE)
 
-(use-package cedet
-  :config
-  (progn
-    (setq ede-project-placeholder-cache-file (path my-cache-dir "ede-projects.el"))
-    (global-ede-mode 1)
-    (setq ede-project-directories t)        ; TODO: unsafe
-    ))
-
-(defun my-cedet-toggle ()
-  (interactive)
-  (call-interactively #'global-semanticdb-minor-mode)
-  (call-interactively #'global-semantic-idle-scheduler-mode)
-  (call-interactively #'global-semantic-decoration-mode)
-  (call-interactively #'global-semantic-highlight-func-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version control
@@ -31,7 +35,7 @@
   :config
   (progn
     (defun my-dwim-vc (path &optional backend)
-  "Start version control interface according to the backend of current buffer.
+      "Start version control interface according to the backend of current buffer.
 
 If called with a prefix, prompts the user for the backend."
       (interactive

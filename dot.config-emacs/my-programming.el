@@ -2,69 +2,7 @@
 
 ;;; Code:
 
-
-;; * Semantic
 
-;; ;; show summary of symbol under point
-;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-;; decore tags based on their attributes
-(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
-;; highlight current tag
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;; ;; display header for topmost tag
-;; (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-;; C-x B => MRU list of edited tags
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-
-;; ;; Convenience menu in 'mouse-3'
-;; (use-package cedet-m3
-;;   :commands global-cedet-m3-minor-mode
-;;   :init
-;;   (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode))
-
-(semantic-mode 1)                       ; global minor mode
-
-;; TODO: not available through `semantic-default-submodes'
-;; display header with FQN of symbol under point
-(global-semantic-idle-breadcrumbs-mode 1)
-
-;; Let the user temporarily disable some minibuffer output
-(setq my--enable-semantic-idle-summary-idle-function t)
-(make-variable-buffer-local 'my--enable-semantic-idle-summary-idle-function)
-(defadvice semantic-idle-summary-idle-function (around
-                                                my--semantic-idle-summary-idle-function
-                                                activate compile)
-  (when my--enable-semantic-idle-summary-idle-function
-    ad-do-it))
-(defun my-set-minibuffer-helpers (state)
-  "Temporarily enable/disable helpers that show state in the minibuffer."
-  (setq my--enable-semantic-idle-summary-idle-function state))
-
-
-;; ** Code tagging (semanticdb)
-(setq semanticdb-default-save-directory ; where to store tag cache files
-      (path my-cache-dir "semanticdb")) ; TODO: use a project-specific dir
-
-(global-semanticdb-minor-mode 1)
-
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
-;; (use-package semantic/db-cscope
-;;   :init
-;;   (semanticdb-enable-cscope-databases))
-
-
-;; ** Idle scheduler
-(global-semantic-idle-local-symbol-highlight-mode 1) ; highlight symbol under point
-
-
-;; ** Miscellaneous
-(require 'semantic/sb)                  ; display semantic tags in SpeedBar
-(semantic-toggle-decoration-style "semantic-tag-boundary" -1)
-(semantic-toggle-decoration-style "semantic-decoration-on-private-members" t)
-(semantic-toggle-decoration-style "semantic-decoration-on-protected-members" t)
-(setq pulse-iterations 3)               ; make pulsing faster
-(ede-enable-generic-projects)
 
 
 
@@ -381,6 +319,5 @@ If ARG is not nil, force a call to `compile'."
 ;; `macrostep'
 (use-package macrostep
   :ensure t)
-
 
 (provide 'my-programming)
