@@ -77,28 +77,21 @@
   :diminish (abbrev-mode
              auto-fill-function))
 
-(use-package powerline
-  :ensure t
-  :init (setq-default powerline-default-separator 'chamfer))
 
-(use-package smart-mode-line
+(use-package doom-modeline
   :ensure t
   :init
-  (setq-default sml/no-confirm-load-theme t)
-  :config
-  (sml/setup))
-
-(use-package eyebrowse
-  :ensure t
-  :init (add-hook 'emacs-startup-hook 'eyebrowse-mode))
-
-(use-package spaceline
-  :ensure t
-  :init (add-hook 'emacs-startup-hook
-                  (lambda ()
-                    (require 'spaceline-config)
-                    (spaceline-spacemacs-theme)
-                    (spaceline-info-mode))))
+  (let* ((font-dest (cl-case window-system
+                      (x  (concat (or (getenv "XDG_DATA_HOME")
+                                      (concat (getenv "HOME") "/.local/share"))
+                                  "/fonts/"))
+                      (mac (concat (getenv "HOME") "/Library/Fonts/" ))
+                      (ns (concat (getenv "HOME") "/Library/Fonts/" ))))
+         (font-file (concat font-dest "/all-the-icons.ttf")))
+    (unless (file-exists-p font-file)
+      (all-the-icons-install-fonts)))
+  :config (setq doom-modeline-icon t)
+  :hook (after-init . doom-modeline-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utf8 / input-method
