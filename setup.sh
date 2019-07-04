@@ -52,6 +52,8 @@ mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 
 cat >$BASE/bashrc <<EOF
+#!/bin/bash
+
 # use Emacs as default editor
 EDITOR="$BASE/bin/default-editor"
 VISUAL="\$EDITOR -nw"
