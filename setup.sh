@@ -45,9 +45,10 @@ setup_file_rel()
     setup_file $sourcerel $2
 }
 
-setup_file $HOME/.config/emacs $HOME/.emacs.d
 mkdir -p $HOME/.config
 setup_file_rel $BASE/dot.config-emacs $HOME/.config/emacs
+setup_file $HOME/.config/emacs $HOME/.emacs.d
+
 mkdir -p $HOME/.local/share
 setup_file_rel $BASE/dot.local-share-emacs $HOME/.local/share/emacs
 
