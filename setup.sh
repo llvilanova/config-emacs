@@ -76,7 +76,7 @@ ediff () { emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
 gdbtool () { emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
 EOF
 
-sudo apt install clang-tools bear nodejs
+sudo apt install -y clang-tools bear nodejs
 mkdir -p $HOME/.local/share/emacs/snippets
 mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 
