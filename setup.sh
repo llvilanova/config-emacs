@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-echo -n "Setting up Emacs's directories..."
+echo "Setting up Emacs's directories..."
 
 BASE=$(dirname `readlink -f $0`)
 
@@ -80,7 +80,8 @@ sudo apt install -y clang-tools bear nodejs
 mkdir -p $HOME/.local/share/emacs/snippets
 mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 
-echo " done"
+echo "Setting up Emacs's directories... done"
 
+echo
 echo "You should add the following to your ~/.bashrc:"
 echo "  source $BASE/bashrc"
