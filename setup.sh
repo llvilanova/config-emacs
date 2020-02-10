@@ -84,5 +84,5 @@ mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 echo "Setting up Emacs's directories... done"
 
 echo
-echo "You should add the following to your ~/.bashrc:"
+echo "You should add the following to your ~/.profile:"
 echo "  source $BASE/bashrc"
