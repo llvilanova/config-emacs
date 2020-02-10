@@ -82,9 +82,9 @@
   :ensure t
   :init
   (let* ((font-dest (cl-case system-type
-                      (gnu/linux  (concat (or (getenv "XDG_DATA_HOME")
-                                      (concat (getenv "HOME") "/.local/share"))
-                                  "/fonts/"))
+                      (gnu/linux (concat (or (getenv "XDG_DATA_HOME")
+                                             (concat (getenv "HOME") "/.local/share"))
+                                         "/fonts/"))
                       (darwin (concat (getenv "HOME") "/Library/Fonts/" ))))
          (font-file (concat font-dest "/all-the-icons.ttf")))
     (unless (file-exists-p font-file)
