@@ -34,6 +34,7 @@ setup_file()
     fi
 
     mkdir -p $(dirname "$2")
+    rm -f "$2"
     ln -s "$1" "$2"
 }
 
