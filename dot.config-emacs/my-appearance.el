@@ -81,12 +81,11 @@
 (use-package doom-modeline
   :ensure t
   :init
-  (let* ((font-dest (cl-case window-system
-                      (x  (concat (or (getenv "XDG_DATA_HOME")
+  (let* ((font-dest (cl-case system-type
+                      (gnu/linux  (concat (or (getenv "XDG_DATA_HOME")
                                       (concat (getenv "HOME") "/.local/share"))
                                   "/fonts/"))
-                      (mac (concat (getenv "HOME") "/Library/Fonts/" ))
-                      (ns (concat (getenv "HOME") "/Library/Fonts/" ))))
+                      (darwin (concat (getenv "HOME") "/Library/Fonts/" ))))
          (font-file (concat font-dest "/all-the-icons.ttf")))
     (unless (file-exists-p font-file)
       (all-the-icons-install-fonts)))
