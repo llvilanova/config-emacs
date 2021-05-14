@@ -61,6 +61,7 @@
 (size-indication-mode t)                     ; file size
 (unless (display-graphic-p)
   (display-time-mode t))                     ; current time
+(require 'scroll-bar)
 (scroll-bar-mode -1)                         ; no good'ol scrollbar...
 
 (use-package diminish
