@@ -46,5 +46,25 @@ sudo apt install -y bear nodejs
 mkdir -p $HOME/.local/share/emacs/snippets
 mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 
+cat >~/.local/share/applications/org-protocol.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Name=org-protocol helper
+Comment=helper to allow GNOME to open org-protocol: pseudo-urls
+TryExec=/usr/bin/emacsclient
+Exec=/usr/bin/emacsclient -c -F '((name . "org-protocol-capture"))' %u
+NoDisplay=true
+Icon=emacs24
+Terminal=false
+Type=Application
+EOF
+
+touch ~/.config/mimeapps.list
+grep -v "^x-scheme-handler/org-protocol=.*" ~/.config/mimeapps.list >~/.config/mimeapps.list.new
+cat >>~/.config/mimeapps.list.new <<EOF
+[Added Associations]
+x-scheme-handler/org-protocol=org-protocol.desktop;
+EOF
+mv ~/.config/mimeapps.list.new ~/.config/mimeapps.list
 
 echo "Setting up Emacs... done"
