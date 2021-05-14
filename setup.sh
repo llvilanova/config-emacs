@@ -46,6 +46,7 @@ sudo apt install -y bear nodejs
 mkdir -p $HOME/.local/share/emacs/snippets
 mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 
+mkdir -p ~/.local/share/applications
 cat >~/.local/share/applications/org-protocol.desktop <<EOF
 [Desktop Entry]
 Version=1.0
