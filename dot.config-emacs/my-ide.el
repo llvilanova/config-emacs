@@ -88,10 +88,7 @@ If called with a prefix, prompts the user for the backend."
     "Restores the previous window configuration and kills the magit buffer"
     (interactive)
     (kill-buffer)
-    (set-window-configuration (frame-parameter nil 'my-magit-status-windows)))
-
-  :init
-  (global-magit-file-mode))
+    (set-window-configuration (frame-parameter nil 'my-magit-status-windows))))
 
 (use-package magit-stgit
   :ensure t
