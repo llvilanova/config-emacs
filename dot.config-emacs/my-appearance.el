@@ -52,15 +52,6 @@
 
 (setq inhibit-startup-message t)                     ; don't show ...
 
-;; `cursor-chg': context-specific cursor appearence
-(use-package cursor-chg
-  :ensure t
-  :init
-  (setq-default curchg-default-cursor-color "Yellow")
-  :config
-  (change-cursor-mode 1)
-  (curchg-toggle-cursor-type-when-idle 1))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Modeline appearance
