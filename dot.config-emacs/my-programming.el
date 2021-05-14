@@ -42,11 +42,11 @@
   :init (add-hook 'prog-mode-hook #'highlight-parentheses-mode))
 
 ;; `fic-ext-mode': Highlight TODO's and the like
-(use-package fic-ext-mode
+(use-package fic-mode
   :ensure t
   :defer t
   :diminish fic-ext-mode
-  :init (add-hook 'prog-mode-hook 'fic-ext-mode)
+  :init (add-hook 'prog-mode-hook 'fic-mode)
   :config (add-to-list 'fic-highlighted-words "XXX"))
 
 ;; `dtrt-indent': guess indentation style
