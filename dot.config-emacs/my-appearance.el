@@ -15,8 +15,9 @@
   "Set font and color theme on a frame."
   (set-variable 'color-theme-is-global nil)
   (select-frame frame)
-  (when (display-graphic-p frame)
-    (set-frame-parameter frame 'font "Terminus-10")))
+  ;; (when (display-graphic-p frame)
+  ;;   (set-frame-parameter frame 'font "Terminus-12"))
+  )
 
 (add-hook 'after-make-frame-functions 'my-frame-parameters)
 (my-frame-parameters (next-frame))
