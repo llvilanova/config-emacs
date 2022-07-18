@@ -41,10 +41,9 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; External programs
 
-;; (setq browse-url-browser-function 'browse-url-generic
-;;       browse-url-generic-program "epiphany"
-;;       browse-url-generic-args '("--new-tab"))
-(setq browse-url-browser-function 'eww-browse-url)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "xdg-open")
+;; (setq browse-url-browser-function 'eww-browse-url)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
