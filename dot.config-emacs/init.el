@@ -50,7 +50,6 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Pull the rest of configuration
 
-(require 'cl)
 (require 'my-misc)
 (require 'my-appearance)
 (require 'my-behaviour)
