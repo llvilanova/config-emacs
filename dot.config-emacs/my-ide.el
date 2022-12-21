@@ -98,4 +98,7 @@ If called with a prefix, prompts the user for the backend."
   :commands magit-stgit-mode
   :init (add-hook 'magit-mode-hook 'magit-stgit-mode))
 
+(use-package forge
+  :after magit)
+
 (provide 'my-ide)
