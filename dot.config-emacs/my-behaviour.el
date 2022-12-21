@@ -351,6 +351,7 @@ then only one line is copied."
   :diminish undo-tree-mode
   :config
   (progn
+    (setq undo-tree-auto-save-history nil)
     (defadvice undo-tree-undo (around keep-region activate)
       "Keep region when undoing in region."
       (if (use-region-p)
