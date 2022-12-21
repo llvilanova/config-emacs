@@ -1,4 +1,6 @@
+;; -*- lexical-binding: t; -*-
 ;;; my-behaviour.el --- Global behaviour settings.
+
 
 ;;; Code:
 
@@ -88,7 +90,7 @@ Examples:
    ; or
    (enable-window-reuse-for-modes 'Man-mode 'Info-mode)
 "
-  (lexical-let ((checked-modes modes))
+  (let ((checked-modes modes))
     (add-to-list 'display-buffer-alist
                  (cons (lambda (buffer alist)
                          (with-current-buffer buffer
