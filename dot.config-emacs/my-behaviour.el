@@ -235,8 +235,7 @@ If COMMENTFIRST is non-nil, comment the original line."
 
 ;;;; `saveplace': restore last cursor position in file
 (setq save-place-file (path my-cache-dir "places"))
-(setq-default save-place t)             ; activate it for all buffers
-(require 'saveplace)
+(save-place-mode t)
 
 ;;;; backups: all in one single place
 (setq my-backup-dir (path my-cache-dir "backups" ""))
