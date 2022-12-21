@@ -5,7 +5,9 @@
 
 (use-package lsp-mode
   :ensure t
-  :init (add-hook 'prog-mode-hook  #'lsp))
+  :init
+  (setq lsp-warn-no-matched-clients nil)
+  (add-hook 'prog-mode-hook  #'lsp))
 
 (use-package lsp-ui
   :ensure t
