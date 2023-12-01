@@ -131,6 +131,7 @@
 ;; `filladapt-mode': fill comment blocks
 ;; http://wonderworks.com/download/filladapt.el
 (use-package filladapt
+  :ensure t
   :diminish filladapt-mode
   :init
   (add-hook 'prog-mode-hook
