@@ -161,7 +161,9 @@
 (use-package yasnippet
   :ensure t
   :defer t
-  :diminish yas-minor-mode)
+  :diminish yas-minor-mode
+  :config
+  (yas-global-mode))
 
 
 ;; `company'
