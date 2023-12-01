@@ -506,6 +506,10 @@ then only one line is copied."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Misc
 
+;; Increase internal buffers / caches
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq gc-cons-threshold 100000000) ;; 10mb
+
 (setq load-prefer-newer t)         ; prefer the newer file when loading .el/.elc
 
 (setq tramp-persistency-file-name (path my-cache-dir "tramp"))
