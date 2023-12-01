@@ -71,6 +71,9 @@
              auto-fill-function))
 
 
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 (use-package doom-modeline
   :ensure t
   :init
@@ -81,7 +84,8 @@
                       (darwin (concat (getenv "HOME") "/Library/Fonts/" ))))
          (font-file (concat font-dest "/all-the-icons.ttf")))
     (unless (file-exists-p font-file)
-      (all-the-icons-install-fonts)))
+      (when (display-graphic-p)
+        (all-the-icons-install-fonts))))
   :config (setq doom-modeline-icon t)
   :hook (after-init . doom-modeline-mode))
 
