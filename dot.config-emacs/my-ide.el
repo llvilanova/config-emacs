@@ -99,6 +99,9 @@ If called with a prefix, prompts the user for the backend."
   :init (add-hook 'magit-mode-hook 'magit-stgit-mode))
 
 (use-package forge
-  :after magit)
+  :ensure t
+  :after magit
+  :config
+  (add-to-list 'forge-alist '("lsds.doc.ic.ac.uk" "lsds.doc.ic.ac.uk/gitlab/api/v4" "lsds" forge-gitlab-repository)))
 
 (provide 'my-ide)
