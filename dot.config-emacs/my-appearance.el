@@ -70,9 +70,8 @@
   :diminish (abbrev-mode
              auto-fill-function))
 
-
-(use-package all-the-icons
-  :if (display-graphic-p))
+(use-package nerd-icons
+  :ensure t)
 
 (use-package doom-modeline
   :ensure t
@@ -80,14 +79,14 @@
   (let* ((font-dest (cl-case system-type
                       (gnu/linux (concat (or (getenv "XDG_DATA_HOME")
                                              (concat (getenv "HOME") "/.local/share"))
-                                         "/fonts/"))
+                                         "/fonts/"
+                                         nerd-icons-fonts-subdirectory))
                       (darwin (concat (getenv "HOME") "/Library/Fonts/" ))))
-         (font-file (concat font-dest "/all-the-icons.ttf")))
+         (font-file (concat font-dest "/NFM.ttf")))
     (unless (file-exists-p font-file)
-      (when (display-graphic-p)
-        (all-the-icons-install-fonts))))
-  :config (setq doom-modeline-icon t)
-  :hook (after-init . doom-modeline-mode))
+      (nerd-icons-install-fonts)))
+  :if (display-graphic-p)
+  :hook(after-init . doom-modeline-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; utf8 / input-method
