@@ -50,6 +50,9 @@ directory path."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Pull the rest of configuration
 
+(setq browse-url-mailto-function 'browse-url-generic)
+(setq browse-url-generic-program "thunderbird")
+
 (require 'my-misc)
 (require 'my-appearance)
 (require 'my-behaviour)
