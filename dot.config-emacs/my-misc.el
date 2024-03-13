@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014-2019 Lluís Vilanova
+;; Copyright (C) 2014-2024 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -43,9 +43,9 @@
   (interactive)
   (unwind-protect
       (progn
-        (linum-mode 1)
+        (display-line-numbers-mode 1)
         (call-interactively 'goto-line))
-    (linum-mode -1)))
+    (display-line-numbers-mode -1)))
 
 (defun my-delay-function (func)
   "Delay execution of FUNC until next user's command."
