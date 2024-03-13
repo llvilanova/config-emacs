@@ -138,7 +138,6 @@
 (global-set-key (kbd "C-x t")
                 (defhydra hydra-toggle (:color blue)
                   "toggle"
-                  ("c" my-cedet-toggle         "CEDET")
                   ("e" toggle-debug-on-error   "toggle-debug-on-error")
                   ("f" auto-fill-mode          "auto-fill-mode")
                   ("l" linum-mode              "linux-mode")
