@@ -279,13 +279,11 @@ If COMMENTFIRST is non-nil, comment the original line."
 ;;;; `uniquify': nicer unique names for buffers
 (setq-default uniquify-ignore-buffers-re "^\\*")
 
-(setq-default show-trailing-whitespace t)
-
 ;;;; `whitespace': highlight lines breaking formatting rules
 (use-package whitespace
   :diminish whitespace-mode
   :init
-  (add-hook 'fund-file-hook #'whitespace-mode)
+  (add-hook 'find-file-hook #'whitespace-mode)
   :config
   (progn
     (setq whitespace-style
