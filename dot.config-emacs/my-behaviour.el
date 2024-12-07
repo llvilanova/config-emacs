@@ -537,6 +537,12 @@ then only one line is copied."
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package recentf
+  :ensure t
+  :custom
+  (recentf-save-file (path my-cache-dir "recentf"))
+  :init (recentf-mode))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
