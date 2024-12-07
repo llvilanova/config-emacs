@@ -473,6 +473,16 @@ then only one line is copied."
     (setq ivy-count-format "(%d/%d) ")
     (global-set-key (kbd "C-s") 'swiper)))
 
+;;;; `vertico': vertical completion window
+(use-package vertico
+  :ensure t
+  :init (vertico-mode)
+  :config
+  (progn
+    (keymap-set vertico-map "?" #'minibuffer-completion-help) 
+    (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+    (keymap-set vertico-map "M-TAB" #'minibuffer-complete)))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
