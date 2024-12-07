@@ -603,8 +603,12 @@ then only one line is copied."
 (setq desktop-save 'if-exists)          ; only save if desktop file exists
 
 ;;;; `savehist': save minibuffer history
-(setq savehist-file (path my-cache-dir "history"))
-(savehist-mode t)
+(use-package savehist
+  :ensure t
+  :init
+  (progn
+    (setq savehist-file (path my-cache-dir "history"))
+    (savehist-mode t)))
 
 ;;;; `bookmark+': bookmark everything
 (setq bookmark-default-file (path my-data-dir "bookmarks"))
