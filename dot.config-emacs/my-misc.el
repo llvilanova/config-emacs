@@ -257,7 +257,7 @@ Position the cursor at it's beginning, according to the current mode."
   :ensure t
   :commands wgrep-toggle-readonly-area
   :bind (:map grep-mode-map
-	 ("C-c C-p" . wgrep-toggle-readonly-area)))
+              ("C-c C-p" . wgrep-toggle-readonly-area)))
 
 (provide 'my-misc)
 ;;; my-misc.el ends here
