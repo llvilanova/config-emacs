@@ -531,6 +531,25 @@ then only one line is copied."
                  nil
                  (window-parameters (mode-line-format . none)))))
 
+;;;; `consult': better minibuffer completions
+(use-package consult
+  :ensure t
+  :bind
+  (("C-s" . consult-line)
+   ("C-x b" . consult-buffer)
+   ("C-x 4 b" . consult-buffer-other-window)
+   ("C-x 5 b" . consult-buffer-other-frame)
+   ("M-g g" . consult-goto-line))
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+
+  ;; Tweak the register preview for `consult-register-load',
+  ;; `consult-register-store' and the built-in commands.  This improves the
+  ;; register formatting, adds thin separator lines, register sorting and hides
+  ;; the window mode line.
+  (advice-add #'register-preview :override #'consult-register-window)
+  (setq register-preview-delay 0.5))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
