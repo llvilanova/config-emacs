@@ -494,6 +494,16 @@ then only one line is copied."
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+;;;; `marginalia': rich minibuffer annotations
+(use-package marginalia
+  :ensure t
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map ("M-a" . marginalia-cycle))
+  :init
+  (marginalia-mode))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
