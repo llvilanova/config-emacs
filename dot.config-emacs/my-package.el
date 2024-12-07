@@ -8,8 +8,8 @@
 (setq package-enable-at-startup nil)
 (setq package-user-dir (path my-cache-dir "elpa"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
