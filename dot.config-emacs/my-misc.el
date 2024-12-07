@@ -38,15 +38,6 @@
         (set-process-sentinel process callback)
         nil))))
 
-(defun my-goto-line-with-feedback ()
-  "Show line numbers temporarily, while prompting for the line number input"
-  (interactive)
-  (unwind-protect
-      (progn
-        (display-line-numbers-mode 1)
-        (call-interactively 'goto-line))
-    (display-line-numbers-mode -1)))
-
 (defun my-delay-function (func)
   "Delay execution of FUNC until next user's command."
   (let ((sym (intern (concat "my-hook-once--" (symbol-name func)))))
