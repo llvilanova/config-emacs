@@ -483,6 +483,17 @@ then only one line is copied."
     (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
     (keymap-set vertico-map "M-TAB" #'minibuffer-complete)))
 
+;;;; `orderless': completion matching styles
+(use-package orderless
+  :ensure t
+  :custom
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
+  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
