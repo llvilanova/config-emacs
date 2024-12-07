@@ -73,6 +73,17 @@
 (use-package nerd-icons
   :ensure t)
 
+(use-package nerd-icons
+  :ensure t
+  :init
+  (when (not (f-exists-p
+              (concat (or (getenv "XDG_DATA_HOME")
+                          (concat (getenv "HOME") "/.local/share"))
+                      "/fonts/"
+                      nerd-icons-fonts-subdirectory
+                      "NFM.ttf")))
+    (nerd-icons-install-fonts)))
+
 (use-package doom-modeline
   :ensure t
   :init
