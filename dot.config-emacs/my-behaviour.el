@@ -453,26 +453,6 @@ then only one line is copied."
 (fset 'yes-or-no-p 'y-or-n-p)           ; enable y/n answers to yes/no
 (file-name-shadow-mode t)               ; shadow / dim parts of file names
 
-(use-package counsel
-  :ensure t
-  :config
-  (progn
-    (use-package smex
-      :ensure t
-      :init
-      (setq smex-save-file (path my-cache-dir "smex.save"))
-      :config
-      (smex-initialize))
-    (use-package flx
-      :ensure t)
-    (use-package ivy-hydra
-      :ensure t)
-    (ivy-mode)
-    (counsel-mode)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (global-set-key (kbd "C-s") 'swiper)))
-
 ;;;; `vertico': vertical completion window
 (use-package vertico
   :ensure t
