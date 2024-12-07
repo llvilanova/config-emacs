@@ -347,6 +347,8 @@ then only one line is copied."
   :ensure t
   :init (global-undo-tree-mode)
   :diminish undo-tree-mode
+  :custom
+  (undo-tree-history-directory-alist `(("." . ,(path my-cache-dir "undo-tree"))))
   :config
   (progn
     (setq undo-tree-auto-save-history nil)
