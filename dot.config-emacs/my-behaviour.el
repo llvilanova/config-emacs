@@ -550,6 +550,13 @@ then only one line is copied."
   (advice-add #'register-preview :override #'consult-register-window)
   (setq register-preview-delay 0.5))
 
+;;;; `embark-consult': consult integration for embark
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 ;;;; `ibuffer': dired-style buffer selection
 ;; TODO: use EDE's project name to group files that would otherwise be in
 ;; "Programming" or "Default"
