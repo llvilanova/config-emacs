@@ -76,7 +76,7 @@
 (use-package nerd-icons
   :ensure t
   :init
-  (when (not (f-exists-p
+  (when (not (file-exists-p
               (concat (or (getenv "XDG_DATA_HOME")
                           (concat (getenv "HOME") "/.local/share"))
                       "/fonts/"
