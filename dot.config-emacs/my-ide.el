@@ -55,8 +55,8 @@ If called with a prefix, prompts the user for the backend."
       (setq backend (or backend (vc-responsible-backend path)))
       (let ((root (vc-call-backend backend 'root path)))
         (case backend
-          ('Git (magit-status root))
-          (t    (vc-dir root backend)))))))
+              ('Git (magit-status root))
+              (t    (vc-dir root backend)))))))
 
 (use-package vc-dir
   :defer t
