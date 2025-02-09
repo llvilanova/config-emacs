@@ -68,4 +68,6 @@ x-scheme-handler/org-protocol=org-protocol.desktop;
 EOF
 mv ~/.config/mimeapps.list.new ~/.config/mimeapps.list
 
+sudo snap install emacs --classic
+
 echo "Setting up Emacs... done"
