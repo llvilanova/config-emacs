@@ -7,7 +7,24 @@
   :ensure t
   :init
   (setq lsp-warn-no-matched-clients nil)
-  (add-hook 'prog-mode-hook  #'lsp))
+  (add-hook 'prog-mode-hook  #'lsp)
+  ;; better embark+lsp integration
+  (with-eval-after-load 'embark
+    (defun embark-target-lsp-identifier-at-point ()
+      (when lsp-mode
+        (when-let ((sym (embark-target-identifier-at-point)))
+          (cons 'lsp-identifier (cdr (car sym))))))
+    (cl-pushnew 'embark-target-lsp-identifier-at-point embark-target-finders)
+    (defvar-keymap embark-lsp-identifier-actions
+      :doc "Keymap for actions on LSP identifiers."
+      :parent embark-identifier-map
+      "a" #'lsp-execute-code-action
+      "s" #'lsp-describe-thing-at-point)
+    (add-to-list 'embark-keymap-alist '(lsp-identifier . embark-lsp-identifier-actions))
+    (add-to-list 'embark-target-injection-hooks '(lsp-execute-code-action embark--ignore-target))
+    (add-to-list 'embark-target-injection-hooks '(lsp-describe-thing-at-point embark--ignore-target))
+    ;;(add-to-list 'embark-keymap-alist '(lsp-identifier embark-file-map))
+    ))
 
 (use-package lsp-ui
   :ensure t
