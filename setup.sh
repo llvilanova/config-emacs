@@ -37,7 +37,7 @@ ediff () { emacs-open --eval "(ediff \"\$1\" \"\$2\")"; }
 gdbtool () { emacs-open --eval "(gdb \"gdb -i=mi \$*\")";}
 EOF
 touch ~/.bashrc
-grep -v "^source .*/config-emacs/bashrc$" ~/.bashrc > ~/.bashrc.new
+(grep -v "^source .*/config-emacs/bashrc$" ~/.bashrc > ~/.bashrc.new) | true
 echo "source $BASE/bashrc" >> ~/.bashrc.new
 mv ~/.bashrc.new ~/.bashrc
 
@@ -61,7 +61,7 @@ Type=Application
 EOF
 
 touch ~/.config/mimeapps.list
-grep -v "^x-scheme-handler/org-protocol=.*" ~/.config/mimeapps.list >~/.config/mimeapps.list.new
+(grep -v "^x-scheme-handler/org-protocol=.*" ~/.config/mimeapps.list >~/.config/mimeapps.list.new) | true
 cat >>~/.config/mimeapps.list.new <<EOF
 [Added Associations]
 x-scheme-handler/org-protocol=org-protocol.desktop;
