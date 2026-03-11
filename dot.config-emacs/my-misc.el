@@ -1,6 +1,6 @@
 ;;; my-misc.el --- Miscellaneous function definitions and settings
 ;;
-;; Copyright (C) 2014-2024 Lluís Vilanova
+;; Copyright (C) 2014-2026 Lluís Vilanova
 ;;
 ;; Author: Lluís Vilanova <vilanova@ac.upc.edu>
 ;;
@@ -251,6 +251,11 @@ Position the cursor at it's beginning, according to the current mode."
       (when to-current-dir
         (eshell/cd dir)
         (eshell-send-input)))))
+
+;; `info'
+(use-package info-buffer
+  :ensure t
+  :bind (("C-h i" . info-buffer)))
 
 ;; `wgrep'
 (use-package wgrep
