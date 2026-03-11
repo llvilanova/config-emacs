@@ -103,25 +103,14 @@
   (setq-default bib-cite-use-reftex-view-crossref t)
   (add-hook 'LaTeX-mode-hook #'turn-on-bib-cite))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; * Preview
-(add-hook
- 'LaTeX-mode-hook
- (lambda ()
-   (setq preview-LaTeX-command          ; command for starting a preview
-         '("%T %`%l \"\\nonstopmode\\nofiles\\PassOptionsToPackage{"
-           ("," . preview-required-option-list)
-           "}{preview}\\AtBeginDocument{\\ifx\\ifPreview\\undefined"
-           preview-default-preamble
-           "\\fi}\"%' %t")
-         preview-LaTeX-command-replacements ; replacements
-         '(("%T" "TEXINPUTS=\".:./tex:./templates/tex:\""))
-         preview-default-option-list   ; what to show in previews
-         ;; Not used: section, footnotes, counters
-         '("displaymath" "textmath" "floats" "graphics" "counters"))))
 
+(use-package pdf-tools
+  :ensure t
+  :config (pdf-tools-install))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; * Compilation
 (add-hook
  'LaTeX-mode-hook
@@ -133,10 +122,6 @@
    (add-to-list 'TeX-command-list '("Makefile Clean" "make clean"
                                     TeX-run-compile nil t))
    (setq TeX-command-default "Makefile PDF")))
-
-(use-package pdf-tools
-  :ensure t
-  :config (pdf-tools-install))
 
 
 (provide 'my-writing-latex)
