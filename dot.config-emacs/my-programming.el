@@ -254,7 +254,7 @@ If ARG is not nil, force a call to `compile'."
   :commands global-flycheck-mode
   :init
   (add-hook 'after-init-hook 'global-flycheck-mode)
-  (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11"))))
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++20"))))
 
 ;; Linux-specific includes & defines
 (defun my-flycheck-linux ()
