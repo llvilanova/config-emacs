@@ -49,52 +49,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version control
 
-(use-package emacs
-  :bind (("<f9>" . my-dwim-vc)
-         ;; ("M-<f9>" . vc-dir)
-         ;; ("C-<f9>" . magit-status)
-         )
-  :config
-  (progn
-    (defun my-dwim-vc (path &optional backend)
-      "Start version control interface according to the backend of current buffer.
-
-If called with a prefix, prompts the user for the backend."
-      (interactive
-       (list
-        (or (buffer-file-name)
-            (read-directory-name "Select directory: "))
-        (if current-prefix-arg
-            (intern
-             (completing-read
-              "Use VC backend: "
-              (mapcar (lambda (b) (list (symbol-name b)))
-                      vc-handled-backends)
-              nil t nil nil)))))
-      (require 'vc)
-      (setq backend (or backend (vc-responsible-backend path)))
-      (let ((root (vc-call-backend backend 'root path)))
-        (case backend
-              ('Git (magit-status root))
-              (t    (vc-dir root backend)))))))
-
 (use-package magit
   :ensure t
   :commands magit-status
+  :bind (("<f9>" . magit-status)
+         ("C-x g" . magit-status)
+         ("S-<f9>" . my-magit-status-fullscreen)
+         ("C-x G" . my-magit-status-fullscreen))
   :config
-  (setq magit-diff-refine-hunk nil)
-
-  ;; `magit' in fullscreen
-  (defadvice magit-status (around magit-fullscreen activate)
-    (set-frame-parameter nil 'my-magit-status-windows (current-window-configuration))
-    ad-do-it
-    (delete-other-windows)
-    (define-key magit-status-mode-map (kbd "q") 'my-magit-quit-session))
-  (defun my-magit-quit-session ()
+  (setq magit-diff-refine-hunk t)
+  (defun my-magit-bury-buffer (kill-buffer)
     "Restores the previous window configuration and kills the magit buffer"
+    (funcall magit-bury-buffer-function-prev kill-buffer)
+    (set-window-configuration (frame-parameter nil 'my-magit-status-windows)))
+  (defun my-magit-status-fullscreen ()
     (interactive)
-    (kill-buffer)
-    (set-window-configuration (frame-parameter nil 'my-magit-status-windows))))
+    (set-frame-parameter nil 'my-magit-status-windows (current-window-configuration))
+    (call-interactively #'magit-status)
+    (delete-other-windows)
+    (make-local-variable 'magit-bury-buffer-function)
+    (make-local-variable 'magit-bury-buffer-function-prev)
+    (setq magit-bury-buffer-function-prev magit-bury-buffer-function)
+    (setq magit-bury-buffer-function #'my-magit-bury-buffer)))
 
 (use-package magit-stgit
   :ensure t
