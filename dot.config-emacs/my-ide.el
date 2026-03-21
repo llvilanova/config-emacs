@@ -84,4 +84,18 @@
 ;;   :config
 ;;   (add-to-list 'forge-alist '("lsds.doc.ic.ac.uk" "lsds.doc.ic.ac.uk/gitlab/api/v4" "lsds" forge-gitlab-repository)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; AI
+
+(use-package agent-shell
+  :ensure t
+  :bind (:map agent-shell-mode-map
+              ("RET" . newline)
+              ("C-c C-c" . shell-maker-submit)
+              ("C-c C-k" . agent-shell-interrupt))
+  :config
+  (setq agent-shell-preferred-agent-config (agent-shell-opencode-make-agent-config)
+        agent-shell-session-strategy 'new
+        agent-shell-prefer-viewport-interaction t))
 (provide 'my-ide)
