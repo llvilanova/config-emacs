@@ -1,2 +1,9 @@
 #!/bin/bash -e
-exec snap run emacs.emacsclient -nw "$@"
+
+source ~/.config/emacs/.use_apt
+
+if [ "x$USE_APT" = "x1" ]; then
+    exec /usr/bin/emacsclient "$@"
+else
+    exec snap run emacs.emacsclient -nw "$@"
+fi

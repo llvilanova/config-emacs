@@ -1,10 +1,13 @@
 #!/bin/bash -e
 
+USE_APT=1
+
 BASE=$(dirname `readlink -f $0`)
 
 echo "Setting up Emacs..."
 
-mkdir -p $HOME/.config
+mkdir -p "$HOME/.config"
+
 rm -Rf $HOME/.config/emacs $HOME/.emacs.d
 ln -s $BASE/dot.config-emacs $HOME/.config/emacs
 ln -s $HOME/.config/emacs $HOME/.emacs.d
@@ -12,6 +15,8 @@ ln -s $HOME/.config/emacs $HOME/.emacs.d
 mkdir -p $HOME/.local/share
 rm -Rf $HOME/.local/share/emacs
 ln -s $BASE/dot.local-share-emacs $HOME/.local/share/emacs
+
+echo "USE_APT=$USE_APT" > "$HOME/.config/emacs/.use_apt"
 
 cat >$BASE/bashrc <<EOF
 #!/bin/bash
@@ -41,8 +46,10 @@ touch ~/.bashrc
 echo "source $BASE/bashrc" >> ~/.bashrc.new
 mv ~/.bashrc.new ~/.bashrc
 
-# sudo apt install -y clang-tools bear nodejs
-sudo apt install -y bear nodejs
+if [ "x$USE_APT" = "x1" ]; then
+    # sudo apt install -y clang-tools bear nodejs
+    sudo apt install -y bear nodejs
+fi
 mkdir -p $HOME/.local/share/emacs/snippets
 mkdir -p $HOME/.local/share/emacs/yasnippet-snippets
 
@@ -68,6 +75,10 @@ x-scheme-handler/org-protocol=org-protocol.desktop;
 EOF
 mv ~/.config/mimeapps.list.new ~/.config/mimeapps.list
 
-sudo snap install emacs --classic
+if [ "x$USE_APT" = "x1" ]; then
+    sudo apt install emacs
+else
+    sudo snap install emacs --classic
+fi
 
 echo "Setting up Emacs... done"
