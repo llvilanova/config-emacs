@@ -7,7 +7,7 @@ Clone and run setup.sh to point all files and configuration directories to your
 clone of the repository (can be run as many times as you want, in case you move
 your clone around):
 
-    git clone https://gitlab.com/llvilanova/config-emacs.git ~/config-emacs
+    git clone https://github.com/llvilanova/config-emacs.git ~/config-emacs
     ~/config-emacs/setup.sh
 
 This generates a small bash script that you should include from your main
