@@ -19,15 +19,18 @@
   (setq-default font-latex-user-keyword-classes  ; user-defined keyword highlighting
                 '(("my-latex-todo" (("TODO" "{")) font-latex-warning-face command)))
 
-  ;; foldable regions
-  (use-package outline
-    :defer t
-    :init (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
   ;; support for org's tables
   (use-package org-table
     :defer t
     :commands orgtbl-mode
     :init (add-hook 'LaTeX-mode-hook #'orgtbl-mode)))
+
+;; foldable regions
+(use-package outline
+  :after auctex
+  :defer t
+  :init
+  (add-hook 'LaTeX-mode-hook #'outline-minor-mode))
 
 (use-package tex
   :ensure auctex
