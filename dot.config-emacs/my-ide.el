@@ -96,6 +96,10 @@
               ("C-c C-k" . agent-shell-interrupt))
   :config
   (setq agent-shell-preferred-agent-config (agent-shell-opencode-make-agent-config)
-        agent-shell-session-strategy 'new
-        agent-shell-prefer-viewport-interaction t))
+        agent-shell-session-strategy 'prompt
+        agent-shell-prefer-session-resume nil
+        agent-shell-prefer-viewport-interaction t
+        agent-shell-opencode-default-model-id "github-copilot/claude-opus-4.6/high"
+        agent-shell-opencode-default-session-mode-id "\u200BSisyphus - Ultraworker")
+  )
 (provide 'my-ide)
