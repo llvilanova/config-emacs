@@ -126,11 +126,11 @@
 (global-set-key [(super o) (b)] 'org-iswitchb)
 
 ;; `eshell' in fullscreen
-(global-set-key [(super e)] '(lambda () (interactive) (my-eshell 'other-window nil)))
-(define-key dired-mode-map [(super e)] '(lambda () (interactive) (my-eshell 'other-window t)))
-(global-set-key [(control super e)] '(lambda () (interactive) (my-eshell 'other-window t)))
-(global-set-key [(super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen nil)))
-(global-set-key [(control super shift e)] '(lambda () (interactive) (my-eshell 'fullscreen t)))
+(global-set-key [(super e)] (lambda () (interactive) (my-eshell 'other-window nil)))
+(define-key dired-mode-map [(super e)] (lambda () (interactive) (my-eshell 'other-window t)))
+(global-set-key [(control super e)] (lambda () (interactive) (my-eshell 'other-window t)))
+(global-set-key [(super shift e)] (lambda () (interactive) (my-eshell 'fullscreen nil)))
+(global-set-key [(control super shift e)] (lambda () (interactive) (my-eshell 'fullscreen t)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
