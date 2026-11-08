@@ -262,7 +262,7 @@ Position the cursor at it's beginning, according to the current mode."
   :ensure t
   :commands wgrep-toggle-readonly-area
   :bind (:map grep-mode-map
-              ("C-c C-p" . wgrep-toggle-readonly-area)))
+	      ("C-c C-p" . wgrep-toggle-readonly-area)))
 
 ;;;; `csv-mode': visualize/edit CSV-formatted files
 (use-package csv-mode
