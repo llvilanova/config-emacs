@@ -342,28 +342,6 @@ then only one line is copied."
   :diminish hungry-delete-mode
   :config (global-hungry-delete-mode))
 
-;;;; `undo-tree'
-(use-package undo-tree
-  :ensure t
-  :init (global-undo-tree-mode)
-  :diminish undo-tree-mode
-  :custom
-  (undo-tree-history-directory-alist `(("." . ,(path my-cache-dir "undo-tree"))))
-  :config
-  (progn
-    (setq undo-tree-auto-save-history nil)
-    (defadvice undo-tree-undo (around keep-region activate)
-      "Keep region when undoing in region."
-      (if (use-region-p)
-          (let ((m (set-marker (make-marker) (mark)))
-                (p (set-marker (make-marker) (point))))
-            ad-do-it
-            (goto-char p)
-            (set-mark m)
-            (set-marker p nil)
-            (set-marker m nil))
-        ad-do-it))))
-
 (use-package multiple-cursors
   :ensure t
   :bind (("C-;"   . mc/mark-all-dwim)
