@@ -9,6 +9,9 @@
   :ensure t
   :commands defhydra)
 
+(use-package transient
+  :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Frames
