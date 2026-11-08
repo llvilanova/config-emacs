@@ -4,7 +4,6 @@
 
 (use-package auctex
   :ensure t
-  :mode ("\\.tex" . TeX-latex-mode)
   ;; :commands (latex-mode LaTeX-mode plain-tex-mode)
   :init
   (require 'org) ; TODO: missing autoload for org-load-modules-maybe
