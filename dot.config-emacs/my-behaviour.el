@@ -702,9 +702,7 @@ then only one line is copied."
 ;;;; GnuPG
 (use-package epg
   :ensure t
-  :defer 2
-  :config
-  (epa-file-enable))
+  :defer 2)
 
 
 ;;; Postamble
