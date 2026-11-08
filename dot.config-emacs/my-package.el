@@ -10,6 +10,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 ;; (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(setq package-archive-priorities
+      '(("melpa" . 10)))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
