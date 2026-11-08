@@ -93,16 +93,27 @@
 
 (use-package agent-shell
   :ensure t
-  :bind (:map agent-shell-mode-map
-              ("RET" . newline)
-              ("C-c C-c" . shell-maker-submit)
-              ("C-c C-k" . agent-shell-interrupt))
+  :after transient
+  :bind (("M-o" . my-ai-menu)
+         :map agent-shell-mode-map
+         ("RET" . newline)
+         ("C-c C-c" . shell-maker-submit)
+         ("C-c C-k" . agent-shell-interrupt))
+
   :config
-  (setq agent-shell-preferred-agent-config (agent-shell-opencode-make-agent-config)
-        agent-shell-session-strategy 'prompt
-        agent-shell-prefer-session-resume nil
-        agent-shell-prefer-viewport-interaction t
-        agent-shell-opencode-default-model-id "github-copilot/claude-opus-4.6/high"
-        agent-shell-opencode-default-session-mode-id "\u200BSisyphus - Ultraworker")
-  )
+  (setq
+   agent-shell-agent-configs (list (agent-shell-opencode-make-agent-config))
+   agent-shell-session-strategy 'prompt
+   agent-shell-prefer-session-resume nil
+   agent-shell-prefer-viewport-interaction t)
+  (eval
+   `(transient-define-prefix my-ai-menu ()
+      "AI actions"
+      [;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+       ["All modes"
+        ("M-o" "AgentShell sidebar" agent-shell-sidebar-toggle-focus)
+        ("o" "Open AgentShell" agent-shell)
+        ("T" "AgentShell Manager" agent-shell-manager-toggle)
+        ("O" "Open GPTel" gptel)
+        ]])))
 (provide 'my-ide)
