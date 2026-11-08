@@ -15,6 +15,7 @@
   "Set font and color theme on a frame."
   (set-variable 'color-theme-is-global nil)
   (select-frame frame)
+  (set-face-attribute 'default nil :family "Monospace" :height 90)
   ;; (when (display-graphic-p frame)
   ;;   (set-frame-parameter frame 'font "Terminus-12"))
   )
