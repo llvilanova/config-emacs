@@ -492,6 +492,10 @@ then only one line is copied."
                  nil
                  (window-parameters (mode-line-format . none)))))
 
+;;;; `embark-consult': consult integration for embark
+(use-package embark-consult
+  :ensure t) ;; consult will load it after embark if found
+
 ;;;; `consult': better minibuffer completions
 (use-package consult
   :ensure t
@@ -511,12 +515,6 @@ then only one line is copied."
   (advice-add #'register-preview :override #'consult-register-window)
   (setq register-preview-delay 0.5))
 
-;;;; `embark-consult': consult integration for embark
-(use-package embark-consult
-  :ensure t
-  :after (embark consult)
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package recentf
   :ensure t
