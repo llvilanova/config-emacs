@@ -72,6 +72,9 @@
     (setq magit-bury-buffer-function-prev magit-bury-buffer-function)
     (setq magit-bury-buffer-function #'my-magit-bury-buffer)))
 
+(with-eval-after-load 'magit
+  (require 'my-magit-opencode))
+
 (use-package magit-stgit
   :ensure t
   :defer t
