@@ -284,7 +284,7 @@ Position the cursor at it's beginning, according to the current mode."
                  do (font-lock-add-keywords nil `((,r (1 '(face (:foreground ,c)))))))))
     (add-hook 'csv-mode-hook 'csv-highlight)
     (add-hook 'csv-mode-hook 'csv-align-mode)
-    (add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))))
+    (add-hook 'csv-mode-hook (lambda () (interactive) (toggle-truncate-lines nil)))))
 
 (provide 'my-misc)
 ;;; my-misc.el ends here
