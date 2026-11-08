@@ -66,19 +66,8 @@
   :defer t
   :commands (TeX-fold-buffer)
   :init
-  ;; ... and pre-fold entire buffer
-  (add-hook 'LaTeX-mode-hook #'TeX-fold-buffer)
   ;; nicely foldable environments ...
-  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode)
-  ;; auto-fold on closing brace
-  (add-hook
-   'LaTeX-mode-hook
-   (lambda ()
-     (local-set-key [(})] (lambda ()
-                            (interactive)
-                            (insert "}")
-                            (when TeX-fold-mode
-                              (TeX-fold-buffer)))))))
+  (add-hook 'LaTeX-mode-hook #'TeX-fold-mode))
 
 
 ;; * Bibliography
