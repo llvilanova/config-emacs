@@ -191,12 +191,19 @@ Reuse the existing frame rather than requesting a new one."
       answer)))
 
 (defun my-magit-opencode--finish (job ok value)
-  "Complete JOB exactly once with OK and VALUE, preserving its session."
+  "Complete JOB exactly once with OK and VALUE, deleting its temp session."
   (unless (my-magit-opencode--job-done job)
     (setf (my-magit-opencode--job-done job) t)
     (when-let ((timer (my-magit-opencode--job-timer job))) (cancel-timer timer))
     (when-let ((file (my-magit-opencode--job-file job)))
       (when (file-exists-p file) (delete-file file)))
+    (when-let ((session (my-magit-opencode--job-session job))
+               ((string-prefix-p "ses_" session)))
+      (ignore-errors
+        (let ((default-directory (my-magit-opencode--job-root job)))
+          (make-process :name "commit-opencode-delete" :noquery t :buffer nil
+                        :command (list my-magit-opencode-executable "session" "delete" session)
+                        :sentinel #'ignore))))
     (funcall (if ok (my-magit-opencode--job-success job)
                (my-magit-opencode--job-failure job)) value)))
 
